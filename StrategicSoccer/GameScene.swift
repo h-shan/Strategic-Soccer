@@ -24,19 +24,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-//    func didBeginContact(contact: SKPhysicsContact){
-//        let firstNode = contact.bodyA.node as! SKSpriteNode
-//        let secondNode = contact.bodyB.node as! SKSpriteNode
-//        if(firstNode.name == "player"){
-//            let firstP = firstNode as! Player
-//            
-//        }
-//        if(secondNode.name=="player"){
-//            let secondP = secondNode as! Player
-//        }
-//        
-//        
-//    }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
@@ -56,13 +43,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        for node in self.children{
-            if node.name == "player"{
-                let p = node as! Player
-                p.move()
-            }
-            
-        }
+        
+        
         /* Called before each frame is rendered */
     }
 }
