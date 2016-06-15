@@ -12,7 +12,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         let background = SKSpriteNode(imageNamed: "SoccerField")
-        background.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
+        let midX = CGRectGetMidX(self.frame)
+        let midY = CGRectGetMidY(self.frame)
+        background.position = CGPoint(x:midX, y:midY)
         background.size = self.frame.size
         background.zPosition=1
         addChild(background)
@@ -21,6 +23,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsBody = borderBody
         self.physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
+        let playerA1 = Player()
+        let playerA2 = Player()
+        let playerA3 = Player()
+        let playerB1 = Player()
+        let playerB2 = Player()
+        let playerB3 = Player()
+        playerA1.position = CGPoint(x:midX*0.3,y:midY*1.5)
+        playerA2.position = CGPoint(x:midX*0.3,y:midY*0.5)
+        playerA3.position = CGPoint(x:midX*0.7,y:midY)
+        playerB1.position = CGPoint(x:midX*1.7,y:midY*1.5)
+        playerB2.position = CGPoint(x:midX*1.7,y:midY*0.5)
+        playerB3.position = CGPoint(x:midX*1.3,y:midY)
+        
+        playerA1.physicsBody!.velocity = CGVectorMake(0,0)
+        playerA2.physicsBody!.velocity=CGVectorMake(0,0)
+        playerA3.physicsBody!.velocity = CGVectorMake(0,0)
+        playerB1.physicsBody!.velocity = CGVectorMake(0,0)
+        playerB2.physicsBody!.velocity = CGVectorMake(0,0)
+        playerB3.physicsBody!.velocity = CGVectorMake(0,0)
+        self.addChild(playerA1)
+        self.addChild(playerA2)
+        self.addChild(playerA3)
+        self.addChild(playerB1)
+        self.addChild(playerB2)
+        self.addChild(playerB3)
         
     }
     

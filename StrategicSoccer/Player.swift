@@ -14,7 +14,7 @@ class Player: SKSpriteNode {
         
         let texture = SKTexture(imageNamed: "Player")
         super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
-        self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
+        self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2*0.95)
         let body:SKPhysicsBody = self.physicsBody!
         body.usesPreciseCollisionDetection = true
         body.categoryBitMask = 1
