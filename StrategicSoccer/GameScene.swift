@@ -9,6 +9,13 @@
 import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    var selectedPlayer : Player?
+    var startPosition : CGPoint?
+    var playerSelected : Bool?
+    
+    
+    
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         let background = SKSpriteNode(imageNamed: "SoccerField")
@@ -37,7 +44,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         playerB3.position = CGPoint(x:midX*1.3,y:midY)
         
         playerA1.physicsBody!.velocity = CGVectorMake(0,0)
-        playerA2.physicsBody!.velocity=CGVectorMake(0,0)
+        playerA2.physicsBody!.velocity = CGVectorMake(0,0)
         playerA3.physicsBody!.velocity = CGVectorMake(0,0)
         playerB1.physicsBody!.velocity = CGVectorMake(0,0)
         playerB2.physicsBody!.velocity = CGVectorMake(0,0)
@@ -52,20 +59,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
         
         for touch in touches {
             let location = touch.locationInNode(self)
+            print ("\(location.x) \(location.y)")
+            for player in self.children{
+                if abs(location.x-player.position.x)<30 && abs(location.y-player.position.y)<30{
+                    selectedPlayer = player as? Player
+                    startPosition = location
+                    playerSelected = true
+                }
+            }
             
-            let player:Player = Player()
-            player.position = location
-            
-            //let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            //sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(player)
+  
+//            let player:Player = Player()
+//            player.position = location
+//            
+//            //let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
+//            
+//            //sprite.runAction(SKAction.repeatActionForever(action))
+//            
+//            self.addChild(player)
+        }
+        
+    }
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?){
+        if (playerSelected != nil && playerSelected == true) {
+            let xMovement = touches.first!.locationInNode(self).x - startPosition!.x
+            let yMovement = touches.first!.locationInNode(self).y - startPosition!.y
+            print ("\(xMovement) \(yMovement)")
+            selectedPlayer!.physicsBody!.velocity = CGVectorMake(xMovement, yMovement)
         }
     }
    
