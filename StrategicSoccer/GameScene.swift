@@ -26,10 +26,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background.zPosition=1
         addChild(background)
         
+        // set rectangular border around screen
         let borderBody:SKPhysicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         self.physicsBody = borderBody
         self.physicsWorld.contactDelegate = self
+        
+        
         physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
+        
+        // set goal posts in place
+        let goalPostA1:GoalPost = GoalPost()
+        let goalPostA2 = GoalPost()
+        let goalPostB1 = GoalPost()
+        let goalPostB2 = GoalPost()
+        goalPostA1.position = CGPoint(x: 50/568*midX, y: midY*440/320)
+        goalPostA2.position = CGPoint(x: 50/568*midX, y: midY*200/320)
+        goalPostB1.position = CGPoint(x: 1086/568*midX, y: midY*440/320)
+        goalPostB2.position = CGPoint(x: 1086/568*midX, y: midY*200/320)
+        self.addChild(goalPostA1)
+        self.addChild(goalPostA2)
+        self.addChild(goalPostB1)
+        self.addChild(goalPostB2)
+        
+        // initilaize and position all 6 players
         let playerA1 = Player()
         let playerA2 = Player()
         let playerA3 = Player()
@@ -65,12 +84,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         for touch in touches {
             let location = touch.locationInNode(self)
-            print ("\(location.x) \(location.y)")
             for player in self.children{
-                if abs(location.x-player.position.x)<30 && abs(location.y-player.position.y)<30{
-                    selectedPlayer = player as? Player
-                    startPosition = location
-                    playerSelected = true
+                if player.name == "player"{
+                    if abs(location.x-player.position.x)<30 && abs(location.y-player.position.y)<30{
+                        selectedPlayer = player as? Player
+                        startPosition = location
+                        playerSelected = true
+                    }
                 }
             }
             
@@ -90,9 +110,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (playerSelected != nil && playerSelected == true) {
             let xMovement = touches.first!.locationInNode(self).x - startPosition!.x
             let yMovement = touches.first!.locationInNode(self).y - startPosition!.y
-            print ("\(xMovement) \(yMovement)")
             selectedPlayer!.physicsBody!.velocity = CGVectorMake(xMovement, yMovement)
         }
+        playerSelected = false
     }
    
     override func update(currentTime: CFTimeInterval) {

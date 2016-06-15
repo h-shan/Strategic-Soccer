@@ -6,11 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "SoccerField.png",
+      "filename" : "GoalPost.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "GoalPost-1.png",
       "scale" : "3x"
     }
   ],

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		89EFF7BD1D1208C3004DEA93 /* GoalPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */; };
+		89EFF7BE1D1216FA004DEA93 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */; };
+		89EFF7BF1D121703004DEA93 /* GoalPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */; };
 		DC83CF2D1D10A85C0044D0E1 /* TitleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83CF2C1D10A85C0044D0E1 /* TitleScene.swift */; };
 		DC83CF2F1D10CB780044D0E1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83CF2E1D10CB780044D0E1 /* Player.swift */; };
 		DC83DCFC1D1089EA00E1C3F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DCFB1D1089EA00E1C3F8 /* AppDelegate.swift */; };
@@ -38,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalPost.swift; sourceTree = "<group>"; };
 		DC83CF2C1D10A85C0044D0E1 /* TitleScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TitleScene.swift; path = ../TitleScene.swift; sourceTree = "<group>"; };
 		DC83CF2E1D10CB780044D0E1 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		DC83DCF81D1089EA00E1C3F8 /* StrategicSoccer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StrategicSoccer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +113,7 @@
 				DC83DCFB1D1089EA00E1C3F8 /* AppDelegate.swift */,
 				DC83DCFD1D1089EA00E1C3F8 /* GameScene.sks */,
 				DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */,
+				89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */,
 				DC83DD011D1089EA00E1C3F8 /* GameViewController.swift */,
 				DC83DD031D1089EA00E1C3F8 /* Main.storyboard */,
 				DC83DD061D1089EA00E1C3F8 /* Assets.xcassets */,
@@ -274,6 +279,7 @@
 				DC83DCFC1D1089EA00E1C3F8 /* AppDelegate.swift in Sources */,
 				DC83CF2F1D10CB780044D0E1 /* Player.swift in Sources */,
 				DC83CF2D1D10A85C0044D0E1 /* TitleScene.swift in Sources */,
+				89EFF7BD1D1208C3004DEA93 /* GoalPost.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +287,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89EFF7BF1D121703004DEA93 /* GoalPost.swift in Sources */,
+				89EFF7BE1D1216FA004DEA93 /* GameScene.swift in Sources */,
 				DC83DD151D1089EA00E1C3F8 /* StrategicSoccerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
