@@ -34,14 +34,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreB = 0
     let score = SKLabelNode(fontNamed: "Georgia")
     
-    var velocityA1: CGVector?
-    var velocityA2: CGVector?
-    var velocityA3: CGVector?
-    var velocityB1: CGVector?
-    var velocityB2: CGVector?
-    var velocityB3: CGVector?
-    var velocityBall: CGVector?
-    
     let lightA1 = SKLightNode()
     let lightA2 = SKLightNode()
     let lightA3 = SKLightNode()
