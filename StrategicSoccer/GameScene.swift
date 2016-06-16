@@ -98,12 +98,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         playerB2.position = CGPoint(x:midX!*1.7,y:midY!*0.5)
         playerB3.position = CGPoint(x:midX!*1.3,y:midY!)
         
-        self.addChild(playerA1)
-        self.addChild(playerA2)
-        self.addChild(playerA3)
-        self.addChild(playerB1)
-        self.addChild(playerB2)
-        self.addChild(playerB3)
+        players = [playerA1, playerA2, playerA3, playerB1, playerB2, playerB3]
+        
+        for node in players!{
+            self.addChild(node)
+        }
         
         // put ball in middle
         ball = Ball()
@@ -169,21 +168,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if node == pause {
                     endPaused = true
                 }
-            }
-            
-            else{
-                for child in self.children{
-                    if node == child && node.name == "player"{
-                        let touchedPlayer = (node as! Player)
-                        if touchedPlayer.mTeamA! == turnA {
-                            selectedPlayer = touchedPlayer
-                            playerSelected = true
-                            startPosition = location
-                            
-                        }
-                    }
-                    if node == child && child.name == "pause"{
-                        startPaused = true
+            }else{
+                if node is Player{
+                    let touchedPlayer = (node as! Player)
+                    if touchedPlayer.mTeamA! == turnA {
+                        selectedPlayer = touchedPlayer
+                        playerSelected = true
+                        startPosition = location
+                        turnA = !turnA
                     }
                 }
                 if node.name == "pause"{
