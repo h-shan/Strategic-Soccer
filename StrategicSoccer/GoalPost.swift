@@ -14,6 +14,7 @@ class GoalPost: SKSpriteNode {
         let texture = SKTexture(imageNamed: "GoalPost")
         super.init(texture: texture, color: UIColor.redColor(), size: texture.size())
         
+        self.name = "goalPost"
         self.zPosition=2
         self.physicsBody = SKPhysicsBody(rectangleOfSize: texture.size())
         
