@@ -9,12 +9,19 @@
 import SpriteKit
 
 class Player: SKSpriteNode {
+    var mTeamA:Bool!
     
-    init(){
-        
-        let texture = SKTexture(imageNamed: "Player")
-        super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
-        self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2*0.95)
+    init(teamA: Bool){
+        mTeamA = teamA
+        var texture = SKTexture(imageNamed: "PlayerA")
+        if (mTeamA!){
+            super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
+        }
+        else{
+            texture = SKTexture(imageNamed: "PlayerB")
+            super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
+        }
+        self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
         let body:SKPhysicsBody = self.physicsBody!
         body.usesPreciseCollisionDetection = true
         body.categoryBitMask = 1

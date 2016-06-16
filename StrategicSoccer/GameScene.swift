@@ -8,6 +8,7 @@
 
 import SpriteKit
 
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var selectedPlayer : Player?
     var startPosition : CGPoint?
@@ -18,6 +19,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
+        
         let background = SKSpriteNode(imageNamed: "SoccerField")
         let midX = CGRectGetMidX(self.frame)
         let midY = CGRectGetMidY(self.frame)
@@ -49,12 +51,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(goalPostB2)
         
         // initilaize and position all 6 players
-        let playerA1 = Player()
-        let playerA2 = Player()
-        let playerA3 = Player()
-        let playerB1 = Player()
-        let playerB2 = Player()
-        let playerB3 = Player()
+        let playerA1 = Player(teamA: true)
+        let playerA2 = Player(teamA: true)
+        let playerA3 = Player(teamA: true)
+        let playerB1 = Player(teamA: false)
+        let playerB2 = Player(teamA: false)
+        let playerB3 = Player(teamA: false)
+        
         playerA1.position = CGPoint(x:midX*0.3,y:midY*1.5)
         playerA2.position = CGPoint(x:midX*0.3,y:midY*0.5)
         playerA3.position = CGPoint(x:midX*0.7,y:midY)
