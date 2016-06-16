@@ -23,6 +23,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let playerB1 = Player(teamA: false)
     let playerB2 = Player(teamA: false)
     let playerB3 = Player(teamA:false)
+
+    var scoreA = 0
+    var scoreB = 0
+    let score = SKLabelNode(fontNamed: "Georgia")
     
     
     
@@ -32,6 +36,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let background = SKSpriteNode(imageNamed: "SoccerField")
         midX = CGRectGetMidX(self.frame)
         midY = CGRectGetMidY(self.frame)
+       
+        
+        
+        score.fontSize = 50
+        score.position = CGPoint(x: midX!, y: midY!)
+        score.zPosition = 2
+        addChild(score)
+        
         background.position = CGPoint(x:midX!, y:midY!)
         background.size = self.frame.size
         background.zPosition=1
@@ -46,7 +58,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
         
         // set goal posts in place
-        let goalPostA1:GoalPost = GoalPost()
+        let goalPostA1 = GoalPost()
         let goalPostA2 = GoalPost()
         let goalPostB1 = GoalPost()
         let goalPostB2 = GoalPost()
@@ -86,6 +98,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ball!.position = CGPoint(x: midX!,y: midY!)
         self.addChild(ball!)
         
+        
+        
+        
     }
     
     
@@ -120,18 +135,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(currentTime: CFTimeInterval) {
         if (200/320 * midY! < ball!.position.y && ball!.position.y < 440/320 * midY!){
             if 0<ball!.position.x && ball!.position.x<50/568*midX!{
-                reset(false)
+                self.reset(false)
             }
-            else if 1086/568*midX!<ball!.position.x {
-                reset(true)
+            else if 1086/568*midX! < ball!.position.x {
+                self.reset(true)
             }
         }
         
         /* Called before each frame is rendered */
     }
-    func reset(scoreGoalA: Bool){
+    func reset(scoreGoal: Bool){
         // reset position of all players and ball
         
+        if scoreGoal{
+            scoreA+=1
+        }
+        else{
+            scoreB+=1
+        }
+        _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
+        score.text = "\(scoreA) - \(scoreB)"
         playerA1.position = CGPoint(x:midX!*0.3,y:midY!*1.5)
         playerA2.position = CGPoint(x:midX!*0.3,y:midY!*0.5)
         playerA3.position = CGPoint(x:midX!*0.7,y:midY!)
@@ -149,4 +172,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ball!.position = CGPoint(x: midX!,y: midY!)
         ball!.physicsBody!.velocity = CGVectorMake(0,0)
     }
+    func twoSeconds(){
+        score.text = ""
+    }
+    
 }
