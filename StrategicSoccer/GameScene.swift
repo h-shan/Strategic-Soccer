@@ -13,7 +13,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var selectedPlayer : Player?
     var startPosition : CGPoint?
     var playerSelected : Bool?
-    
+    var goalA : Bool?
+    var ball: Ball?
+    var midY: CGFloat?
+    var midX: CGFloat?
+    let playerA1 = Player(teamA: true)
+    let playerA2 = Player(teamA: true)
+    let playerA3 = Player(teamA: true)
+    let playerB1 = Player(teamA: false)
+    let playerB2 = Player(teamA: false)
+    let playerB3 = Player(teamA:false)
     
     
     
@@ -21,9 +30,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Setup your scene here */
         
         let background = SKSpriteNode(imageNamed: "SoccerField")
-        let midX = CGRectGetMidX(self.frame)
-        let midY = CGRectGetMidY(self.frame)
-        background.position = CGPoint(x:midX, y:midY)
+        midX = CGRectGetMidX(self.frame)
+        midY = CGRectGetMidY(self.frame)
+        background.position = CGPoint(x:midX!, y:midY!)
         background.size = self.frame.size
         background.zPosition=1
         addChild(background)
@@ -41,29 +50,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let goalPostA2 = GoalPost()
         let goalPostB1 = GoalPost()
         let goalPostB2 = GoalPost()
-        goalPostA1.position = CGPoint(x: 50/568*midX, y: midY*440/320)
-        goalPostA2.position = CGPoint(x: 50/568*midX, y: midY*200/320)
-        goalPostB1.position = CGPoint(x: 1086/568*midX, y: midY*440/320)
-        goalPostB2.position = CGPoint(x: 1086/568*midX, y: midY*200/320)
+        goalPostA1.position = CGPoint(x: 50/568*midX!, y: midY!*440/320)
+        goalPostA2.position = CGPoint(x: 50/568*midX!, y: midY!*200/320)
+        goalPostB1.position = CGPoint(x: 1086/568*midX!, y: midY!*440/320)
+        goalPostB2.position = CGPoint(x: 1086/568*midX!, y: midY!*200/320)
         self.addChild(goalPostA1)
         self.addChild(goalPostA2)
         self.addChild(goalPostB1)
         self.addChild(goalPostB2)
         
-        // initilaize and position all 6 players
-        let playerA1 = Player(teamA: true)
-        let playerA2 = Player(teamA: true)
-        let playerA3 = Player(teamA: true)
-        let playerB1 = Player(teamA: false)
-        let playerB2 = Player(teamA: false)
-        let playerB3 = Player(teamA: false)
+        // position all 6 players
         
-        playerA1.position = CGPoint(x:midX*0.3,y:midY*1.5)
-        playerA2.position = CGPoint(x:midX*0.3,y:midY*0.5)
-        playerA3.position = CGPoint(x:midX*0.7,y:midY)
-        playerB1.position = CGPoint(x:midX*1.7,y:midY*1.5)
-        playerB2.position = CGPoint(x:midX*1.7,y:midY*0.5)
-        playerB3.position = CGPoint(x:midX*1.3,y:midY)
+        playerA1.position = CGPoint(x:midX!*0.3,y:midY!*1.5)
+        playerA2.position = CGPoint(x:midX!*0.3,y:midY!*0.5)
+        playerA3.position = CGPoint(x:midX!*0.7,y:midY!)
+        playerB1.position = CGPoint(x:midX!*1.7,y:midY!*1.5)
+        playerB2.position = CGPoint(x:midX!*1.7,y:midY!*0.5)
+        playerB3.position = CGPoint(x:midX!*1.3,y:midY!)
         
         playerA1.physicsBody!.velocity = CGVectorMake(0,0)
         playerA2.physicsBody!.velocity = CGVectorMake(0,0)
@@ -79,9 +82,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(playerB3)
         
         // put ball in middle
-        let ball = Ball()
-        ball.position = CGPoint(x: midX,y: midY)
-        self.addChild(ball)
+        ball = Ball()
+        ball!.position = CGPoint(x: midX!,y: midY!)
+        self.addChild(ball!)
         
     }
     
@@ -115,8 +118,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        
+        if (200/320 * midY! < ball!.position.y && ball!.position.y < 440/320 * midY!){
+            if 0<ball!.position.x && ball!.position.x<50/568*midX!{
+                reset(false)
+            }
+            else if 1086/568*midX!<ball!.position.x {
+                reset(true)
+            }
+        }
         
         /* Called before each frame is rendered */
+    }
+    func reset(scoreGoalA: Bool){
+        // reset position of all players and ball
+        
+        playerA1.position = CGPoint(x:midX!*0.3,y:midY!*1.5)
+        playerA2.position = CGPoint(x:midX!*0.3,y:midY!*0.5)
+        playerA3.position = CGPoint(x:midX!*0.7,y:midY!)
+        playerB1.position = CGPoint(x:midX!*1.7,y:midY!*1.5)
+        playerB2.position = CGPoint(x:midX!*1.7,y:midY!*0.5)
+        playerB3.position = CGPoint(x:midX!*1.3,y:midY!)
+        
+        playerA1.physicsBody!.velocity = CGVectorMake(0,0)
+        playerA2.physicsBody!.velocity = CGVectorMake(0,0)
+        playerA3.physicsBody!.velocity = CGVectorMake(0,0)
+        playerB1.physicsBody!.velocity = CGVectorMake(0,0)
+        playerB2.physicsBody!.velocity = CGVectorMake(0,0)
+        playerB3.physicsBody!.velocity = CGVectorMake(0,0)
+        
+        ball!.position = CGPoint(x: midX!,y: midY!)
+        ball!.physicsBody!.velocity = CGVectorMake(0,0)
     }
 }
