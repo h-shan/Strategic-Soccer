@@ -10,6 +10,7 @@ import SpriteKit
 
 class Player: SKSpriteNode {
     var mTeamA:Bool!
+    var storedVelocity:CGVector?
     
     init(teamA: Bool){
         mTeamA = teamA
@@ -27,7 +28,6 @@ class Player: SKSpriteNode {
         let body:SKPhysicsBody = self.physicsBody!
         body.usesPreciseCollisionDetection = true
         body.categoryBitMask = 1
-        
         
         body.restitution = 1
         body.friction = 1
