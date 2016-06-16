@@ -66,6 +66,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
         
+        
         // set goal posts in place
         let goalPostA1 = GoalPost()
         let goalPostA2 = GoalPost()
@@ -89,12 +90,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         playerB2.position = CGPoint(x:midX!*1.7,y:midY!*0.5)
         playerB3.position = CGPoint(x:midX!*1.3,y:midY!)
         
-        playerA1.physicsBody!.velocity = CGVectorMake(0,0)
-        playerA2.physicsBody!.velocity = CGVectorMake(0,0)
-        playerA3.physicsBody!.velocity = CGVectorMake(0,0)
-        playerB1.physicsBody!.velocity = CGVectorMake(0,0)
-        playerB2.physicsBody!.velocity = CGVectorMake(0,0)
-        playerB3.physicsBody!.velocity = CGVectorMake(0,0)
+//        playerA1.physicsBody!.velocity = CGVectorMake(0,0)
+//        playerA2.physicsBody!.velocity = CGVectorMake(0,0)
+//        playerA3.physicsBody!.velocity = CGVectorMake(0,0)
+//        playerB1.physicsBody!.velocity = CGVectorMake(0,0)
+//        playerB2.physicsBody!.velocity = CGVectorMake(0,0)
+//        playerB3.physicsBody!.velocity = CGVectorMake(0,0)
         self.addChild(playerA1)
         self.addChild(playerA2)
         self.addChild(playerA3)
@@ -188,8 +189,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ball!.physicsBody!.velocity = velocityBall!
         }
         if (playerSelected != nil && playerSelected == true) {
-            let xMovement = touches.first!.locationInNode(self).x - startPosition!.x
-            let yMovement = touches.first!.locationInNode(self).y - startPosition!.y
+            let xMovement = 1.5*(touches.first!.locationInNode(self).x - startPosition!.x)
+            let yMovement = 1.5*(touches.first!.locationInNode(self).y - startPosition!.y)
+            
             selectedPlayer!.physicsBody!.velocity = CGVectorMake(xMovement, yMovement)
         }
         playerSelected = false
