@@ -92,27 +92,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         for touch in touches {
             let location = touch.locationInNode(self)
-            for player in self.children{
-                let player = player as? Player
-                if let nPlayer = player{
-                    let x2 = (location.x-nPlayer.position.x)*(location.x-nPlayer.position.x)
-                    let y2 = (location.y-nPlayer.position.y)*(location.y-nPlayer.position.y)
-                
-                    if nPlayer.name == "player" && sqrt(x2+y2) < nPlayer.size.width/2{
-                            selectedPlayer = nPlayer
-                            startPosition = location
-                            playerSelected = true
-                        }
+            let node = nodeAtPoint(location)
+            
+            for child in self.children{
+                if node == child && node.name == "player"{
+                    selectedPlayer = node as? Player
+                    playerSelected = true
+                    startPosition = location
                 }
             }
-            }
         }
+    }
         
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?){
         if (playerSelected != nil && playerSelected == true) {
-            let xMovement = touches.first!.locationInNode(self).x - startPosition!.x
-            let yMovement = touches.first!.locationInNode(self).y - startPosition!.y
+            let xMovement = 1.5*touches.first!.locationInNode(self).x - startPosition!.x
+            let yMovement = 1.5*touches.first!.locationInNode(self).y - startPosition!.y
             selectedPlayer!.physicsBody!.velocity = CGVectorMake(xMovement, yMovement)
         }
         playerSelected = false
