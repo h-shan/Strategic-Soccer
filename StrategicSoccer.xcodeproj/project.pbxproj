@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		89EFF7BD1D1208C3004DEA93 /* GoalPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */; };
-		89EFF7BE1D1216FA004DEA93 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */; };
 		89EFF7BF1D121703004DEA93 /* GoalPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */; };
 		89EFF7C11D122FBA004DEA93 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EFF7C01D122FBA004DEA93 /* Ball.swift */; };
 		89EFF7C31D12414C004DEA93 /* GoalScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EFF7C21D12414C004DEA93 /* GoalScene.swift */; };
@@ -297,7 +296,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				89EFF7BF1D121703004DEA93 /* GoalPost.swift in Sources */,
-				89EFF7BE1D1216FA004DEA93 /* GameScene.swift in Sources */,
 				DC83DD151D1089EA00E1C3F8 /* StrategicSoccerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
