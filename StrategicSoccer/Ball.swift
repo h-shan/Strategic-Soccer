@@ -10,6 +10,8 @@ import SpriteKit
 
 class Ball: SKSpriteNode {
     
+    var storedVelocity:CGVector?
+    
     init() {
         let texture = SKTexture(imageNamed: "Ball")
         super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
