@@ -146,6 +146,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     func reset(scoreGoal: Bool){
         // reset position of all players and ball
+        playerA1.physicsBody!.dynamic = false
+        playerA2.physicsBody!.dynamic = false
+        playerA3.physicsBody!.dynamic = false
+        playerB1.physicsBody!.dynamic = false
+        playerB2.physicsBody!.dynamic = false
+        playerB3.physicsBody!.dynamic = false
         
         if scoreGoal{
             scoreA+=1
@@ -174,6 +180,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     func twoSeconds(){
         score.text = ""
+        playerA1.physicsBody!.dynamic = true
+        playerA2.physicsBody!.dynamic = true
+        playerA3.physicsBody!.dynamic = true
+        playerB1.physicsBody!.dynamic = true
+        playerB2.physicsBody!.dynamic = true
+        playerB3.physicsBody!.dynamic = true
     }
     
 }
