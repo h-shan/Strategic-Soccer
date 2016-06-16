@@ -25,6 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let playerB3 = Player(teamA:false)
     let pause = SKSpriteNode(texture: SKTexture(imageNamed: "Pause"), color: UIColor.clearColor(), size: SKTexture(imageNamed: "Pause").size())
     
+    var turnA = true
     var startPaused = false
     var endPaused = false
     var scoreA = 0
@@ -135,9 +136,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             else{
                 for child in self.children{
                     if node == child && node.name == "player"{
-                        selectedPlayer = node as? Player
-                        playerSelected = true
-                        startPosition = location
+                        let touchedPlayer = (node as! Player)
+                        if touchedPlayer.mTeamA! == turnA {
+                            selectedPlayer = touchedPlayer
+                            playerSelected = true
+                            startPosition = location
+                            turnA = !turnA
+                        }
                     }
                     if node == child && child.name == "pause"{
                         startPaused = true
