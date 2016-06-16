@@ -93,27 +93,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for touch in touches {
             let location = touch.locationInNode(self)
             for player in self.children{
-                if player.name == "player"{
-                    if abs(location.x-player.position.x)<30 && abs(location.y-player.position.y)<30{
-                        selectedPlayer = player as? Player
-                        startPosition = location
-                        playerSelected = true
-                    }
+                let player = player as? Player
+                if let nPlayer = player{
+                    let x2 = (location.x-nPlayer.position.x)*(location.x-nPlayer.position.x)
+                    let y2 = (location.y-nPlayer.position.y)*(location.y-nPlayer.position.y)
+                
+                    if nPlayer.name == "player" && sqrt(x2+y2) < nPlayer.size.width/2{
+                            selectedPlayer = nPlayer
+                            startPosition = location
+                            playerSelected = true
+                        }
                 }
             }
-            
-  
-//            let player:Player = Player()
-//            player.position = location
-//            
-//            //let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-//            
-//            //sprite.runAction(SKAction.repeatActionForever(action))
-//            
-//            self.addChild(player)
+            }
         }
         
-    }
+    
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?){
         if (playerSelected != nil && playerSelected == true) {
             let xMovement = touches.first!.locationInNode(self).x - startPosition!.x

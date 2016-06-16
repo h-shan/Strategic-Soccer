@@ -27,7 +27,7 @@ class Player: SKSpriteNode {
         let body:SKPhysicsBody = self.physicsBody!
         body.usesPreciseCollisionDetection = true
         body.categoryBitMask = 1
-        body.friction = 0
+        
         body.linearDamping = 0
         body.restitution = 1
     }
