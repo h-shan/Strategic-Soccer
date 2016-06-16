@@ -167,7 +167,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         selectedPlayer = touchedPlayer
                         playerSelected = true
                         startPosition = location
-                        turnA = !turnA
                     }
                 }
                 if node.name == "pause"{
