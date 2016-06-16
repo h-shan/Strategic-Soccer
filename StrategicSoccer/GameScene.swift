@@ -78,6 +78,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(playerB2)
         self.addChild(playerB3)
         
+        // put ball in middle
+        let ball = Ball()
+        ball.position = CGPoint(x: midX,y: midY)
+        self.addChild(ball)
+        
     }
     
     

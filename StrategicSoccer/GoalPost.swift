@@ -11,7 +11,6 @@ import SpriteKit
 class GoalPost: SKSpriteNode {
     
     init(){
-
         let texture = SKTexture(imageNamed: "GoalPost")
         super.init(texture: texture, color: UIColor.redColor(), size: texture.size())
         
