@@ -39,14 +39,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var velocityB2: CGVector?
     var velocityB3: CGVector?
     var velocityBall: CGVector?
-    
-    let lightA1 = SKLightNode()
-    let lightA2 = SKLightNode()
-    let lightA3 = SKLightNode()
-    let lightB1 = SKLightNode()
-    let lightB2 = SKLightNode()
-    let lightB3 = SKLightNode()
-    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         
@@ -73,6 +65,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
+        
         
         
         // set goal posts in place
@@ -116,43 +109,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pause.zPosition = 1.5
         pause.name = "pause"
         addChild(pause)
-        
-        // set dimming
-        playerA1.lightingBitMask = 1
-        lightA1.categoryBitMask = 1
-        lightA1.position = playerA1.position
-        lightA1.lightColor = UIColor.blackColor()
-        addChild(lightA1)
-        
-        playerA2.lightingBitMask = 1
-        lightA2.categoryBitMask = 1
-        lightA2.position = playerA2.position
-        lightA2.lightColor = UIColor.blackColor()
-        addChild(lightA2)
-        
-        playerA3.lightingBitMask = 1
-        lightA3.categoryBitMask = 1
-        lightA3.position = playerA3.position
-        lightA3.lightColor = UIColor.blackColor()
-        addChild(lightA3)
-        
-        playerB1.lightingBitMask = 2
-        lightB1.categoryBitMask = 2
-        lightB1.position = playerB1.position
-        lightB1.lightColor = UIColor.blackColor()
-        addChild(lightB1)
-        
-        playerB2.lightingBitMask = 2
-        lightB2.categoryBitMask = 2
-        lightB2.position = playerB2.position
-        lightB2.lightColor = UIColor.blackColor()
-        addChild(lightB2)
-        
-        playerB3.lightingBitMask = 2
-        lightB3.categoryBitMask = 2
-        lightB3.position = playerB3.position
-        lightB3.lightColor = UIColor.blackColor()
-        addChild(lightB3)
         
     }
     
@@ -242,27 +198,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        lightA1.position = playerA1.position
-        lightA2.position = playerA2.position
-        lightA3.position = playerA3.position
-        lightB1.position = playerB1.position
-        lightB2.position = playerB2.position
-        lightB3.position = playerB3.position
+        playerA1.light.position = playerA1.position
+        playerA2.light.position = playerA2.position
+        playerA3.light.position = playerA3.position
+        playerB1.light.position = playerB1.position
+        playerB2.light.position = playerB2.position
+        playerB3.light.position = playerB3.position
         if (!turnA){
-            lightA1.enabled = true
-            lightA2.enabled = true
-            lightA3.enabled = true
-            lightB1.enabled = false
-            lightB2.enabled = false
-            lightB3.enabled = false
+            playerA1.light.enabled = true
+            playerA2.light.enabled = true
+            playerA3.light.enabled = true
+            playerB1.light.enabled = false
+            playerB2.light.enabled = false
+            playerB3.light.enabled = false
         }
         else{
-            lightA1.enabled = false
-            lightA2.enabled = false
-            lightA3.enabled = false
-            lightB1.enabled = true
-            lightB2.enabled = true
-            lightB3.enabled = true
+            playerA1.light.enabled = false
+            playerA2.light.enabled = false
+            playerA3.light.enabled = false
+            playerB1.light.enabled = true
+            playerB2.light.enabled = true
+            playerB3.light.enabled = true
             
         }
         if (200/320 * midY! < ball!.position.y && ball!.position.y < 440/320 * midY!){
