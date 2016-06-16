@@ -50,8 +50,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         score.fontSize = 50
+        score.fontColor = UIColor.blackColor()
         score.position = CGPoint(x: midX!, y: 1.5*midY!)
         score.zPosition = 2
+        
         addChild(score)
         
         background.position = CGPoint(x:midX!, y:midY!)
@@ -229,8 +231,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else{
             scoreB+=1
         }
-        _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
-        score.text = "\(scoreA) - \(scoreB)"
+        if scoreA == 10 {
+            score.text = "Player A Wins"
+            scoreA = 0
+            scoreB = 0
+            _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
+        }
+        else if scoreB == 10{
+            score.text = "Player B Wins"
+            scoreA = 0
+            scoreB = 0
+            _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
+        }
+        else{ _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
+            score.text = "\(scoreA) - \(scoreB)"
+        }
         playerA1.position = CGPoint(x:midX!*0.3,y:midY!*1.5)
         playerA2.position = CGPoint(x:midX!*0.3,y:midY!*0.5)
         playerA3.position = CGPoint(x:midX!*0.7,y:midY!)
@@ -257,5 +272,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         playerB2.physicsBody!.dynamic = true
         playerB3.physicsBody!.dynamic = true
     }
+    
     
 }
