@@ -24,6 +24,8 @@ class Player: SKSpriteNode {
         self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
         self.name = "player"
         self.zPosition = 2
+        self.lightingBitMask = 1
+        
         let body:SKPhysicsBody = self.physicsBody!
         body.usesPreciseCollisionDetection = true
         body.categoryBitMask = 1
