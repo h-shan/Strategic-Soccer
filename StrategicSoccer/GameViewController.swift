@@ -14,7 +14,8 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-            let scene = TitleScene(size: view.bounds.size)
+        let scene = TitleScene(size: CGSize(width: 1136, height: 640))
+        scene.scaleMode = SKSceneScaleMode.AspectFit
             // Configure the view.
             let skView = self.view as! SKView
             skView.showsFPS = true

@@ -40,6 +40,7 @@ class TitleScene: SKScene {
             let node = self.nodeAtPoint(location)
             if(node.name == "startButton"){
                 let nextScene = GameScene(size: scene!.size)
+                nextScene.scaleMode = SKSceneScaleMode.AspectFit
                 scene?.view?.presentScene(nextScene)
             }
 
