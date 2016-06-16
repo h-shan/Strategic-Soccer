@@ -107,8 +107,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?){
         if (playerSelected != nil && playerSelected == true) {
-            let xMovement = 1.5*touches.first!.locationInNode(self).x - startPosition!.x
-            let yMovement = 1.5*touches.first!.locationInNode(self).y - startPosition!.y
+            let xMovement = touches.first!.locationInNode(self).x - startPosition!.x
+            let yMovement = touches.first!.locationInNode(self).y - startPosition!.y
             selectedPlayer!.physicsBody!.velocity = CGVectorMake(xMovement, yMovement)
         }
         playerSelected = false

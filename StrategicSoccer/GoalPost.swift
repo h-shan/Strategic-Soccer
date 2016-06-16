@@ -18,8 +18,7 @@ class GoalPost: SKSpriteNode {
         self.physicsBody = SKPhysicsBody(rectangleOfSize: texture.size())
         
         let body = self.physicsBody!
-        body.pinned = true
-        body.allowsRotation = false
+        body.dynamic = false
         body.categoryBitMask = 1
         body.usesPreciseCollisionDetection = true
         body.restitution = 1
