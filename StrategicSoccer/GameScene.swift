@@ -106,7 +106,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         updateLighting()
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(switchTurns), userInfo: nil, repeats: false)
+        restartTimer()
         
     }
     
@@ -149,6 +149,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 score.text = "PAUSED"
                 storeVelocities()
                 setDynamicStates(false)
+                timer?.invalidate()
             }
         }
         else if (startPaused && endPaused){
@@ -156,6 +157,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score.text = ""
             setDynamicStates(true)
             retrieveVelocities()
+            restartTimer()
         }
         if (playerSelected == true) {
             
@@ -225,7 +227,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score.text = "\(scoreA) - \(scoreB)"
         }
         _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
-        timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(switchTurns), userInfo: nil, repeats: false)
+        restartTimer()
         
         playerA1.position = CGPoint(x:midX!*0.3,y:midY!*1.5)
         playerA2.position = CGPoint(x:midX!*0.3,y:midY!*0.5)
@@ -243,7 +245,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ball!.position = CGPoint(x: midX!,y: midY!)
         ball!.physicsBody!.velocity = CGVectorMake(0,0)
         ball!.physicsBody!.angularVelocity = 0
-        
     }
     
     func twoSeconds(){
@@ -276,11 +277,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if playerSelected == true {
             playerSelected = false
         }
+        restartTimer()
+        updateLighting()
+    }
+    func restartTimer(){
         timer?.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(switchTurns), userInfo: nil, repeats: false)
-        updateLighting()
-        
-        
     }
     
 }
