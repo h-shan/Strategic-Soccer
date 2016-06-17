@@ -1,5 +1,5 @@
 //
-//  Timer.swift
+//  TimerM.swift
 //  StrategicSoccer
 //
 //  Created by Howard Shan on 6/17/16.
@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class Timer {
+class TimerM {
     var startTime: NSDate?
     var endTime: NSDate?
     init(){

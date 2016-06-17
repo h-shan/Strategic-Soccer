@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8932AD6B1D13BD0100F6AC84 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8932AD6A1D13BD0100F6AC84 /* Mode.swift */; };
-		8932AD6D1D14554700F6AC84 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8932AD6C1D14554700F6AC84 /* Timer.swift */; };
+		8932AD6D1D14554700F6AC84 /* TimerM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8932AD6C1D14554700F6AC84 /* TimerM.swift */; };
 		89EFF7BD1D1208C3004DEA93 /* GoalPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */; };
 		89EFF7BF1D121703004DEA93 /* GoalPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */; };
 		89EFF7C11D122FBA004DEA93 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EFF7C01D122FBA004DEA93 /* Ball.swift */; };
@@ -44,7 +44,7 @@
 
 /* Begin PBXFileReference section */
 		8932AD6A1D13BD0100F6AC84 /* Mode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
-		8932AD6C1D14554700F6AC84 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		8932AD6C1D14554700F6AC84 /* TimerM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerM.swift; sourceTree = "<group>"; };
 		89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalPost.swift; sourceTree = "<group>"; };
 		89EFF7C01D122FBA004DEA93 /* Ball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
 		DC83CF2C1D10A85C0044D0E1 /* TitleScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TitleScene.swift; path = ../TitleScene.swift; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 				DC83DCFB1D1089EA00E1C3F8 /* AppDelegate.swift */,
 				DC83DCFD1D1089EA00E1C3F8 /* GameScene.sks */,
 				DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */,
-				8932AD6C1D14554700F6AC84 /* Timer.swift */,
+				8932AD6C1D14554700F6AC84 /* TimerM.swift */,
 				8932AD6A1D13BD0100F6AC84 /* Mode.swift */,
 				89EFF7C01D122FBA004DEA93 /* Ball.swift */,
 				89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */,
@@ -289,7 +289,7 @@
 				DC83DCFC1D1089EA00E1C3F8 /* AppDelegate.swift in Sources */,
 				DC83CF2F1D10CB780044D0E1 /* Player.swift in Sources */,
 				DC83CF2D1D10A85C0044D0E1 /* TitleScene.swift in Sources */,
-				8932AD6D1D14554700F6AC84 /* Timer.swift in Sources */,
+				8932AD6D1D14554700F6AC84 /* TimerM.swift in Sources */,
 				89EFF7C11D122FBA004DEA93 /* Ball.swift in Sources */,
 				89EFF7BD1D1208C3004DEA93 /* GoalPost.swift in Sources */,
 			);

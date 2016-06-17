@@ -26,7 +26,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let playerB3 = Player(teamA: false)
     var players: [Player]?
     
-    let gameTimer = Timer()
+    let gameTimer = TimerM()
     let clock = SKLabelNode(fontNamed: "Georgia")
     var gameTime: NSTimeInterval?
     var baseTime = 180.1
