@@ -49,4 +49,11 @@ class Timer{
         return started ? NSDate().timeIntervalSinceDate(startTime!) + elapsedTime : elapsedTime
     }
     
+    //restart() calls starts a clean timer running.
+    
+    func restart(){
+        self.reset()
+        self.start()
+    }
+    
 }
