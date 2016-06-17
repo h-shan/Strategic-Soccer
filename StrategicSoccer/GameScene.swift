@@ -35,6 +35,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let score = SKLabelNode(fontNamed: "Georgia")
     
     var timer: NSTimer?
+    var t:Timer?
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -105,7 +106,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(pause)
         
         updateLighting()
-        
+        t = Timer()
         restartTimer()
         
     }
@@ -149,7 +150,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 score.text = "PAUSED"
                 storeVelocities()
                 setDynamicStates(false)
-                timer?.invalidate()
+                t!.pause()
+                //timer?.invalidate()
             }
         }
         else if (startPaused && endPaused){
@@ -157,7 +159,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score.text = ""
             setDynamicStates(true)
             retrieveVelocities()
-            restartTimer()
+            //restartTimer()
+            t!.start()
         }
         if (playerSelected == true) {
             
@@ -194,6 +197,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
+        if(t!.getElapsedTime() > 5){
+            switchTurns()
+        }
+        
         /* Called before each frame is rendered */
     }
     
@@ -227,7 +234,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score.text = "\(scoreA) - \(scoreB)"
         }
         _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
-        restartTimer()
+        timer?.invalidate()
         
         playerA1.position = CGPoint(x:midX!*0.3,y:midY!*1.5)
         playerA2.position = CGPoint(x:midX!*0.3,y:midY!*0.5)
@@ -250,6 +257,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func twoSeconds(){
         score.text = ""
         setDynamicStates(true)
+        restartTimer()
     }
     
     func setDynamicStates(isDynamic: Bool){
@@ -281,8 +289,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         updateLighting()
     }
     func restartTimer(){
-        timer?.invalidate()
-        timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(switchTurns), userInfo: nil, repeats: false)
+//        timer?.invalidate()
+//        timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(switchTurns), userInfo: nil, repeats: false)
+        t?.reset()
+        t?.start()
+        
     }
     
 }
