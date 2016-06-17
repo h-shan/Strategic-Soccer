@@ -11,6 +11,7 @@ import SpriteKit
 class Player: SKSpriteNode {
     var mTeamA:Bool!
     let light = SKLightNode()
+    var storedVelocity: CGVector?
     
     init(teamA: Bool){
         mTeamA = teamA
