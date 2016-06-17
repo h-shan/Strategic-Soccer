@@ -182,6 +182,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 storeVelocities()
                 setDynamicStates(false)
                 timer?.invalidate()
+                paused = true
+                if mode == Mode.threeMinute{
+                    baseTime = gameTime!
+                }
             }
         }
         else if (startPaused && endPaused){
@@ -190,6 +194,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             setDynamicStates(true)
             retrieveVelocities()
             restartTimer()
+            gameTimer.start()
+            paused = false
         }
         if (playerSelected == true) {
             
@@ -235,7 +241,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setDynamicStates(false)
         timer?.invalidate()
         updateLighting()
-        
+        paused = true
         if scoreGoal{
             scoreA+=1
             turnA = false
@@ -280,6 +286,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func twoSeconds(){
         score.text = ""
         setDynamicStates(true)
+        paused = false
     }
     
     func setDynamicStates(isDynamic: Bool){
@@ -318,11 +325,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         _ = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(showTime), userInfo: nil, repeats: true)
     }
     func showTime(){
-        gameTime = baseTime - gameTimer.stop()
-        if (gameTime<=0){
-            endGame()
+        if !paused {
+            gameTime = baseTime - gameTimer.stop()
+            if (gameTime<=0){
+                endGame()
+            }
+            clock.text = gameTimer.secondsToString(gameTime!)
         }
-        clock.text = gameTimer.secondsToString(gameTime!)
         
     }
     func endGame(){
