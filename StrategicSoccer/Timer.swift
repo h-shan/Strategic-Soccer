@@ -32,7 +32,7 @@ class Timer{
     //pause() allows the timer to be momentarily stopped without the total time being affected.
     
     func pause(){
-        elapsedTime += getElapsedTime()
+        elapsedTime = getElapsedTime()
         started = false
     }
     
@@ -54,6 +54,15 @@ class Timer{
     func restart(){
         self.reset()
         self.start()
+    }
+    func secondsToString (seconds : NSTimeInterval) -> (String) {
+        let minutes = Int(seconds/60)
+        let seconds = Int(seconds%60)
+        if seconds < 10 {
+            return String.localizedStringWithFormat("%d:0%d", minutes,seconds)
+        }
+        
+        return String.localizedStringWithFormat("%d:%d",minutes,seconds)
     }
     
 }

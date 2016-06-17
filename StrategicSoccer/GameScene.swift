@@ -26,11 +26,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let playerB3 = Player(teamA: false)
     var players: [Player]?
     
-    let gameTimer = TimerM()
+    let gameTimer = Timer()
     let clock = SKLabelNode(fontNamed: "Georgia")
     var gameTime: NSTimeInterval?
-    var baseTime = 180.1
-    
     let mode: Mode
     
     
@@ -48,6 +46,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.mode = mode
         super.init(size: size)
     }
+    var scoreTimer: NSTimer?
+    var moveTimer:Timer?
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -125,6 +125,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         moveTimer = Timer()
         moveTimer?.restart()
         
+        restartTimer()
+        
         // set timer for threeMinute
         
         if (mode == Mode.threeMinute){
@@ -183,9 +185,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 setDynamicStates(false)
                 timer?.invalidate()
                 paused = true
-                if mode == Mode.threeMinute{
-                    baseTime = gameTime!
-                }
+                moveTimer?.pause()
+                gameTimer.pause()
             }
         }
         else if (startPaused && endPaused){
@@ -196,6 +197,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             restartTimer()
             gameTimer.start()
             paused = false
+            moveTimer?.start()
         }
         if (playerSelected == true) {
             
@@ -291,6 +293,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         score.text = ""
         setDynamicStates(true)
         paused = false
+        moveTimer?.restart()
     }
     
     func setDynamicStates(isDynamic: Bool){
@@ -330,7 +333,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     func showTime(){
         if !paused {
-            gameTime = baseTime - gameTimer.stop()
+            gameTime = 180.1 - gameTimer.getElapsedTime()
             if (gameTime<=0){
                 endGame()
             }
