@@ -248,10 +248,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if scoreA == 10 || scoreB == 10 {
                 endGame()
             }
+            else{
+                score.text = String.localizedStringWithFormat("%d - %d", scoreA, scoreB)
+
+            }
         }
-        
-        score.text = String.localizedStringWithFormat("%d - %d", scoreA, scoreB)
-        
+        else{
+            score.text = String.localizedStringWithFormat("%d - %d", scoreA, scoreB)
+        }
         _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
         restartTimer()
         
@@ -323,19 +327,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     func endGame(){
         if scoreA > scoreB {
-            score.text = "PlayerA Wins"
+            score.text = "Player A Wins"
         }
         else if scoreB > scoreA {
-            score.text = "PlayerB Wins"
+            score.text = "Player B Wins"
         }
         else{
             score.text = "It's a Tie!"
         }
-        _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(wait), userInfo: nil, repeats: false)
+        _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(goBackToTitle), userInfo: nil, repeats: false)
+    }
+    func goBackToTitle (){
         let nextScene = TitleScene(size: scene!.size)
         scene?.view?.presentScene(nextScene)
-    }
-    func wait (){
     }
     
 }
