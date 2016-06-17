@@ -22,14 +22,21 @@ class TitleScene: SKScene {
         
         self.addChild(titleLabel)
         
-        let startButton = SKLabelNode(fontNamed:"Times New Roman")
-        startButton.text = "Start"
-        startButton.fontSize = 25
-        startButton.fontColor=UIColor.whiteColor()
-        startButton.name = "startButton"
-        startButton.position = CGPoint(x:CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame)*2/3)
+        let tenPoints = SKLabelNode(fontNamed:"Times New Roman")
+        tenPoints.text = "First to 10"
+        tenPoints.fontSize = 25
+        tenPoints.fontColor=UIColor.whiteColor()
+        tenPoints.name = "tenPoints"
+        tenPoints.position = CGPoint(x:CGRectGetMidX(self.frame)*2/3, y: CGRectGetMidY(self.frame)*2/3)
         
-        self.addChild(startButton)
+        self.addChild(tenPoints)
+        
+        let threeMinutes = SKLabelNode(fontNamed:"Times New Roman")
+        threeMinutes.text = "Three Minutes"
+        threeMinutes.fontSize = 25
+        threeMinutes.name = "threeMinutes"
+        threeMinutes.position = CGPoint(x:CGRectGetMidX(self.frame)*4/3, y: CGRectGetMidY(self.frame)*2/3)
+        addChild(threeMinutes)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -38,11 +45,14 @@ class TitleScene: SKScene {
         for touch in touches {
             let location = touch.locationInNode(self)
             let node = self.nodeAtPoint(location)
-            if(node.name == "startButton"){
-                let nextScene = GameScene(size: scene!.size)
+            if(node.name == "tenPoints"){
+                let nextScene = GameScene(size: scene!.size, mode: Mode.tenPoints)
                 scene?.view?.presentScene(nextScene)
             }
-
+            if node.name == "threeMinutes"{
+                let nextScene = GameScene(size: scene!.size, mode: Mode.threeMinute)
+                scene?.view?.presentScene(nextScene)
+            }
         }
     }
     

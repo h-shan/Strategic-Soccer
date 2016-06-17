@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import Foundation
 
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -25,6 +26,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let playerB3 = Player(teamA: false)
     var players: [Player]?
     
+    let gameTimer = Timer()
+    let clock = SKLabelNode(fontNamed: "Georgia")
+    var gameTime: NSTimeInterval?
+    
+    
+    let mode: Mode
+    
+    
     let pause = SKSpriteNode(texture: SKTexture(imageNamed: "Pause"), color: UIColor.clearColor(), size: SKTexture(imageNamed: "Pause").size())
 
     var turnA = true
@@ -35,6 +44,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let score = SKLabelNode(fontNamed: "Georgia")
     
     var timer: NSTimer?
+    init(size: CGSize, mode: Mode){
+        self.mode = mode
+        super.init(size: size)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -107,6 +125,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         updateLighting()
         
         restartTimer()
+        
+        // set timer for threeMinute
+        
+        if (mode == Mode.threeMinute){
+            gameTime = 180
+            // set up clock
+            clock.text = gameTimer.secondsToString(gameTime!)
+            clock.fontSize = 15
+            clock.position = CGPoint(x: midX!, y: 7/4*midY!)
+            clock.zPosition = 1.5
+            clock.fontColor = UIColor.blackColor()
+            gameTimer.start()
+            addChild(clock)
+            updateTime()
+        }
         
     }
     
@@ -283,6 +316,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func restartTimer(){
         timer?.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(switchTurns), userInfo: nil, repeats: false)
+    }
+    func updateTime(){
+        _ = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(showTime), userInfo: nil, repeats: true)
+    }
+    func showTime(){
+        gameTime = 180.1 - gameTimer.stop()
+        
+        clock.text = gameTimer.secondsToString(gameTime!)
+        
     }
     
 }
