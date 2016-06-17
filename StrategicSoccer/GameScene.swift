@@ -29,7 +29,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let gameTimer = Timer()
     let clock = SKLabelNode(fontNamed: "Georgia")
     var gameTime: NSTimeInterval?
-    
+    var baseTime = 180.1
     
     let mode: Mode
     
@@ -47,7 +47,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     init(size: CGSize, mode: Mode){
         self.mode = mode
         super.init(size: size)
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -245,20 +244,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scoreB+=1
             turnA = true
         }
+        if mode == Mode.tenPoints{
+            if scoreA == 10 || scoreB == 10 {
+                endGame()
+            }
+        }
         
-        if scoreA == 10 {
-            score.text = "Player A Wins"
-            scoreA = 0
-            scoreB = 0
-        }
-        else if scoreB == 10{
-            score.text = "Player B Wins"
-            scoreA = 0
-            scoreB = 0
-        }
-        else{
-            score.text = "\(scoreA) - \(scoreB)"
-        }
+        score.text = String.localizedStringWithFormat("%d - %d", scoreA, scoreB)
+        
         _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
         restartTimer()
         
@@ -321,10 +314,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         _ = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(showTime), userInfo: nil, repeats: true)
     }
     func showTime(){
-        gameTime = 180.1 - gameTimer.stop()
-        
+        gameTime = baseTime - gameTimer.stop()
+        if (gameTime<=0){
+            endGame()
+        }
         clock.text = gameTimer.secondsToString(gameTime!)
         
+    }
+    func endGame(){
+        if scoreA > scoreB {
+            score.text = "PlayerA Wins"
+        }
+        else if scoreB > scoreA {
+            score.text = "PlayerB Wins"
+        }
+        else{
+            score.text = "It's a Tie!"
+        }
+        _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(wait), userInfo: nil, repeats: false)
+        let nextScene = TitleScene(size: scene!.size)
+        scene?.view?.presentScene(nextScene)
+    }
+    func wait (){
     }
     
 }

@@ -23,6 +23,9 @@ class Timer {
     func secondsToString (seconds : NSTimeInterval) -> (String) {
         let minutes = Int(seconds/60)
         let seconds = Int(seconds%60)
+        if seconds < 10 {
+            return String.localizedStringWithFormat("%d:0%d", minutes,seconds)
+        }
        
         return String.localizedStringWithFormat("%d:%d",minutes,seconds)
     }
