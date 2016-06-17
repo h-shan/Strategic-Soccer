@@ -12,7 +12,7 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var selectedPlayer : Player?
     var startPosition : CGPoint?
-    var playerSelected : Bool?
+    var playerSelected = false
     var goalA : Bool?
     var ball: Ball?
     var midY: CGFloat?
@@ -33,6 +33,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreA = 0
     var scoreB = 0
     let score = SKLabelNode(fontNamed: "Georgia")
+    
+    var timer: NSTimer?
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -104,6 +106,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         updateLighting()
         
+        timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(switchTurns), userInfo: nil, repeats: false)
+        
     }
     
     
@@ -128,6 +132,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         playerSelected = true
                         startPosition = location
                         selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0.00001))
+                        
                     }
                 }
                 if node.name == "pause"{
@@ -152,14 +157,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             setDynamicStates(true)
             retrieveVelocities()
         }
-        if (playerSelected != nil && playerSelected == true) {
-            selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: -0.4, duration: 0.00001))
-            turnA = !turnA
-            updateLighting()
+        if (playerSelected == true) {
+            
             let xMovement = 1.5*(touches.first!.locationInNode(self).x - startPosition!.x)
             let yMovement = 1.5*(touches.first!.locationInNode(self).y - startPosition!.y)
             
             selectedPlayer!.physicsBody!.velocity = CGVectorMake(xMovement, yMovement)
+            switchTurns()
+            
         }
         
         playerSelected = false
@@ -167,7 +172,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func updateLighting(){
         for player in players!{
-            player.setLighting(player.mTeamA == !turnA)
+            if playerSelected && player == selectedPlayer!{
+                player.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: -0.4, duration: 0.00001))
+                playerSelected = false
+            }
+            player.setLighting(player.mTeamA != turnA)
+            
         }
     }
    
@@ -189,6 +199,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // reset position of all players and ball
         
         setDynamicStates(false)
+        timer?.invalidate()
+        updateLighting()
         
         if scoreGoal{
             scoreA+=1
@@ -203,17 +215,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score.text = "Player A Wins"
             scoreA = 0
             scoreB = 0
-            _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
         }
         else if scoreB == 10{
             score.text = "Player B Wins"
             scoreA = 0
             scoreB = 0
-            _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
         }
-        else{ _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
+        else{
             score.text = "\(scoreA) - \(scoreB)"
         }
+        _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
+        timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(switchTurns), userInfo: nil, repeats: false)
+        
         playerA1.position = CGPoint(x:midX!*0.3,y:midY!*1.5)
         playerA2.position = CGPoint(x:midX!*0.3,y:midY!*0.5)
         playerA3.position = CGPoint(x:midX!*0.7,y:midY!)
@@ -229,7 +242,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         ball!.position = CGPoint(x: midX!,y: midY!)
         ball!.physicsBody!.velocity = CGVectorMake(0,0)
-        updateLighting()
+        ball!.physicsBody!.angularVelocity = 0
+        
     }
     
     func twoSeconds(){
@@ -257,6 +271,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         ball!.physicsBody!.velocity = ball!.storedVelocity!
     }
-    
+    func switchTurns(){
+        turnA = !turnA
+        if playerSelected == true {
+            playerSelected = false
+        }
+        timer?.invalidate()
+        timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(switchTurns), userInfo: nil, repeats: false)
+        updateLighting()
+        
+        
+    }
     
 }
