@@ -25,7 +25,6 @@ class Player: SKSpriteNode {
         self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
         self.name = "player"
         self.zPosition = 2
-        self.lightingBitMask = 1
         
         let body:SKPhysicsBody = self.physicsBody!
         body.usesPreciseCollisionDetection = true
@@ -33,6 +32,23 @@ class Player: SKSpriteNode {
         
         body.restitution = 1
         body.friction = 1
+     
+    }
+    
+    func setLighting(bright:Bool){
+        if(bright){
+            changeColorBright()
+        }else{
+            changeColorDark()
+        }
+    }
+    
+    func changeColorBright(){
+        self.runAction(SKAction.colorizeWithColor(UIColor.grayColor(), colorBlendFactor: 0.7, duration: 0.25))
+    }
+    
+    func changeColorDark(){
+        self.runAction(SKAction.colorizeWithColor(UIColor.whiteColor(), colorBlendFactor: 0.7, duration: 0.25))
     }
     
     required init?(coder aDecoder: NSCoder) {

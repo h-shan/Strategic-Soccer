@@ -34,13 +34,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreB = 0
     let score = SKLabelNode(fontNamed: "Georgia")
     
-    let lightA1 = SKLightNode()
-    let lightA2 = SKLightNode()
-    let lightA3 = SKLightNode()
-    let lightB1 = SKLightNode()
-    let lightB2 = SKLightNode()
-    let lightB3 = SKLightNode()
-    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         let background = SKSpriteNode(imageNamed: "SoccerField")
@@ -107,42 +100,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pause.name = "pause"
         addChild(pause)
         
-        // set dimming
-        playerA1.lightingBitMask = 1
-        lightA1.categoryBitMask = 1
-        lightA1.position = playerA1.position
-        lightA1.lightColor = UIColor.blackColor()
-        addChild(lightA1)
-        
-        playerA2.lightingBitMask = 1
-        lightA2.categoryBitMask = 1
-        lightA2.position = playerA2.position
-        lightA2.lightColor = UIColor.blackColor()
-        addChild(lightA2)
-        
-        playerA3.lightingBitMask = 1
-        lightA3.categoryBitMask = 1
-        lightA3.position = playerA3.position
-        lightA3.lightColor = UIColor.blackColor()
-        addChild(lightA3)
-        
-        playerB1.lightingBitMask = 2
-        lightB1.categoryBitMask = 2
-        lightB1.position = playerB1.position
-        lightB1.lightColor = UIColor.blackColor()
-        addChild(lightB1)
-        
-        playerB2.lightingBitMask = 2
-        lightB2.categoryBitMask = 2
-        lightB2.position = playerB2.position
-        lightB2.lightColor = UIColor.blackColor()
-        addChild(lightB2)
-        
-        playerB3.lightingBitMask = 2
-        lightB3.categoryBitMask = 2
-        lightB3.position = playerB3.position
-        lightB3.lightColor = UIColor.blackColor()
-        addChild(lightB3)
+        updateLighting()
         
     }
     
@@ -193,6 +151,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         if (playerSelected != nil && playerSelected == true) {
             turnA = !turnA
+            updateLighting()
             let xMovement = 1.5*(touches.first!.locationInNode(self).x - startPosition!.x)
             let yMovement = 1.5*(touches.first!.locationInNode(self).y - startPosition!.y)
             
@@ -201,31 +160,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         playerSelected = false
     }
+    
+    func updateLighting(){
+        for player in players!{
+            player.setLighting(player.mTeamA == !turnA)
+        }
+    }
    
     override func update(currentTime: CFTimeInterval) {
-        lightA1.position = playerA1.position
-        lightA2.position = playerA2.position
-        lightA3.position = playerA3.position
-        lightB1.position = playerB1.position
-        lightB2.position = playerB2.position
-        lightB3.position = playerB3.position
-        if (!turnA){
-            lightA1.enabled = true
-            lightA2.enabled = true
-            lightA3.enabled = true
-            lightB1.enabled = false
-            lightB2.enabled = false
-            lightB3.enabled = false
-        }
-        else{
-            lightA1.enabled = false
-            lightA2.enabled = false
-            lightA3.enabled = false
-            lightB1.enabled = true
-            lightB2.enabled = true
-            lightB3.enabled = true
-            
-        }
+        
         if (200/320 * midY! < ball!.position.y && ball!.position.y < 440/320 * midY!){
             if 0<ball!.position.x && ball!.position.x<50/568*midX!{
                 self.reset(false)
@@ -237,6 +180,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         /* Called before each frame is rendered */
     }
+    
     func reset(scoreGoal: Bool){
         // reset position of all players and ball
         
@@ -250,6 +194,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scoreB+=1
             turnA = true
         }
+        
         if scoreA == 10 {
             score.text = "Player A Wins"
             scoreA = 0
@@ -280,6 +225,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         ball!.position = CGPoint(x: midX!,y: midY!)
         ball!.physicsBody!.velocity = CGVectorMake(0,0)
+        updateLighting()
     }
     
     func twoSeconds(){
