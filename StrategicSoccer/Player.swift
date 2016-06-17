@@ -22,7 +22,6 @@ class Player: SKSpriteNode {
             texture = SKTexture(imageNamed: "PlayerB")
             super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
         }
-        light.position = position
         self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
         self.name = "player"
         self.zPosition = 2
