@@ -59,6 +59,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
         
+        
+        
         // set goal posts in place
         
         let goalPostA1 = GoalPost()
