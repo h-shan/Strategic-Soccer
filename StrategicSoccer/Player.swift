@@ -43,7 +43,6 @@ class Player: SKSpriteNode {
         body.usesPreciseCollisionDetection = true
         body.categoryBitMask = 1
         
-        
         body.restitution = 1
         body.friction = 1
     }
