@@ -122,8 +122,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(pause)
         
         updateLighting()
-        
-        restartTimer()
+        moveTimer = Timer()
+        moveTimer?.restart()
         
         // set timer for threeMinute
         
@@ -232,6 +232,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
+        if(moveTimer!.getElapsedTime() > 5){
+            switchTurns()
+        }
+        
         /* Called before each frame is rendered */
     }
     
@@ -239,7 +243,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // reset position of all players and ball
         
         setDynamicStates(false)
-        timer?.invalidate()
+        scoreTimer?.invalidate()
         updateLighting()
         paused = true
         if scoreGoal{
@@ -263,7 +267,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score.text = String.localizedStringWithFormat("%d - %d", scoreA, scoreB)
         }
         _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
-        restartTimer()
+        scoreTimer?.invalidate()
         
         playerA1.position = CGPoint(x:midX!*0.3,y:midY!*1.5)
         playerA2.position = CGPoint(x:midX!*0.3,y:midY!*0.5)
@@ -314,7 +318,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if playerSelected == true {
             playerSelected = false
         }
-        restartTimer()
+        moveTimer?.restart()
         updateLighting()
     }
     func restartTimer(){
