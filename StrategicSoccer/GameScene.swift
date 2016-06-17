@@ -127,6 +127,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         selectedPlayer = touchedPlayer
                         playerSelected = true
                         startPosition = location
+                        selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0.00001))
                     }
                 }
                 if node.name == "pause"{
@@ -152,6 +153,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             retrieveVelocities()
         }
         if (playerSelected != nil && playerSelected == true) {
+            selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: -0.4, duration: 0.00001))
             turnA = !turnA
             updateLighting()
             let xMovement = 1.5*(touches.first!.locationInNode(self).x - startPosition!.x)
