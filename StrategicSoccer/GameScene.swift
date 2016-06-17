@@ -34,6 +34,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreB = 0
     let score = SKLabelNode(fontNamed: "Georgia")
     
+    var velocityA1: CGVector?
+    var velocityA2: CGVector?
+    var velocityA3: CGVector?
+    var velocityB1: CGVector?
+    var velocityB2: CGVector?
+    var velocityB3: CGVector?
+    var velocityBall: CGVector?
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         let background = SKSpriteNode(imageNamed: "SoccerField")
