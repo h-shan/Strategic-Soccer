@@ -11,11 +11,12 @@ import Foundation
 class Timer{
     
     var startTime:NSDate?
-    var elapsedTime:Double = 0
+    var elapsedTime:Double
     var started:Bool
     
     init(){
         started = false
+        elapsedTime = 0
     }
     
     
@@ -32,7 +33,7 @@ class Timer{
     //pause() allows the timer to be momentarily stopped without the total time being affected.
     
     func pause(){
-        elapsedTime = getElapsedTime()
+        elapsedTime += NSDate().timeIntervalSinceDate(startTime!)
         started = false
     }
     
@@ -55,6 +56,7 @@ class Timer{
         self.reset()
         self.start()
     }
+    
     func secondsToString (seconds : NSTimeInterval) -> (String) {
         let minutes = Int(seconds/60)
         let seconds = Int(seconds%60)

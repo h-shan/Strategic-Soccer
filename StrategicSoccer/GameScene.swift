@@ -125,8 +125,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         moveTimer = Timer()
         moveTimer?.restart()
         
-        restartTimer()
-        
         // set timer for threeMinute
         
         if (mode == Mode.threeMinute){
@@ -159,7 +157,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     endPaused = true
                 }
             }else{
-                if node is Player{
+                if (node is Player && !paused){
                     let touchedPlayer = (node as! Player)
                     if touchedPlayer.mTeamA! == turnA {
                         selectedPlayer = touchedPlayer
@@ -186,7 +184,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 timer?.invalidate()
                 paused = true
                 moveTimer?.pause()
-                gameTimer.pause()
+                if(mode == Mode.threeMinute){
+                    gameTimer.pause()
+                }
             }
         }
         else if (startPaused && endPaused){
@@ -194,8 +194,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score.text = ""
             setDynamicStates(true)
             retrieveVelocities()
-            restartTimer()
-            gameTimer.start()
+            if(mode == Mode.threeMinute){
+                gameTimer.start()
+            }
             paused = false
             moveTimer?.start()
         }
@@ -233,7 +234,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.reset(true)
             }
         }
-        
+        print(turnA)
         if(moveTimer!.getElapsedTime() > 5){
             switchTurns()
         }
@@ -243,10 +244,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func reset(scoreGoal: Bool){
         // reset position of all players and ball
-        
         setDynamicStates(false)
         scoreTimer?.invalidate()
-        updateLighting()
+        moveTimer?.reset()
         paused = true
         if scoreGoal{
             scoreA+=1
@@ -256,6 +256,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scoreB+=1
             turnA = true
         }
+        updateLighting()
         if mode == Mode.tenPoints{
             if scoreA == 10 || scoreB == 10 {
                 endGame()
@@ -293,7 +294,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         score.text = ""
         setDynamicStates(true)
         paused = false
-        moveTimer?.restart()
+        moveTimer?.start()
     }
     
     func setDynamicStates(isDynamic: Bool){
@@ -316,6 +317,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         ball!.physicsBody!.velocity = ball!.storedVelocity!
     }
+    
     func switchTurns(){
         turnA = !turnA
         if playerSelected == true {
@@ -324,13 +326,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         moveTimer?.restart()
         updateLighting()
     }
-    func restartTimer(){
-        timer?.invalidate()
-        timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(switchTurns), userInfo: nil, repeats: false)
-    }
+    
     func updateTime(){
         _ = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(showTime), userInfo: nil, repeats: true)
     }
+    
     func showTime(){
         if !paused {
             gameTime = 180.1 - gameTimer.getElapsedTime()
@@ -341,6 +341,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
     }
+    
     func endGame(){
         if scoreA > scoreB {
             score.text = "Player A Wins"
