@@ -15,7 +15,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var startPosition : CGPoint?
     var playerSelected = false
     var goalA : Bool?
-    var ball: Ball?
+    let ball = Ball()
     var midY: CGFloat?
     var midX: CGFloat?
     let playerA1 = Player(teamA: true)
@@ -46,7 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.mode = mode
         super.init(size: size)
     }
-    var scoreTimer: NSTimer?
+    
     var moveTimer:Timer?
     
     required init?(coder aDecoder: NSCoder) {
@@ -95,14 +95,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(goalPostB1)
         self.addChild(goalPostB2)
         
-        // position all 6 players
-        
-        playerA1.position = CGPoint(x:midX!*0.3,y:midY!*1.5)
-        playerA2.position = CGPoint(x:midX!*0.3,y:midY!*0.5)
-        playerA3.position = CGPoint(x:midX!*0.7,y:midY!)
-        playerB1.position = CGPoint(x:midX!*1.7,y:midY!*1.5)
-        playerB2.position = CGPoint(x:midX!*1.7,y:midY!*0.5)
-        playerB3.position = CGPoint(x:midX!*1.3,y:midY!)
         
         players = [playerA1, playerA2, playerA3, playerB1, playerB2, playerB3]
         
@@ -111,9 +103,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         // put ball in middle
-        ball = Ball()
-        ball!.position = CGPoint(x: midX!,y: midY!)
-        self.addChild(ball!)
+        
+        setPosition()
+        self.addChild(ball)
         
         // set pause button
         pause.position = CGPoint(x: 50/568*midX!, y:50/320*midY!)
@@ -226,15 +218,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
    
     override func update(currentTime: CFTimeInterval) {
         
-        if (200/320 * midY! < ball!.position.y && ball!.position.y < 440/320 * midY!){
-            if 0<ball!.position.x && ball!.position.x<50/568*midX!{
+        if (200/320 * midY! < ball.position.y && ball.position.y < 440/320 * midY!){
+            if 0<ball.position.x && ball.position.x<50/568*midX!{
+                
+                if !turnA {
+                    switchTurns()
+                }
                 self.reset(false)
             }
-            else if 1086/568*midX! < ball!.position.x {
+            else if 1086/568*midX! < ball.position.x {
+                
+                if turnA {
+                    switchTurns()
+                }
                 self.reset(true)
             }
         }
-        print(turnA)
+        
         if(moveTimer!.getElapsedTime() > 5){
             switchTurns()
         }
@@ -244,78 +244,74 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func reset(scoreGoal: Bool){
         // reset position of all players and ball
-        setDynamicStates(false)
-        scoreTimer?.invalidate()
+        
+        
         moveTimer?.reset()
-        paused = true
+        
         if scoreGoal{
             scoreA+=1
-            turnA = false
         }
-        else{
+        else if !scoreGoal{
             scoreB+=1
-            turnA = true
         }
-        updateLighting()
+        
+        setDynamicStates(false)
+        paused = true
         if mode == Mode.tenPoints{
             if scoreA == 10 || scoreB == 10 {
                 endGame()
             }
             else{
                 score.text = String.localizedStringWithFormat("%d - %d", scoreA, scoreB)
-
             }
         }
         else{
             score.text = String.localizedStringWithFormat("%d - %d", scoreA, scoreB)
         }
-        _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
-        scoreTimer?.invalidate()
-        
-        playerA1.position = CGPoint(x:midX!*0.3,y:midY!*1.5)
-        playerA2.position = CGPoint(x:midX!*0.3,y:midY!*0.5)
-        playerA3.position = CGPoint(x:midX!*0.7,y:midY!)
-        playerB1.position = CGPoint(x:midX!*1.7,y:midY!*1.5)
-        playerB2.position = CGPoint(x:midX!*1.7,y:midY!*0.5)
-        playerB3.position = CGPoint(x:midX!*1.3,y:midY!)
-        
-        for child in self.children{
-            if child is Player{
-                child.physicsBody!.velocity = CGVectorMake(0,0)
-            }
+        if mode == Mode.threeMinute{
+            
+            gameTimer.pause()
         }
         
-        ball!.position = CGPoint(x: midX!,y: midY!)
-        ball!.physicsBody!.velocity = CGVectorMake(0,0)
-        ball!.physicsBody!.angularVelocity = 0
+        _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
+        if mode == Mode.threeMinute{
+            
+            gameTimer.start()
+            
+        }
+        setPosition()
+        ball.physicsBody!.velocity = CGVectorMake(0,0)
+        ball.physicsBody!.angularVelocity = 0
+        
+        moveTimer?.elapsedTime -= 2
     }
     
     func twoSeconds(){
         score.text = ""
         setDynamicStates(true)
         paused = false
-        moveTimer?.start()
+        moveTimer?.reset()
     }
     
     func setDynamicStates(isDynamic: Bool){
         for player in self.players!{
             player.physicsBody!.dynamic = isDynamic
         }
-        ball?.physicsBody!.dynamic = isDynamic
+        ball.physicsBody!.dynamic = isDynamic
     }
     
     func storeVelocities(){
         for player in self.players!{
             player.storedVelocity = player.physicsBody!.velocity
         }
-        ball!.storedVelocity = ball!.physicsBody!.velocity
+        ball.storedVelocity = ball.physicsBody!.velocity
     }
     
     func retrieveVelocities(){
         for player in self.players!{
             player.physicsBody!.velocity = player.storedVelocity!
         }
-        ball!.physicsBody!.velocity = ball!.storedVelocity!
+        ball.physicsBody!.velocity = ball.storedVelocity!
     }
     
     func switchTurns(){
@@ -323,6 +319,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if playerSelected == true {
             playerSelected = false
         }
+        
         moveTimer?.restart()
         updateLighting()
     }
@@ -357,6 +354,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func goBackToTitle (){
         let nextScene = TitleScene(size: scene!.size)
         scene?.view?.presentScene(nextScene)
+    }
+    
+    func setPosition(){
+        playerA1.position = CGPoint(x:midX!*0.3,y:midY!*1.5)
+        playerA2.position = CGPoint(x:midX!*0.3,y:midY!*0.5)
+        playerA3.position = CGPoint(x:midX!*0.7,y:midY!)
+        playerB1.position = CGPoint(x:midX!*1.7,y:midY!*1.5)
+        playerB2.position = CGPoint(x:midX!*1.7,y:midY!*0.5)
+        playerB3.position = CGPoint(x:midX!*1.3,y:midY!)
+        
+        ball.position = CGPoint(x: midX!,y: midY!)
     }
     
 }

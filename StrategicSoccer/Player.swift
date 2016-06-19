@@ -12,6 +12,7 @@ class Player: SKSpriteNode {
     var mTeamA:Bool!
     var storedVelocity:CGVector?
     
+    
     init(teamA: Bool){
         mTeamA = teamA
         var texture = SKTexture(imageNamed: "PlayerA")
@@ -39,15 +40,18 @@ class Player: SKSpriteNode {
             changeColorBright()
         }else{
             changeColorDark()
+            
         }
     }
     
     func changeColorBright(){
         self.runAction(SKAction.colorizeWithColor(UIColor.grayColor(), colorBlendFactor: 0.7, duration: 0.00001))
+        
     }
     
     func changeColorDark(){
         self.runAction(SKAction.colorizeWithColor(UIColor.grayColor(), colorBlendFactor: -0.7, duration: 0.00001))
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
