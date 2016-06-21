@@ -198,6 +198,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let yMovement = 1.5*(touches.first!.locationInNode(self).y - startPosition!.y)
             
             selectedPlayer!.physicsBody!.velocity = CGVectorMake(xMovement, yMovement)
+            playerSelected = false
             switchTurns()
             
         }
@@ -207,12 +208,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func updateLighting(){
         for player in players!{
-            if playerSelected && player == selectedPlayer!{
-                player.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: -0.4, duration: 0.00001))
-                playerSelected = false
-            }
             player.setLighting(player.mTeamA != turnA)
-            
         }
     }
    
@@ -245,8 +241,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func reset(scoreGoal: Bool){
         // reset position of all players and ball
         
-        
-        moveTimer?.reset()
+        if playerSelected{
+            playerSelected = false
+            selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.grayColor(), colorBlendFactor: -0.7, duration: 0.00001))
+        }
+        moveTimer?.restart()
         
         if scoreGoal{
             scoreA+=1
@@ -254,7 +253,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else if !scoreGoal{
             scoreB+=1
         }
-        
         setDynamicStates(false)
         paused = true
         if mode == Mode.tenPoints{
@@ -269,16 +267,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score.text = String.localizedStringWithFormat("%d - %d", scoreA, scoreB)
         }
         if mode == Mode.threeMinute{
-            
             gameTimer.pause()
         }
-        
+        setDynamicStates(true)
+        paused = false
+        moveTimer?.reset()
         _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
         if mode == Mode.threeMinute{
             
             gameTimer.start()
             
-        }
+        }        
         setPosition()
         ball.physicsBody!.velocity = CGVectorMake(0,0)
         ball.physicsBody!.angularVelocity = 0
@@ -288,9 +287,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func twoSeconds(){
         score.text = ""
-        setDynamicStates(true)
-        paused = false
-        moveTimer?.reset()
     }
     
     func setDynamicStates(isDynamic: Bool){
@@ -316,12 +312,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func switchTurns(){
         turnA = !turnA
+        
         if playerSelected == true {
             playerSelected = false
         }
-        
-        moveTimer?.restart()
         updateLighting()
+        moveTimer?.restart()
+        
     }
     
     func updateTime(){
@@ -363,8 +360,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         playerB1.position = CGPoint(x:midX!*1.7,y:midY!*1.5)
         playerB2.position = CGPoint(x:midX!*1.7,y:midY!*0.5)
         playerB3.position = CGPoint(x:midX!*1.3,y:midY!)
-        
         ball.position = CGPoint(x: midX!,y: midY!)
     }
-    
 }
