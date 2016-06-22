@@ -80,10 +80,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // make soccer net
         let netTexture = SKTexture(imageNamed: "SoccerNet")
-        let soccerNet = SKSpriteNode(texture: netTexture)
-        soccerNet.position = CGPoint(x:40/568*midX!, y: midY!)
-        soccerNet.zPosition = 3
-        addChild(soccerNet)
+        let leftSoccerNet = SKSpriteNode(texture: netTexture)
+        let rightSoccerNet = SKSpriteNode(texture: netTexture)
+        rightSoccerNet.position = CGPoint(x: 1096/568*midX!, y: midY!)
+        leftSoccerNet.position = CGPoint(x:40/568*midX!, y: midY!)
+        rightSoccerNet.zPosition = 3
+        leftSoccerNet.zPosition = 3
+        addChild(leftSoccerNet)
+        addChild(rightSoccerNet)
         
         // set goal posts in place
         
