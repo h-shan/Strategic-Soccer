@@ -15,15 +15,15 @@ class Player: SKSpriteNode {
     
     init(teamA: Bool){
         mTeamA = teamA
-        var texture = SKTexture(imageNamed: "PlayerA")
+        var texture = SKTexture(imageNamed: "PlayerTaiwan")
         if (mTeamA!){
             super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
         }
         else{
-            texture = SKTexture(imageNamed: "PlayerB")
+            texture = SKTexture(imageNamed: "PlayerUSA")
             super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
         }
-        self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
+        self.physicsBody = SKPhysicsBody(circleOfRadius: texture.size().width*5/12)
         self.name = "player"
         self.zPosition = 2
         
@@ -33,6 +33,7 @@ class Player: SKSpriteNode {
         
         body.restitution = 1
         body.friction = 1
+        body.allowsRotation = false
     }
     
     func setLighting(bright:Bool){

@@ -131,10 +131,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addChild(clock)
             updateTime()
         }
-        
+
     }
-    
-    
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
         {
@@ -271,13 +269,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         setDynamicStates(true)
         paused = false
-        moveTimer?.reset()
+        moveTimer?.restart()
         _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
         if mode == Mode.threeMinute{
             
             gameTimer.start()
             
-        }        
+        }
         setPosition()
         ball.physicsBody!.velocity = CGVectorMake(0,0)
         ball.physicsBody!.angularVelocity = 0
