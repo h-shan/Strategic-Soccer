@@ -23,7 +23,7 @@ class Ball: SKSpriteNode {
         let body = self.physicsBody!
         body.usesPreciseCollisionDetection = true
         body.categoryBitMask = 1
-        
+        body.linearDamping = 0.3
         body.restitution = 1
         body.friction = 1
         

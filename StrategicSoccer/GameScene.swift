@@ -344,6 +344,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func endGame(){
+        gameTimer.elapsedTime = 0
         if scoreA > scoreB {
             score.text = "Player A Wins"
         }

@@ -13,28 +13,28 @@ class TitleScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        self.backgroundColor = UIColor.blackColor()
+        self.backgroundColor = UIColor.greenColor()
 
         let titleLabel = SKLabelNode(fontNamed:"Times New Roman")
-        titleLabel.text = "Greetings, Traveler"
+        titleLabel.text = "Strategic Soccer"
         titleLabel.fontSize = 45
-        titleLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
+        titleLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame)*5/4)
         
         self.addChild(titleLabel)
         
-        let tenPoints = SKLabelNode(fontNamed:"Times New Roman")
-        tenPoints.text = "First to 10"
-        tenPoints.fontSize = 25
-        tenPoints.fontColor=UIColor.whiteColor()
+        let tenPoints = MenuButton(label: "First to 10", texture: SKTexture(imageNamed: "ButtonA"))
+        tenPoints.label.fontSize = 25
+        tenPoints.label.fontColor=UIColor.whiteColor()
         tenPoints.name = "tenPoints"
+        tenPoints.zPosition = 2
         tenPoints.position = CGPoint(x:CGRectGetMidX(self.frame)*2/3, y: CGRectGetMidY(self.frame)*2/3)
         
         self.addChild(tenPoints)
         
-        let threeMinutes = SKLabelNode(fontNamed:"Times New Roman")
-        threeMinutes.text = "Three Minutes"
-        threeMinutes.fontSize = 25
+        let threeMinutes = MenuButton(label: "Three Minutes", texture: SKTexture(imageNamed:"ButtonA"))
+        threeMinutes.label.fontSize = 25
         threeMinutes.name = "threeMinutes"
+        threeMinutes.zPosition = 2
         threeMinutes.position = CGPoint(x:CGRectGetMidX(self.frame)*4/3, y: CGRectGetMidY(self.frame)*2/3)
         addChild(threeMinutes)
     }
