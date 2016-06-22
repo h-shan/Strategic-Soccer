@@ -14,10 +14,11 @@ class Ball: SKSpriteNode {
     
     init() {
         let texture = SKTexture(imageNamed: "Ball")
-        super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
+        let actualSize = CGSizeMake(texture.size().width*0.85, texture.size().height*0.85)
+        super.init(texture: texture, color: UIColor.clearColor(), size: actualSize)
         
         self.name="ball"
-        self.physicsBody = SKPhysicsBody(circleOfRadius: texture.size().width/2)
+        self.physicsBody = SKPhysicsBody(circleOfRadius: actualSize.width/2)
         self.zPosition = 2
         let body = self.physicsBody!
         body.usesPreciseCollisionDetection = true

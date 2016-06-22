@@ -78,7 +78,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
         
-        
+        // make soccer net
+        let netTexture = SKTexture(imageNamed: "SoccerNet")
+        let soccerNet = SKSpriteNode(texture: netTexture)
+        soccerNet.position = CGPoint(x:40/568*midX!, y: midY!)
+        soccerNet.zPosition = 3
+        addChild(soccerNet)
         
         // set goal posts in place
         
@@ -192,8 +197,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         if (playerSelected == true) {
             
-            let xMovement = 1.5*(touches.first!.locationInNode(self).x - startPosition!.x)
-            let yMovement = 1.5*(touches.first!.locationInNode(self).y - startPosition!.y)
+            let xMovement = 2*(touches.first!.locationInNode(self).x - startPosition!.x)
+            let yMovement = 2*(touches.first!.locationInNode(self).y - startPosition!.y)
             
             selectedPlayer!.physicsBody!.velocity = CGVectorMake(xMovement, yMovement)
             playerSelected = false

@@ -17,11 +17,14 @@ class Player: SKSpriteNode {
         mTeamA = teamA
         var texture = SKTexture(imageNamed: "PlayerTaiwan")
         if (mTeamA!){
+            
             super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
+            zRotation = 3.1415*1.5
         }
         else{
             texture = SKTexture(imageNamed: "PlayerUSA")
             super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
+            zRotation = 3.1415*0.5
         }
         self.physicsBody = SKPhysicsBody(circleOfRadius: texture.size().width*5/12)
         self.name = "player"
@@ -30,9 +33,9 @@ class Player: SKSpriteNode {
         let body:SKPhysicsBody = self.physicsBody!
         body.usesPreciseCollisionDetection = true
         body.categoryBitMask = 1
-        
+        body.linearDamping = 0.5
         body.restitution = 1
-        body.friction = 1
+        body.friction = 0.6
         body.allowsRotation = false
     }
     
