@@ -15,15 +15,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var startPosition : CGPoint?
     var playerSelected = false
     var goalA : Bool?
-    let ball = Ball()
+    var ball = Ball()
     var midY: CGFloat?
     var midX: CGFloat?
-    let playerA1 = Player(teamA: true)
-    let playerA2 = Player(teamA: true)
-    let playerA3 = Player(teamA: true)
-    let playerB1 = Player(teamA: false)
-    let playerB2 = Player(teamA: false)
-    let playerB3 = Player(teamA: false)
+    var playerA1 = Player()
+    var playerA2 = Player()
+    var playerA3 = Player()
+    var playerB1 = Player()
+    var playerB2 = Player()
+    var playerB3 = Player()
     var players: [Player]?
     
     let gameTimer = Timer()
@@ -44,6 +44,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var timer: NSTimer?
     init(size: CGSize, mode: Mode){
         self.mode = mode
+        
         super.init(size: size)
     }
     
@@ -80,8 +81,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // make soccer net
         let netTexture = SKTexture(imageNamed: "SoccerNet")
-        let leftSoccerNet = SKSpriteNode(texture: netTexture)
-        let rightSoccerNet = SKSpriteNode(texture: netTexture)
+        let netSize = CGSize(width: 80/568*midX!, height: 240/320*midY!)
+        let leftSoccerNet = SKSpriteNode(texture: netTexture, size: netSize)
+        let rightSoccerNet = SKSpriteNode(texture: netTexture, size: netSize)
         rightSoccerNet.position = CGPoint(x: 1096/568*midX!, y: midY!)
         leftSoccerNet.position = CGPoint(x:40/568*midX!, y: midY!)
         rightSoccerNet.zPosition = 3
@@ -91,10 +93,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // set goal posts in place
         
-        let goalPostA1 = GoalPost()
-        let goalPostA2 = GoalPost()
-        let goalPostB1 = GoalPost()
-        let goalPostB2 = GoalPost()
+        let goalPostA1 = GoalPost(sender: self)
+        let goalPostA2 = GoalPost(sender: self)
+        let goalPostB1 = GoalPost(sender: self)
+        let goalPostB2 = GoalPost(sender: self)
         goalPostA1.position = CGPoint(x: 50/568*midX!, y: midY!*440/320)
         goalPostA2.position = CGPoint(x: 50/568*midX!, y: midY!*200/320)
         goalPostB1.position = CGPoint(x: 1086/568*midX!, y: midY!*440/320)
@@ -104,6 +106,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(goalPostB1)
         self.addChild(goalPostB2)
         
+        playerA1 = Player(teamA: true, sender: self)
+        playerA2 = Player(teamA: true, sender: self)
+        playerA3 = Player(teamA: true, sender: self)
+        playerB1 = Player(teamA: false, sender: self)
+        playerB2 = Player(teamA: false, sender: self)
+        playerB3 = Player(teamA: false, sender: self)
         
         players = [playerA1, playerA2, playerA3, playerB1, playerB2, playerB3]
         
@@ -113,6 +121,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // put ball in middle
         
+        
+        ball = Ball(scene: self)
         setPosition()
         self.addChild(ball)
         

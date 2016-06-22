@@ -11,22 +11,24 @@ import SpriteKit
 class Player: SKSpriteNode {
     var mTeamA:Bool!
     var storedVelocity:CGVector?
-    
-    
-    init(teamA: Bool){
+    var mTexture = SKTexture(imageNamed: "PlayerTaiwan")
+
+    init(){
+        super.init(texture: mTexture, color: UIColor.clearColor(), size: mTexture.size())
+    }
+    init(teamA: Bool, sender: GameScene){
+        let playerSize = CGSizeMake(120/568*sender.midX!, 120/320*sender.midY!)
         mTeamA = teamA
-        var texture = SKTexture(imageNamed: "PlayerTaiwan")
         if (mTeamA!){
-            
-            super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
+            super.init(texture: mTexture, color: UIColor.clearColor(), size: playerSize)
             zRotation = 3.1415*1.5
         }
         else{
-            texture = SKTexture(imageNamed: "PlayerUSA")
-            super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
+            mTexture = SKTexture(imageNamed: "PlayerUSA")
+            super.init(texture: mTexture, color: UIColor.clearColor(), size:playerSize)
             zRotation = 3.1415*0.5
         }
-        self.physicsBody = SKPhysicsBody(circleOfRadius: texture.size().width*5/12)
+        self.physicsBody = SKPhysicsBody(circleOfRadius: playerSize.width*5/12)
         self.name = "player"
         self.zPosition = 2
         
