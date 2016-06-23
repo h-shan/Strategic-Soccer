@@ -11,7 +11,7 @@ import SpriteKit
 class Player: SKSpriteNode {
     var mTeamA:Bool!
     var storedVelocity:CGVector?
-    var mTexture = SKTexture(imageNamed: "PlayerTaiwan")
+    var mTexture = SKTexture(imageNamed: "Taiwan")
 
     init(){
         super.init(texture: mTexture, color: UIColor.clearColor(), size: mTexture.size())
@@ -24,7 +24,7 @@ class Player: SKSpriteNode {
             zRotation = 3.1415*1.5
         }
         else{
-            mTexture = SKTexture(imageNamed: "PlayerUSA")
+            mTexture = SKTexture(imageNamed: "Brazil")
             super.init(texture: mTexture, color: UIColor.clearColor(), size:playerSize)
             zRotation = 3.1415*0.5
         }
