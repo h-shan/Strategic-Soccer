@@ -148,7 +148,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             clock.fontColor = UIColor.blackColor()
             gameTimer.start()
             addChild(clock)
-            updateTime()
         }
 
     }
@@ -251,7 +250,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if(moveTimer!.getElapsedTime() > 5){
             switchTurns()
         }
-        
+        showTime()
         /* Called before each frame is rendered */
     }
     
@@ -338,9 +337,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func updateTime(){
-        _ = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(showTime), userInfo: nil, repeats: true)
-    }
     
     func showTime(){
         if !paused {
@@ -366,7 +362,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(goBackToTitle), userInfo: nil, repeats: false)
     }
-    func goBackToTitle (){
+    func goBackToTitle(){
         let nextScene = TitleScene(size: scene!.size)
         scene?.view?.presentScene(nextScene)
     }
