@@ -44,7 +44,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var timer: NSTimer?
     init(size: CGSize, mode: Mode){
         self.mode = mode
-        
         super.init(size: size)
     }
     
@@ -74,8 +73,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // set rectangular border around screen
         let borderBody:SKPhysicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+        borderBody.linearDamping = 0
         self.physicsBody = borderBody
         self.physicsWorld.contactDelegate = self
+        
         
         physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
         
@@ -173,6 +174,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         startPosition = location
                         selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0.00001))
                         
+                    }
+                }
+                else{
+                    if !paused{
+                    for player in players!{
+                        if player.mTeamA! == turnA{
+                            if distance(player.position, point2: location) < player.size.width*1.5 {
+                                selectedPlayer = player
+                                playerSelected = true
+                                startPosition = player.position
+                                selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0.00001))
+                            }
+                        }
+                        }
                     }
                 }
                 if node.name == "pause"{
@@ -375,5 +390,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         playerB2.position = CGPoint(x:midX!*1.7,y:midY!*0.5)
         playerB3.position = CGPoint(x:midX!*1.3,y:midY!)
         ball.position = CGPoint(x: midX!,y: midY!)
+    }
+    func distance(point1: CGPoint, point2: CGPoint) -> CGFloat{
+        let distX = point1.x-point2.x
+        let distY = point1.y-point2.y
+        return sqrt(distX*distX + distY*distY)
     }
 }
