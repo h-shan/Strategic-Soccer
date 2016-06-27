@@ -25,12 +25,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playerB2 = Player()
     var playerB3 = Player()
     var players: [Player]?
+    var gameEnded = false
+    var viewController: TitleViewController!
     
     let gameTimer = Timer()
     let clock = SKLabelNode(fontNamed: "Georgia")
     var gameTime: NSTimeInterval?
     let mode: Mode
-    
     
     let pause = SKSpriteNode(texture: SKTexture(imageNamed: "Pause"), color: UIColor.clearColor(), size: SKTexture(imageNamed: "Pause").size())
 
@@ -62,7 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         score.fontSize = 50
         score.fontColor = UIColor.blackColor()
         score.position = CGPoint(x: midX!, y: 1.5*midY!)
-        score.zPosition = 2
+        score.zPosition = 4
         
         addChild(score)
         
@@ -265,7 +266,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if(moveTimer!.getElapsedTime() > 5){
             switchTurns()
         }
-        showTime()
+        if !gameEnded{
+            showTime()
+        }
         /* Called before each frame is rendered */
     }
     
@@ -300,10 +303,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if mode == Mode.threeMinute{
             gameTimer.pause()
         }
+        
+        _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
+        
+        
+        
+    }
+    
+    func twoSeconds(){
+        score.text = ""
         setDynamicStates(true)
         paused = false
         moveTimer?.restart()
-        _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
         if mode == Mode.threeMinute{
             
             gameTimer.start()
@@ -312,12 +323,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setPosition()
         ball.physicsBody!.velocity = CGVectorMake(0,0)
         ball.physicsBody!.angularVelocity = 0
-        
-        moveTimer?.elapsedTime -= 2
-    }
-    
-    func twoSeconds(){
-        score.text = ""
     }
     
     func setDynamicStates(isDynamic: Bool){
@@ -355,17 +360,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func showTime(){
         if !paused {
-            gameTime = 180.1 - gameTimer.getElapsedTime()
+            gameTime = 5.1 - gameTimer.getElapsedTime()
             if (gameTime<=0){
+                clock.text = "0:00"
+                
+                gameTimer.pause()
+                moveTimer?.pause()
                 endGame()
+            }else{
+                clock.text = gameTimer.secondsToString(gameTime!)
             }
-            clock.text = gameTimer.secondsToString(gameTime!)
         }
         
     }
     
     func endGame(){
-        gameTimer.elapsedTime = 0
+        gameEnded = true
+        setDynamicStates(false)
         if scoreA > scoreB {
             score.text = "Player A Wins"
         }
@@ -376,10 +387,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score.text = "It's a Tie!"
         }
         _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(goBackToTitle), userInfo: nil, repeats: false)
+        gameTimer.elapsedTime = 0
     }
     func goBackToTitle(){
-        let nextScene = TitleScene(size: scene!.size)
-        scene?.view?.presentScene(nextScene)
+        viewController.showAll()
+        view?.presentScene(viewController.background)
     }
     
     func setPosition(){

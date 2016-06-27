@@ -1,10 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nfR-o1-JvP">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
+        <!--Title View Controller-->
+        <scene sceneID="h3u-aM-BFQ">
+            <objects>
+                <viewController id="fkE-IQ-IGn" customClass="TitleViewController" customModule="StrategicSoccer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hSj-AY-0ek"/>
+                        <viewControllerLayoutGuide type="bottom" id="RU4-g5-MvK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QOX-e5-Slf" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Strategic Soccer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGJ-V1-cSz">
+                                <rect key="frame" x="232" y="289" width="137" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="137" id="9e4-bu-KNT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BFe-yD-yxb">
+                                <rect key="frame" x="414" y="335" width="72" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.56820989290000001" blue="0.31144493610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Ten Points"/>
+                                <connections>
+                                    <action selector="TenPoints:" destination="fkE-IQ-IGn" eventType="touchUpInside" id="8BG-hy-YlR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXm-qw-is6">
+                                <rect key="frame" x="104" y="335" width="91" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.56820989287002954" blue="0.31144493613999813" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Three Minute"/>
+                                <connections>
+                                    <action selector="ThreeMinutes:" destination="fkE-IQ-IGn" eventType="touchUpInside" id="zIj-0u-QwW"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="BFe-yD-yxb" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" constant="150" id="5dc-st-Pxg"/>
+                            <constraint firstItem="ZGJ-V1-cSz" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" id="LG4-Gf-L78"/>
+                            <constraint firstItem="wXm-qw-is6" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="50" id="ddL-JS-rC8"/>
+                            <constraint firstItem="wXm-qw-is6" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" constant="-150" id="lzd-xb-wWf"/>
+                            <constraint firstItem="BFe-yD-yxb" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="50" id="rGB-Mk-QFa"/>
+                            <constraint firstItem="ZGJ-V1-cSz" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" id="vZM-Ba-fzT"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="xgG-MR-dDW"/>
+                    <connections>
+                        <outlet property="StrategicSoccerLabel" destination="ZGJ-V1-cSz" id="ktT-eN-tJ0"/>
+                        <outlet property="TenPoint" destination="BFe-yD-yxb" id="07g-SW-L9E"/>
+                        <outlet property="ThreeMinute" destination="wXm-qw-is6" id="J3F-eT-ud5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M0y-G1-wOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="334" y="-78"/>
+        </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
@@ -20,6 +78,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1011" y="-108"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="a3F-uW-CET">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2d8-nT-H3a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nfR-o1-JvP" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xcZ-yV-bl4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fkE-IQ-IGn" kind="relationship" relationship="rootViewController" id="Cbu-BG-R63"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-456" y="-78"/>
         </scene>
     </scenes>
 </document>
