@@ -42,18 +42,18 @@ class TitleScene: SKScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Called when a touch begins */
         
-        for touch in touches {
-            let location = touch.locationInNode(self)
-            let node = self.nodeAtPoint(location)
-            if(node.name == "tenPoints"){
-                let nextScene = GameScene(size: scene!.size, mode: Mode.tenPoints)
-                scene?.view?.presentScene(nextScene)
-            }
-            if node.name == "threeMinutes"{
-                let nextScene = GameScene(size: scene!.size, mode: Mode.threeMinute)
-                scene?.view?.presentScene(nextScene)
-            }
-        }
+//        for touch in touches {
+//            let location = touch.locationInNode(self)
+//            let node = self.nodeAtPoint(location)
+//            if(node.name == "tenPoints"){
+//                let nextScene = GameScene(size: scene!.size, mode: Mode.tenPoints)
+//                scene?.view?.presentScene(nextScene)
+//            }
+//            if node.name == "threeMinutes"{
+//                let nextScene = GameScene(size: scene!.size, mode: Mode.threeMinute)
+//                scene?.view?.presentScene(nextScene)
+//            }
+//        }
     }
     
     override func update(currentTime: CFTimeInterval) {

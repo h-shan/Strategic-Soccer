@@ -31,7 +31,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let gameTimer = Timer()
     let clock = SKLabelNode(fontNamed: "Georgia")
     var gameTime: NSTimeInterval?
-    let mode: Mode
+    var mode: Mode!
     
     let pause = SKSpriteNode(texture: SKTexture(imageNamed: "Pause"), color: UIColor.clearColor(), size: SKTexture(imageNamed: "Pause").size())
 
@@ -40,16 +40,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var endPaused = false
     var scoreA = 0
     var scoreB = 0
-    let score = SKLabelNode(fontNamed: "Georgia")
+    var score = SKLabelNode(fontNamed: "Georgia")
     
     var timer: NSTimer?
-    init(size: CGSize, mode: Mode){
-        self.mode = mode
-        super.init(size: size)
-    }
+    
     
     var moveTimer:Timer?
-    
+    override init(size:CGSize){
+        super.init(size: size)
+    }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -128,12 +127,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setPosition()
         self.addChild(ball)
         
-        // set pause button
-        pause.position = CGPoint(x: 50/568*midX!, y:50/320*midY!)
-        pause.zPosition = 1.5
-        pause.name = "pause"
-        addChild(pause)
-        
+
         updateLighting()
         moveTimer = Timer()
         moveTimer?.restart()
@@ -162,68 +156,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             let location = touch.locationInNode(self)
             let node = nodeAtPoint(location)
-            if startPaused {
-                if node == pause {
-                    endPaused = true
-                }
-            }else{
-                if (node is Player && !paused){
-                    let touchedPlayer = (node as! Player)
-                    if touchedPlayer.mTeamA! == turnA {
-                        selectedPlayer = touchedPlayer
-                        playerSelected = true
-                        startPosition = location
-                        selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0.00001))
-                        
-                    }
-                }
-                else{
-                    if !paused{
-                    for player in players!{
-                        if player.mTeamA! == turnA{
-                            if distance(player.position, point2: location) < player.size.width*1.5 {
-                                selectedPlayer = player
-                                playerSelected = true
-                                startPosition = player.position
-                                selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0.00001))
-                            }
-                        }
-                        }
-                    }
-                }
-                if node.name == "pause"{
-                    startPaused = true
+
+            
+            if (node is Player && !paused){
+                let touchedPlayer = (node as! Player)
+                if touchedPlayer.mTeamA! == turnA {
+                    selectedPlayer = touchedPlayer
+                    playerSelected = true
+                    startPosition = location
+                    selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0.00001))
+                    
                 }
             }
+            else{
+                if !paused{
+                for player in players!{
+                    if player.mTeamA! == turnA{
+                        if distance(player.position, point2: location) < player.size.width*1.5 {
+                            selectedPlayer = player
+                            playerSelected = true
+                            startPosition = player.position
+                            selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0.00001))
+                        }
+                    }
+                    }
+                }
+            }
+
+            
         }
     }
         
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?){
-        if (startPaused && !endPaused){
-            if (nodeAtPoint(touches.first!.locationInNode(self))) == pause {
-                score.text = "PAUSED"
-                storeVelocities()
-                setDynamicStates(false)
-                timer?.invalidate()
-                paused = true
-                moveTimer?.pause()
-                if(mode == Mode.threeMinute){
-                    gameTimer.pause()
-                }
-            }
-        }
-        else if (startPaused && endPaused){
-            startPaused = false; endPaused = false
-            score.text = ""
-            setDynamicStates(true)
-            retrieveVelocities()
-            if(mode == Mode.threeMinute){
-                gameTimer.start()
-            }
-            paused = false
-            moveTimer?.start()
-        }
         if (playerSelected == true) {
             
             let xMovement = 2*(touches.first!.locationInNode(self).x - startPosition!.x)
@@ -386,12 +351,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else{
             score.text = "It's a Tie!"
         }
-        _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(goBackToTitle), userInfo: nil, repeats: false)
+                _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(goBackToTitle), userInfo: nil, repeats: false)
         gameTimer.elapsedTime = 0
     }
     func goBackToTitle(){
         viewController.showAll()
         view?.presentScene(viewController.background)
+        viewController.scene = GameScene(size: viewController.skView.bounds.size)
     }
     
     func setPosition(){
@@ -407,5 +373,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let distX = point1.x-point2.x
         let distY = point1.y-point2.y
         return sqrt(distX*distX + distY*distY)
+    }
+    func restart(){
+        scoreA = 0
+        scoreB = 0
+        if mode == Mode.threeMinute{
+            gameTimer.restart()
+        }
+        setPosition()
+        setDynamicStates(false)
+        setDynamicStates(true)
+        moveTimer?.restart()
     }
 }

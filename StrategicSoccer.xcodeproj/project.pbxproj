@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8932AD6B1D13BD0100F6AC84 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8932AD6A1D13BD0100F6AC84 /* Mode.swift */; };
 		89B97F811D20F5DB00588A21 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B97F801D20F5DB00588A21 /* TitleViewController.swift */; };
+		89B97F821D220CAC00588A21 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */; };
+		89B97F861D2221AE00588A21 /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B97F851D2221AE00588A21 /* PauseViewController.swift */; };
 		89EE42CD1D1A646E0093538A /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE42CC1D1A646E0093538A /* MenuButton.swift */; };
 		89EE42CF1D1B0C620093538A /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE42CE1D1B0C620093538A /* Menu.swift */; };
 		89EFF7BD1D1208C3004DEA93 /* GoalPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */; };
@@ -18,7 +20,6 @@
 		DC83CF2F1D10CB780044D0E1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83CF2E1D10CB780044D0E1 /* Player.swift */; };
 		DC83DCFC1D1089EA00E1C3F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DCFB1D1089EA00E1C3F8 /* AppDelegate.swift */; };
 		DC83DCFE1D1089EA00E1C3F8 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = DC83DCFD1D1089EA00E1C3F8 /* GameScene.sks */; };
-		DC83DD001D1089EA00E1C3F8 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */; };
 		DC83DD021D1089EA00E1C3F8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DD011D1089EA00E1C3F8 /* GameViewController.swift */; };
 		DC83DD051D1089EA00E1C3F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC83DD031D1089EA00E1C3F8 /* Main.storyboard */; };
 		DC83DD071D1089EA00E1C3F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC83DD061D1089EA00E1C3F8 /* Assets.xcassets */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		8932AD6A1D13BD0100F6AC84 /* Mode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		89B97F801D20F5DB00588A21 /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
+		89B97F851D2221AE00588A21 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
 		89EE42CC1D1A646E0093538A /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		89EE42CE1D1B0C620093538A /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalPost.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				DC83DD011D1089EA00E1C3F8 /* GameViewController.swift */,
 				DC83DD031D1089EA00E1C3F8 /* Main.storyboard */,
 				89B97F801D20F5DB00588A21 /* TitleViewController.swift */,
+				89B97F851D2221AE00588A21 /* PauseViewController.swift */,
 				DC83DD061D1089EA00E1C3F8 /* Assets.xcassets */,
 				DC83CF2E1D10CB780044D0E1 /* Player.swift */,
 				DC83DD081D1089EA00E1C3F8 /* LaunchScreen.storyboard */,
@@ -292,15 +295,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC83DD001D1089EA00E1C3F8 /* GameScene.swift in Sources */,
 				DC83DD021D1089EA00E1C3F8 /* GameViewController.swift in Sources */,
 				89EE42CD1D1A646E0093538A /* MenuButton.swift in Sources */,
 				8932AD6B1D13BD0100F6AC84 /* Mode.swift in Sources */,
 				DC83DCFC1D1089EA00E1C3F8 /* AppDelegate.swift in Sources */,
 				89B97F811D20F5DB00588A21 /* TitleViewController.swift in Sources */,
 				89EE42CF1D1B0C620093538A /* Menu.swift in Sources */,
+				89B97F821D220CAC00588A21 /* GameScene.swift in Sources */,
 				DC83CF2F1D10CB780044D0E1 /* Player.swift in Sources */,
 				DC83CF2D1D10A85C0044D0E1 /* TitleScene.swift in Sources */,
+				89B97F861D2221AE00588A21 /* PauseViewController.swift in Sources */,
 				89EFF7C11D122FBA004DEA93 /* Ball.swift in Sources */,
 				89EFF7BD1D1208C3004DEA93 /* GoalPost.swift in Sources */,
 				DCFEEDD41D14645600D4A259 /* Timer.swift in Sources */,

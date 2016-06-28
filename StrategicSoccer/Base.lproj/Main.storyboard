@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Title View Controller-->
@@ -42,11 +43,28 @@
                                     <action selector="ThreeMinutes:" destination="fkE-IQ-IGn" eventType="touchUpInside" id="zIj-0u-QwW"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paz-pH-qnx">
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
+                                <state key="normal" image="Pause"/>
+                                <connections>
+                                    <action selector="PauseClicked:" destination="fkE-IQ-IGn" eventType="touchUpInside" id="0dR-XM-iDq"/>
+                                </connections>
+                            </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3eD-OI-ThD">
+                                <rect key="frame" x="186" y="235" width="228" height="130"/>
+                                <connections>
+                                    <segue destination="jas-UU-nYs" kind="embed" identifier="Pause" id="Nem-WV-SRb"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="BFe-yD-yxb" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" constant="150" id="5dc-st-Pxg"/>
+                            <constraint firstItem="3eD-OI-ThD" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" id="6qc-yv-w2g"/>
                             <constraint firstItem="ZGJ-V1-cSz" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" id="LG4-Gf-L78"/>
+                            <constraint firstItem="3eD-OI-ThD" firstAttribute="bottom" secondItem="wXm-qw-is6" secondAttribute="bottom" id="VzU-UK-fz9"/>
+                            <constraint firstItem="BFe-yD-yxb" firstAttribute="leading" secondItem="3eD-OI-ThD" secondAttribute="trailing" id="WvF-cZ-zCz"/>
                             <constraint firstItem="wXm-qw-is6" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="50" id="ddL-JS-rC8"/>
+                            <constraint firstItem="3eD-OI-ThD" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" id="dtl-IV-rB7"/>
                             <constraint firstItem="wXm-qw-is6" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" constant="-150" id="lzd-xb-wWf"/>
                             <constraint firstItem="BFe-yD-yxb" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="50" id="rGB-Mk-QFa"/>
                             <constraint firstItem="ZGJ-V1-cSz" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" id="vZM-Ba-fzT"/>
@@ -54,6 +72,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="xgG-MR-dDW"/>
                     <connections>
+                        <outlet property="PauseButton" destination="paz-pH-qnx" id="JDM-Zo-N3G"/>
+                        <outlet property="PauseView" destination="3eD-OI-ThD" id="TdZ-54-9oa"/>
                         <outlet property="StrategicSoccerLabel" destination="ZGJ-V1-cSz" id="ktT-eN-tJ0"/>
                         <outlet property="TenPoint" destination="BFe-yD-yxb" id="07g-SW-L9E"/>
                         <outlet property="ThreeMinute" destination="wXm-qw-is6" id="J3F-eT-ud5"/>
@@ -61,7 +81,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0y-G1-wOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="334" y="-78"/>
+            <point key="canvasLocation" x="308" y="-218"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -83,7 +103,6 @@
         <!--Navigation Controller-->
         <scene sceneID="a3F-uW-CET">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2d8-nT-H3a" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nfR-o1-JvP" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xcZ-yV-bl4">
@@ -95,8 +114,81 @@
                         <segue destination="fkE-IQ-IGn" kind="relationship" relationship="rootViewController" id="Cbu-BG-R63"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2d8-nT-H3a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-456" y="-78"/>
         </scene>
+        <!--Pause View Controller-->
+        <scene sceneID="HdW-SH-cCy">
+            <objects>
+                <viewController id="jas-UU-nYs" customClass="PauseViewController" customModule="StrategicSoccer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ce0-GS-o1d"/>
+                        <viewControllerLayoutGuide type="bottom" id="u9Y-a3-Fck"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Vgd-n9-GOU">
+                        <rect key="frame" x="0.0" y="0.0" width="228" height="130"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c34-ON-rnq">
+                                <rect key="frame" x="2" y="-15" width="224" height="160"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="PAUSED" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jfK-jR-rPs">
+                                        <rect key="frame" x="82" y="32" width="60" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LwK-xD-PUM">
+                                        <rect key="frame" x="87" y="81" width="50" height="30"/>
+                                        <state key="normal" title="Restart"/>
+                                        <connections>
+                                            <action selector="Restart:" destination="jas-UU-nYs" eventType="touchUpInside" id="gYL-o8-Jsz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OX3-ah-zBL">
+                                        <rect key="frame" x="87" y="110" width="50" height="30"/>
+                                        <state key="normal" title="Quit"/>
+                                        <connections>
+                                            <action selector="Quit:" destination="jas-UU-nYs" eventType="touchUpInside" id="yNS-Zu-dZg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0E-Lx-zmo">
+                                        <rect key="frame" x="85" y="51" width="55" height="30"/>
+                                        <state key="normal" title="Resume"/>
+                                        <connections>
+                                            <action selector="Resume:" destination="jas-UU-nYs" eventType="touchUpInside" id="nx8-RI-DzS"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.56820989290000001" blue="0.31144493610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="OX3-ah-zBL" firstAttribute="leading" secondItem="LwK-xD-PUM" secondAttribute="leading" id="1a6-qL-uqU"/>
+                                    <constraint firstItem="jfK-jR-rPs" firstAttribute="centerX" secondItem="c34-ON-rnq" secondAttribute="centerX" id="2gf-lc-0lm"/>
+                                    <constraint firstItem="jfK-jR-rPs" firstAttribute="centerY" secondItem="c34-ON-rnq" secondAttribute="centerY" constant="-40" id="3bL-FL-GNC"/>
+                                    <constraint firstItem="k0E-Lx-zmo" firstAttribute="top" secondItem="jfK-jR-rPs" secondAttribute="bottom" constant="2" id="4cW-bF-QDY"/>
+                                    <constraint firstItem="LwK-xD-PUM" firstAttribute="centerX" secondItem="c34-ON-rnq" secondAttribute="centerX" id="5U7-0R-TDz"/>
+                                    <constraint firstItem="OX3-ah-zBL" firstAttribute="centerX" secondItem="c34-ON-rnq" secondAttribute="centerX" id="Emu-P2-4la"/>
+                                    <constraint firstItem="OX3-ah-zBL" firstAttribute="leading" secondItem="c34-ON-rnq" secondAttribute="leadingMargin" constant="79" id="Gmv-C1-ZpG"/>
+                                    <constraint firstAttribute="bottom" secondItem="OX3-ah-zBL" secondAttribute="bottom" constant="20" symbolic="YES" id="Hg9-sA-Kgr"/>
+                                    <constraint firstItem="jfK-jR-rPs" firstAttribute="leading" secondItem="c34-ON-rnq" secondAttribute="leading" constant="82" id="Lg9-AF-Sh5"/>
+                                    <constraint firstItem="LwK-xD-PUM" firstAttribute="top" secondItem="k0E-Lx-zmo" secondAttribute="bottom" id="NSC-t7-jIB"/>
+                                    <constraint firstItem="OX3-ah-zBL" firstAttribute="top" secondItem="k0E-Lx-zmo" secondAttribute="bottom" constant="29" id="VPb-PD-qOw"/>
+                                    <constraint firstItem="k0E-Lx-zmo" firstAttribute="centerX" secondItem="c34-ON-rnq" secondAttribute="centerX" id="sf3-it-EAw"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="c34-ON-rnq" firstAttribute="centerY" secondItem="Vgd-n9-GOU" secondAttribute="centerY" id="82t-et-XTc"/>
+                            <constraint firstItem="c34-ON-rnq" firstAttribute="centerX" secondItem="Vgd-n9-GOU" secondAttribute="centerX" id="ZKA-Jm-RLb"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KH0-50-fKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="308" y="515"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="Pause" width="50" height="50"/>
+    </resources>
 </document>
