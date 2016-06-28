@@ -21,11 +21,12 @@ class TitleViewController: UIViewController {
     
     @IBAction func PauseClicked(sender: AnyObject) {
         PauseView.hidden = false
-        scene.paused = true
-        scene.moveTimer?.pause()
+        
+        scene.moveTimer!.pause()
         if scene.mode == Mode.threeMinute{
             scene.gameTimer.pause()
         }
+        scene.paused = true
     }
     @IBOutlet weak var PauseView: UIView!
 
@@ -71,6 +72,7 @@ class TitleViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     override func viewWillAppear(animated: Bool){
         super.viewWillAppear(animated)
         skView.presentScene(background)
@@ -101,7 +103,6 @@ class TitleViewController: UIViewController {
         if segue.identifier == "Pause"{
             let destinationVC = segue.destinationViewController as! PauseViewController
             destinationVC.parent = self
-            print("1")
         }
     }
 

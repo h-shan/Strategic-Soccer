@@ -36,8 +36,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let pause = SKSpriteNode(texture: SKTexture(imageNamed: "Pause"), color: UIColor.clearColor(), size: SKTexture(imageNamed: "Pause").size())
 
     var turnA = true
-    var startPaused = false
-    var endPaused = false
     var scoreA = 0
     var scoreB = 0
     var score = SKLabelNode(fontNamed: "Georgia")
@@ -158,7 +156,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let node = nodeAtPoint(location)
 
             
-            if (node is Player && !paused){
+            if (node is Player){
                 let touchedPlayer = (node as! Player)
                 if touchedPlayer.mTeamA! == turnA {
                     selectedPlayer = touchedPlayer
@@ -169,9 +167,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
             else{
-                if !paused{
+                
                 for player in players!{
-                    if player.mTeamA! == turnA{
+                    if player.mTeamA! == turnA && playerSelected == false{
                         if distance(player.position, point2: location) < player.size.width*1.5 {
                             selectedPlayer = player
                             playerSelected = true
@@ -179,7 +177,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                             selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0.00001))
                         }
                     }
-                    }
+                    
                 }
             }
 
@@ -210,7 +208,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        
         if (200/320 * midY! < ball.position.y && ball.position.y < 440/320 * midY!){
             if 0<ball.position.x && ball.position.x<50/568*midX!{
                 
@@ -341,6 +338,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func endGame(){
         gameEnded = true
+        paused = true
         setDynamicStates(false)
         if scoreA > scoreB {
             score.text = "Player A Wins"
@@ -355,8 +353,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameTimer.elapsedTime = 0
     }
     func goBackToTitle(){
+        
+        viewController.skView.presentScene(viewController.background)
         viewController.showAll()
-        view?.presentScene(viewController.background)
         viewController.scene = GameScene(size: viewController.skView.bounds.size)
     }
     

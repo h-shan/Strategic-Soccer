@@ -12,7 +12,6 @@
 		89B97F821D220CAC00588A21 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */; };
 		89B97F861D2221AE00588A21 /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B97F851D2221AE00588A21 /* PauseViewController.swift */; };
 		89EE42CD1D1A646E0093538A /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE42CC1D1A646E0093538A /* MenuButton.swift */; };
-		89EE42CF1D1B0C620093538A /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE42CE1D1B0C620093538A /* Menu.swift */; };
 		89EFF7BD1D1208C3004DEA93 /* GoalPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */; };
 		89EFF7BF1D121703004DEA93 /* GoalPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */; };
 		89EFF7C11D122FBA004DEA93 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EFF7C01D122FBA004DEA93 /* Ball.swift */; };
@@ -51,7 +50,6 @@
 		89B97F801D20F5DB00588A21 /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		89B97F851D2221AE00588A21 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
 		89EE42CC1D1A646E0093538A /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
-		89EE42CE1D1B0C620093538A /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalPost.swift; sourceTree = "<group>"; };
 		89EFF7C01D122FBA004DEA93 /* Ball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
 		DC83CF2C1D10A85C0044D0E1 /* TitleScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TitleScene.swift; path = ../TitleScene.swift; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 				DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */,
 				8932AD6A1D13BD0100F6AC84 /* Mode.swift */,
 				89EFF7C01D122FBA004DEA93 /* Ball.swift */,
-				89EE42CE1D1B0C620093538A /* Menu.swift */,
 				89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */,
 				DC83DD011D1089EA00E1C3F8 /* GameViewController.swift */,
 				DC83DD031D1089EA00E1C3F8 /* Main.storyboard */,
@@ -300,7 +297,6 @@
 				8932AD6B1D13BD0100F6AC84 /* Mode.swift in Sources */,
 				DC83DCFC1D1089EA00E1C3F8 /* AppDelegate.swift in Sources */,
 				89B97F811D20F5DB00588A21 /* TitleViewController.swift in Sources */,
-				89EE42CF1D1B0C620093538A /* Menu.swift in Sources */,
 				89B97F821D220CAC00588A21 /* GameScene.swift in Sources */,
 				DC83CF2F1D10CB780044D0E1 /* Player.swift in Sources */,
 				DC83CF2D1D10A85C0044D0E1 /* TitleScene.swift in Sources */,

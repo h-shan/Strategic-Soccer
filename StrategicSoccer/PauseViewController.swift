@@ -11,32 +11,41 @@ import UIKit
 class PauseViewController: UIViewController {
     var parent:TitleViewController!
     var scene: GameScene!
+    
+    @IBOutlet weak var Quit: UIButton!
+    @IBOutlet weak var Restart: UIButton!
+    @IBOutlet weak var Resume: UIButton!
     @IBAction func Quit(sender: AnyObject) {
+        scene = parent.scene
         parent.PauseView.hidden = true
         scene.goBackToTitle()
         
     }
     @IBAction func Restart(sender: AnyObject) {
+        scene = parent.scene
         parent.PauseView.hidden = true
         scene.paused = false
         scene.restart()
+        
     }
     @IBAction func Resume(sender: AnyObject) {
-        scene.paused = false
+        scene = parent.scene
         parent.PauseView.hidden = true
+        scene.paused = false
         scene.moveTimer?.start()
         if scene.mode == Mode.threeMinute{
             scene.gameTimer.start()
         }
+        
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        Quit.layer.cornerRadius = 10
+        Restart.layer.cornerRadius = 10
+        Resume.layer.cornerRadius = 10
 
         // Do any additional setup after loading the view.
-    }
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        scene = parent.scene
     }
 
     override func didReceiveMemoryWarning() {
