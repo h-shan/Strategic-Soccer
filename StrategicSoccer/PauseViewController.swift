@@ -9,7 +9,7 @@
 import UIKit
 
 class PauseViewController: UIViewController {
-    var parent:TitleViewController!
+    var parent:GameViewController!
     var scene: GameScene!
     
     @IBOutlet weak var Quit: UIButton!
@@ -26,7 +26,6 @@ class PauseViewController: UIViewController {
         parent.PauseView.hidden = true
         scene.paused = false
         scene.restart()
-        
     }
     @IBAction func Resume(sender: AnyObject) {
         scene = parent.scene
@@ -36,8 +35,6 @@ class PauseViewController: UIViewController {
         if scene.mode == Mode.threeMinute{
             scene.gameTimer.start()
         }
-        
-        
     }
     override func viewDidLoad() {
         super.viewDidLoad()

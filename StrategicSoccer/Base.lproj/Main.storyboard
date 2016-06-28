@@ -9,7 +9,7 @@
         <!--Title View Controller-->
         <scene sceneID="h3u-aM-BFQ">
             <objects>
-                <viewController id="fkE-IQ-IGn" customClass="TitleViewController" customModule="StrategicSoccer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TitleViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fkE-IQ-IGn" customClass="TitleViewController" customModule="StrategicSoccer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hSj-AY-0ek"/>
                         <viewControllerLayoutGuide type="bottom" id="RU4-g5-MvK"/>
@@ -19,22 +19,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Strategic Soccer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGJ-V1-cSz">
-                                <rect key="frame" x="232" y="289" width="137" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="137" id="9e4-bu-KNT"/>
-                                </constraints>
+                                <rect key="frame" x="237" y="189.5" width="127.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BFe-yD-yxb">
-                                <rect key="frame" x="414" y="335" width="72" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.56820989290000001" blue="0.31144493610000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Ten Points"/>
-                                <connections>
-                                    <action selector="TenPoints:" destination="fkE-IQ-IGn" eventType="touchUpInside" id="8BG-hy-YlR"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXm-qw-is6">
                                 <rect key="frame" x="104" y="335" width="91" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.56820989287002954" blue="0.31144493613999813" alpha="1" colorSpace="calibratedRGB"/>
@@ -43,28 +32,34 @@
                                     <action selector="ThreeMinutes:" destination="fkE-IQ-IGn" eventType="touchUpInside" id="zIj-0u-QwW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paz-pH-qnx">
-                                <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
-                                <state key="normal" image="Pause"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nrx-pZ-cFj">
+                                <rect key="frame" x="271" y="385" width="57" height="30"/>
+                                <state key="normal" title="Settings"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLw-HV-UYu">
+                                <rect key="frame" x="285" y="285" width="30" height="30"/>
+                                <state key="normal" title="Play"/>
                                 <connections>
-                                    <action selector="PauseClicked:" destination="fkE-IQ-IGn" eventType="touchUpInside" id="0dR-XM-iDq"/>
+                                    <segue destination="BV1-FR-VrT" kind="show" identifier="GameSegue" animates="NO" id="McN-dH-VRB"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3eD-OI-ThD">
-                                <rect key="frame" x="186" y="235" width="228" height="195"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BFe-yD-yxb">
+                                <rect key="frame" x="414" y="335" width="72" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.56820989290000001" blue="0.31144493610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Ten Points"/>
                                 <connections>
-                                    <segue destination="jas-UU-nYs" kind="embed" identifier="Pause" id="Nem-WV-SRb"/>
+                                    <action selector="TenPoints:" destination="fkE-IQ-IGn" eventType="touchUpInside" id="8BG-hy-YlR"/>
                                 </connections>
-                            </containerView>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="BFe-yD-yxb" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" constant="150" id="5dc-st-Pxg"/>
-                            <constraint firstItem="3eD-OI-ThD" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" id="6qc-yv-w2g"/>
-                            <constraint firstItem="ZGJ-V1-cSz" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" id="LG4-Gf-L78"/>
-                            <constraint firstItem="3eD-OI-ThD" firstAttribute="bottom" secondItem="wXm-qw-is6" secondAttribute="bottom" constant="65" id="VzU-UK-fz9"/>
-                            <constraint firstItem="BFe-yD-yxb" firstAttribute="leading" secondItem="3eD-OI-ThD" secondAttribute="trailing" id="WvF-cZ-zCz"/>
+                            <constraint firstItem="ZGJ-V1-cSz" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="-100" id="LG4-Gf-L78"/>
+                            <constraint firstItem="Nrx-pZ-cFj" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="100" id="RXP-y0-Pnw"/>
+                            <constraint firstItem="NLw-HV-UYu" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" id="Xwq-QD-F52"/>
+                            <constraint firstItem="Nrx-pZ-cFj" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" id="b4Z-9d-gNq"/>
                             <constraint firstItem="wXm-qw-is6" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="50" id="ddL-JS-rC8"/>
-                            <constraint firstItem="3eD-OI-ThD" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="32.5" id="dtl-IV-rB7"/>
+                            <constraint firstItem="NLw-HV-UYu" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" id="jsD-Ci-3JT"/>
                             <constraint firstItem="wXm-qw-is6" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" constant="-150" id="lzd-xb-wWf"/>
                             <constraint firstItem="BFe-yD-yxb" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="50" id="rGB-Mk-QFa"/>
                             <constraint firstItem="ZGJ-V1-cSz" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" id="vZM-Ba-fzT"/>
@@ -81,7 +76,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0y-G1-wOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="308" y="-218"/>
+            <point key="canvasLocation" x="274" y="-346"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -94,11 +89,36 @@
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paz-pH-qnx">
+                                <rect key="frame" x="5" y="5" width="50" height="50"/>
+                                <state key="normal" image="Pause"/>
+                                <connections>
+                                    <action selector="PauseClicked:" destination="fkE-IQ-IGn" eventType="touchUpInside" id="0dR-XM-iDq"/>
+                                    <action selector="PauseClicked:" destination="BV1-FR-VrT" eventType="touchUpInside" id="96K-pd-ZSc"/>
+                                </connections>
+                            </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3eD-OI-ThD">
+                                <rect key="frame" x="186" y="202" width="228" height="195"/>
+                                <connections>
+                                    <segue destination="jas-UU-nYs" kind="embed" identifier="Pause" id="Nem-WV-SRb"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="paz-pH-qnx" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" constant="5" id="1uW-xw-RN9"/>
+                            <constraint firstItem="paz-pH-qnx" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" constant="5" id="E5j-mX-Tg1"/>
+                            <constraint firstItem="3eD-OI-ThD" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="WM2-L5-7hZ"/>
+                            <constraint firstItem="3eD-OI-ThD" firstAttribute="centerY" secondItem="3se-qz-xqx" secondAttribute="centerY" id="zf2-iu-g3H"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="PauseView" destination="3eD-OI-ThD" id="roI-CZ-e1d"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1011" y="-108"/>
+            <point key="canvasLocation" x="1012" y="-346"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="a3F-uW-CET">

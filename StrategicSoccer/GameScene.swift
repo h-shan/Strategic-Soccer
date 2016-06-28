@@ -26,12 +26,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playerB3 = Player()
     var players: [Player]?
     var gameEnded = false
-    var viewController: TitleViewController!
+    var viewController: GameViewController!
     
     let gameTimer = Timer()
     let clock = SKLabelNode(fontNamed: "Georgia")
     var gameTime: NSTimeInterval?
-    var mode: Mode!
+    var mode = Mode.tenPoints
     
     let pause = SKSpriteNode(texture: SKTexture(imageNamed: "Pause"), color: UIColor.clearColor(), size: SKTexture(imageNamed: "Pause").size())
 
@@ -353,10 +353,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameTimer.elapsedTime = 0
     }
     func goBackToTitle(){
-        
-        viewController.skView.presentScene(viewController.background)
-        viewController.showAll()
-        viewController.scene = GameScene(size: viewController.skView.bounds.size)
+        viewController.backToTitle()
     }
     
     func setPosition(){

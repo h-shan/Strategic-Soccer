@@ -10,11 +10,23 @@ import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController {
+    var scene: GameScene!
+    var parent: TitleViewController!
+    @IBOutlet weak var PauseView: UIView!
+    
+    @IBAction func PauseClicked(sender: AnyObject) {
+        PauseView.hidden = false
+        
+        scene.moveTimer!.pause()
+        if scene.mode == Mode.threeMinute{
+            scene.gameTimer.pause()
+        }
+        scene.paused = true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-            let scene = TitleScene(size: view.bounds.size)
+            scene.viewController = self
             // Configure the view.
             let skView = self.view as! SKView
             
@@ -23,6 +35,7 @@ class GameViewController: UIViewController {
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
+            PauseView.hidden = true
         
             skView.presentScene(scene)
         
@@ -47,5 +60,17 @@ class GameViewController: UIViewController {
 
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "Pause"{
+            let destinationVC = segue.destinationViewController as! PauseViewController
+            destinationVC.parent = self
+        }
+    }
+    func backToTitle(){
+//        let titleViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TitleViewController") as! TitleViewController
+//        
+//        self.navigationController!.pushViewController(titleViewController, animated: false)
+        navigationController?.popViewControllerAnimated(false)
     }
 }
