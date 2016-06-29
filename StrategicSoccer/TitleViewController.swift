@@ -12,6 +12,10 @@ import SpriteKit
 class TitleViewController: UIViewController {
     let background = SKScene()
     var scene: GameScene!
+    
+    @IBOutlet weak var PlayButton: UIButton!
+    @IBOutlet weak var SettingsButton: UIButton!
+    
     var skView: SKView!
     var defaultMode = Mode.threeMinute
     var defaultPlayers = PlayerOption.three
@@ -22,9 +26,12 @@ class TitleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.blueColor()
+        
         skView = self.view as! SKView
         skView.ignoresSiblingOrder = true
         scene = GameScene(size: skView.bounds.size)
+        SettingsButton.layer.cornerRadius = 10
+        PlayButton.layer.cornerRadius = 10
         
         // Do any additional setup after loading the view.
     }
@@ -53,6 +60,8 @@ class TitleViewController: UIViewController {
         
         if segue.identifier == "GameSegue"{
             let destinationVC = segue.destinationViewController as! GameViewController
+            scene.mode = defaultMode
+            scene.playerOption = defaultPlayers
             destinationVC.scene = scene
             destinationVC.parent = self
         }
@@ -61,6 +70,7 @@ class TitleViewController: UIViewController {
             destinationVC.scene = scene
             destinationVC.defaultMode = defaultMode
             destinationVC.defaultPlayers = defaultPlayers
+            destinationVC.parent = self
         }
     }
 

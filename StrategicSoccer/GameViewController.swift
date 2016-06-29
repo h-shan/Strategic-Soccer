@@ -38,9 +38,6 @@ class GameViewController: UIViewController {
         PauseView.hidden = true
     
         skView.presentScene(scene)
-        parent.defaultMode = scene.mode
-        parent.defaultPlayers = scene.playerOption
-        
     }
 
     override func shouldAutorotate() -> Bool {

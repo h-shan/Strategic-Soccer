@@ -39,6 +39,7 @@ class SettingsViewController: UIViewController {
     var allButtons: [UIButton]!
     var defaultMode: Mode?
     var defaultPlayers: PlayerOption?
+    var parent: TitleViewController!
     
     @IBOutlet weak var PlayerFour: UIButton!
     @IBOutlet weak var PlayerThree: UIButton!
@@ -46,9 +47,11 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var ModeThreeMinutes: UIButton!
     @IBAction func PlayerFour(sender: UIButton) {
         playerButtonGroup.selectButton(sender)
+        defaultPlayers = PlayerOption.four
     }
     @IBAction func PlayerThree(sender: UIButton) {
         playerButtonGroup.selectButton(sender)
+        defaultPlayers = PlayerOption.three
     }
     @IBAction func BackButton(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(false)
@@ -56,6 +59,7 @@ class SettingsViewController: UIViewController {
     @IBAction func ModeTenPoints(sender: UIButton) {
         modeButtonGroup.selectButton(sender)
         scene.mode = Mode.tenPoints
+        defaultMode = Mode.tenPoints
     }
     @IBAction func ModeThreeMinute(sender: UIButton) {
         modeButtonGroup.selectButton(sender)
@@ -94,6 +98,11 @@ class SettingsViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        parent.defaultMode = defaultMode!
+        parent.defaultPlayers = defaultPlayers!
     }
     
 
