@@ -7,6 +7,9 @@
 //
 
 import Foundation
-enum Mode {
+public enum Mode {
     case threeMinute, tenPoints
+}
+public enum PlayerOption{
+    case three, four
 }

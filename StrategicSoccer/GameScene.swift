@@ -31,7 +31,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let gameTimer = Timer()
     let clock = SKLabelNode(fontNamed: "Georgia")
     var gameTime: NSTimeInterval?
-    var mode = Mode.tenPoints
+    var mode = Mode.threeMinute
+    var playerOption = PlayerOption.three
     
     let pause = SKSpriteNode(texture: SKTexture(imageNamed: "Pause"), color: UIColor.clearColor(), size: SKTexture(imageNamed: "Pause").size())
 
@@ -322,7 +323,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func showTime(){
         if !paused {
-            gameTime = 5.1 - gameTimer.getElapsedTime()
+            gameTime = 180.1 - gameTimer.getElapsedTime()
             if (gameTime<=0){
                 clock.text = "0:00"
                 

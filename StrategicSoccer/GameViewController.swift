@@ -26,18 +26,20 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-            scene.viewController = self
-            // Configure the view.
-            let skView = self.view as! SKView
-            
-            /* Sprite Kit applies additional optimizations to improve rendering performance */
-            skView.ignoresSiblingOrder = true
-            
-            /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
-            PauseView.hidden = true
+        scene.viewController = self
+        // Configure the view.
+        let skView = self.view as! SKView
         
-            skView.presentScene(scene)
+        /* Sprite Kit applies additional optimizations to improve rendering performance */
+        skView.ignoresSiblingOrder = true
+        
+        /* Set the scale mode to scale to fit the window */
+        scene.scaleMode = .AspectFill
+        PauseView.hidden = true
+    
+        skView.presentScene(scene)
+        parent.defaultMode = scene.mode
+        parent.defaultPlayers = scene.playerOption
         
     }
 
@@ -68,9 +70,8 @@ class GameViewController: UIViewController {
         }
     }
     func backToTitle(){
-//        let titleViewController = self.storyboard!.instantiateViewControllerWithIdentifier("TitleViewController") as! TitleViewController
-//        
-//        self.navigationController!.pushViewController(titleViewController, animated: false)
+        parent.scene = GameScene(size: parent.skView.bounds.size)
         navigationController?.popViewControllerAnimated(false)
+        
     }
 }

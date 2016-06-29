@@ -25,18 +25,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXm-qw-is6">
-                                <rect key="frame" x="104" y="335" width="91" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.56820989287002954" blue="0.31144493613999813" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Three Minute"/>
-                                <connections>
-                                    <action selector="ThreeMinutes:" destination="fkE-IQ-IGn" eventType="touchUpInside" id="zIj-0u-QwW"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nrx-pZ-cFj">
-                                <rect key="frame" x="271" y="385" width="57" height="30"/>
-                                <state key="normal" title="Settings"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLw-HV-UYu">
                                 <rect key="frame" x="285" y="285" width="30" height="30"/>
                                 <state key="normal" title="Play"/>
@@ -44,25 +32,20 @@
                                     <segue destination="BV1-FR-VrT" kind="show" identifier="GameSegue" animates="NO" id="McN-dH-VRB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BFe-yD-yxb">
-                                <rect key="frame" x="414" y="335" width="72" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.56820989290000001" blue="0.31144493610000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Ten Points"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nrx-pZ-cFj">
+                                <rect key="frame" x="272" y="385" width="57" height="30"/>
+                                <state key="normal" title="Settings"/>
                                 <connections>
-                                    <action selector="TenPoints:" destination="fkE-IQ-IGn" eventType="touchUpInside" id="8BG-hy-YlR"/>
+                                    <segue destination="1lU-lZ-m6k" kind="show" identifier="SettingsSegue" animates="NO" id="nEl-sp-Cra"/>
                                 </connections>
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="BFe-yD-yxb" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" constant="150" id="5dc-st-Pxg"/>
                             <constraint firstItem="ZGJ-V1-cSz" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="-100" id="LG4-Gf-L78"/>
                             <constraint firstItem="Nrx-pZ-cFj" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="100" id="RXP-y0-Pnw"/>
                             <constraint firstItem="NLw-HV-UYu" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" id="Xwq-QD-F52"/>
                             <constraint firstItem="Nrx-pZ-cFj" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" id="b4Z-9d-gNq"/>
-                            <constraint firstItem="wXm-qw-is6" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="50" id="ddL-JS-rC8"/>
                             <constraint firstItem="NLw-HV-UYu" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" id="jsD-Ci-3JT"/>
-                            <constraint firstItem="wXm-qw-is6" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" constant="-150" id="lzd-xb-wWf"/>
-                            <constraint firstItem="BFe-yD-yxb" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="50" id="rGB-Mk-QFa"/>
                             <constraint firstItem="ZGJ-V1-cSz" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" id="vZM-Ba-fzT"/>
                         </constraints>
                     </view>
@@ -71,8 +54,6 @@
                         <outlet property="PauseButton" destination="paz-pH-qnx" id="JDM-Zo-N3G"/>
                         <outlet property="PauseView" destination="3eD-OI-ThD" id="TdZ-54-9oa"/>
                         <outlet property="StrategicSoccerLabel" destination="ZGJ-V1-cSz" id="ktT-eN-tJ0"/>
-                        <outlet property="TenPoint" destination="BFe-yD-yxb" id="07g-SW-L9E"/>
-                        <outlet property="ThreeMinute" destination="wXm-qw-is6" id="J3F-eT-ud5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0y-G1-wOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -99,8 +80,12 @@
                                     <action selector="PauseClicked:" destination="BV1-FR-VrT" eventType="touchUpInside" id="96K-pd-ZSc"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3eD-OI-ThD">
-                                <rect key="frame" x="186" y="202" width="228" height="195"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3eD-OI-ThD">
+                                <rect key="frame" x="185" y="199.5" width="230" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="230" id="QnN-fR-ian"/>
+                                    <constraint firstAttribute="height" constant="200" id="kHE-XD-TYC"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="jas-UU-nYs" kind="embed" identifier="Pause" id="Nem-WV-SRb"/>
                                 </connections>
@@ -152,7 +137,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rep-hV-DSt">
-                                <rect key="frame" x="70" y="135" width="60" height="30"/>
+                                <rect key="frame" x="70" y="335" width="60" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.41937775882940787" blue="0.10399489457071254" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="WPu-F5-KCr"/>
@@ -163,28 +148,37 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x1V-wF-2Rs">
-                                <rect key="frame" x="190" y="85" width="100" height="30"/>
+                                <rect key="frame" x="190" y="235" width="100" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="gHE-pw-1xl"/>
                                 </constraints>
                                 <state key="normal" title="Three Minutes"/>
+                                <connections>
+                                    <action selector="ModeThreeMinute:" destination="1lU-lZ-m6k" eventType="touchUpInside" id="GaK-m1-Cv1"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xfv-5N-ocI">
-                                <rect key="frame" x="310" y="85" width="100" height="30"/>
+                                <rect key="frame" x="310" y="235" width="100" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="bQT-pa-abp"/>
                                 </constraints>
                                 <state key="normal" title="Ten Points"/>
+                                <connections>
+                                    <action selector="ModeTenPoints:" destination="1lU-lZ-m6k" eventType="touchUpInside" id="0E1-ju-F3u"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cbl-8U-uwl">
-                                <rect key="frame" x="310" y="135" width="100" height="30"/>
+                                <rect key="frame" x="310" y="335" width="100" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.41937775882940787" blue="0.10399489457071254" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="co1-jg-Upd"/>
                                 </constraints>
                                 <state key="normal" title="Four"/>
+                                <connections>
+                                    <action selector="PlayerFour:" destination="1lU-lZ-m6k" eventType="touchUpInside" id="ah5-j1-ZCI"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETTINGS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="In0-Pn-ZYX">
                                 <rect key="frame" x="259" y="20" width="81" height="21"/>
@@ -195,9 +189,12 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="66D-1E-wB0">
                                 <rect key="frame" x="43" y="6" width="100" height="75"/>
                                 <state key="normal" image="BackArrow"/>
+                                <connections>
+                                    <action selector="BackButton:" destination="1lU-lZ-m6k" eventType="touchUpInside" id="v55-1g-JqN"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXJ-xE-DP7">
-                                <rect key="frame" x="70" y="85" width="60" height="30"/>
+                                <rect key="frame" x="70" y="235" width="60" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="70A-oo-Wsf"/>
@@ -208,34 +205,43 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdt-er-Qx4">
-                                <rect key="frame" x="190" y="135" width="100" height="30"/>
+                                <rect key="frame" x="190" y="335" width="100" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.41937775882940787" blue="0.10399489457071254" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="3XE-12-OrP"/>
                                 </constraints>
                                 <state key="normal" title="Three"/>
+                                <connections>
+                                    <action selector="PlayerThree:" destination="1lU-lZ-m6k" eventType="touchUpInside" id="j8Z-tg-XVy"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.94116815850000002" blue="0.27942194850000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="x1V-wF-2Rs" firstAttribute="centerX" secondItem="Tce-jn-p8V" secondAttribute="centerX" constant="-60" id="5or-Fu-d7b"/>
                             <constraint firstItem="Cbl-8U-uwl" firstAttribute="centerX" secondItem="Tce-jn-p8V" secondAttribute="centerX" constant="60" id="6YS-0u-APQ"/>
-                            <constraint firstItem="x1V-wF-2Rs" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="-200" id="AQK-rY-2ph"/>
+                            <constraint firstItem="x1V-wF-2Rs" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="-50" id="AQK-rY-2ph"/>
                             <constraint firstItem="66D-1E-wB0" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="top" constant="43.5" id="DoL-1w-rrs"/>
-                            <constraint firstItem="xfv-5N-ocI" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="-200" id="EDq-pI-nJV"/>
-                            <constraint firstItem="gdt-er-Qx4" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="-150" id="H75-AG-DPv"/>
-                            <constraint firstItem="jXJ-xE-DP7" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="-200" id="PmH-QQ-ahS"/>
+                            <constraint firstItem="xfv-5N-ocI" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="-50" id="EDq-pI-nJV"/>
+                            <constraint firstItem="gdt-er-Qx4" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="50" id="H75-AG-DPv"/>
+                            <constraint firstItem="jXJ-xE-DP7" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="-50" id="PmH-QQ-ahS"/>
                             <constraint firstItem="In0-Pn-ZYX" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="top" constant="30" id="eMh-9e-2bh"/>
-                            <constraint firstItem="Cbl-8U-uwl" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="-150" id="hK7-Aa-Ze5"/>
+                            <constraint firstItem="Cbl-8U-uwl" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="50" id="hK7-Aa-Ze5"/>
                             <constraint firstItem="rep-hV-DSt" firstAttribute="centerX" secondItem="Tce-jn-p8V" secondAttribute="leading" constant="100" id="n59-YW-tZN"/>
                             <constraint firstItem="66D-1E-wB0" firstAttribute="centerX" secondItem="Tce-jn-p8V" secondAttribute="leading" constant="93" id="qo1-hb-PB5"/>
-                            <constraint firstItem="rep-hV-DSt" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="-150" id="rJE-fJ-NMe"/>
+                            <constraint firstItem="rep-hV-DSt" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="50" id="rJE-fJ-NMe"/>
                             <constraint firstItem="In0-Pn-ZYX" firstAttribute="centerX" secondItem="Tce-jn-p8V" secondAttribute="centerX" id="vEz-23-Rck"/>
                             <constraint firstItem="jXJ-xE-DP7" firstAttribute="centerX" secondItem="Tce-jn-p8V" secondAttribute="leading" constant="100" id="vcy-c9-MIc"/>
                             <constraint firstItem="xfv-5N-ocI" firstAttribute="centerX" secondItem="Tce-jn-p8V" secondAttribute="centerX" constant="60" id="x6W-mD-1EH"/>
                             <constraint firstItem="gdt-er-Qx4" firstAttribute="centerX" secondItem="Tce-jn-p8V" secondAttribute="centerX" constant="-60" id="xS5-tg-ufr"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="ModeTenPoints" destination="xfv-5N-ocI" id="8sx-m3-dGC"/>
+                        <outlet property="ModeThreeMinutes" destination="x1V-wF-2Rs" id="E6i-Yr-R0J"/>
+                        <outlet property="PlayerFour" destination="Cbl-8U-uwl" id="Sti-g4-0Rb"/>
+                        <outlet property="PlayerThree" destination="gdt-er-Qx4" id="gvo-aC-qaK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jmZ-J4-8VC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -250,21 +256,21 @@
                         <viewControllerLayoutGuide type="bottom" id="u9Y-a3-Fck"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Vgd-n9-GOU">
-                        <rect key="frame" x="0.0" y="0.0" width="228" height="195"/>
+                        <rect key="frame" x="0.0" y="0.0" width="230" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c34-ON-rnq">
-                                <rect key="frame" x="2" y="-16" width="224" height="211"/>
+                                <rect key="frame" x="2" y="-16" width="226" height="216"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="PAUSED" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jfK-jR-rPs">
-                                        <rect key="frame" x="0.0" y="32" width="224" height="17"/>
+                                        <rect key="frame" x="0.0" y="32" width="226" height="17"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LwK-xD-PUM">
-                                        <rect key="frame" x="51" y="94" width="129" height="30"/>
+                                        <rect key="frame" x="51" y="94" width="131" height="30"/>
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Restart"/>
                                         <connections>
@@ -272,7 +278,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0E-Lx-zmo">
-                                        <rect key="frame" x="51" y="57" width="129" height="30"/>
+                                        <rect key="frame" x="51" y="57" width="131" height="30"/>
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Resume"/>
                                         <connections>
@@ -280,7 +286,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OX3-ah-zBL">
-                                        <rect key="frame" x="51" y="132" width="129" height="30"/>
+                                        <rect key="frame" x="51" y="132" width="131" height="30"/>
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Quit"/>
                                         <connections>
