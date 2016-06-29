@@ -33,7 +33,6 @@ class buttonGroup{
     }
 }
 class SettingsViewController: UIViewController {
-    var scene: GameScene!
     var modeButtonGroup: buttonGroup!
     var playerButtonGroup: buttonGroup!
     var allButtons: [UIButton]!
@@ -58,12 +57,12 @@ class SettingsViewController: UIViewController {
     }
     @IBAction func ModeTenPoints(sender: UIButton) {
         modeButtonGroup.selectButton(sender)
-        scene.mode = Mode.tenPoints
         defaultMode = Mode.tenPoints
     }
     @IBAction func ModeThreeMinute(sender: UIButton) {
         modeButtonGroup.selectButton(sender)
-        scene.mode = Mode.threeMinute
+        defaultMode = Mode.threeMinute
+
     }
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -67,7 +67,6 @@ class TitleViewController: UIViewController {
         }
         if segue.identifier == "SettingsSegue"{
             let destinationVC = segue.destinationViewController as! SettingsViewController
-            destinationVC.scene = scene
             destinationVC.defaultMode = defaultMode
             destinationVC.defaultPlayers = defaultPlayers
             destinationVC.parent = self
