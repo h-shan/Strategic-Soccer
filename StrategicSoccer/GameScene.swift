@@ -21,9 +21,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playerA1 = Player()
     var playerA2 = Player()
     var playerA3 = Player()
+    var playerA4 = Player()
     var playerB1 = Player()
     var playerB2 = Player()
     var playerB3 = Player()
+    var playerB4 = Player()
     var players: [Player]?
     var gameEnded = false
     var viewController: GameViewController!
@@ -109,11 +111,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         playerA1 = Player(teamA: true, sender: self)
         playerA2 = Player(teamA: true, sender: self)
         playerA3 = Player(teamA: true, sender: self)
+        playerA4 = Player(teamA: true, sender: self)
         playerB1 = Player(teamA: false, sender: self)
         playerB2 = Player(teamA: false, sender: self)
         playerB3 = Player(teamA: false, sender: self)
+        playerB4 = Player(teamA: false, sender: self)
         
-        players = [playerA1, playerA2, playerA3, playerB1, playerB2, playerB3]
+        switch (playerOption){
+        case PlayerOption.three:
+            players = [playerA1, playerA2, playerA3, playerB1, playerB2, playerB3]
+            break
+        case PlayerOption.four:
+            players = [playerA1, playerA2, playerA3, playerA4, playerB1, playerB2, playerB3, playerB4]
+            break;
+        }
         
         for node in players!{
             self.addChild(node)
@@ -358,12 +369,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setPosition(){
-        playerA1.position = CGPoint(x:midX!*0.3,y:midY!*1.5)
-        playerA2.position = CGPoint(x:midX!*0.3,y:midY!*0.5)
-        playerA3.position = CGPoint(x:midX!*0.7,y:midY!)
-        playerB1.position = CGPoint(x:midX!*1.7,y:midY!*1.5)
-        playerB2.position = CGPoint(x:midX!*1.7,y:midY!*0.5)
-        playerB3.position = CGPoint(x:midX!*1.3,y:midY!)
+        switch (playerOption){
+        case PlayerOption.three:
+            playerA1.position = CGPoint(x:midX!*0.3,y:midY!*1.5)
+            playerA2.position = CGPoint(x:midX!*0.3,y:midY!*0.5)
+            playerA3.position = CGPoint(x:midX!*0.7,y:midY!)
+            playerB1.position = CGPoint(x:midX!*1.7,y:midY!*1.5)
+            playerB2.position = CGPoint(x:midX!*1.7,y:midY!*0.5)
+            playerB3.position = CGPoint(x:midX!*1.3,y:midY!)
+            break
+        case PlayerOption.four:
+            playerA1.position = CGPoint(x:midX!*0.3,y:midY!*1.5)
+            playerA2.position = CGPoint(x:midX!*0.3,y:midY!*0.5)
+            playerA3.position = CGPoint(x:midX!*0.5,y:midY!*0.8)
+            playerA4.position = CGPoint(x:midX!*0.5,y:midY!*1.2)
+            playerB1.position = CGPoint(x:midX!*1.7,y:midY!*1.5)
+            playerB2.position = CGPoint(x:midX!*1.7,y:midY!*0.5)
+            playerB3.position = CGPoint(x:midX!*1.5,y:midY!*0.8)
+            playerB4.position = CGPoint(x:midX!*1.5,y:midY!*1.2)
+        }
+        
         ball.position = CGPoint(x: midX!,y: midY!)
     }
     func distance(point1: CGPoint, point2: CGPoint) -> CGFloat{
