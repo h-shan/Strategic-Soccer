@@ -31,6 +31,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var viewController: GameViewController!
     
     let gameTimer = Timer()
+    var clockBackground:SKShapeNode?
     let clock = SKLabelNode(fontNamed: "Georgia")
     var gameTime: NSTimeInterval?
     var mode = Mode.threeMinute
@@ -147,17 +148,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (mode == Mode.threeMinute){
             gameTime = 180
             // set up clock
+            clockBackground = SKShapeNode(rect: CGRectMake(-50/568*midX!,-25/320*midY!,100/568*midX!,50/320*midY!), cornerRadius: 10)
+            clockBackground!.fillColor = UIColor.blackColor()
+            clockBackground!.strokeColor = UIColor.whiteColor()
+            clockBackground!.alpha = 0.7
+//            clockBackground = SKSpriteNode(color: UIColor.blackColor(), size: CGSizeMake(100/568*midX!,50/320*midY!))
+//            clockBackground.
             clock.text = gameTimer.secondsToString(gameTime!)
             clock.fontSize = 15
-            clock.position = CGPoint(x: midX!, y: 7/4*midY!)
-            clock.zPosition = 1.5
-            clock.fontColor = UIColor.blackColor()
+            clockBackground!.position = CGPoint(x: midX!, y: 7/4*midY!)
+            clock.zPosition = 2
+            clock.position = CGPointMake(0,-8/320*midY!)
+            clock.fontColor = UIColor.whiteColor()
             gameTimer.start()
-            addChild(clock)
+            clockBackground!.addChild(clock)
+            clockBackground!.zPosition = 4
+            self.addChild(clockBackground!)
         }
-
     }
-    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
         {
        /* Called when a touch begins */
