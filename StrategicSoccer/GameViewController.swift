@@ -21,6 +21,7 @@ class GameViewController: UIViewController {
         if scene.mode == Mode.threeMinute{
             scene.gameTimer.pause()
         }
+        scene.goalDelay.pause()
         scene.paused = true
     }
 

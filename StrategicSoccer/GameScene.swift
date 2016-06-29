@@ -29,7 +29,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var players: [Player]?
     var gameEnded = false
     var viewController: GameViewController!
+    var goalAccounted = false
     
+    let goalDelay = Timer()
     let gameTimer = Timer()
     var clockBackground:SKShapeNode?
     let clock = SKLabelNode(fontNamed: "Georgia")
@@ -42,6 +44,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var turnA = true
     var scoreA = 0
     var scoreB = 0
+    
+    var scoreBackground:SKSpriteNode!
     var score = SKLabelNode(fontNamed: "Georgia")
     
     var timer: NSTimer?
@@ -60,19 +64,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let background = SKSpriteNode(imageNamed: "SoccerField")
         midX = CGRectGetMidX(self.frame)
         midY = CGRectGetMidY(self.frame)
-        
+        scoreBackground = SKSpriteNode(color: UIColor.whiteColor()
+            , size: CGSizeMake(800/568*midX!,200/320*midY!))
+        scoreBackground.addChild(score)
+        scoreBackground.zPosition = 4
+        scoreBackground.alpha = 0.8
         score.fontSize = 50
         score.fontColor = UIColor.blackColor()
-        score.position = CGPoint(x: midX!, y: 1.5*midY!)
-        score.zPosition = 4
+        scoreBackground.position = CGPoint(x: midX!, y: 1.3*midY!)
+        score.zPosition = 2
         
-        addChild(score)
+        addChild(scoreBackground)
         
         background.position = CGPoint(x:midX!, y:midY!)
         background.size = self.frame.size
         background.zPosition=1
         addChild(background)
-        
+        scoreBackground.hidden = true
         // set rectangular border around screen
         let borderBody:SKPhysicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         borderBody.linearDamping = 0
@@ -152,8 +160,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             clockBackground!.fillColor = UIColor.blackColor()
             clockBackground!.strokeColor = UIColor.whiteColor()
             clockBackground!.alpha = 0.7
-//            clockBackground = SKSpriteNode(color: UIColor.blackColor(), size: CGSizeMake(100/568*midX!,50/320*midY!))
-//            clockBackground.
             clock.text = gameTimer.secondsToString(gameTime!)
             clock.fontSize = 15
             clockBackground!.position = CGPoint(x: midX!, y: 7/4*midY!)
@@ -228,19 +234,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        if (200/320 * midY! < ball.position.y && ball.position.y < 440/320 * midY!){
+        if (!goalAccounted && 200/320 * midY! < ball.position.y && ball.position.y < 440/320 * midY!){
             if 0<ball.position.x && ball.position.x<50/568*midX!{
                 
-                if !turnA {
-                    switchTurns()
-                }
                 self.reset(false)
             }
             else if 1086/568*midX! < ball.position.x {
                 
-                if turnA {
-                    switchTurns()
-                }
+                
                 self.reset(true)
             }
         }
@@ -251,18 +252,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if !gameEnded{
             showTime()
         }
+        if (goalDelay.getElapsedTime()>2){
+            goalDelay.reset()
+            scoreBackground.hidden = true
+            score.text = ""
+            setDynamicStates(true)
+            moveTimer?.restart()
+            if mode == Mode.threeMinute{
+                gameTimer.start()
+            }
+    
+            setPosition()
+            goalAccounted = false
+            userInteractionEnabled = true
+        }
         /* Called before each frame is rendered */
     }
     
     func reset(scoreGoal: Bool){
         // reset position of all players and ball
-        
+        goalAccounted = true
         if playerSelected{
             playerSelected = false
             selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.grayColor(), colorBlendFactor: -0.7, duration: 0.00001))
         }
         moveTimer?.restart()
-        
+        userInteractionEnabled = false
         if scoreGoal{
             scoreA+=1
         }
@@ -270,7 +285,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scoreB+=1
         }
         setDynamicStates(false)
-        paused = true
+        scoreBackground.hidden = false
+
         if mode == Mode.tenPoints{
             if scoreA == 10 || scoreB == 10 {
                 endGame()
@@ -279,33 +295,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 score.text = String.localizedStringWithFormat("%d - %d", scoreA, scoreB)
             }
         }
+            
         else{
             score.text = String.localizedStringWithFormat("%d - %d", scoreA, scoreB)
         }
+
         if mode == Mode.threeMinute{
             gameTimer.pause()
         }
-        
-        _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(twoSeconds), userInfo: nil, repeats: false)
-        
-        
+        goalDelay.start()
         
     }
     
-    func twoSeconds(){
-        score.text = ""
-        setDynamicStates(true)
-        paused = false
-        moveTimer?.restart()
-        if mode == Mode.threeMinute{
-            
-            gameTimer.start()
-            
-        }
-        setPosition()
-        ball.physicsBody!.velocity = CGVectorMake(0,0)
-        ball.physicsBody!.angularVelocity = 0
-    }
     
     func setDynamicStates(isDynamic: Bool){
         for player in self.players!{
@@ -341,25 +342,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func showTime(){
-        if !paused {
-            gameTime = 180.1 - gameTimer.getElapsedTime()
-            if (gameTime<=0){
-                clock.text = "0:00"
-                
-                gameTimer.pause()
-                moveTimer?.pause()
-                endGame()
-            }else{
-                clock.text = gameTimer.secondsToString(gameTime!)
-            }
+        gameTime = 180.1 - gameTimer.getElapsedTime()
+        if (gameTime<=0){
+            clock.text = "0:00"
+            
+            gameTimer.pause()
+            moveTimer?.pause()
+            endGame()
+        }else{
+            clock.text = gameTimer.secondsToString(gameTime!)
         }
-        
     }
     
     func endGame(){
         gameEnded = true
         paused = true
         setDynamicStates(false)
+        scoreBackground.hidden = false
         if scoreA > scoreB {
             score.text = "Player A Wins"
         }
@@ -414,5 +413,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setDynamicStates(false)
         setDynamicStates(true)
         moveTimer?.restart()
+        goalDelay.reset()
     }
 }

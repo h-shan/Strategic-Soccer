@@ -33,7 +33,7 @@ class Timer{
     //pause() allows the timer to be momentarily stopped without the total time being affected.
     
     func pause(){
-        elapsedTime += NSDate().timeIntervalSinceDate(startTime!)
+        elapsedTime = getElapsedTime()
         started = false
     }
     
