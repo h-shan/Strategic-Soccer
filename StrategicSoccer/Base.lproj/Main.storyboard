@@ -33,8 +33,8 @@
                                     <action selector="BackButton:" destination="1lU-lZ-m6k" eventType="touchUpInside" id="heP-q6-6w8"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hX3-ee-hi8">
-                                <rect key="frame" x="43" y="101" width="224" height="199"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hX3-ee-hi8">
+                                <rect key="frame" x="40" y="101" width="224" height="199"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="5yu-Xs-09g" id="nSh-0t-2PQ"/>
@@ -195,6 +195,8 @@
                             <constraint firstItem="3eD-OI-ThD" firstAttribute="centerY" secondItem="3se-qz-xqx" secondAttribute="centerY" id="zf2-iu-g3H"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="PauseView" destination="3eD-OI-ThD" id="roI-CZ-e1d"/>
                     </connections>

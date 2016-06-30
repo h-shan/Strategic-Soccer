@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8932AD6B1D13BD0100F6AC84 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8932AD6A1D13BD0100F6AC84 /* Mode.swift */; };
+		897E8D291D258E6000DCAC9F /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897E8D281D258E6000DCAC9F /* TableViewCell.swift */; };
 		89B97F811D20F5DB00588A21 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B97F801D20F5DB00588A21 /* TitleViewController.swift */; };
 		89B97F821D220CAC00588A21 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */; };
 		89B97F861D2221AE00588A21 /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B97F851D2221AE00588A21 /* PauseViewController.swift */; };
@@ -49,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		8932AD6A1D13BD0100F6AC84 /* Mode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
+		897E8D281D258E6000DCAC9F /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		89B97F801D20F5DB00588A21 /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		89B97F851D2221AE00588A21 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
 		89EE42CC1D1A646E0093538A /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				DC83DD011D1089EA00E1C3F8 /* GameViewController.swift */,
 				DC83DD031D1089EA00E1C3F8 /* Main.storyboard */,
 				89EEC9831D246D8A0075A85C /* ChangePlayerViewController.swift */,
+				897E8D281D258E6000DCAC9F /* TableViewCell.swift */,
 				89EEC9811D234CCF0075A85C /* SettingsViewController.swift */,
 				89B97F801D20F5DB00588A21 /* TitleViewController.swift */,
 				89B97F851D2221AE00588A21 /* PauseViewController.swift */,
@@ -298,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				897E8D291D258E6000DCAC9F /* TableViewCell.swift in Sources */,
 				DC83DD021D1089EA00E1C3F8 /* GameViewController.swift in Sources */,
 				89EE42CD1D1A646E0093538A /* MenuButton.swift in Sources */,
 				8932AD6B1D13BD0100F6AC84 /* Mode.swift in Sources */,

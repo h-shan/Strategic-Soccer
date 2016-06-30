@@ -42,6 +42,18 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         
         cell.textLabel?.text = self.items[indexPath.row]
         
+        if tableView == PlayerA{
+            cell.imageView!.image = UIImage(imageLiteral: items[indexPath.row])
+
+        }
+        else if tableView == PlayerB{
+            cell.imageView!.image = UIImage(imageLiteral: items[indexPath.row])
+            cell.contentView.transform = CGAffineTransformMakeScale(-1,1);
+            cell.imageView!.transform = CGAffineTransformMakeScale(-1,1);
+            cell.textLabel!.transform = CGAffineTransformMakeScale(-1,1);
+            cell.textLabel?.textAlignment = .Right
+        }
+        
         return cell
     }
     
