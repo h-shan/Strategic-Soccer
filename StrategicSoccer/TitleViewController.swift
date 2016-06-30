@@ -15,11 +15,14 @@ class TitleViewController: UIViewController {
     
     @IBOutlet weak var PlayButton: UIButton!
     @IBOutlet weak var SettingsButton: UIButton!
-    
+    @IBOutlet weak var ChangePlayersButton: UIButton!
+
     var skView: SKView!
     var defaultMode = Mode.threeMinute
     var defaultPlayers = PlayerOption.three
-
+    
+    var playerA = "Brazil"
+    var playerB = "Argentina"
 
     @IBOutlet weak var StrategicSoccerLabel: UILabel!
     
@@ -32,6 +35,7 @@ class TitleViewController: UIViewController {
         scene = GameScene(size: skView.bounds.size)
         SettingsButton.layer.cornerRadius = 10
         PlayButton.layer.cornerRadius = 10
+        ChangePlayersButton.layer.cornerRadius = 10
         
         // Do any additional setup after loading the view.
     }
@@ -62,6 +66,8 @@ class TitleViewController: UIViewController {
             let destinationVC = segue.destinationViewController as! GameViewController
             scene.mode = defaultMode
             scene.playerOption = defaultPlayers
+            scene.countryA = playerA
+            scene.countryB = playerB
             destinationVC.scene = scene
             destinationVC.parent = self
         }
@@ -70,6 +76,12 @@ class TitleViewController: UIViewController {
             destinationVC.defaultMode = defaultMode
             destinationVC.defaultPlayers = defaultPlayers
             destinationVC.parent = self
+        }
+        if segue.identifier == "ChangePlayersSegue"{
+            let destinationVC = segue.destinationViewController as! ChangePlayerViewController
+            destinationVC.parent = self
+            destinationVC.defaultA = playerA
+            destinationVC.defaultB = playerB
         }
     }
 

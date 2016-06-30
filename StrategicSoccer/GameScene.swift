@@ -31,6 +31,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var viewController: GameViewController!
     var goalAccounted = false
     
+    var countryA = "Brazil"
+    var countryB = "Taiwan"
+
     let goalDelay = Timer()
     let gameTimer = Timer()
     var clockBackground:SKShapeNode?
@@ -117,14 +120,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(goalPostB1)
         self.addChild(goalPostB2)
         
-        playerA1 = Player(teamA: true, sender: self)
-        playerA2 = Player(teamA: true, sender: self)
-        playerA3 = Player(teamA: true, sender: self)
-        playerA4 = Player(teamA: true, sender: self)
-        playerB1 = Player(teamA: false, sender: self)
-        playerB2 = Player(teamA: false, sender: self)
-        playerB3 = Player(teamA: false, sender: self)
-        playerB4 = Player(teamA: false, sender: self)
+        playerA1 = Player(teamA: true, country: countryA, sender: self)
+        playerA2 = Player(teamA: true, country: countryA, sender: self)
+        playerA3 = Player(teamA: true, country: countryA, sender: self)
+        playerA4 = Player(teamA: true, country: countryA, sender: self)
+        playerB1 = Player(teamA: false, country: countryB, sender: self)
+        playerB2 = Player(teamA: false, country: countryB, sender: self)
+        playerB3 = Player(teamA: false, country: countryB, sender: self)
+        playerB4 = Player(teamA: false, country: countryB, sender: self)
         
         switch (playerOption){
         case PlayerOption.three:
