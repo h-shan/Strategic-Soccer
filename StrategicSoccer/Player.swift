@@ -22,7 +22,12 @@ class Player: SKSpriteNode {
         mTeamA = teamA
         mTexture = SKTexture(imageNamed: country)
         super.init(texture: mTexture, color: UIColor.clearColor(), size:playerSize)
-        zRotation = 3.1415*0.5
+        if teamA{
+            zRotation = 3.1415*1.5
+        }
+        else {
+            zRotation = 3.1415*0.5
+        }
         self.physicsBody = SKPhysicsBody(circleOfRadius: playerSize.width*5/12)
         self.name = "player"
         self.zPosition = 2
