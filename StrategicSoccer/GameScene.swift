@@ -31,8 +31,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var viewController: GameViewController!
     var goalAccounted = false
     
-    var countryA = "Brazil"
-    var countryB = "Taiwan"
+    var countryA:String!
+    var countryB:String!
 
     let goalDelay = Timer()
     let gameTimer = Timer()
@@ -87,6 +87,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // set rectangular border around screen
         let borderBody:SKPhysicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         borderBody.linearDamping = 0
+        borderBody.angularDamping = 0
         self.physicsBody = borderBody
         self.physicsWorld.contactDelegate = self
         

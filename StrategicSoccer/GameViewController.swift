@@ -22,6 +22,7 @@ class GameViewController: UIViewController {
             scene.gameTimer.pause()
         }
         scene.goalDelay.pause()
+        scene.userInteractionEnabled = false
         scene.paused = true
     }
 

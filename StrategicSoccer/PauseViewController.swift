@@ -35,7 +35,10 @@ class PauseViewController: UIViewController {
         if scene.mode == Mode.threeMinute && scene.goalDelay.elapsedTime == 0{
             scene.gameTimer.start()
         }
-        scene.goalDelay.start()
+        if scene.goalDelay.getElapsedTime() > 0{
+            scene.goalDelay.start()
+        }
+        scene.userInteractionEnabled = true
     }
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -21,8 +21,8 @@ class TitleViewController: UIViewController {
     var defaultMode = Mode.threeMinute
     var defaultPlayers = PlayerOption.three
     
-    var playerA = "Brazil"
-    var playerB = "Argentina"
+    var playerA = "Afghanistan"
+    var playerB = "Albania"
 
     @IBOutlet weak var StrategicSoccerLabel: UILabel!
     
