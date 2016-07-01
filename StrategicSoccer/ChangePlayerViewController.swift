@@ -9,7 +9,7 @@
 import UIKit
 
 class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var items: [String] = ["Argentina", "Brazil", "Spain", "Taiwan", "USA" ]
+    var items: [String] = ["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria" ,"Azerbaijan","Brazil","Kyrgyzstan", "Spain", "Taiwan", "USA"]
     var parent: TitleViewController!
     var scene: GameScene!
     var defaultA: String!
