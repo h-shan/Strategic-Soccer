@@ -16,7 +16,8 @@ class TitleViewController: UIViewController {
     @IBOutlet weak var PlayButton: UIButton!
     @IBOutlet weak var SettingsButton: UIButton!
     @IBOutlet weak var ChangePlayersButton: UIButton!
-
+    @IBOutlet weak var SinglePlayer: UIButton!
+    
     var skView: SKView!
     var defaultMode = Mode.threeMinute
     var defaultPlayers = PlayerOption.three
@@ -36,6 +37,7 @@ class TitleViewController: UIViewController {
         SettingsButton.layer.cornerRadius = 10
         PlayButton.layer.cornerRadius = 10
         ChangePlayersButton.layer.cornerRadius = 10
+        SinglePlayer.layer.cornerRadius = 10
         
         // Do any additional setup after loading the view.
     }
@@ -70,6 +72,7 @@ class TitleViewController: UIViewController {
             scene.countryB = playerB
             destinationVC.scene = scene
             destinationVC.parent = self
+            scene.singlePlayer = false
         }
         if segue.identifier == "SettingsSegue"{
             let destinationVC = segue.destinationViewController as! SettingsViewController
@@ -83,8 +86,18 @@ class TitleViewController: UIViewController {
             destinationVC.defaultA = playerA
             destinationVC.defaultB = playerB
         }
+        if segue.identifier == "SinglePlayerSegue"{
+            let destinationVC = segue.destinationViewController as! GameViewController
+            scene.mode = defaultMode
+            scene.playerOption = defaultPlayers
+            scene.countryA = playerA
+            scene.countryB = playerB
+            destinationVC.scene = scene
+            destinationVC.parent = self
+            
+            scene.cAggro = 50
+            scene.cDef = 50
+            scene.singlePlayer = true
+        }
     }
-
-
-
 }

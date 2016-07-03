@@ -96,13 +96,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLw-HV-UYu">
-                                <rect key="frame" x="209" y="135" width="150" height="50"/>
+                                <rect key="frame" x="9" y="135" width="150" height="50"/>
                                 <color key="backgroundColor" red="0.99162817774374845" green="0.50970698697969086" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="gJ5-t2-Hbt"/>
                                     <constraint firstAttribute="height" constant="50" id="jtg-EB-cWm"/>
                                 </constraints>
-                                <state key="normal" title="Play"/>
+                                <state key="normal" title="Two Players"/>
                                 <connections>
                                     <segue destination="BV1-FR-VrT" kind="show" identifier="GameSegue" animates="NO" id="McN-dH-VRB"/>
                                 </connections>
@@ -131,16 +131,30 @@
                                     <segue destination="5yu-Xs-09g" kind="show" identifier="ChangePlayersSegue" animates="NO" id="pmK-Yb-6Mg"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqf-rF-hA3">
+                                <rect key="frame" x="409" y="135" width="150" height="50"/>
+                                <color key="backgroundColor" red="0.9916281777" green="0.50970698699999994" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="hDH-Fj-12N"/>
+                                    <constraint firstAttribute="height" constant="50" id="paC-xt-2tl"/>
+                                </constraints>
+                                <state key="normal" title="Single Player"/>
+                                <connections>
+                                    <segue destination="BV1-FR-VrT" kind="show" identifier="SinglePlayerSegue" animates="NO" id="W3R-gC-myb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="ZGJ-V1-cSz" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="-80" id="LG4-Gf-L78"/>
                             <constraint firstItem="Nrx-pZ-cFj" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="60" id="RXP-y0-Pnw"/>
                             <constraint firstItem="L89-lv-x1T" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="120" id="Vmm-Jl-dp0"/>
-                            <constraint firstItem="NLw-HV-UYu" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" id="Xwq-QD-F52"/>
+                            <constraint firstItem="NLw-HV-UYu" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" constant="-200" id="Xwq-QD-F52"/>
                             <constraint firstItem="L89-lv-x1T" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" id="aLz-FF-imV"/>
                             <constraint firstItem="Nrx-pZ-cFj" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" id="b4Z-9d-gNq"/>
                             <constraint firstItem="NLw-HV-UYu" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" id="jsD-Ci-3JT"/>
+                            <constraint firstItem="zqf-rF-hA3" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" constant="200" id="oCp-VV-oIw"/>
                             <constraint firstItem="ZGJ-V1-cSz" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" id="vZM-Ba-fzT"/>
+                            <constraint firstItem="zqf-rF-hA3" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" id="yng-vY-WRT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xgG-MR-dDW"/>
@@ -150,6 +164,7 @@
                         <outlet property="PauseView" destination="3eD-OI-ThD" id="TdZ-54-9oa"/>
                         <outlet property="PlayButton" destination="NLw-HV-UYu" id="26f-6r-TmK"/>
                         <outlet property="SettingsButton" destination="Nrx-pZ-cFj" id="alY-kp-y6k"/>
+                        <outlet property="SinglePlayer" destination="zqf-rF-hA3" id="bEL-Z1-EDz"/>
                         <outlet property="StrategicSoccerLabel" destination="ZGJ-V1-cSz" id="ktT-eN-tJ0"/>
                     </connections>
                 </viewController>
@@ -438,4 +453,7 @@
         <image name="BackArrow" width="100" height="75"/>
         <image name="Pause" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="W3R-gC-myb"/>
+    </inferredMetricsTieBreakers>
 </document>

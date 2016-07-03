@@ -31,9 +31,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var viewController: GameViewController!
     var goalAccounted = false
     
+    
     var countryA:String!
     var countryB:String!
 
+    var singlePlayer:Bool!
+    var cAggro:Int?
+    var cDef:Int?
+    
     let goalDelay = Timer()
     let gameTimer = Timer()
     var clockBackground:SKShapeNode?
@@ -185,31 +190,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let location = touch.locationInNode(self)
             let node = nodeAtPoint(location)
 
-            
-            if (node is Player){
-                let touchedPlayer = (node as! Player)
-                if touchedPlayer.mTeamA! == turnA {
-                    selectedPlayer = touchedPlayer
-                    playerSelected = true
-                    startPosition = location
-                    selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0.00001))
-                    
+            if !singlePlayer || (singlePlayer && turnA){
+                if (node is Player){
+                    let touchedPlayer = (node as! Player)
+                    if touchedPlayer.mTeamA! == turnA {
+                        selectedPlayer = touchedPlayer
+                        playerSelected = true
+                        startPosition = location
+                        selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0.00001))
+                        
+                    }
                 }
-            }
-            else{
-                
-                for player in players!{
-                    if player.mTeamA! == turnA && playerSelected == false{
-                        if distance(player.position, point2: location) < player.size.width*1.5 {
-                            selectedPlayer = player
-                            playerSelected = true
-                            startPosition = player.position
-                            selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0.00001))
+                else{
+                    
+                    for player in players!{
+                        if player.mTeamA! == turnA && playerSelected == false{
+                            if distance(player.position, point2: location) < player.size.width*1.5 {
+                                selectedPlayer = player
+                                playerSelected = true
+                                startPosition = player.position
+                                selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0.00001))
+                            }
                         }
                     }
-                    
+                
                 }
             }
+            
+            
 
             
         }
@@ -248,6 +256,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 self.reset(true)
             }
+        }
+        if singlePlayer && !turnA{
+            computerMove(cAggro!, cDef: cDef!)
         }
         
         if(moveTimer!.getElapsedTime() > 5){
@@ -319,19 +330,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ball.physicsBody!.dynamic = isDynamic
     }
     
-    func storeVelocities(){
-        for player in self.players!{
-            player.storedVelocity = player.physicsBody!.velocity
-        }
-        ball.storedVelocity = ball.physicsBody!.velocity
-    }
     
-    func retrieveVelocities(){
-        for player in self.players!{
-            player.physicsBody!.velocity = player.storedVelocity!
-        }
-        ball.physicsBody!.velocity = ball.storedVelocity!
-    }
     
     func switchTurns(){
         turnA = !turnA
@@ -418,5 +417,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setDynamicStates(true)
         moveTimer?.restart()
         goalDelay.reset()
+    }
+    func computerMove(cAggro: Int, cDef: Int){
+        if moveTimer?.getElapsedTime()>1.5{
+            let type = Int(arc4random()%100)
+            var closestPlayer:Player = playerB1
+            if type > cAggro{
+                var closestPlayerPosition = distance(playerB1.position,point2: ball.position)
+                for player in players!{
+                    if !player.mTeamA{
+                        let distanceToBall = distance(player.position,point2: ball.position)
+                        if distanceToBall < closestPlayerPosition{
+                            closestPlayerPosition = distanceToBall
+                            closestPlayer = player
+                        }
+                    }
+                }
+                let playerVelocity = CGVectorMake(ball.position.x-closestPlayer.position.x, ball.position.y - closestPlayer.position.y)
+                closestPlayer.physicsBody!.velocity = playerVelocity
+            }
+            else{
+                let goalPosition = CGPointMake(self.frame.maxX,self.frame.midY)
+                var closestPlayerPosition = distance(playerB1.position,point2: ball.position)
+                for player in players!{
+                    if !player.mTeamA{
+                        let distanceToGoal = distance(player.position, point2:goalPosition)
+                        if distanceToGoal < closestPlayerPosition {
+                            closestPlayerPosition = distanceToGoal
+                            closestPlayer = player
+                        }
+                    }
+                }
+                let playerVelocity = CGVectorMake(goalPosition.x-closestPlayer.position.x, goalPosition.y - closestPlayer.position.y)
+                closestPlayer.physicsBody!.velocity = playerVelocity
+            }
+        switchTurns()
+        }
     }
 }

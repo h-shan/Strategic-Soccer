@@ -10,7 +10,6 @@ import SpriteKit
 
 class Player: SKSpriteNode {
     var mTeamA:Bool!
-    var storedVelocity:CGVector?
     var mTexture:SKTexture
     
     init(){
