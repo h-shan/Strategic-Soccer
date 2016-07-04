@@ -26,6 +26,8 @@ class PauseViewController: UIViewController {
         parent.PauseView.hidden = true
         scene.paused = false
         scene.restart()
+        scene.userInteractionEnabled = true
+        
     }
     @IBAction func Resume(sender: AnyObject) {
         scene = parent.scene

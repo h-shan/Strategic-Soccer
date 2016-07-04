@@ -31,7 +31,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var viewController: GameViewController!
     var goalAccounted = false
     
-    
+    var firstTurn = true
+    var ownGoal = false
     var countryA:String!
     var countryB:String!
 
@@ -280,6 +281,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             setPosition()
             goalAccounted = false
             userInteractionEnabled = true
+            if ownGoal{
+                switchTurns()
+                ownGoal = false
+            }
         }
         /* Called before each frame is rendered */
     }
@@ -291,7 +296,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             playerSelected = false
             selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.grayColor(), colorBlendFactor: -0.7, duration: 0.00001))
         }
-        moveTimer?.restart()
+        if turnA == scoreGoal{
+            ownGoal = true
+        }
+        moveTimer?.reset()
         userInteractionEnabled = false
         if scoreGoal{
             scoreA+=1
@@ -317,6 +325,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         if mode == Mode.threeMinute{
             gameTimer.pause()
+        }
+        if singlePlayer == true{
+            firstTurn = true
         }
         goalDelay.start()
         
@@ -417,41 +428,55 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setDynamicStates(true)
         moveTimer?.restart()
         goalDelay.reset()
+        scoreBackground.hidden = true
+        goalAccounted = false
+        if !turnA{
+            switchTurns()
+        }
     }
     func computerMove(cAggro: Int, cDef: Int){
         if moveTimer?.getElapsedTime()>1.5{
-            let type = Int(arc4random()%100)
-            var closestPlayer:Player = playerB1
-            if type > cAggro{
-                var closestPlayerPosition = distance(playerB1.position,point2: ball.position)
-                for player in players!{
-                    if !player.mTeamA{
-                        let distanceToBall = distance(player.position,point2: ball.position)
-                        if distanceToBall < closestPlayerPosition{
-                            closestPlayerPosition = distanceToBall
-                            closestPlayer = player
-                        }
-                    }
-                }
-                let playerVelocity = CGVectorMake(ball.position.x-closestPlayer.position.x, ball.position.y - closestPlayer.position.y)
-                closestPlayer.physicsBody!.velocity = playerVelocity
+            if firstTurn == true{
+                firstTurn = false
+                firstMove()
             }
             else{
-                let goalPosition = CGPointMake(self.frame.maxX,self.frame.midY)
-                var closestPlayerPosition = distance(playerB1.position,point2: ball.position)
-                for player in players!{
-                    if !player.mTeamA{
-                        let distanceToGoal = distance(player.position, point2:goalPosition)
-                        if distanceToGoal < closestPlayerPosition {
-                            closestPlayerPosition = distanceToGoal
-                            closestPlayer = player
-                        }
-                    }
-                }
-                let playerVelocity = CGVectorMake(goalPosition.x-closestPlayer.position.x, goalPosition.y - closestPlayer.position.y)
-                closestPlayer.physicsBody!.velocity = playerVelocity
+            let random = CGFloat(arc4random_uniform(30))
+            let ballMultiplier = (CGFloat(arc4random_uniform(30))+85)/100
+            let chosePlayer:UInt32
+            if playerOption == PlayerOption.three{
+                chosePlayer = arc4random_uniform(3)+3
             }
-        switchTurns()
+            else{
+                chosePlayer = arc4random_uniform(4) + 4
+            }
+            var closestPlayer:Player = playerB1
+            closestPlayer = players![Int(chosePlayer)]
+            
+            let ballFuturePosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*ballMultiplier, ball.position.y + ball.physicsBody!.velocity.dy*ballMultiplier)
+            let playerVelocity = CGVectorMake(2*ballMultiplier*(ballFuturePosition.x-closestPlayer.position.x)+random, 2*ballMultiplier*(ballFuturePosition.y - closestPlayer.position.y)+random)
+            closestPlayer.physicsBody!.velocity = playerVelocity
+            }
+        
+            switchTurns()
+        }
+    }
+    func firstMove(){
+        if playerOption == PlayerOption.three{
+            let random = arc4random_uniform(3)
+            switch (random){
+            case 0:
+                playerB1.physicsBody!.velocity = CGVectorMake(playerA1.position.x-playerB1.position.x,playerA3.position.y - playerB1.position.y)
+                break
+            case 1:
+                playerB2.physicsBody!.velocity = CGVectorMake(playerA1.position.x-playerB2.position.x,playerA3.position.y - playerB2.position.y)
+                break
+            case 2:
+                playerB3.physicsBody!.velocity = CGVectorMake(playerA1.position.x-playerB3.position.x,playerA3.position.y - playerB3.position.y)
+                break
+            default:
+                break
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 class TitleViewController: UIViewController {
-    let background = SKScene()
+    var background:SKScene!
     var scene: GameScene!
     
     @IBOutlet weak var PlayButton: UIButton!
@@ -29,7 +29,6 @@ class TitleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.blueColor()
         
         skView = self.view as! SKView
         skView.ignoresSiblingOrder = true
@@ -50,8 +49,15 @@ class TitleViewController: UIViewController {
     override func viewWillAppear(animated: Bool){
         
         super.viewWillAppear(animated)
+        background = SKScene()
+        //background.addChild(SKSpriteNode(texture: SKTexture(imageNamed: "Menu"), color: UIColor.clearColor(), size: skView.bounds.size))
+        
+        let image = SKSpriteNode(imageNamed: "SoccerBackground")
+        background.addChild(image)
+        image.position = CGPointMake(background.frame.midX, background.frame.midY)
+        image.size = CGSizeMake(1,1)
+        
         skView.presentScene(background)
-        skView.scene!.backgroundColor = UIColor.greenColor()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
        
     }
@@ -95,8 +101,8 @@ class TitleViewController: UIViewController {
             destinationVC.scene = scene
             destinationVC.parent = self
             
-            scene.cAggro = 50
-            scene.cDef = 50
+            scene.cAggro = 0
+            scene.cDef = 0
             scene.singlePlayer = true
         }
     }
