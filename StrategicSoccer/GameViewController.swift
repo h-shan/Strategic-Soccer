@@ -69,6 +69,7 @@ class GameViewController: UIViewController {
     }
     func backToTitle(){
         parent.scene = GameScene(size: parent.skView.bounds.size)
+        scene.pause
         navigationController?.popViewControllerAnimated(false)
         
     }

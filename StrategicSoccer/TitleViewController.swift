@@ -13,8 +13,9 @@ class TitleViewController: UIViewController {
     var background:SKScene!
     var scene: GameScene!
     
-    @IBOutlet weak var PlayButton: UIButton!
+    @IBOutlet weak var TwoPlayers: UIButton!
     @IBOutlet weak var SettingsButton: UIButton!
+    @IBOutlet weak var StrategicSoccer: UILabel!
     @IBOutlet weak var ChangePlayersButton: UIButton!
     @IBOutlet weak var SinglePlayer: UIButton!
     
@@ -24,8 +25,6 @@ class TitleViewController: UIViewController {
     
     var playerA = "Afghanistan"
     var playerB = "Albania"
-
-    @IBOutlet weak var StrategicSoccerLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +33,11 @@ class TitleViewController: UIViewController {
         skView.ignoresSiblingOrder = true
         scene = GameScene(size: skView.bounds.size)
         SettingsButton.layer.cornerRadius = 10
-        PlayButton.layer.cornerRadius = 10
+        TwoPlayers.layer.cornerRadius = 10
         ChangePlayersButton.layer.cornerRadius = 10
         SinglePlayer.layer.cornerRadius = 10
         
+
         // Do any additional setup after loading the view.
     }
 
@@ -52,7 +52,7 @@ class TitleViewController: UIViewController {
         background = SKScene()
         //background.addChild(SKSpriteNode(texture: SKTexture(imageNamed: "Menu"), color: UIColor.clearColor(), size: skView.bounds.size))
         
-        let image = SKSpriteNode(imageNamed: "SoccerBackground")
+        let image = SKSpriteNode(imageNamed: "SoccerBackground2")
         background.addChild(image)
         image.position = CGPointMake(background.frame.midX, background.frame.midY)
         image.size = CGSizeMake(1,1)

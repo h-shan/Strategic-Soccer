@@ -66,6 +66,7 @@ class SettingsViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "SoccerBackground2")!)
         let modeButtons: Set<UIButton> = [ModeThreeMinutes,ModeTenPoints]
         modeButtonGroup = buttonGroup(buttons: modeButtons)
         let playerButtons: Set<UIButton> = [PlayerThree, PlayerFour]

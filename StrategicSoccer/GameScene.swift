@@ -247,6 +247,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
    
     override func update(currentTime: CFTimeInterval) {
+        print ("\(ball.position.x) \(ball.position.y)")
         if (!goalAccounted && 200/320 * midY! < ball.position.y && ball.position.y < 440/320 * midY!){
             if 0<ball.position.x && ball.position.x<50/568*midX!{
                 
