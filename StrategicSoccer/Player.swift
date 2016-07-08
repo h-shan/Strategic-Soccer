@@ -17,7 +17,7 @@ class Player: SKSpriteNode {
         super.init(texture: mTexture, color: UIColor.clearColor(), size: mTexture.size())
     }
     init(teamA: Bool, country: String, sender: GameScene){
-        let playerSize = CGSizeMake(120/568*sender.midX!, 120/320*sender.midY!)
+        let playerSize = CGSizeMake(120/568*sender.midX!, 120/568*sender.midX!)
         mTeamA = teamA
         mTexture = SKTexture(imageNamed: country)
         super.init(texture: mTexture, color: UIColor.clearColor(), size:playerSize)

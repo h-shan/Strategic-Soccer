@@ -12,7 +12,7 @@ class GoalPost: SKSpriteNode {
     
     init(sender: GameScene){
         let texture = SKTexture(imageNamed: "GoalPost")
-        let actualSize = CGSizeMake(80/568*sender.midX!, 5/320*sender.midY!)
+        let actualSize = CGSizeMake(80/568*sender.midX!, 5/568*sender.midX!)
         super.init(texture: texture, color: UIColor.redColor(), size: actualSize)
         
         self.name = "goalPost"

@@ -12,6 +12,7 @@ import SpriteKit
 class GameViewController: UIViewController {
     var scene: GameScene!
     var parent: TitleViewController!
+    var skView : SKView!
     @IBOutlet weak var PauseView: UIView!
     
     @IBAction func PauseClicked(sender: AnyObject) {
@@ -30,7 +31,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         scene.viewController = self
         // Configure the view.
-        let skView = self.view as! SKView
+        skView = self.view as! SKView
         
         /* Sprite Kit applies additional optimizations to improve rendering performance */
         skView.ignoresSiblingOrder = true
@@ -69,8 +70,12 @@ class GameViewController: UIViewController {
     }
     func backToTitle(){
         parent.scene = GameScene(size: parent.skView.bounds.size)
-        scene.pause
+ 
         navigationController?.popViewControllerAnimated(false)
         
+    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        skView.presentScene(nil)
     }
 }

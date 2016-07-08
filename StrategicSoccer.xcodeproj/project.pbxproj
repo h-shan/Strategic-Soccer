@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8932AD6B1D13BD0100F6AC84 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8932AD6A1D13BD0100F6AC84 /* Mode.swift */; };
+		893B41C21D2E221B00E191BE /* ScoreBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B41C11D2E221B00E191BE /* ScoreBoard.swift */; };
 		897E8D291D258E6000DCAC9F /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897E8D281D258E6000DCAC9F /* TableViewCell.swift */; };
 		89B97F811D20F5DB00588A21 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B97F801D20F5DB00588A21 /* TitleViewController.swift */; };
 		89B97F821D220CAC00588A21 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		8932AD6A1D13BD0100F6AC84 /* Mode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
+		893B41C11D2E221B00E191BE /* ScoreBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreBoard.swift; sourceTree = "<group>"; };
 		897E8D281D258E6000DCAC9F /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		89B97F801D20F5DB00588A21 /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		89B97F851D2221AE00588A21 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				DC83DD081D1089EA00E1C3F8 /* LaunchScreen.storyboard */,
 				DC83DD0B1D1089EA00E1C3F8 /* Info.plist */,
 				DCFEEDD31D14645600D4A259 /* Timer.swift */,
+				893B41C11D2E221B00E191BE /* ScoreBoard.swift */,
 			);
 			path = StrategicSoccer;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				89EFF7BD1D1208C3004DEA93 /* GoalPost.swift in Sources */,
 				89EEC9841D246D8A0075A85C /* ChangePlayerViewController.swift in Sources */,
 				DCFEEDD41D14645600D4A259 /* Timer.swift in Sources */,
+				893B41C21D2E221B00E191BE /* ScoreBoard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +471,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.msjhs.StrategicSoccer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -481,6 +486,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.msjhs.StrategicSoccer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
