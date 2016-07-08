@@ -75,27 +75,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     func didBeginContact(contact: SKPhysicsContact){
         let ballVelocity = ball.physicsBody!.velocity
+        print ("Contact")
 
         if contact.bodyA == borderBody && contact.bodyB == ball.physicsBody!{
             print(1)
-            if abs(ballVelocity.dx) < 5{
-                ball.physicsBody!.velocity = CGVectorMake(5,ball.physicsBody!.velocity.dy)
+            if 0 <= ballVelocity.dx && ballVelocity.dx < 10{
+                ball.physicsBody!.velocity = CGVectorMake(-10,ball.physicsBody!.velocity.dy)
             }
-            if abs(ballVelocity.dy) < 5{
-                ball.physicsBody!.velocity = CGVectorMake(ball.physicsBody!.velocity.dx,5)
+            if -10 < ballVelocity.dx && ballVelocity.dx < 0 {
+                ball.physicsBody!.velocity = CGVectorMake(10, ball.physicsBody!.velocity.dy)
             }
+            if 0 <= ballVelocity.dy && ballVelocity.dy < 10{
+                ball.physicsBody!.velocity = CGVectorMake(ball.physicsBody!.velocity.dx,-10)
+            }
+            if -10 < ballVelocity.dy && ballVelocity.dy < 0{
+                ball.physicsBody!.velocity = CGVectorMake(ball.physicsBody!.velocity.dx,10)
+            }
+            print("\(ball.physicsBody!.velocity.dx) \(ball.physicsBody!.velocity.dy)")
 
-        }
-        else if contact.bodyA == ball.physicsBody! && contact.bodyB == borderBody{
-            print(2)
-            if ballVelocity.dx < 1{
-                ball.physicsBody!.velocity = CGVectorMake(1,ball.physicsBody!.velocity.dy)
-            }
-            if ballVelocity.dy < 1{
-                ball.physicsBody!.velocity = CGVectorMake(ball.physicsBody!.velocity.dx,1)
-            }
-
-            
         }
     }
     override func didMoveToView(view: SKView) {
