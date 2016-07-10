@@ -98,7 +98,7 @@
                                 </constraints>
                                 <state key="normal" title="Two Players"/>
                                 <connections>
-                                    <segue destination="BV1-FR-VrT" kind="show" identifier="GameSegue" animates="NO" id="McN-dH-VRB"/>
+                                    <segue destination="BV1-FR-VrT" kind="show" identifier="TwoPlayerSegue" animates="NO" id="McN-dH-VRB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nrx-pZ-cFj">
@@ -192,7 +192,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paz-pH-qnx">
+                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paz-pH-qnx">
                                 <rect key="frame" x="5" y="5" width="50" height="50"/>
                                 <state key="normal" image="Pause"/>
                                 <connections>
@@ -278,9 +278,9 @@
                                     <constraint firstAttribute="width" constant="130" id="gHE-pw-1xl" userLabel="width = 130"/>
                                     <constraint firstAttribute="height" constant="35" id="uo4-9d-hfv"/>
                                 </constraints>
-                                <state key="normal" title="Three Minutes"/>
+                                <state key="normal" title="Timed"/>
                                 <connections>
-                                    <action selector="ModeThreeMinute:" destination="1lU-lZ-m6k" eventType="touchUpInside" id="GaK-m1-Cv1"/>
+                                    <action selector="ModeTimed:" destination="1lU-lZ-m6k" eventType="touchUpInside" id="Rmy-sZ-knf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xfv-5N-ocI">
@@ -290,9 +290,9 @@
                                     <constraint firstAttribute="height" constant="35" id="FPK-zK-VUI"/>
                                     <constraint firstAttribute="width" constant="130" id="bQT-pa-abp" userLabel="width = 130"/>
                                 </constraints>
-                                <state key="normal" title="Ten Points"/>
+                                <state key="normal" title="Points"/>
                                 <connections>
-                                    <action selector="ModeTenPoints:" destination="1lU-lZ-m6k" eventType="touchUpInside" id="0E1-ju-F3u"/>
+                                    <action selector="ModePoints:" destination="1lU-lZ-m6k" eventType="touchUpInside" id="V02-Az-4p9"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETTINGS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="In0-Pn-ZYX">
@@ -343,16 +343,36 @@
                                     <action selector="PlayerFour:" destination="1lU-lZ-m6k" eventType="touchUpInside" id="ah5-j1-ZCI"/>
                                 </connections>
                             </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aoE-XK-syY">
+                                <rect key="frame" x="34" y="110" width="250" height="100"/>
+                                <connections>
+                                    <segue destination="Aq4-5H-fVw" kind="embed" identifier="ChangeTime" id="3GG-Ix-mkY"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BWt-8S-NPU">
+                                <rect key="frame" x="284" y="110" width="250" height="100"/>
+                                <connections>
+                                    <segue destination="loy-k9-g4a" kind="embed" identifier="ChangePoint" id="v76-At-Qxj"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="x1V-wF-2Rs" firstAttribute="centerX" secondItem="Tce-jn-p8V" secondAttribute="centerX" constant="-60" id="5or-Fu-d7b"/>
                             <constraint firstItem="Cbl-8U-uwl" firstAttribute="centerX" secondItem="Tce-jn-p8V" secondAttribute="centerX" constant="80" id="6YS-0u-APQ"/>
                             <constraint firstItem="x1V-wF-2Rs" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="-50" id="AQK-rY-2ph"/>
+                            <constraint firstItem="BWt-8S-NPU" firstAttribute="leading" secondItem="Tce-jn-p8V" secondAttribute="centerX" id="Ael-Cn-qnu"/>
+                            <constraint firstItem="BWt-8S-NPU" firstAttribute="trailing" secondItem="Tce-jn-p8V" secondAttribute="centerX" constant="250" id="Ati-zq-0eW"/>
                             <constraint firstItem="66D-1E-wB0" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="top" constant="43.5" id="DoL-1w-rrs"/>
                             <constraint firstItem="xfv-5N-ocI" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="-50" id="EDq-pI-nJV"/>
                             <constraint firstItem="gdt-er-Qx4" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="50" id="H75-AG-DPv"/>
+                            <constraint firstItem="BWt-8S-NPU" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" id="P7t-u3-xty"/>
                             <constraint firstItem="jXJ-xE-DP7" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="-50" id="PmH-QQ-ahS"/>
+                            <constraint firstItem="aoE-XK-syY" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" id="R3g-Za-oQL"/>
+                            <constraint firstItem="aoE-XK-syY" firstAttribute="leading" secondItem="Tce-jn-p8V" secondAttribute="centerX" constant="-250" id="V7O-OE-UsG"/>
+                            <constraint firstItem="aoE-XK-syY" firstAttribute="top" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="-50" id="Xh6-GW-Tck"/>
+                            <constraint firstItem="aoE-XK-syY" firstAttribute="trailing" secondItem="Tce-jn-p8V" secondAttribute="centerX" id="Yq5-ft-kze"/>
                             <constraint firstItem="In0-Pn-ZYX" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="top" constant="30" id="eMh-9e-2bh"/>
+                            <constraint firstItem="BWt-8S-NPU" firstAttribute="top" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="-50" id="eiG-D1-69o"/>
                             <constraint firstItem="Cbl-8U-uwl" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="50" id="hK7-Aa-Ze5"/>
                             <constraint firstItem="rep-hV-DSt" firstAttribute="centerX" secondItem="Tce-jn-p8V" secondAttribute="leading" constant="100" id="n59-YW-tZN"/>
                             <constraint firstItem="66D-1E-wB0" firstAttribute="centerX" secondItem="Tce-jn-p8V" secondAttribute="leading" constant="93" id="qo1-hb-PB5"/>
@@ -366,10 +386,12 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="ModeTenPoints" destination="xfv-5N-ocI" id="8sx-m3-dGC"/>
-                        <outlet property="ModeThreeMinutes" destination="x1V-wF-2Rs" id="E6i-Yr-R0J"/>
+                        <outlet property="ModePoints" destination="xfv-5N-ocI" id="Xec-kd-M3S"/>
+                        <outlet property="ModeTimed" destination="x1V-wF-2Rs" id="Wan-sX-RsC"/>
                         <outlet property="PlayerFour" destination="Cbl-8U-uwl" id="Sti-g4-0Rb"/>
                         <outlet property="PlayerThree" destination="gdt-er-Qx4" id="gvo-aC-qaK"/>
+                        <outlet property="PointView" destination="BWt-8S-NPU" id="uT6-Tv-EhP"/>
+                        <outlet property="TimeView" destination="aoE-XK-syY" id="rco-Me-5I6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jmZ-J4-8VC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -457,12 +479,109 @@
             </objects>
             <point key="canvasLocation" x="1006" y="238.5"/>
         </scene>
+        <!--Change Point View Controller-->
+        <scene sceneID="pRI-DM-XSH">
+            <objects>
+                <viewController id="loy-k9-g4a" customClass="ChangePointViewController" customModule="StrategicSoccer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JMF-In-8f5"/>
+                        <viewControllerLayoutGuide type="bottom" id="KBc-1r-GE5"/>
+                    </layoutGuides>
+                    <view key="view" alpha="0.84999999999999998" contentMode="scaleToFill" id="Pfd-F3-8ju">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="100"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" alpha="0.69999999999999996" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zUJ-AB-ArL">
+                                <rect key="frame" x="0.0" y="0.0" width="250" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="loy-k9-g4a" id="8Y1-ao-dbW"/>
+                                    <outlet property="delegate" destination="loy-k9-g4a" id="Zic-fE-nQy"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxJ-nK-EHC" userLabel="ClosingX">
+                                <rect key="frame" x="230" y="0.0" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="MqD-cY-Pe2"/>
+                                    <constraint firstAttribute="width" constant="20" id="du5-fc-2F3"/>
+                                </constraints>
+                                <state key="normal" image="ClosingX"/>
+                                <connections>
+                                    <action selector="ClosingX:" destination="loy-k9-g4a" eventType="touchUpInside" id="HA1-Vh-nJu"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zUJ-AB-ArL" firstAttribute="top" secondItem="Pfd-F3-8ju" secondAttribute="top" id="XHx-cS-nZ5"/>
+                            <constraint firstItem="zUJ-AB-ArL" firstAttribute="centerX" secondItem="Pfd-F3-8ju" secondAttribute="centerX" id="b6b-e2-Cet"/>
+                            <constraint firstItem="zUJ-AB-ArL" firstAttribute="leading" secondItem="Pfd-F3-8ju" secondAttribute="leading" id="cyd-E6-Rne"/>
+                            <constraint firstItem="NxJ-nK-EHC" firstAttribute="trailing" secondItem="Pfd-F3-8ju" secondAttribute="trailing" id="itP-t2-Wdg"/>
+                            <constraint firstItem="NxJ-nK-EHC" firstAttribute="top" secondItem="Pfd-F3-8ju" secondAttribute="top" id="mWc-gi-leW"/>
+                            <constraint firstItem="zUJ-AB-ArL" firstAttribute="centerY" secondItem="Pfd-F3-8ju" secondAttribute="centerY" id="uIj-c8-icV"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="pointOptions" destination="zUJ-AB-ArL" id="V6H-b4-OXm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1I9-e0-If3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="397" y="821"/>
+        </scene>
+        <!--Change Time View Controller-->
+        <scene sceneID="Yw2-lE-BuU">
+            <objects>
+                <viewController id="Aq4-5H-fVw" customClass="ChangeTimeViewController" customModule="StrategicSoccer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" alpha="0.84999999999999998" contentMode="scaleToFill" id="X5W-NA-K6t">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="100"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hUk-WK-T5S">
+                                <rect key="frame" x="0.0" y="0.0" width="250" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Aq4-5H-fVw" id="vbJ-sL-Zzz"/>
+                                    <outlet property="delegate" destination="Aq4-5H-fVw" id="Lpf-N0-yt7"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IRf-ss-BVw" userLabel="ClosingX">
+                                <rect key="frame" x="230" y="0.0" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="1EN-3d-OF4"/>
+                                    <constraint firstAttribute="height" constant="20" id="tq0-Oc-aef"/>
+                                </constraints>
+                                <state key="normal" image="ClosingX"/>
+                                <connections>
+                                    <action selector="ClosingX:" destination="Aq4-5H-fVw" eventType="touchUpInside" id="EPb-6R-oLI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IRf-ss-BVw" firstAttribute="top" secondItem="X5W-NA-K6t" secondAttribute="top" id="0Lq-MI-vyU"/>
+                            <constraint firstItem="hUk-WK-T5S" firstAttribute="top" secondItem="X5W-NA-K6t" secondAttribute="top" id="1UM-Ja-Spc"/>
+                            <constraint firstItem="hUk-WK-T5S" firstAttribute="centerY" secondItem="X5W-NA-K6t" secondAttribute="centerY" id="8qD-fk-D1H"/>
+                            <constraint firstItem="hUk-WK-T5S" firstAttribute="leading" secondItem="X5W-NA-K6t" secondAttribute="leading" id="C77-jE-Jdo"/>
+                            <constraint firstItem="hUk-WK-T5S" firstAttribute="centerX" secondItem="X5W-NA-K6t" secondAttribute="centerX" id="OAP-fd-Q2E"/>
+                            <constraint firstItem="IRf-ss-BVw" firstAttribute="trailing" secondItem="X5W-NA-K6t" secondAttribute="trailing" id="r9p-ah-6o2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="timeOptions" destination="hUk-WK-T5S" id="aiu-Rh-G9L"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UIA-sE-ht8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="147" y="821"/>
+        </scene>
     </scenes>
     <resources>
         <image name="BackArrow" width="100" height="75"/>
+        <image name="ClosingX" width="36" height="36"/>
         <image name="Pause" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="W3R-gC-myb"/>
+        <segue reference="McN-dH-VRB"/>
     </inferredMetricsTieBreakers>
 </document>

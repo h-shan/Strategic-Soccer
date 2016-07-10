@@ -19,7 +19,7 @@ class GameViewController: UIViewController {
         PauseView.hidden = false
         
         scene.moveTimer!.pause()
-        if scene.mode == Mode.threeMinute{
+        if scene.mode.getType() == .timed{
             scene.gameTimer.pause()
         }
         scene.goalDelay.pause()
@@ -29,18 +29,26 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         scene.viewController = self
+    
         // Configure the view.
         skView = self.view as! SKView
-        
         /* Sprite Kit applies additional optimizations to improve rendering performance */
         skView.ignoresSiblingOrder = true
         
         /* Set the scale mode to scale to fit the window */
         scene.scaleMode = .AspectFill
         PauseView.hidden = true
+        
+        
+        
+    }
+    override func viewWillAppear(animated:Bool){
+        super.viewWillAppear(animated)
         skView.presentScene(scene)
     }
+    
 
     override func shouldAutorotate() -> Bool {
         return true

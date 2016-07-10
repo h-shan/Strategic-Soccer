@@ -46,7 +46,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let gameTimer = Timer()
     var clockBackground:SKShapeNode?
     let clock = SKLabelNode(fontNamed: "Georgia")
+    
+    var winPoints: Int?
+    var baseTime: NSTimeInterval?
     var gameTime: NSTimeInterval?
+    
+    
     var mode = Mode.threeMinute
     var playerOption = PlayerOption.three
     
@@ -75,24 +80,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     func didBeginContact(contact: SKPhysicsContact){
         let ballVelocity = ball.physicsBody!.velocity
-        print ("Contact")
-
         if contact.bodyA == borderBody && contact.bodyB == ball.physicsBody!{
-            print(1)
-            if 0 <= ballVelocity.dx && ballVelocity.dx < 10{
-                ball.physicsBody!.velocity = CGVectorMake(-10,ball.physicsBody!.velocity.dy)
+            if 0 <= ballVelocity.dx && ballVelocity.dx < 20{
+                ball.physicsBody!.velocity = CGVectorMake(20,ball.physicsBody!.velocity.dy)
             }
-            if -10 < ballVelocity.dx && ballVelocity.dx < 0 {
-                ball.physicsBody!.velocity = CGVectorMake(10, ball.physicsBody!.velocity.dy)
+            if -20 < ballVelocity.dx && ballVelocity.dx < 0 {
+                ball.physicsBody!.velocity = CGVectorMake(-20, ball.physicsBody!.velocity.dy)
             }
-            if 0 <= ballVelocity.dy && ballVelocity.dy < 10{
-                ball.physicsBody!.velocity = CGVectorMake(ball.physicsBody!.velocity.dx,-10)
+            if 0 <= ballVelocity.dy && ballVelocity.dy < 20{
+                ball.physicsBody!.velocity = CGVectorMake(ball.physicsBody!.velocity.dx,20)
             }
-            if -10 < ballVelocity.dy && ballVelocity.dy < 0{
-                ball.physicsBody!.velocity = CGVectorMake(ball.physicsBody!.velocity.dx,10)
+            if -20 < ballVelocity.dy && ballVelocity.dy < 0{
+                ball.physicsBody!.velocity = CGVectorMake(ball.physicsBody!.velocity.dx,-20)
             }
-            print("\(ball.physicsBody!.velocity.dx) \(ball.physicsBody!.velocity.dy)")
-
         }
     }
     override func didMoveToView(view: SKView) {
@@ -192,16 +192,47 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         moveTimer = Timer()
         moveTimer?.restart()
         
-        // set timer for threeMinute
+        if (mode.getType() == .points){
+            switch (mode){
+            case .threePoint:
+                winPoints = 3
+            case .fivePoint:
+                winPoints = 5
+            case .tenPoint:
+                winPoints = 10
+            case .twentyPoint:
+                winPoints = 20
+            default:
+                break
+            }
+
+        }
         
-        if (mode == Mode.threeMinute){
-            gameTime = 180
+        // set timer for timed
+        
+        if (mode.getType() == .timed){
+            switch(mode){
+            case .oneMinute:
+                baseTime = 60.5
+                break
+            case .threeMinute:
+                baseTime = 180.5
+                break
+            case .fiveMinute:
+                baseTime = 300.5
+                break
+            case .tenMinute:
+                baseTime = 600.5
+                break
+            default:
+                break
+            }
             // set up clock
             clockBackground = SKShapeNode(rect: CGRectMake(-50/568*midX!,-25/320*midY!,100/568*midX!,50/320*midY!), cornerRadius: 10)
             clockBackground!.fillColor = UIColor.blackColor()
             clockBackground!.strokeColor = UIColor.whiteColor()
             clockBackground!.alpha = 0.7
-            clock.text = gameTimer.secondsToString(gameTime!)
+            clock.text = gameTimer.secondsToString(baseTime!)
             clock.fontSize = 15
             clockBackground!.position = CGPoint(x: midX!, y: 7/4*midY!)
             clock.zPosition = 2
@@ -234,7 +265,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                 }
                 else{
-                    
                     for player in players!{
                         if player.mTeamA! == turnA && playerSelected == false{
                             if distance(player.position, point2: location) < player.size.width*1.5 {
@@ -245,13 +275,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                             }
                         }
                     }
-                
                 }
             }
-            
-            
-
-            
         }
     }
         
@@ -265,9 +290,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             selectedPlayer!.physicsBody!.velocity = CGVectorMake(xMovement, yMovement)
             playerSelected = false
             switchTurns()
-            
         }
-        
         playerSelected = false
     }
     
@@ -278,7 +301,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        //print ("\(ball.position.x) \(ball.position.y)")
         if (!goalAccounted && 200/320 * midY! < ball.position.y && ball.position.y < 440/320 * midY!){
             if 0<ball.position.x && ball.position.x<50/568*midX!{
                 
@@ -298,7 +320,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if(moveTimer!.getElapsedTime() > 5){
             switchTurns()
         }
-        if !gameEnded{
+        if mode.getType() == .timed && !gameEnded{
             showTime()
         }
         if (goalDelay.getElapsedTime()>2){
@@ -307,7 +329,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score.text = ""
             setDynamicStates(true)
             moveTimer?.restart()
-            if mode == Mode.threeMinute{
+            if mode.getType() == .timed{
                 gameTimer.start()
             }
     
@@ -344,8 +366,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setDynamicStates(false)
         scoreBackground.hidden = false
 
-        if mode == Mode.tenPoints{
-            if scoreA == 10 || scoreB == 10 {
+        if mode.getType() == .points{
+            if scoreA == winPoints! || scoreB == winPoints! {
                 endGame()
             }
             else{
@@ -357,7 +379,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score.text = String.localizedStringWithFormat("%d - %d", scoreA, scoreB)
         }
 
-        if mode == Mode.threeMinute{
+        if mode.getType() == .timed{
             gameTimer.pause()
         }
         if singlePlayer == true{
@@ -390,7 +412,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func showTime(){
-        gameTime = 180.1 - gameTimer.getElapsedTime()
+        gameTime = baseTime! - gameTimer.getElapsedTime()
         if (gameTime<=0){
             clock.text = "0:00"
             gameTimer.pause()
@@ -420,7 +442,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else{
             score.text = "It's a Tie!"
         }
-                _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(goBackToTitle), userInfo: nil, repeats: false)
+        _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(goBackToTitle), userInfo: nil, repeats: false)
         gameTimer.elapsedTime = 0
     }
     func goBackToTitle(){
@@ -458,7 +480,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func restart(){
         scoreA = 0
         scoreB = 0
-        if mode == Mode.threeMinute{
+        if mode.getType() == .timed{
             gameTimer.restart()
         }
         setPosition()

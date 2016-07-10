@@ -33,17 +33,23 @@ class buttonGroup{
     }
 }
 class SettingsViewController: UIViewController {
+    let timed: [String] = ["OneMinute","ThreeMinute","FiveMinute","TenMinute"]
+    let points: [String] = ["ThreePoint","FivePoint","TenPoint","TwentyPoint"]
     var modeButtonGroup: buttonGroup!
     var playerButtonGroup: buttonGroup!
     var allButtons: [UIButton]!
-    var defaultMode: Mode?
+    var defaultMode: Mode!
     var defaultPlayers: PlayerOption?
     var parent: TitleViewController!
+    var timeVC: ChangeTimeViewController!
+    var pointVC: ChangePointViewController!
     
+    @IBOutlet weak var TimeView: UIView!
+    @IBOutlet weak var PointView: UIView!
     @IBOutlet weak var PlayerFour: UIButton!
     @IBOutlet weak var PlayerThree: UIButton!
-    @IBOutlet weak var ModeTenPoints: UIButton!
-    @IBOutlet weak var ModeThreeMinutes: UIButton!
+    @IBOutlet weak var ModePoints: UIButton!
+    @IBOutlet weak var ModeTimed: UIButton!
     @IBAction func PlayerFour(sender: UIButton) {
         playerButtonGroup.selectButton(sender)
         defaultPlayers = PlayerOption.four
@@ -55,33 +61,34 @@ class SettingsViewController: UIViewController {
     @IBAction func BackButton(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(false)
     }
-    @IBAction func ModeTenPoints(sender: UIButton) {
+    @IBAction func ModePoints(sender: UIButton) {
         modeButtonGroup.selectButton(sender)
-        defaultMode = Mode.tenPoints
+        defaultMode = Mode.tenPoint
+        PointView.hidden = false
+        TimeView.hidden = true
     }
-    @IBAction func ModeThreeMinute(sender: UIButton) {
+    @IBAction func ModeTimed(sender: UIButton) {
         modeButtonGroup.selectButton(sender)
         defaultMode = Mode.threeMinute
-
+        TimeView.hidden = false
+        PointView.hidden = true
+        
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        TimeView.hidden = true
+        PointView.hidden = true
+        defaultMode = parent.defaultMode
+        
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "SoccerBackground2")!)
-        let modeButtons: Set<UIButton> = [ModeThreeMinutes,ModeTenPoints]
+        let modeButtons: Set<UIButton> = [ModeTimed,ModePoints]
         modeButtonGroup = buttonGroup(buttons: modeButtons)
         let playerButtons: Set<UIButton> = [PlayerThree, PlayerFour]
         playerButtonGroup = buttonGroup(buttons: playerButtons)
-        allButtons = [PlayerFour,PlayerThree,ModeTenPoints,ModeThreeMinutes]
+        allButtons = [PlayerFour,PlayerThree,ModePoints,ModeTimed]
         for button in allButtons{
             button.layer.cornerRadius = 10
-        }
-        switch (defaultMode!){
-            case Mode.tenPoints:
-                modeButtonGroup.selectButton(ModeTenPoints)
-                break
-            case Mode.threeMinute:
-                modeButtonGroup.selectButton(ModeThreeMinutes)
-                break
         }
         switch (defaultPlayers!){
             case PlayerOption.three:
@@ -101,19 +108,22 @@ class SettingsViewController: UIViewController {
     }
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        parent.defaultMode = defaultMode!
+        
+        parent.defaultMode = defaultMode
         parent.defaultPlayers = defaultPlayers!
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "ChangeTime"{
+            timeVC = segue.destinationViewController as! ChangeTimeViewController
+            timeVC.parent = self
+        }
+        if segue.identifier == "ChangePoint"{
+            pointVC = segue.destinationViewController as! ChangePointViewController
+            pointVC.parent = self
+        }
+    
     }
-    */
 
 }

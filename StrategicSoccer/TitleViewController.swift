@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 class TitleViewController: UIViewController {
-    var background:SKScene!
+    var background = SKScene()
     var scene: GameScene!
     
     @IBOutlet weak var TwoPlayers: UIButton!
@@ -49,8 +49,6 @@ class TitleViewController: UIViewController {
     override func viewWillAppear(animated: Bool){
         
         super.viewWillAppear(animated)
-        background = SKScene()
-        //background.addChild(SKSpriteNode(texture: SKTexture(imageNamed: "Menu"), color: UIColor.clearColor(), size: skView.bounds.size))
         
         let image = SKSpriteNode(imageNamed: "SoccerBackground2")
         background.addChild(image)
@@ -70,7 +68,7 @@ class TitleViewController: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == "GameSegue"{
+        if segue.identifier == "TwoPlayerSegue"{
             let destinationVC = segue.destinationViewController as! GameViewController
             scene.mode = defaultMode
             scene.playerOption = defaultPlayers
@@ -82,7 +80,7 @@ class TitleViewController: UIViewController {
         }
         if segue.identifier == "SettingsSegue"{
             let destinationVC = segue.destinationViewController as! SettingsViewController
-            destinationVC.defaultMode = defaultMode
+            destinationVC.defaultMode = self.defaultMode
             destinationVC.defaultPlayers = defaultPlayers
             destinationVC.parent = self
         }

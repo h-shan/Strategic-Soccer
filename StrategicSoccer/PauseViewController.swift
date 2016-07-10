@@ -34,7 +34,7 @@ class PauseViewController: UIViewController {
         parent.PauseView.hidden = true
         scene.paused = false
         scene.moveTimer?.start()
-        if scene.mode == Mode.threeMinute && scene.goalDelay.elapsedTime == 0{
+        if scene.mode.getType() == .timed && scene.goalDelay.elapsedTime == 0{
             scene.gameTimer.start()
         }
         if scene.goalDelay.getElapsedTime() > 0{
