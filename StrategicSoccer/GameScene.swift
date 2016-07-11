@@ -54,8 +54,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var mode = Mode.threeMinute
     var playerOption = PlayerOption.three
-    
-    let pause = SKSpriteNode(texture: SKTexture(imageNamed: "Pause"), color: UIColor.clearColor(), size: SKTexture(imageNamed: "Pause").size())
+    var goalPostA1: GoalPost!
+    var goalPostA2: GoalPost!
+    var goalPostB1: GoalPost!
+    var goalPostB2: GoalPost!
     
     var scoreBoard: ScoreBoard!
 
@@ -73,6 +75,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override init(size:CGSize){
         super.init(size: size)
         scoreBoard = ScoreBoard(sender: self)
+        
         
     }
     required init?(coder aDecoder: NSCoder) {
@@ -145,10 +148,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // set goal posts in place
         
-        let goalPostA1 = GoalPost(sender: self)
-        let goalPostA2 = GoalPost(sender: self)
-        let goalPostB1 = GoalPost(sender: self)
-        let goalPostB2 = GoalPost(sender: self)
+        goalPostA1 = GoalPost(sender: self)
+        goalPostA2 = GoalPost(sender: self)
+        goalPostB1 = GoalPost(sender: self)
+        goalPostB2 = GoalPost(sender: self)
         goalPostA1.position = CGPoint(x: 50/568*midX!, y: midY!*440/320)
         goalPostA2.position = CGPoint(x: 50/568*midX!, y: midY!*200/320)
         goalPostB1.position = CGPoint(x: 1086/568*midX!, y: midY!*440/320)
@@ -259,7 +262,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if !singlePlayer || (singlePlayer && turnA){
                 if (node is Player){
                     let touchedPlayer = (node as! Player)
-                    if touchedPlayer.mTeamA! == turnA {
+                    if touchedPlayer.mTeamA == turnA {
                         selectedPlayer = touchedPlayer
                         playerSelected = true
                         startPosition = location
@@ -269,7 +272,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
                 else{
                     for player in players!{
-                        if player.mTeamA! == turnA && playerSelected == false{
+                        if player.mTeamA == turnA && playerSelected == false{
                             if distance(player.position, point2: location) < player.size.width*1.5 {
                                 selectedPlayer = player
                                 playerSelected = true
@@ -334,6 +337,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             moveTimer?.restart()
             if mode.getType() == .timed{
                 gameTimer.start()
+            }
+            for child in children{
+                if child.name == "yellow" || child.name == "blue"{
+                    child.removeFromParent()
+                }
             }
     
             setPosition()
@@ -500,14 +508,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreBoard.label.text = "0    0"
     }
     func computerMove(cAggro: Int, cDef: Int){
-        if moveTimer?.getElapsedTime()>1.5{
+        if (moveTimer?.getElapsedTime())!%0.2<0.1 && (moveTimer?.getElapsedTime())! > 0.4{
+            for player in players!{
+                if !player.mTeamA{
+                    if detectStraightShot(player){
+                        switchTurns()
+                        return
+                    }
+                }
+            }
+        }
+        if moveTimer?.getElapsedTime()>2.5{
+
             if firstTurn == true{
                 firstTurn = false
                 firstMove()
             }
             else{
             let random = CGFloat(arc4random_uniform(30))
-            let ballMultiplier = (CGFloat(arc4random_uniform(30))+85)/100
+            let ballMultiplier:CGFloat = 0.5
             let chosePlayer:UInt32
             if playerOption == PlayerOption.three{
                 chosePlayer = arc4random_uniform(3)+3
@@ -518,7 +537,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             var closestPlayer:Player = playerB1
             closestPlayer = players![Int(chosePlayer)]
             
-            let ballFuturePosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*ballMultiplier, ball.position.y + ball.physicsBody!.velocity.dy*ballMultiplier)
+            var ballFuturePosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*ballMultiplier, ball.position.y + ball.physicsBody!.velocity.dy*ballMultiplier)
+                if ballFuturePosition.x < 0 {
+                    ballFuturePosition.x = -ballFuturePosition.x
+                }
+                else if ballFuturePosition.x > frame.maxX{
+                    ballFuturePosition.x = 2*frame.maxX-ballFuturePosition.x
+                }
+                if ballFuturePosition.y < 0 {
+                    ballFuturePosition.y = -ballFuturePosition.y
+                }
+                else if ballFuturePosition.y > frame.maxY{
+                    ballFuturePosition.y = 2*frame.maxY-ballFuturePosition.y
+                }
+                
             let playerVelocity = CGVectorMake(2*ballMultiplier*(ballFuturePosition.x-closestPlayer.position.x)+random, 2*ballMultiplier*(ballFuturePosition.y - closestPlayer.position.y)+random)
             closestPlayer.physicsBody!.velocity = playerVelocity
             }
@@ -543,5 +575,97 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 break
             }
         }
+        
+    }
+    func detectStraightShot(player: Player) -> Bool{
+        var multiplier:CGFloat = 0.3
+        var buffed = false
+        LOOP: while (multiplier <= 0.6){
+            let predictedBallPosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*multiplier, ball.position.y + ball.physicsBody!.velocity.dy*multiplier)
+            let toPointVelocity = CGVectorMake((predictedBallPosition.x-player.position.x),(predictedBallPosition.y - player.position.y))
+            let angle = atan(toPointVelocity.dy/toPointVelocity.dx)
+            let buffer = CGFloat(ball.radius) + player.playerSize.width*5/12
+            let predictedPlayerPosition = CGPointMake(predictedBallPosition.x + cos(angle)*buffer,predictedBallPosition.y + sin(angle)*buffer)
+            var straightShotVelocity = CGVectorMake((predictedPlayerPosition.x-player.position.x)/multiplier, (predictedPlayerPosition.y-player.position.y)/multiplier)
+            if straightShotVelocity.dx > 0 {
+                return false
+            }
+            if abs(ball.physicsBody!.velocity.dy) < 100 && straightShotVelocity.dx > -200{
+                straightShotVelocity.dy *= -200/straightShotVelocity.dx
+                straightShotVelocity.dx = -200
+                buffed = true
+            }
+
+            
+            let xDistance = player.position.x - 50/568*midX!
+            if xDistance < 0 {
+                return false
+            }
+            if ball.position.x < 50/568*midX!{
+                multiplier+=0.1
+                continue LOOP
+            }
+            let finalPositionY = -straightShotVelocity.dy*(xDistance/straightShotVelocity.dx) + player.position.y
+            
+            var xPosition:CGFloat = player.position.x
+            var yPosition:CGFloat = player.position.y
+            if goalPostA1.position.y > finalPositionY && finalPositionY > goalPostA2.position.y{
+                // detectObstacles
+                
+                var objectAtPoint: SKPhysicsBody?
+                while xPosition > 50/568*midX!{
+                    xPosition -= 2
+                    yPosition -= straightShotVelocity.dy/straightShotVelocity.dx*2
+                    objectAtPoint = physicsWorld.bodyAtPoint(CGPointMake(xPosition, yPosition))
+                    if objectAtPoint != nil && objectAtPoint != player.physicsBody! && objectAtPoint != ball.physicsBody!{
+                        break
+                    }
+                }
+                if objectAtPoint == nil{
+                    if straightShotVelocity.dx < -500{
+                        straightShotVelocity.dy *= -500/straightShotVelocity.dx
+                        straightShotVelocity.dx = -500
+                    }
+
+                    player.physicsBody!.velocity = straightShotVelocity
+                    let blue = SKSpriteNode(imageNamed: "PlayerA")
+                    blue.size = CGSizeMake(10,10)
+                    if buffed{
+                        blue.size = CGSizeMake(20,20)
+                    }
+                    print(straightShotVelocity.dx)
+                    blue.position = player.position
+                    blue.zPosition = 2
+                    blue.name = "blue"
+                    addChild(blue)
+                    let yellow = SKSpriteNode(imageNamed: "PlayerB")
+                    yellow.name = "yellow"
+                    yellow.size = CGSizeMake(10,10)
+                    yellow.position = predictedPlayerPosition
+                    yellow.zPosition = 2
+                    addChild(yellow)
+                    return true
+                }
+            }
+            multiplier += 0.1
+        }
+        return false
+    }
+    func detectBarriers(velocity: CGVector) -> Int{
+        let startingPoint = ball.position
+        var xPosition = (startingPoint.x)
+        var yPosition = (startingPoint.y)
+        var detectedBarriers = [SKPhysicsBody]()
+        var objectAtPoint: SKPhysicsBody?
+        detectedBarriers.append(ball.physicsBody!)
+        while (xPosition > 0 && xPosition < frame.maxX && yPosition > 0 && yPosition < frame.maxY){
+            xPosition -= 2
+            yPosition -= 2*velocity.dy/velocity.dx
+            objectAtPoint = physicsWorld.bodyAtPoint(CGPointMake(xPosition, yPosition))
+            if objectAtPoint != nil && !detectedBarriers.contains(objectAtPoint!){
+                detectedBarriers.append(objectAtPoint!)
+            }
+        }
+        return detectedBarriers.count-1
     }
 }

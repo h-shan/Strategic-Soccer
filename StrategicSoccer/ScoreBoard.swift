@@ -20,7 +20,7 @@ class ScoreBoard: SKShapeNode{
         self.fillColor = UIColor.blackColor()
         self.strokeColor = UIColor.whiteColor()
         self.alpha = 0.7
-        label.text = "0  0"
+        label.text = "0    0"
         label.color = UIColor.whiteColor()
         label.fontSize = 25
         label.zPosition = 2

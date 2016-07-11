@@ -44,8 +44,7 @@ class GameViewController: UIViewController {
     override func viewWillAppear(animated:Bool){
         super.viewWillAppear(animated)
         skView.presentScene(scene)
-        skView.showsFPS = true
-        
+
     }
     
 
