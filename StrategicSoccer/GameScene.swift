@@ -97,6 +97,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
+        
         let background = SKSpriteNode(imageNamed: "SoccerField")
         midX = CGRectGetMidX(self.frame)
         midY = CGRectGetMidY(self.frame)
@@ -117,7 +118,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         background.position = CGPoint(x:midX!, y:midY!)
         background.size = self.frame.size
-        background.zPosition=1
+        background.zPosition=1.1
         addChild(background)
         scoreBackground.hidden = true
         // set rectangular border around screen
@@ -176,6 +177,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         for node in players!{
+            node.zPosition = 2
             self.addChild(node)
         }
         
@@ -183,6 +185,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         ball = Ball(scene: self)
+        ball.zPosition = 2
         setPosition()
         self.addChild(ball)
         ball.physicsBody!.contactTestBitMask = ball.physicsBody!.collisionBitMask
@@ -446,6 +449,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameTimer.elapsedTime = 0
     }
     func goBackToTitle(){
+        
         viewController.backToTitle()
     }
     

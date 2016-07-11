@@ -12,12 +12,12 @@ import SpriteKit
 class GameViewController: UIViewController {
     var scene: GameScene!
     var parent: TitleViewController!
-    var skView : SKView!
-    @IBOutlet weak var PauseView: UIView!
     
+    @IBOutlet weak var PauseView: UIView!
+    @IBOutlet weak var skView: SKView!
+    @IBOutlet weak var PauseButton: UIButton!
     @IBAction func PauseClicked(sender: AnyObject) {
         PauseView.hidden = false
-        
         scene.moveTimer!.pause()
         if scene.mode.getType() == .timed{
             scene.gameTimer.pause()
@@ -29,12 +29,9 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         scene.viewController = self
-    
-        // Configure the view.
-        skView = self.view as! SKView
-        /* Sprite Kit applies additional optimizations to improve rendering performance */
+        
         skView.ignoresSiblingOrder = true
         
         /* Set the scale mode to scale to fit the window */
@@ -47,6 +44,8 @@ class GameViewController: UIViewController {
     override func viewWillAppear(animated:Bool){
         super.viewWillAppear(animated)
         skView.presentScene(scene)
+        skView.showsFPS = true
+        
     }
     
 
@@ -78,12 +77,20 @@ class GameViewController: UIViewController {
     }
     func backToTitle(){
         parent.scene = GameScene(size: parent.skView.bounds.size)
- 
         navigationController?.popViewControllerAnimated(false)
-        
+        self.removeFromParentViewController()
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        let snapShot = UIImageView(image: image)
+        view.addSubview(snapShot)
+        skView.presentScene(nil)
+        skView.removeFromSuperview()
+        snapShot.removeFromSuperview()
+        view = nil
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        skView.presentScene(nil)
     }
 }

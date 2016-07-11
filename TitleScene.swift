@@ -22,7 +22,7 @@ class TitleScene: SKScene {
         
         self.addChild(titleLabel)
         
-        let tenPoints = MenuButton(label: "First to 10", texture: SKTexture(imageNamed: "ButtonA"))
+        let tenPoints = MenuButton(label: "First to 10", texture: SKTexture(image: UIImage(imageLiteral:"ButtonA")))
         tenPoints.label.fontSize = 25
         tenPoints.label.fontColor=UIColor.whiteColor()
         tenPoints.name = "tenPoints"
@@ -31,7 +31,7 @@ class TitleScene: SKScene {
         
         self.addChild(tenPoints)
         
-        let threeMinutes = MenuButton(label: "Three Minutes", texture: SKTexture(imageNamed:"ButtonA"))
+        let threeMinutes = MenuButton(label: "Three Minutes", texture: SKTexture(image: UIImage(imageLiteral:"ButtonA")))
         threeMinutes.label.fontSize = 25
         threeMinutes.name = "threeMinutes"
         threeMinutes.zPosition = 2
