@@ -24,7 +24,6 @@
 		89EFF7C11D122FBA004DEA93 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EFF7C01D122FBA004DEA93 /* Ball.swift */; };
 		89F6A2BE1D30CD610090618E /* ChangeTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F6A2BD1D30CD610090618E /* ChangeTimeViewController.swift */; };
 		89F6A2C01D30DFDE0090618E /* ChangePointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F6A2BF1D30DFDE0090618E /* ChangePointViewController.swift */; };
-		DC83CF2D1D10A85C0044D0E1 /* TitleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83CF2C1D10A85C0044D0E1 /* TitleScene.swift */; };
 		DC83CF2F1D10CB780044D0E1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83CF2E1D10CB780044D0E1 /* Player.swift */; };
 		DC83DCFC1D1089EA00E1C3F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DCFB1D1089EA00E1C3F8 /* AppDelegate.swift */; };
 		DC83DCFE1D1089EA00E1C3F8 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = DC83DCFD1D1089EA00E1C3F8 /* GameScene.sks */; };
@@ -70,7 +69,6 @@
 		89EFF7C01D122FBA004DEA93 /* Ball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
 		89F6A2BD1D30CD610090618E /* ChangeTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeTimeViewController.swift; sourceTree = "<group>"; };
 		89F6A2BF1D30DFDE0090618E /* ChangePointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePointViewController.swift; sourceTree = "<group>"; };
-		DC83CF2C1D10A85C0044D0E1 /* TitleScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TitleScene.swift; path = ../TitleScene.swift; sourceTree = "<group>"; };
 		DC83CF2E1D10CB780044D0E1 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		DC83DCF81D1089EA00E1C3F8 /* StrategicSoccer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StrategicSoccer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC83DCFB1D1089EA00E1C3F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -138,7 +136,6 @@
 		DC83DCFA1D1089EA00E1C3F8 /* StrategicSoccer */ = {
 			isa = PBXGroup;
 			children = (
-				DC83CF2C1D10A85C0044D0E1 /* TitleScene.swift */,
 				89EE42CC1D1A646E0093538A /* MenuButton.swift */,
 				DC83DCFB1D1089EA00E1C3F8 /* AppDelegate.swift */,
 				DC83DCFD1D1089EA00E1C3F8 /* GameScene.sks */,
@@ -152,11 +149,11 @@
 				89F6A2BD1D30CD610090618E /* ChangeTimeViewController.swift */,
 				89F6A2BF1D30DFDE0090618E /* ChangePointViewController.swift */,
 				89EEC9831D246D8A0075A85C /* ChangePlayerViewController.swift */,
+				DC83DD061D1089EA00E1C3F8 /* Assets.xcassets */,
 				897E8D281D258E6000DCAC9F /* TableViewCell.swift */,
 				89EEC9811D234CCF0075A85C /* SettingsViewController.swift */,
 				89B97F801D20F5DB00588A21 /* TitleViewController.swift */,
 				89B97F851D2221AE00588A21 /* PauseViewController.swift */,
-				DC83DD061D1089EA00E1C3F8 /* Assets.xcassets */,
 				DC83DD081D1089EA00E1C3F8 /* LaunchScreen.storyboard */,
 				DC83DD0B1D1089EA00E1C3F8 /* Info.plist */,
 				DCFEEDD31D14645600D4A259 /* Timer.swift */,
@@ -329,7 +326,6 @@
 				89B97F811D20F5DB00588A21 /* TitleViewController.swift in Sources */,
 				89B97F821D220CAC00588A21 /* GameScene.swift in Sources */,
 				DC83CF2F1D10CB780044D0E1 /* Player.swift in Sources */,
-				DC83CF2D1D10A85C0044D0E1 /* TitleScene.swift in Sources */,
 				89B97F861D2221AE00588A21 /* PauseViewController.swift in Sources */,
 				89EFF7C11D122FBA004DEA93 /* Ball.swift in Sources */,
 				892182951D35B60100A2F274 /* MiniGoal.swift in Sources */,

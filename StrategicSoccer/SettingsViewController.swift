@@ -81,7 +81,9 @@ class SettingsViewController: UIViewController {
         PointView.hidden = true
         defaultMode = parent.defaultMode
         
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "SoccerBackground2")!)
+        let backgroundImage = UIImageView(frame: UIScreen.mainScreen().bounds)
+        backgroundImage.image = UIImage(named: "SoccerBackground2")
+        self.view.insertSubview(backgroundImage, atIndex: 0)
         let modeButtons: Set<UIButton> = [ModeTimed,ModePoints]
         modeButtonGroup = buttonGroup(buttons: modeButtons)
         let playerButtons: Set<UIButton> = [PlayerThree, PlayerFour]

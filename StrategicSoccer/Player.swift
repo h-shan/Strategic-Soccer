@@ -70,12 +70,12 @@ class Player: SKSpriteNode {
     }
     
     func changeColorBright(){
-        self.runAction(SKAction.colorizeWithColor(UIColor.grayColor(), colorBlendFactor: 0.7, duration: 0.00001))
+        self.runAction(SKAction.colorizeWithColor(UIColor.grayColor(), colorBlendFactor: 0.9, duration: 0.00001))
         
     }
     
     func changeColorDark(){
-        self.runAction(SKAction.colorizeWithColor(UIColor.grayColor(), colorBlendFactor: -0.7, duration: 0.00001))
+        self.runAction(SKAction.colorizeWithColor(UIColor.grayColor(), colorBlendFactor: -0.9, duration: 0.00001))
         
     }
     

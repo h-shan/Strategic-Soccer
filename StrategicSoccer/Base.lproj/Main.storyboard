@@ -546,6 +546,10 @@
         <scene sceneID="Yw2-lE-BuU">
             <objects>
                 <viewController id="Aq4-5H-fVw" customClass="ChangeTimeViewController" customModule="StrategicSoccer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kxw-6W-kG9"/>
+                        <viewControllerLayoutGuide type="bottom" id="QGR-ZE-pk1"/>
+                    </layoutGuides>
                     <view key="view" alpha="0.84999999999999998" contentMode="scaleToFill" id="X5W-NA-K6t">
                         <rect key="frame" x="0.0" y="0.0" width="250" height="100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
