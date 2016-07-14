@@ -147,15 +147,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(rightSoccerNet)
         
         // set goal posts in place
-        
-        goalPostA1 = GoalPost(sender: self)
-        goalPostA2 = GoalPost(sender: self)
-        goalPostB1 = GoalPost(sender: self)
-        goalPostB2 = GoalPost(sender: self)
-        goalPostA1.position = CGPoint(x: 50/568*midX!, y: midY!*440/320)
-        goalPostA2.position = CGPoint(x: 50/568*midX!, y: midY!*200/320)
-        goalPostB1.position = CGPoint(x: 1086/568*midX!, y: midY!*440/320)
-        goalPostB2.position = CGPoint(x: 1086/568*midX!, y: midY!*200/320)
+        let actualSize = CGSizeMake(80/568*self.frame.midX, 5/568*self.frame.midX)
+        goalPostA1 = GoalPost(sender: self, actualSize: actualSize)
+        goalPostA2 = GoalPost(sender: self, actualSize: actualSize)
+        goalPostB1 = GoalPost(sender: self, actualSize: actualSize)
+        goalPostB2 = GoalPost(sender: self, actualSize: actualSize)
+        goalPostA1.position = CGPoint(x: 40/568*midX!, y: midY!*440/320)
+        goalPostA2.position = CGPoint(x: 40/568*midX!, y: midY!*200/320)
+        goalPostB1.position = CGPoint(x: 1096/568*midX!, y: midY!*440/320)
+        goalPostB2.position = CGPoint(x: 1096/568*midX!, y: midY!*200/320)
         self.addChild(goalPostA1)
         self.addChild(goalPostA2)
         self.addChild(goalPostB1)
@@ -651,14 +651,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         return false
     }
-    func detectBarriers(velocity: CGVector) -> Int{
+    func detectBarriers(velocity: CGVector, xLimit: CGFloat) -> Int{
         let startingPoint = ball.position
         var xPosition = (startingPoint.x)
         var yPosition = (startingPoint.y)
         var detectedBarriers = [SKPhysicsBody]()
         var objectAtPoint: SKPhysicsBody?
         detectedBarriers.append(ball.physicsBody!)
-        while (xPosition > 0 && xPosition < frame.maxX && yPosition > 0 && yPosition < frame.maxY){
+        while (xPosition > xLimit && xPosition < frame.maxX && yPosition > 0 && yPosition < frame.maxY){
             xPosition -= 2
             yPosition -= 2*velocity.dy/velocity.dx
             objectAtPoint = physicsWorld.bodyAtPoint(CGPointMake(xPosition, yPosition))

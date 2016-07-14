@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		892182911D34C67000A2F274 /* MiniGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892182901D34C67000A2F274 /* MiniGameViewController.swift */; };
+		892182931D359BCF00A2F274 /* Game1Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892182921D359BCF00A2F274 /* Game1Scene.swift */; };
+		892182951D35B60100A2F274 /* MiniGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892182941D35B60100A2F274 /* MiniGoal.swift */; };
 		8932AD6B1D13BD0100F6AC84 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8932AD6A1D13BD0100F6AC84 /* Mode.swift */; };
 		893B41C21D2E221B00E191BE /* ScoreBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B41C11D2E221B00E191BE /* ScoreBoard.swift */; };
 		897E8D291D258E6000DCAC9F /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897E8D281D258E6000DCAC9F /* TableViewCell.swift */; };
@@ -52,6 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		892182901D34C67000A2F274 /* MiniGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniGameViewController.swift; sourceTree = "<group>"; };
+		892182921D359BCF00A2F274 /* Game1Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game1Scene.swift; sourceTree = "<group>"; };
+		892182941D35B60100A2F274 /* MiniGoal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniGoal.swift; sourceTree = "<group>"; };
 		8932AD6A1D13BD0100F6AC84 /* Mode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		893B41C11D2E221B00E191BE /* ScoreBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreBoard.swift; sourceTree = "<group>"; };
 		897E8D281D258E6000DCAC9F /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
@@ -138,6 +144,7 @@
 				DC83DCFD1D1089EA00E1C3F8 /* GameScene.sks */,
 				DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */,
 				8932AD6A1D13BD0100F6AC84 /* Mode.swift */,
+				892182901D34C67000A2F274 /* MiniGameViewController.swift */,
 				89EFF7C01D122FBA004DEA93 /* Ball.swift */,
 				89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */,
 				DC83DD011D1089EA00E1C3F8 /* GameViewController.swift */,
@@ -150,11 +157,13 @@
 				89B97F801D20F5DB00588A21 /* TitleViewController.swift */,
 				89B97F851D2221AE00588A21 /* PauseViewController.swift */,
 				DC83DD061D1089EA00E1C3F8 /* Assets.xcassets */,
-				DC83CF2E1D10CB780044D0E1 /* Player.swift */,
 				DC83DD081D1089EA00E1C3F8 /* LaunchScreen.storyboard */,
 				DC83DD0B1D1089EA00E1C3F8 /* Info.plist */,
 				DCFEEDD31D14645600D4A259 /* Timer.swift */,
 				893B41C11D2E221B00E191BE /* ScoreBoard.swift */,
+				DC83CF2E1D10CB780044D0E1 /* Player.swift */,
+				892182921D359BCF00A2F274 /* Game1Scene.swift */,
+				892182941D35B60100A2F274 /* MiniGoal.swift */,
 			);
 			path = StrategicSoccer;
 			sourceTree = "<group>";
@@ -310,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				892182931D359BCF00A2F274 /* Game1Scene.swift in Sources */,
 				897E8D291D258E6000DCAC9F /* TableViewCell.swift in Sources */,
 				DC83DD021D1089EA00E1C3F8 /* GameViewController.swift in Sources */,
 				89EE42CD1D1A646E0093538A /* MenuButton.swift in Sources */,
@@ -322,10 +332,12 @@
 				DC83CF2D1D10A85C0044D0E1 /* TitleScene.swift in Sources */,
 				89B97F861D2221AE00588A21 /* PauseViewController.swift in Sources */,
 				89EFF7C11D122FBA004DEA93 /* Ball.swift in Sources */,
+				892182951D35B60100A2F274 /* MiniGoal.swift in Sources */,
 				89EEC9821D234CCF0075A85C /* SettingsViewController.swift in Sources */,
 				89EFF7BD1D1208C3004DEA93 /* GoalPost.swift in Sources */,
 				89EEC9841D246D8A0075A85C /* ChangePlayerViewController.swift in Sources */,
 				89F6A2BE1D30CD610090618E /* ChangeTimeViewController.swift in Sources */,
+				892182911D34C67000A2F274 /* MiniGameViewController.swift in Sources */,
 				DCFEEDD41D14645600D4A259 /* Timer.swift in Sources */,
 				893B41C21D2E221B00E191BE /* ScoreBoard.swift in Sources */,
 			);

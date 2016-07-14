@@ -28,7 +28,11 @@ class TitleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let playA = defaults.objectForKey("PlayerA"){
+            playerA = playA as! String
+            playerB = defaults.objectForKey("PlayerB") as! String
+        }
         skView = self.view as! SKView
         skView.ignoresSiblingOrder = true
         scene = GameScene(size: skView.bounds.size)

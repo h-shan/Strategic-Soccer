@@ -15,9 +15,9 @@ class Ball: SKSpriteNode {
     init(){
         super.init(texture: mTexture, color: UIColor.clearColor(),size:mTexture.size())
     }
-    init(scene: GameScene) {
-        radius = Int(45/568*scene.midX!)
-        let ballSize = CGSizeMake(45/568*scene.midX!, 45/568*scene.midX!)
+    init(scene: SKScene) {
+        radius = Int(45/568*scene.frame.midX)
+        let ballSize = CGSizeMake(45/568*scene.frame.midX, 45/568*scene.frame.midX)
         super.init(texture: mTexture, color: UIColor.clearColor(), size: ballSize)
         self.name="ball"
         self.physicsBody = SKPhysicsBody(circleOfRadius: ballSize.width/2)

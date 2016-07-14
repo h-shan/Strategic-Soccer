@@ -77,6 +77,10 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         super.viewWillDisappear(animated)
         parent.playerA = defaultA
         parent.playerB = defaultB
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(defaultA,forKey: "PlayerA")
+        defaults.setObject(defaultB, forKey: "PlayerB")
+        
     }
 
     /*
@@ -88,5 +92,6 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         // Pass the selected object to the new view controller.
     }
     */
+    
 
 }
