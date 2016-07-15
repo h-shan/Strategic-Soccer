@@ -9,21 +9,22 @@
 import UIKit
 
 class ChangePointViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var items: [String] = ["3 Points", "5 Points", "10 Points", "20 Points"]
+    let threePointKey = "3 PTS"
+    let fivePointKey = "5 PTS"
+    let tenPointKey = "10 PTS"
+    let twentyPointKey = "20 PTS"
+    var items: [String]!
     var parent: SettingsViewController!
     var pointMode: Mode?
 
     
     @IBOutlet var pointOptions: UITableView!
-    @IBAction func ClosingX(sender: AnyObject) {
-        parent.PointView.hidden = true
-
-    }
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.pointOptions.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
+        items = [threePointKey, fivePointKey, tenPointKey, twentyPointKey]
         // Do any additional setup after loading the view.
     }
     
@@ -43,22 +44,15 @@ class ChangePointViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         parent.timeVC.timeOptions.selectRowAtIndexPath(nil, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
-        switch(indexPath.row){
-        case 0:
-            pointMode = Mode.threePoint
-            break
-        case 1:
-            pointMode = Mode.fivePoint
-            break
-        case 2:
-            pointMode = Mode.tenPoint
-            break
-        default:
-            pointMode = Mode.twentyPoint
-            break
-        }
+        pointMode = Mode(rawValue: indexPath.row + Mode.threePoint.rawValue)
         parent.defaultMode = pointMode
+        _ = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(hideView), userInfo: nil, repeats: false)
 
+    }
+    func hideView(){
+        self.parent.PointView.hidden = true
+        parent.modeButtonGroup.selectButton(parent.ModePoints)
+        parent.updateModeLabel()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

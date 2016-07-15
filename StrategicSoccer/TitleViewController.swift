@@ -8,6 +8,13 @@
 
 import UIKit
 import SpriteKit
+let defaults = NSUserDefaults.standardUserDefaults()
+let modeKey = "Mode"
+let playerAKey = "PlayerA"
+let playerBKey = "PlayerB"
+let playerOptionKey = "PlayerOption"
+let gold = UIColor(red: 161/255.0, green: 155/255.0, blue: 75/255.0, alpha: 1.0).CGColor
+
 extension UIViewController{
     func setBackground(){
         let background = UIImage(named: "SoccerBackground2")
@@ -42,10 +49,15 @@ class TitleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let defaults = NSUserDefaults.standardUserDefaults()
-        if let playA = defaults.objectForKey("PlayerA"){
+        if let playA = defaults.objectForKey(playerAKey){
             playerA = playA as! String
-            playerB = defaults.objectForKey("PlayerB") as! String
+            playerB = defaults.objectForKey(playerBKey) as! String
+        }
+        if let storedMode = defaults.objectForKey(modeKey){
+            defaultMode = Mode(rawValue: storedMode as! Int)!
+        }
+        if let storedPlayers = defaults.objectForKey(playerOptionKey){
+            defaultPlayers = PlayerOption(rawValue: storedPlayers as! Int)!
         }
         skView = self.view as! SKView
         skView.ignoresSiblingOrder = true
@@ -54,7 +66,7 @@ class TitleViewController: UIViewController {
         for button in buttons{
             button.layer.cornerRadius = 10
             button.layer.borderWidth = 2
-            button.layer.borderColor = UIColor(red: 0.631, green: 0.608, blue: 0.294, alpha: 1.0).CGColor
+            button.layer.borderColor = gold
         }
         
 

@@ -9,19 +9,21 @@
 import UIKit
 
 class ChangeTimeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
-    var items: [String] = ["1 Minute", "3 Minutes", "5 Minutes", "10 Minutes"]
+    let oneMinKey = "1 MIN"
+    let threeMinKey = "3 MIN"
+    let fiveMinKey = "5 MIN"
+    let tenMinKey = "10 MIN"
+    var items: [String]!
     var parent: SettingsViewController!
     var timedMode: Mode?
     
     @IBOutlet var timeOptions: UITableView!
     
-    @IBAction func ClosingX(sender: AnyObject) {
-        parent.TimeView.hidden = true
-        
-    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.timeOptions.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        items = [oneMinKey, threeMinKey, fiveMinKey,tenMinKey]
         // Do any additional setup after loading the view.
     }
     
@@ -41,22 +43,16 @@ class ChangeTimeViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         parent.pointVC.pointOptions.selectRowAtIndexPath(nil, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
-        switch(indexPath.row){
-        case 0:
-            timedMode = Mode.oneMinute
-            break
-        case 1:
-            timedMode = Mode.threeMinute
-            break
-        case 2:
-            timedMode = Mode.fiveMinute
-            break
-        default:
-            timedMode = Mode.tenMinute
-            break
-        }
+        timedMode = Mode(rawValue: indexPath.row)
         parent.defaultMode = timedMode
+        
+        _ = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(hideView), userInfo: nil, repeats: false)
 
+    }
+    func hideView (){
+        self.parent.TimeView.hidden = true
+        parent.modeButtonGroup.selectButton(parent.ModeTimed)
+        parent.updateModeLabel()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

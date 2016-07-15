@@ -18,7 +18,7 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet var PlayerB: UITableView!
 
     @IBAction func BackArrow(sender: AnyObject) {
-        navigationController?.popViewControllerAnimated(false)
+        navigationController?.popViewControllerAnimated(true)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,8 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         
-        cell.textLabel?.text = self.items[indexPath.row]
+        cell.textLabel?.text = self.items[indexPath.row].uppercaseString
+        cell.textLabel?.font = UIFont(name: "Optima", size: 18)
         
         if tableView == PlayerA{
             cell.imageView!.image = UIImage(imageLiteral: items[indexPath.row])
@@ -76,9 +77,8 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         super.viewWillDisappear(animated)
         parent.playerA = defaultA
         parent.playerB = defaultB
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(defaultA,forKey: "PlayerA")
-        defaults.setObject(defaultB, forKey: "PlayerB")
+        defaults.setObject(defaultA,forKey: playerAKey)
+        defaults.setObject(defaultB, forKey: playerBKey)
         
     }
 

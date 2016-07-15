@@ -39,7 +39,7 @@ class SettingsViewController: UIViewController {
     var playerButtonGroup: buttonGroup!
     var allButtons: [UIButton]!
     var defaultMode: Mode!
-    var defaultPlayers: PlayerOption?
+    var defaultPlayers: PlayerOption!
     var parent: TitleViewController!
     var timeVC: ChangeTimeViewController!
     var pointVC: ChangePointViewController!
@@ -50,36 +50,39 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var PlayerThree: UIButton!
     @IBOutlet weak var ModePoints: UIButton!
     @IBOutlet weak var ModeTimed: UIButton!
+    @IBOutlet weak var CurrentMode: UILabel!
+    @IBOutlet weak var CurrentPlayers: UILabel!
     @IBAction func PlayerFour(sender: UIButton) {
         playerButtonGroup.selectButton(sender)
         defaultPlayers = PlayerOption.four
+        CurrentPlayers.text = "FOUR"
     }
     @IBAction func PlayerThree(sender: UIButton) {
         playerButtonGroup.selectButton(sender)
         defaultPlayers = PlayerOption.three
+        CurrentPlayers.text = "THREE"
     }
     @IBAction func BackButton(sender: AnyObject) {
-        navigationController?.popViewControllerAnimated(false)
+        navigationController?.popViewControllerAnimated(true)
     }
     @IBAction func ModePoints(sender: UIButton) {
-        modeButtonGroup.selectButton(sender)
         defaultMode = Mode.tenPoint
         PointView.hidden = false
         TimeView.hidden = true
     }
     @IBAction func ModeTimed(sender: UIButton) {
-        modeButtonGroup.selectButton(sender)
         defaultMode = Mode.threeMinute
         TimeView.hidden = false
         PointView.hidden = true
         
-        
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        TimeView.layer.zPosition = 2
+        PointView.layer.zPosition = 2
         TimeView.hidden = true
         PointView.hidden = true
-        defaultMode = parent.defaultMode
         
         setBackground()
         let modeButtons: Set<UIButton> = [ModeTimed,ModePoints]
@@ -87,19 +90,32 @@ class SettingsViewController: UIViewController {
         let playerButtons: Set<UIButton> = [PlayerThree, PlayerFour]
         playerButtonGroup = buttonGroup(buttons: playerButtons)
         allButtons = [PlayerFour,PlayerThree,ModePoints,ModeTimed]
-        for button in allButtons{
-            button.layer.cornerRadius = 10
-        }
+        
         switch (defaultPlayers!){
             case PlayerOption.three:
                 playerButtonGroup.selectButton(PlayerThree)
+                CurrentPlayers.text = "THREE"
                 break
             case PlayerOption.four:
                 playerButtonGroup.selectButton(PlayerFour)
+                CurrentPlayers.text = "FOUR"
                 break
         }
+        if (defaultMode.getType() == .timed){
+            modeButtonGroup.selectButton(ModeTimed)
+        }
+        else{
+            modeButtonGroup.selectButton(ModePoints)
+        }
+        updateModeLabel()
+        
 
         // Do any additional setup after loading the view.
+    }
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        TimeView.hidden = true
+        PointView.hidden = true
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -111,6 +127,8 @@ class SettingsViewController: UIViewController {
         
         parent.defaultMode = defaultMode
         parent.defaultPlayers = defaultPlayers!
+        defaults.setInteger(defaultMode.rawValue, forKey: modeKey)
+        defaults.setInteger(defaultPlayers!.rawValue, forKey: playerOptionKey)
     }
     
 
@@ -125,5 +143,17 @@ class SettingsViewController: UIViewController {
         }
     
     }
-
+    func updateModeLabel(){
+        switch(defaultMode.rawValue){
+        case 0:CurrentMode.text = "1 MINUTES"; break
+        case 1:CurrentMode.text = "3 MINUTES"; break
+        case 2:CurrentMode.text = "5 MINUTES"; break
+        case 3:CurrentMode.text = "10 MINUTES"; break
+        case 4:CurrentMode.text = "3 POINTS"; break
+        case 5:CurrentMode.text = "5 POINTS"; break
+        case 6:CurrentMode.text = "10 POINTS"; break
+        case 7:CurrentMode.text = "20 POINTS"; break
+        default: break
+        }
+    }
 }

@@ -47,6 +47,10 @@ class PauseViewController: UIViewController {
         Quit.layer.cornerRadius = 10
         Restart.layer.cornerRadius = 10
         Resume.layer.cornerRadius = 10
+        self.view.layer.cornerRadius = 10
+        self.view.layer.borderWidth = 5
+        self.view.layer.borderColor = gold
+        
 
         // Do any additional setup after loading the view.
     }
