@@ -24,9 +24,7 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         self.PlayerA.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.PlayerB.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        let backgroundImage = UIImageView(frame: UIScreen.mainScreen().bounds)
-        backgroundImage.image = UIImage(named: "SoccerBackground2")
-        self.view.insertSubview(backgroundImage, atIndex: 0)
+        setBackground()
 
         // Do any additional setup after loading the view.
     }

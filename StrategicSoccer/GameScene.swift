@@ -559,7 +559,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     func firstMove(){
-        if playerOption == PlayerOption.three{
+        //if playerOption == PlayerOption.three{
             let random = arc4random_uniform(3)
             switch (random){
             case 0:
@@ -574,7 +574,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             default:
                 break
             }
-        }
+        //}
         
     }
     func detectStraightShot(player: Player) -> Bool{

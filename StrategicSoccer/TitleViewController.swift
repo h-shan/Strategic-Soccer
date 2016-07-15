@@ -8,7 +8,21 @@
 
 import UIKit
 import SpriteKit
-
+extension UIViewController{
+    func setBackground(){
+        let background = UIImage(named: "SoccerBackground2")
+        
+        var imageView : UIImageView!
+        imageView = UIImageView(frame: view.bounds)
+        imageView.contentMode =  UIViewContentMode.ScaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = background
+        imageView.center = view.center
+        view.addSubview(imageView)
+        self.view.sendSubviewToBack(imageView)
+    }
+   
+}
 class TitleViewController: UIViewController {
     var background = SKScene()
     var scene: GameScene!
@@ -36,10 +50,12 @@ class TitleViewController: UIViewController {
         skView = self.view as! SKView
         skView.ignoresSiblingOrder = true
         scene = GameScene(size: skView.bounds.size)
-        SettingsButton.layer.cornerRadius = 10
-        TwoPlayers.layer.cornerRadius = 10
-        ChangePlayersButton.layer.cornerRadius = 10
-        SinglePlayer.layer.cornerRadius = 10
+        let buttons: [UIButton] = [SettingsButton, TwoPlayers,ChangePlayersButton,SinglePlayer]
+        for button in buttons{
+            button.layer.cornerRadius = 10
+            button.layer.borderWidth = 2
+            button.layer.borderColor = UIColor(red: 0.631, green: 0.608, blue: 0.294, alpha: 1.0).CGColor
+        }
         
 
         // Do any additional setup after loading the view.
@@ -51,16 +67,9 @@ class TitleViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool){
-        
+        navigationController?.navigationBarHidden = true
         super.viewWillAppear(animated)
-        
-        let image = SKSpriteNode(imageNamed: "SoccerBackground2")
-        background.addChild(image)
-        image.position = CGPointMake(background.frame.midX, background.frame.midY)
-        image.size = CGSizeMake(1,1)
-        
-        skView.presentScene(background)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        setBackground()
        
     }
     

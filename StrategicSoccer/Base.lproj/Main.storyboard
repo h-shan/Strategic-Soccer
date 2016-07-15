@@ -25,7 +25,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZE-MR-P07">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZE-MR-P07">
                                 <rect key="frame" x="43" y="6" width="100" height="75"/>
                                 <state key="normal" image="BackArrow"/>
                                 <connections>
@@ -89,75 +89,82 @@
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLw-HV-UYu">
-                                <rect key="frame" x="289" y="135" width="120" height="50"/>
-                                <color key="backgroundColor" red="0.99162817774374845" green="0.50970698697969086" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="gJ5-t2-Hbt"/>
-                                    <constraint firstAttribute="height" constant="50" id="jtg-EB-cWm"/>
-                                </constraints>
-                                <state key="normal" title="Two Players"/>
-                                <connections>
-                                    <segue destination="BV1-FR-VrT" kind="show" identifier="TwoPlayerSegue" animates="NO" id="McN-dH-VRB"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nrx-pZ-cFj">
-                                <rect key="frame" x="359" y="200" width="150" height="40"/>
-                                <color key="backgroundColor" red="0.63117754035565499" green="0.587137950754687" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nrx-pZ-cFj">
+                                <rect key="frame" x="349" y="200" width="154" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="e9g-5e-wsC"/>
-                                    <constraint firstAttribute="width" constant="150" id="mhj-8c-Edl"/>
                                 </constraints>
-                                <state key="normal" title="Settings"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="16"/>
+                                <state key="normal" title="SETTINGS"/>
                                 <connections>
                                     <segue destination="1lU-lZ-m6k" kind="show" identifier="SettingsSegue" animates="NO" id="nEl-sp-Cra"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L89-lv-x1T">
-                                <rect key="frame" x="359" y="260" width="150" height="40"/>
-                                <color key="backgroundColor" red="0.25441935416126721" green="0.62147435897435899" blue="0.2549672820713268" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L89-lv-x1T">
+                                <rect key="frame" x="349" y="260" width="154" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="cou-MF-cKs"/>
-                                    <constraint firstAttribute="width" constant="150" id="oaX-xR-snK"/>
                                 </constraints>
-                                <state key="normal" title="Change Players"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="16"/>
+                                <state key="normal" title="CHANGE PLAYERS"/>
                                 <connections>
                                     <segue destination="5yu-Xs-09g" kind="show" identifier="ChangePlayersSegue" animates="NO" id="pmK-Yb-6Mg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqf-rF-hA3">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqf-rF-hA3">
                                 <rect key="frame" x="443" y="135" width="120" height="50"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="hDH-Fj-12N"/>
                                     <constraint firstAttribute="height" constant="50" id="paC-xt-2tl"/>
                                 </constraints>
-                                <state key="normal" title="Single Player"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                <state key="normal" title="ONE PLAYER"/>
                                 <connections>
                                     <segue destination="BV1-FR-VrT" kind="show" identifier="SinglePlayerSegue" animates="NO" id="W3R-gC-myb"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ub-az-A73">
-                                <rect key="frame" x="29.5" y="31.5" width="510" height="57.5"/>
+                                <rect key="frame" x="64" y="35" width="441.5" height="50"/>
                                 <attributedString key="attributedText">
                                     <fragment content="STRATEGIC SOCCER">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="52" name="Palatino-Roman"/>
+                                            <font key="NSFont" size="45" name="Palatino-Roman"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLw-HV-UYu">
+                                <rect key="frame" x="289" y="135" width="120" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="gJ5-t2-Hbt"/>
+                                    <constraint firstAttribute="height" constant="50" id="jtg-EB-cWm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="16"/>
+                                <state key="normal" title="TWO PLAYERS"/>
+                                <connections>
+                                    <segue destination="BV1-FR-VrT" kind="show" identifier="TwoPlayerSegue" animates="NO" id="McN-dH-VRB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="L89-lv-x1T" firstAttribute="leading" secondItem="Nrx-pZ-cFj" secondAttribute="leading" id="0uO-1P-qzG"/>
+                            <constraint firstItem="Nrx-pZ-cFj" firstAttribute="trailing" secondItem="zqf-rF-hA3" secondAttribute="centerX" id="37k-wq-oyP"/>
+                            <constraint firstItem="NLw-HV-UYu" firstAttribute="bottom" secondItem="zqf-rF-hA3" secondAttribute="bottom" id="5k4-ad-GKF"/>
+                            <constraint firstItem="Nrx-pZ-cFj" firstAttribute="leading" secondItem="NLw-HV-UYu" secondAttribute="centerX" id="QJD-FT-L85"/>
                             <constraint firstItem="Nrx-pZ-cFj" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="60" id="RXP-y0-Pnw"/>
-                            <constraint firstItem="L89-lv-x1T" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="120" id="Vmm-Jl-dp0"/>
+                            <constraint firstItem="zqf-rF-hA3" firstAttribute="leading" secondItem="NLw-HV-UYu" secondAttribute="trailing" constant="34" id="ThJ-KZ-Q8N"/>
                             <constraint firstItem="NLw-HV-UYu" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" constant="65" id="Xwq-QD-F52"/>
-                            <constraint firstItem="L89-lv-x1T" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" constant="150" id="aLz-FF-imV"/>
-                            <constraint firstItem="Nrx-pZ-cFj" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" constant="150" id="b4Z-9d-gNq"/>
+                            <constraint firstItem="NLw-HV-UYu" firstAttribute="top" secondItem="zqf-rF-hA3" secondAttribute="top" id="agG-dH-UXT"/>
+                            <constraint firstItem="L89-lv-x1T" firstAttribute="top" secondItem="Nrx-pZ-cFj" secondAttribute="bottom" constant="20" id="c9J-TQ-jIT"/>
                             <constraint firstItem="9Ub-az-A73" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="-100" id="cQw-ac-cx8"/>
+                            <constraint firstItem="L89-lv-x1T" firstAttribute="trailing" secondItem="Nrx-pZ-cFj" secondAttribute="trailing" id="jd3-tr-gNn"/>
                             <constraint firstItem="NLw-HV-UYu" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" id="jsD-Ci-3JT"/>
                             <constraint firstItem="9Ub-az-A73" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" id="nes-bR-1WZ"/>
                             <constraint firstItem="zqf-rF-hA3" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="trailing" constant="-65" id="oCp-VV-oIw"/>
