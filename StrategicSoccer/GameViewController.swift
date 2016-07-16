@@ -38,12 +38,11 @@ class GameViewController: UIViewController {
         scene.scaleMode = .AspectFill
         PauseView.hidden = true
         
-        
-        
     }
     override func viewWillAppear(animated:Bool){
         super.viewWillAppear(animated)
         skView.presentScene(scene)
+        skView.showsNodeCount = true
 
     }
     

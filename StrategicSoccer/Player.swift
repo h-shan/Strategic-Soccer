@@ -19,7 +19,7 @@ class Player: SKSpriteNode {
         super.init(texture: mTexture, color: UIColor.clearColor(), size: mTexture.size())
     }
     init(teamA: Bool, country: String, sender: GameScene){
-        playerSize = CGSizeMake(120/568*sender.midX!, 120/568*sender.midX!)
+        playerSize = CGSizeMake(120*scalerX, 120*scalerX)
         mTeamA = teamA
         mTexture = SKTexture(imageNamed: country)
         //mTexture = SKTexture(image: UIImage(imageLiteral: country))
@@ -43,7 +43,7 @@ class Player: SKSpriteNode {
         body.allowsRotation = false
     }
     init(country: String, sender: Game1Scene){
-        playerSize = CGSizeMake(120/568*sender.frame.midX, 120/568*sender.frame.midX)
+        playerSize = CGSizeMake(120*scalerX, 120*scalerX)
         mTexture = SKTexture(imageNamed: country)
         mTeamA = true
         super.init(texture: mTexture, color: UIColor.clearColor(), size: playerSize)
@@ -56,7 +56,7 @@ class Player: SKSpriteNode {
         body.categoryBitMask = 1
         body.linearDamping = 0.5
         body.restitution = 1
-        body.friction = 0.3
+        body.friction = 0
         body.allowsRotation = false
     }
     

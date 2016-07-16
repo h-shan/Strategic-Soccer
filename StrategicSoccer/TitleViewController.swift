@@ -15,6 +15,11 @@ let playerBKey = "PlayerB"
 let playerOptionKey = "PlayerOption"
 let gold = UIColor(red: 161/255.0, green: 155/255.0, blue: 75/255.0, alpha: 1.0).CGColor
 let optima = UIFont(name: "Optima", size: 18)
+let screenSize: CGRect = UIScreen.mainScreen().bounds
+let scalerX = screenSize.width/1136
+let scalerY = screenSize.height/640
+let goalLineB = 1086*scalerX
+let goalLineA = 50*scalerX
 extension UIViewController{
     func setBackground(){
         let background = UIImage(named: "SoccerBackground2")

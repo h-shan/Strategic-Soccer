@@ -11,13 +11,13 @@ import SpriteKit
 class Ball: SKSpriteNode {
     let mTexture = SKTexture(imageNamed: "Ball")
     var storedVelocity:CGVector?
-    var radius = 0
+    var radius:CGFloat = 0
     init(){
         super.init(texture: mTexture, color: UIColor.clearColor(),size:mTexture.size())
     }
     init(scene: SKScene) {
-        radius = Int(45/568*scene.frame.midX)
-        let ballSize = CGSizeMake(45/568*scene.frame.midX, 45/568*scene.frame.midX)
+        radius = 45*scalerX
+        let ballSize = CGSizeMake(radius,radius)
         super.init(texture: mTexture, color: UIColor.clearColor(), size: ballSize)
         self.name="ball"
         self.physicsBody = SKPhysicsBody(circleOfRadius: ballSize.width/2)
