@@ -38,6 +38,7 @@ class ChangeTimeViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         cell.textLabel?.text = self.items[indexPath.row]
+        cell.textLabel?.font = optima
         return cell
     }
     
@@ -59,23 +60,7 @@ class ChangeTimeViewController: UIViewController, UITableViewDelegate, UITableVi
         var indexPath: NSIndexPath?
         
         if parent.defaultMode!.getType() == type.timed{
-            timedMode = parent.defaultMode!
-            switch (timedMode!){
-            case Mode.oneMinute:
-                indexPath = NSIndexPath(forItem: 0 , inSection: 0)
-                break
-            case Mode.threeMinute:
-                indexPath = NSIndexPath(forItem: 1 , inSection: 0)
-                break
-            case Mode.fiveMinute:
-                indexPath = NSIndexPath(forItem: 2 , inSection: 0)
-                break
-            case Mode.tenMinute:
-                indexPath = NSIndexPath(forItem: 3 , inSection: 0)
-                break
-            default:
-                break
-            }
+            indexPath = NSIndexPath(forRow: parent.defaultMode.rawValue, inSection: 0)
             if indexPath != nil{
                 timeOptions.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
             }

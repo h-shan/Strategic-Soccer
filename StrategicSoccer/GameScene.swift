@@ -8,7 +8,16 @@
 
 import SpriteKit
 import Foundation
-
+import UIKit
+extension SKSpriteNode{
+    func fadeIn(){
+        self.runAction(SKAction.fadeAlphaTo(0.8, duration: 0.3))
+        
+    }
+    func fadeOut(){
+        self.runAction(SKAction.fadeAlphaTo(0, duration: 0.3))
+    }
+}
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var selectedPlayer : Player?
@@ -100,6 +109,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
+        SKView.setAnimationsEnabled(true)
         
         let background = SKSpriteNode(imageNamed: "SoccerField")
         midX = CGRectGetMidX(self.frame)
@@ -108,7 +118,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             , size: CGSizeMake(800/568*midX!,200/320*midY!))
         scoreBackground.addChild(score)
         scoreBackground.zPosition = 4
-        scoreBackground.alpha = 0.8
+        scoreBackground.alpha = 0.0
         score.fontSize = 50
         score.fontColor = UIColor.blackColor()
         scoreBackground.position = CGPoint(x: midX!, y: 1.3*midY!)
@@ -123,7 +133,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background.size = self.frame.size
         background.zPosition=1.1
         addChild(background)
-        scoreBackground.hidden = true
         // set rectangular border around screen
         borderBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         borderBody.linearDamping = 0
@@ -331,7 +340,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         if (goalDelay.getElapsedTime()>2){
             goalDelay.reset()
-            scoreBackground.hidden = true
+            scoreBackground.fadeOut()
             score.text = ""
             setDynamicStates(true)
             moveTimer?.restart()
@@ -375,7 +384,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         scoreBoard.label.text = String.localizedStringWithFormat("%d    %d", scoreA, scoreB)
         setDynamicStates(false)
-        scoreBackground.hidden = false
+        scoreBackground.fadeIn()
 
         if mode.getType() == .points{
             if scoreA == winPoints! || scoreB == winPoints! {
@@ -428,6 +437,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             clock.text = "0:00"
             gameTimer.pause()
             moveTimer?.pause()
+            
             endGame()
         }else{
             if clock.text != gameTimer.secondsToString(gameTime!){
@@ -443,7 +453,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameEnded = true
         paused = true
         setDynamicStates(false)
-        scoreBackground.hidden = false
+        scoreBackground.fadeIn()
         if scoreA > scoreB {
             score.text = "Player A Wins"
         }
@@ -500,7 +510,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setDynamicStates(true)
         moveTimer?.restart()
         goalDelay.reset()
-        scoreBackground.hidden = true
+        scoreBackground.fadeOut()
         goalAccounted = false
         if !turnA{
             switchTurns()

@@ -39,6 +39,7 @@ class ChangePointViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         cell.textLabel?.text = self.items[indexPath.row]
+        cell.textLabel?.font = optima
         return cell
     }
     
@@ -58,22 +59,7 @@ class ChangePointViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewWillAppear(animated)
         var indexPath: NSIndexPath?
         if parent.defaultMode!.getType() == .points{
-            switch parent.defaultMode!{
-            case Mode.threePoint:
-                indexPath = NSIndexPath(forItem: 0 , inSection: 0)
-                break
-            case Mode.fivePoint:
-                indexPath = NSIndexPath(forItem: 1 , inSection: 0)
-                break
-            case Mode.tenPoint:
-                indexPath = NSIndexPath(forItem: 2 , inSection: 0)
-                break
-            case Mode.twentyPoint:
-                indexPath = NSIndexPath(forItem: 3 , inSection: 0)
-                break
-            default:
-                break
-            }
+            indexPath = NSIndexPath(forRow: parent.defaultMode.rawValue-Mode.threePoint.rawValue, inSection: 0)
             if indexPath != nil{
                 pointOptions.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
             }

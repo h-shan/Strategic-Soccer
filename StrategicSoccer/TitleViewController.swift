@@ -14,7 +14,7 @@ let playerAKey = "PlayerA"
 let playerBKey = "PlayerB"
 let playerOptionKey = "PlayerOption"
 let gold = UIColor(red: 161/255.0, green: 155/255.0, blue: 75/255.0, alpha: 1.0).CGColor
-
+let optima = UIFont(name: "Optima", size: 18)
 extension UIViewController{
     func setBackground(){
         let background = UIImage(named: "SoccerBackground2")
@@ -48,6 +48,7 @@ class TitleViewController: UIViewController {
     var playerB = "Albania"
     
     override func viewDidLoad() {
+        UIView.setAnimationsEnabled(true)
         super.viewDidLoad()
         if let playA = defaults.objectForKey(playerAKey){
             playerA = playA as! String
