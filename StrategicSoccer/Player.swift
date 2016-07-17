@@ -37,9 +37,10 @@ class Player: SKSpriteNode {
         let body:SKPhysicsBody = self.physicsBody!
         body.usesPreciseCollisionDetection = true
         body.categoryBitMask = 1
-        body.linearDamping = 0.5
+        // change back linear damping and friction
+        body.linearDamping = 0.3
         body.restitution = 1
-        body.friction = 0.3
+        body.friction = 0.1
         body.allowsRotation = false
     }
     init(country: String, sender: Game1Scene){
@@ -54,9 +55,10 @@ class Player: SKSpriteNode {
         let body:SKPhysicsBody = self.physicsBody!
         body.usesPreciseCollisionDetection = true
         body.categoryBitMask = 1
-        body.linearDamping = 0.5
+        // change back linear damping and friction
+        body.linearDamping = 0.3
         body.restitution = 1
-        body.friction = 0
+        body.friction = 0.1
         body.allowsRotation = false
     }
     

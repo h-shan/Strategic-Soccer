@@ -19,6 +19,12 @@ extension SKSpriteNode{
         self.runAction(SKAction.fadeAlphaTo(0, duration: 0.3))
     }
 }
+extension Bool{
+    static func random() -> Bool {
+        return arc4random_uniform(2) == 0
+    }
+    
+}
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var selectedPlayer : Player?
@@ -35,7 +41,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playerB2 = Player()
     var playerB3 = Player()
     var playerB4 = Player()
-    var players: [Player]?
+    var players: [Player]!
+    var teamA: [Player]!
+    var teamB: [Player]!
     var gameEnded = false
     var viewController: GameViewController!
     var goalAccounted = false
@@ -181,13 +189,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         switch (playerOption){
         case PlayerOption.three:
             players = [playerA1, playerA2, playerA3, playerB1, playerB2, playerB3]
+            teamA = [playerA1,playerA2,playerA3]
+            teamB = [playerB1, playerB2, playerB3]
             break
         case PlayerOption.four:
             players = [playerA1, playerA2, playerA3, playerA4, playerB1, playerB2, playerB3, playerB4]
+            teamA = [playerA1, playerA2, playerA3]
+            teamB = [playerB1, playerB2, playerB3]
             break;
         }
         
-        for node in players!{
+        for node in players{
             node.zPosition = 2
             self.addChild(node)
         }
@@ -280,7 +292,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                 }
                 else{
-                    for player in players!{
+                    for player in players{
                         if player.mTeamA == turnA && playerSelected == false{
                             if distance(player.position, point2: location) < player.size.width*1.5 {
                                 selectedPlayer = player
@@ -310,7 +322,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func updateLighting(){
-        for player in players!{
+        for player in players{
             player.setLighting(player.mTeamA != turnA)
         }
     }
@@ -348,7 +360,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 gameTimer.start()
             }
             for child in children{
-                if child.name == "yellow" || child.name == "blue"{
+                if child.name == "blue"{
                     child.removeFromParent()
                 }
             }
@@ -411,7 +423,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func setDynamicStates(isDynamic: Bool){
-        for player in self.players!{
+        for player in self.players{
             player.physicsBody!.dynamic = isDynamic
         }
         ball.physicsBody!.dynamic = isDynamic
@@ -518,8 +530,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreBoard.label.text = "0    0"
     }
     func computerMove(cAggro: Int, cDef: Int){
+        if firstTurn{
+            for player in teamA{
+                if player.physicsBody!.velocity.dx > 30 || player.physicsBody!.velocity.dy > 30{
+                    firstTurn = false
+                    break
+                }
+            }
+        }
         if (moveTimer?.getElapsedTime())!%0.2<0.1 && (moveTimer?.getElapsedTime())! > 0.4 && !firstTurn{
-            for player in players!{
+            for player in players{
                 if !player.mTeamA{
                     if detectStraightShot(player){
                         switchTurns()
@@ -533,42 +553,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         if moveTimer?.getElapsedTime()>2.5{
-
-            if firstTurn == true{
-                firstTurn = false
-                firstMove()
-            }
-            else{
-            let random = CGFloat(arc4random_uniform(30))
-            let ballMultiplier:CGFloat = 0.5
-            let chosePlayer:UInt32
-            if playerOption == PlayerOption.three{
-                chosePlayer = arc4random_uniform(3)+3
-            }
-            else{
-                chosePlayer = arc4random_uniform(4) + 4
-            }
-            var closestPlayer:Player = playerB1
-            closestPlayer = players![Int(chosePlayer)]
             
-            var ballFuturePosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*ballMultiplier, ball.position.y + ball.physicsBody!.velocity.dy*ballMultiplier)
-                if ballFuturePosition.x < 0 {
-                    ballFuturePosition.x = -ballFuturePosition.x
-                }
-                else if ballFuturePosition.x > frame.maxX{
-                    ballFuturePosition.x = 2*frame.maxX-ballFuturePosition.x
-                }
-                if ballFuturePosition.y < 0 {
-                    ballFuturePosition.y = -ballFuturePosition.y
-                }
-                else if ballFuturePosition.y > frame.maxY{
-                    ballFuturePosition.y = 2*frame.maxY-ballFuturePosition.y
-                }
-                
-            let playerVelocity = CGVectorMake(2*ballMultiplier*(ballFuturePosition.x-closestPlayer.position.x)+random, 2*ballMultiplier*(ballFuturePosition.y - closestPlayer.position.y)+random)
-            closestPlayer.physicsBody!.velocity = playerVelocity
+            if firstTurn{
+                firstMove()
+                firstTurn = false
             }
-        
+            else{
+                improvePosition()
+            }
             switchTurns()
         }
     }
@@ -578,12 +570,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             switch (random){
             case 0:
                 playerB1.physicsBody!.velocity = CGVectorMake(playerA1.position.x-playerB1.position.x,playerA3.position.y - playerB1.position.y)
+                addMarker(UIColor.orangeColor(), point: playerB1.position)
+
                 break
             case 1:
                 playerB2.physicsBody!.velocity = CGVectorMake(playerA1.position.x-playerB2.position.x,playerA3.position.y - playerB2.position.y)
+                addMarker(UIColor.orangeColor(), point: playerB2.position)
                 break
             case 2:
                 playerB3.physicsBody!.velocity = CGVectorMake(playerA1.position.x-playerB3.position.x,playerA3.position.y - playerB3.position.y)
+                addMarker(UIColor.orangeColor(), point: playerB3.position)
+
                 break
             default:
                 break
@@ -593,9 +590,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     func detectStraightShot(player: Player) -> Bool{
         var multiplier:CGFloat = 0.3
-        var buffed = false
         while (multiplier <= 0.6){
             let predictedBallPosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*multiplier, ball.position.y + ball.physicsBody!.velocity.dy*multiplier)
+            if !frame.contains(predictedBallPosition){
+                return false
+            }
+            if detectBarriers(ball.position, velocity: ball.physicsBody!.velocity, xLimit: predictedBallPosition.x, fromRight: predictedBallPosition.x < ball.position.x)>0{
+                return false
+            }
             let toPointVelocity = CGVectorMake((predictedBallPosition.x-player.position.x),(predictedBallPosition.y - player.position.y))
             let angle = atan(toPointVelocity.dy/toPointVelocity.dx)
             let buffer = player.playerSize.width*5/12
@@ -605,12 +607,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 return false
             }
             
-            if abs(ball.physicsBody!.velocity.dy) < 100 && straightShotVelocity.dx > -200{
-                straightShotVelocity.dy *= -200/straightShotVelocity.dx
-                straightShotVelocity.dx = -200
-                buffed = true
-            }
-
             
             let xDistance = player.position.x - 50*scalerX
             if xDistance < 0 {
@@ -621,32 +617,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 continue
             }
             
-            if detectGoal(player.position, velocity: straightShotVelocity, xLimit: 50, fromRight: true){
+            if detectGoal(player.position, velocity: straightShotVelocity, xLimit: goalLineA, fromRight: true){
                 // detectObstacles
                 
-                if detectBarriers(player.position, velocity: straightShotVelocity, xLimit: 50, fromRight: true) <= Int(arc4random_uniform(3)){
-                    if straightShotVelocity.dx < -500{
-                        straightShotVelocity.dy *= -500/straightShotVelocity.dx
-                        straightShotVelocity.dx = -500
-                    }
-
+                if detectBarriers(player.position, velocity: straightShotVelocity, xLimit: goalLineB, fromRight: true) <= Int(arc4random_uniform(3)){
+                    straightShotVelocity = dampVelocity(straightShotVelocity)
                     player.physicsBody!.velocity = straightShotVelocity
-                    let blue = SKSpriteNode(imageNamed: "PlayerA")
-                    blue.size = CGSizeMake(10,10)
-                    if buffed{
-                        blue.size = CGSizeMake(20,20)
-                    }
-                    print(straightShotVelocity.dx)
-                    blue.position = player.position
-                    blue.zPosition = 2
-                    blue.name = "blue"
-                    addChild(blue)
-                    let yellow = SKSpriteNode(imageNamed: "PlayerB")
-                    yellow.name = "yellow"
-                    yellow.size = CGSizeMake(10,10)
-                    yellow.position = predictedPlayerPosition
-                    yellow.zPosition = 2
-                    addChild(yellow)
+                    addMarker(UIColor.blueColor(), point: player.position)
                     return true
                 }
             }
@@ -660,18 +637,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var detectedBarriers = [SKPhysicsBody]()
         var objectAtPoint: SKPhysicsBody?
         detectedBarriers.append(ball.physicsBody!)
-        while (xPosition > xLimit && xPosition < frame.maxX && yPosition > 0 && yPosition < frame.maxY){
-            xPosition -= 2
-            yPosition -= 2*velocity.dy/velocity.dx
-            objectAtPoint = physicsWorld.bodyAtPoint(CGPointMake(xPosition, yPosition))
-            if objectAtPoint != nil && !detectedBarriers.contains(objectAtPoint!){
-                detectedBarriers.append(objectAtPoint!)
-                if objectAtPoint!.node is GoalPost{
-                    return 100
+        if fromRight{
+            while (xPosition > xLimit && xPosition < frame.maxX && yPosition > 0 && yPosition < frame.maxY){
+                xPosition -= 2
+                yPosition -= 2*velocity.dy/velocity.dx
+                objectAtPoint = physicsWorld.bodyAtPoint(CGPointMake(xPosition, yPosition))
+                if objectAtPoint != nil && !detectedBarriers.contains(objectAtPoint!){
+                    detectedBarriers.append(objectAtPoint!)
+                    if objectAtPoint!.node is GoalPost{
+                        return 100
+                    }
                 }
             }
         }
-        return detectedBarriers.count-2
+        else{
+            while (xPosition < xLimit && xPosition < frame.maxX && yPosition > 0 && yPosition < frame.maxY){
+                xPosition += 2
+                yPosition += 2*velocity.dy/velocity.dx
+                objectAtPoint = physicsWorld.bodyAtPoint(CGPointMake(xPosition, yPosition))
+                if objectAtPoint != nil && !detectedBarriers.contains(objectAtPoint!){
+                    detectedBarriers.append(objectAtPoint!)
+                    if objectAtPoint!.node is GoalPost{
+                        return 100
+                    }
+                }
+            }
+        }
+        return detectedBarriers.count-1
     }
     func detectGoal(start: CGPoint, velocity: CGVector, xLimit: CGFloat, fromRight: Bool) -> Bool{
         if (velocity.dx >= 0 && fromRight) || (velocity.dx <= 0 && !fromRight){
@@ -701,24 +693,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if detectGoal(ball.position, velocity: ball.physicsBody!.velocity, xLimit: goalLineB, fromRight: false){
             var shots = [(Player, CGVector, Int)]()
             
-            let multiplier:CGFloat = 0.3
-            for player in players!{
-                if !player.mTeamA{
-                    let predictedBallPosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*multiplier, ball.position.y + ball.physicsBody!.velocity.dy*multiplier)
-                    let toPointVelocity = CGVectorMake((predictedBallPosition.x-player.position.x),(predictedBallPosition.y - player.position.y))
-                    let angle = atan(toPointVelocity.dy/toPointVelocity.dx)
-                    let buffer = player.playerSize.width*5/12
-                    let predictedPlayerPosition = CGPointMake(predictedBallPosition.x + cos(angle)*buffer,predictedBallPosition.y + sin(angle)*buffer)
-                    let blockVelocity = CGVectorMake((predictedPlayerPosition.x-player.position.x)/multiplier, (predictedPlayerPosition.y-player.position.y)/multiplier)
-                    let numBar = detectBarriers(player.position, velocity: blockVelocity, xLimit: goalLineB, fromRight: player.position.x > ball.position.x)
-                    shots.append((player,blockVelocity, numBar))
+            var multiplier:CGFloat = 0.3
+            for player in teamB{
+                var predictedBallPosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*multiplier, ball.position.y + ball.physicsBody!.velocity.dy*multiplier)
+                while !frame.contains(predictedBallPosition) && multiplier > 0{
+                    multiplier -= 0.1
+                    predictedBallPosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*multiplier, ball.position.y + ball.physicsBody!.velocity.dy*multiplier)
                 }
+                let toPointVelocity = CGVectorMake((predictedBallPosition.x-player.position.x),(predictedBallPosition.y - player.position.y))
+                let angle = atan(toPointVelocity.dy/toPointVelocity.dx)
+                //let buffer = player.playerSize.width*5/12
+                let buffer:CGFloat = 0
+                let predictedPlayerPosition = CGPointMake(predictedBallPosition.x + cos(angle)*buffer,predictedBallPosition.y + sin(angle)*buffer)
+                let blockVelocity = CGVectorMake((predictedPlayerPosition.x-player.position.x)/multiplier, (predictedPlayerPosition.y-player.position.y)/multiplier)
+                let numBar = detectBarriers(player.position, velocity: blockVelocity, xLimit: goalLineB, fromRight: player.position.x > ball.position.x)
+                shots.append((player,blockVelocity, numBar))
+                
             }
             var minBar = shots[0].2
             for shot in shots{
                 if shot.2 < minBar{
                     minBar = shot.2
                 }
+            }
+            if minBar > 10 {
+                return false
             }
             var bestShot: (Player, CGVector, Int)?
             var bestAngle: CGFloat = 0
@@ -736,10 +735,164 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                 }
             }
-            bestShot!.0.physicsBody!.velocity = bestShot!.1
+            let finalVelocity = dampVelocity(bestShot!.1)
+            bestShot!.0.physicsBody!.velocity = finalVelocity
             print(bestShot!.2)
+            addMarker(UIColor.yellowColor(), point: bestShot!.0.position)
             return true
         }
         return false
     }
+    func dampVelocity(velocity: CGVector) -> CGVector{
+        var dampedVelocity = velocity
+        if velocity.dx < 100 && velocity.dx > 0{
+            dampedVelocity.dy = velocity.dy*100/velocity.dx
+            dampedVelocity.dx = 100
+        }
+        if velocity.dx > -100 && velocity.dx < 0{
+            dampedVelocity.dy = -velocity.dy*100/velocity.dx
+            dampedVelocity.dx = -100
+        }
+        
+        if velocity.dx > 500{
+            dampedVelocity.dy = velocity.dy*500/velocity.dx
+            dampedVelocity.dx = 500
+        }
+        if velocity.dy > 500{
+            dampedVelocity.dx = velocity.dx*500/velocity.dy
+            dampedVelocity.dy = 500
+        }
+        if velocity.dx < -500{
+            dampedVelocity.dy = -velocity.dy*500/velocity.dx
+            dampedVelocity.dx = -500
+        }
+        if velocity.dy < -500{
+            dampedVelocity.dx = -velocity.dx*500/velocity.dy
+            dampedVelocity.dy = -500
+        }
+        return dampedVelocity
+    }
+    func improvePosition(){
+        if outOfCorner(){
+            return
+        }
+        if Bool.random(){
+            if hitBall(){
+                return
+            }
+        }
+        getBehindBall()
+    }
+    func outOfCorner() -> Bool{
+        for player in teamB{
+            //check corners
+            if player.position.x > goalPostB1.position.x-goalPostB1.size.width/2 || player.position.x < goalPostA1.position.x + goalPostA1.size.width/2{
+                if player.position.x < frame.midX{
+                    if player.position.y < goalPostA1.position.y && player.position.y > goalPostA2.position.y{
+                        if Bool.random(){
+                            player.physicsBody!.velocity = CGVectorMake(frame.midX - player.position.x, goalPostA1.position.y-player.position.y)
+                        }else{
+                            player.physicsBody!.velocity = CGVectorMake(frame.midX - player.position.x, goalPostA2.position.y - player.position.y)
+                        }
+                        addMarker(UIColor.blackColor(), point: player.position)
+                        return true
+                    }
+                }
+                if player.position.y > goalPostA1.position.y{
+                    if abs(player.physicsBody!.velocity.dx) < 100{
+                        player.physicsBody!.velocity = CGVectorMake(frame.midX - player.position.x, goalPostA1.position.y-player.position.y)
+                        addMarker(UIColor.blackColor(), point: player.position)
+                        return true
+                    }
+                    
+                }
+                if player.position.y < goalPostA2.position.y{
+                    if abs(player.physicsBody!.velocity.dx) < 100{
+                        player.physicsBody!.velocity = CGVectorMake(frame.midX - player.position.x, goalPostA2.position.y - player.position.y)
+                        addMarker(UIColor.blackColor(), point: player.position)
+                        return true
+                    }
+                }
+            }
+        }
+        return false
+        
+    }
+    func hitBall() -> Bool{
+        let ballMultiplier:CGFloat = 0.5
+        var ballFuturePosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*ballMultiplier, ball.position.y + ball.physicsBody!.velocity.dy*ballMultiplier)
+        while !frame.contains(ballFuturePosition){
+            let firstVelocity = CGVectorMake(ballFuturePosition.x - ball.position.x, ballFuturePosition.y - ball.position.y)
+            if ballFuturePosition.x < 0 || ballFuturePosition.x > frame.maxX{
+                if detectBarriers(ball.position,velocity: firstVelocity, xLimit: ballFuturePosition.x, fromRight: firstVelocity.dx < 0) == 100{
+                    return false
+                }
+                let secondVelocity = CGVectorMake(-firstVelocity.dx, firstVelocity.dy)
+                ballFuturePosition.x = -ballFuturePosition.x
+                if detectBarriers(ball.position,velocity: secondVelocity, xLimit: ballFuturePosition.x, fromRight: secondVelocity.dx < 0) == 100{
+                    return false
+                }
+
+            }
+            if ballFuturePosition.y < 0 || ballFuturePosition.y>0{
+                if detectBarriers(ball.position, velocity: firstVelocity, xLimit: ballFuturePosition.x, fromRight: firstVelocity.dx < 0) == 100{
+                    return false
+                }
+                let secondVelocity = CGVectorMake(firstVelocity.dx, -firstVelocity.dy)
+                if detectBarriers(ball.position, velocity: firstVelocity, xLimit: ballFuturePosition.x, fromRight: secondVelocity.dx < 0) == 100{
+                    return false
+                }
+                ballFuturePosition.y = -ballFuturePosition.y
+            }
+        }
+        var shots = [(Player, CGVector, Int)]()
+        for player in teamB{
+            let playerVelocity = CGVectorMake(2*ballMultiplier*(ballFuturePosition.x-player.position.x), 2*ballMultiplier*(ballFuturePosition.y - player.position.y))
+            let numBar = detectBarriers(player.position,velocity: playerVelocity, xLimit: ball.position.x, fromRight: playerVelocity.dx < 0)
+            if playerVelocity.dx < 0{
+                shots.append((player,playerVelocity,numBar))
+            }
+        }
+        var minBar = 10
+        var bestShot: (Player, CGVector, Int)?
+        for shot in shots{
+            if shot.2 < minBar{
+                minBar = shot.2
+                bestShot = shot
+                bestShot!.1 = dampVelocity(bestShot!.1)
+            }
+        }
+        if let finalShot = bestShot{
+            let finalVelocity = dampVelocity(finalShot.1)
+            finalShot.0.physicsBody!.velocity = finalVelocity
+            addMarker(UIColor.redColor(), point: finalShot.0.position)
+            return true
+        }
+        return false
+        
+    }
+    func getBehindBall() -> Bool{
+        if ball.position.x < frame.midX{
+            return false
+        }
+        let deflater:CGFloat = 1/3
+        for player in teamB{
+            if player.position.x < frame.maxX/3{
+                player.physicsBody!.velocity = CGVectorMake((goalLineB - player.position.x) * deflater, (frame.midY-player.position.y) * deflater)
+                addMarker(UIColor.purpleColor(), point: player.position)
+                return true
+            }
+        }
+        return false
+    }
+    func addMarker(color: UIColor, point: CGPoint){
+//        let blue = SKSpriteNode(imageNamed: "PlayerA")
+//        blue.runAction(SKAction.colorizeWithColor(color, colorBlendFactor: 1.0, duration: 0.0001))
+//        blue.size = CGSizeMake(10,10)
+//        blue.position = point
+//        blue.zPosition = 2
+//        blue.name = "blue"
+//        addChild(blue)
+    }
 }
+
