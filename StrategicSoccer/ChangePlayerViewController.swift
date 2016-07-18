@@ -10,7 +10,6 @@ import UIKit
 
 extension UITableViewCell {
     func enable(on: Bool) {
-        self.userInteractionEnabled = on
         for view in contentView.subviews {
             if view.tag != 99{
                 view.userInteractionEnabled = on
@@ -20,8 +19,9 @@ extension UITableViewCell {
     }
 }
 class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    var allFlags: [String] = ["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria" ,"Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo, Democratic Republic of the","Congo, Republic of the","Costa Rica","Cote d'Ivoire","Croatia","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","North Korea","Northern Ireland","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Romania","Russia","Rwanda","St Kitts and Nevis","St Lucia","St Vincent and the Grenadines","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Scotland","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trunidad and Tobago","Tunisia","Turkey","Turkmenistan","Turks and Caicos Islands","U.S. Virgin Islands","Uganda","Ukraine","United Arab Emirates","United States","Uruguay","Uzbekistan","Vanuatu","Venezuela","Vietnam","Wales","Yemen","Zambia","Zimbabwe"]
+    var lockedFlags: [String] = ["AFGHANISTAN","ALBANIA","ALGERIA","ANDORRA","ANGOLA","ANTIGUA AND BARBUDA","ARGENTINA","ARMENIA","AUSTRALIA","AUSTRIA" ,"AZERBAIJAN","BAHAMAS","BAHRAIN","BANGLADESH","BARBADOS","BELARUS","BELGIUM","BELIZE","BENIN","BHUTAN","BOLIVIA","BOSNIA AND HERZEGOVINA","BOTSWANA","BRAZIL","BRUNEI","BULGARIA","BURKINA FASO","BURUNDI","CABO VERDE","CAMBODIA","CAMEROON","CANADA","CENTRAL AFRICAN REPUBLIC","CHAD","CHILE","CHINA","COLOMBIA","COMOROS","CONGO, DEMOCRATIC REPUBLIC OF THE","CONGO, REPUBLIC OF THE","COSTA RICA","COTE D'IVOIRE","CROATIA","CUBA","CYPRUS","CZECH REPUBLIC","DENMARK","DJIBOUTI","DOMINICA","DOMINICAN REPUBLIC","ECUADOR","EGYPT","EL SALVADOR","EQUATORIAL GUINEA","ERITREA","ESTONIA","ETHIOPIA","FIJI","FINLAND","FRANCE","GABON","GAMBIA","GEORGIA","GERMANY","GHANA","GREECE","GRENADA","GUATEMALA","GUINEA","GUINEA-BISSAU","GUYANA","HAITI","HONDURAS","HUNGARY","ICELAND","INDIA","INDONESIA","IRAN","IRAQ","IRELAND","ISRAEL","ITALY","JAMAICA","JAPAN","JORDAN","KAZAKHSTAN","KENYA","KIRIBATI","KOSOVO","KUWAIT","KYRGYZSTAN","LAOS","LATVIA","LEBANON","LESOTHO","LIBERIA","LIBYA","LIECHTENSTEIN","LITHUANIA","LUXEMBOURG","MACAU","MACEDONIA","MADAGASCAR","MALAWI","MALAYSIA","MALDIVES","MALI","MALTA","MAURITANIA","MAURITIUS","MEXICO","MOLDOVA","MONACO","MONGOLIA","MONTENEGRO","MONTSERRAT","MOROCCO","MOZAMBIQUE","MYANMAR","NAMIBIA","NAURU","NEPAL","NETHERLANDS","NEW CALEDONIA","NEW ZEALAND","NICARAGUA","NIGER","NIGERIA","NORTH KOREA","NORTHERN IRELAND","NORWAY","OMAN","PAKISTAN","PALESTINE","PANAMA","PAPUA NEW GUINEA","PARAGUAY","PERU","PHILIPPINES","POLAND","PORTUGAL","PUERTO RICO","QATAR","ROMANIA","RUSSIA","RWANDA","ST KITTS AND NEVIS","ST LUCIA","ST VINCENT AND THE GRENADINES","SAMOA","SAN MARINO","SAO TOME AND PRINCIPE","SAUDI ARABIA","SCOTLAND","SENEGAL","SERBIA","SEYCHELLES","SIERRA LEONE","SINGAPORE","SLOVAKIA","SLOVENIA","SOLOMON ISLANDS","SOMALIA","SOUTH AFRICA","SOUTH KOREA","SOUTH SUDAN","SPAIN","SRI LANKA","SUDAN","SURINAME","SWAZILAND","SWEDEN","SWITZERLAND","SYRIA","TAIWAN","TAJIKISTAN","TANZANIA","THAILAND","TIMOR-LESTE","TOGO","TONGA","TRUNIDAD AND TOBAGO","TUNISIA","TURKEY","TURKMENISTAN","TURKS AND CAICOS ISLANDS","U.S. VIRGIN ISLANDS","UGANDA","UKRAINE","UNITED ARAB EMIRATES","UNITED STATES","URUGUAY","UZBEKISTAN","VANUATU","VENEZUELA","VIETNAM","WALES","YEMEN","ZAMBIA","ZIMBABWE"]
     var unlockedFlags:[String]!
+    var currentUnlocked = [String]()
     
     var parent: TitleViewController!
     var defaultA: String!
@@ -30,6 +30,7 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet var PlayerA: UITableView!
     @IBOutlet var PlayerB: UITableView!
 
+    
     @IBAction func BackArrow(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(true)
     }
@@ -40,7 +41,7 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         self.PlayerB.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         setBackground()
         for country in unlockedFlags{
-            allFlags.removeAtIndex(allFlags.indexOf(country)!)
+            lockedFlags.removeAtIndex(lockedFlags.indexOf(country)!)
         }
         unlockedFlags = unlockedFlags.sort()
 
@@ -52,26 +53,31 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         // Dispose of any resources that can be recreated.
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allFlags.count + unlockedFlags.count
+        return lockedFlags.count + unlockedFlags.count
     }
-    
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        let flag = findFlag(indexPath.row)
+        if !unlockedFlags.contains(flag) && !currentUnlocked.contains(flag){
+            return nil
+        }
+        return indexPath
+    }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
-        cell.textLabel?.text = findFlag(indexPath.row).uppercaseString
-        
-
+        cell.textLabel?.text = findFlag(indexPath.row)
         cell.textLabel?.font = UIFont(name: "Optima", size: 18)
         
-        let lock = UIImageView(image:UIImage(named:"Locked"))
+        //let lock = UIImageView(image:UIImage(named:"Locked"))
         
-        lock.frame = CGRectMake(0,0,1/2*cell.frame.size.height,cell.frame.size.height*3/4)
+        let lock = UIButton(frame: CGRectMake(0,0,1/2*cell.frame.size.height,cell.frame.size.height*3/4))
         lock.frame.origin = CGPointMake(cell.frame.size.width/2-lock.frame.width/2, cell.frame.size.height/8)
         lock.tag = 99
-        
-        if indexPath.row>=unlockedFlags.count{
+        lock.addTarget(self, action: #selector(unlockFlag),forControlEvents: .TouchUpInside)
+        lock.setImage(UIImage(imageLiteral: "Locked"), forState: .Normal)
+        if indexPath.row>=unlockedFlags.count && !currentUnlocked.contains(findFlag(indexPath.row)){
             cell.contentView.addSubview(lock)
-
             cell.enable(false)
+            cell.selectionStyle = .None
         }else{
             cell.enable(true)
             for subview in cell.contentView.subviews{
@@ -79,6 +85,7 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
                     subview.removeFromSuperview()
                 }
             }
+            cell.selectionStyle = .Default
         }
         cell.imageView!.image = UIImage(imageLiteral: findFlag(indexPath.row))
         if tableView == PlayerB{
@@ -101,6 +108,17 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
             defaultB = findFlag(indexPath.row)
         }
     }
+    func unlockFlag(sender:UIButton!){
+        if let cell = sender.superview?.superview as? UITableViewCell{
+            cell.enable(true)
+            for subview in cell.contentView.subviews{
+                if subview.tag == 99{
+                    subview.removeFromSuperview()
+                }
+            }
+            currentUnlocked.append(cell.textLabel!.text!)
+        }
+    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         let indexPathA = NSIndexPath(forItem: findIndex(defaultA), inSection: 0)
@@ -116,19 +134,27 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         parent.playerB = defaultB
         defaults.setObject(defaultA,forKey: playerAKey)
         defaults.setObject(defaultB, forKey: playerBKey)
+        let unlocked = Unlockable()
+
+        for flag in currentUnlocked{
+            unlockedFlags.append(flag)
+        }
+        unlocked.unlockedFlags = unlockedFlags
+        parent.unlockedFlags = unlockedFlags
+        NSKeyedArchiver.archiveRootObject(unlockedFlags, toFile: Unlockable.ArchiveURL.path!)
         
     }
     func findIndex(flag:String)->Int{
         if unlockedFlags.contains(flag){
             return unlockedFlags.indexOf(flag)!
         }
-        return unlockedFlags.count + allFlags.indexOf(flag)!
+        return unlockedFlags.count + lockedFlags.indexOf(flag)!
     }
     func findFlag(index: Int) -> String{
         if index < unlockedFlags.count{
             return unlockedFlags[index]
         }
-        return allFlags[index-unlockedFlags.count]
+        return lockedFlags[index-unlockedFlags.count]
     }
     
     /*

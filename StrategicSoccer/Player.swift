@@ -14,7 +14,7 @@ class Player: SKSpriteNode {
     var playerSize: CGSize!
     
     init(){
-        mTexture = SKTexture(imageNamed: "Brazil")
+        mTexture = SKTexture(imageNamed: "BRAZIL")
         mTeamA = false
         super.init(texture: mTexture, color: UIColor.clearColor(), size: mTexture.size())
     }

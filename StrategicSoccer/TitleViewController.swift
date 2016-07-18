@@ -52,15 +52,17 @@ class TitleViewController: UIViewController {
     var defaultAI = 0
     var unlockedFlags:[String]!
     
-    var playerA = "Afghanistan"
-    var playerB = "Albania"
+    var playerA = "AFGHANISTAN"
+    var playerB = "ALBANIA"
     
     override func viewDidLoad() {
         UIView.setAnimationsEnabled(true)
         super.viewDidLoad()
         if let playA = defaults.objectForKey(playerAKey){
             playerA = playA as! String
+            playerA = playerA.uppercaseString
             playerB = defaults.objectForKey(playerBKey) as! String
+            playerB = playerB.uppercaseString
         }
         if let storedMode = defaults.objectForKey(modeKey){
             defaultMode = Mode(rawValue: storedMode as! Int)!
@@ -72,8 +74,12 @@ class TitleViewController: UIViewController {
             defaultAI = AIDifficulty as! Int
         }
         // bring out unlocked
-        let unlocked = Unlockable()
-        unlockedFlags = unlocked.unlockedFlags
+        if let storedUnlock = NSKeyedUnarchiver.unarchiveObjectWithFile(Unlockable.ArchiveURL.path!) as? [String]{
+            unlockedFlags = storedUnlock
+        }
+        else{
+            unlockedFlags = Unlockable().unlockedFlags
+        }
         
         skView = self.view as! SKView
         skView.ignoresSiblingOrder = true
