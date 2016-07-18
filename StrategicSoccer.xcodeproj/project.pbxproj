@@ -12,6 +12,7 @@
 		892182951D35B60100A2F274 /* MiniGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892182941D35B60100A2F274 /* MiniGoal.swift */; };
 		8932AD6B1D13BD0100F6AC84 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8932AD6A1D13BD0100F6AC84 /* Mode.swift */; };
 		893B41C21D2E221B00E191BE /* ScoreBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B41C11D2E221B00E191BE /* ScoreBoard.swift */; };
+		8944D3CC1D3C986F00D90023 /* Unlockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8944D3CB1D3C986F00D90023 /* Unlockable.swift */; };
 		897E8D291D258E6000DCAC9F /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897E8D281D258E6000DCAC9F /* TableViewCell.swift */; };
 		89B97F811D20F5DB00588A21 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B97F801D20F5DB00588A21 /* TitleViewController.swift */; };
 		89B97F821D220CAC00588A21 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */; };
@@ -59,6 +60,7 @@
 		892182941D35B60100A2F274 /* MiniGoal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniGoal.swift; sourceTree = "<group>"; };
 		8932AD6A1D13BD0100F6AC84 /* Mode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		893B41C11D2E221B00E191BE /* ScoreBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreBoard.swift; sourceTree = "<group>"; };
+		8944D3CB1D3C986F00D90023 /* Unlockable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unlockable.swift; sourceTree = "<group>"; };
 		897E8D281D258E6000DCAC9F /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		89B97F801D20F5DB00588A21 /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		89B97F851D2221AE00588A21 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				DC83DCFB1D1089EA00E1C3F8 /* AppDelegate.swift */,
 				DC83DCFD1D1089EA00E1C3F8 /* GameScene.sks */,
 				DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */,
+				8944D3CB1D3C986F00D90023 /* Unlockable.swift */,
 				8932AD6A1D13BD0100F6AC84 /* Mode.swift */,
 				892182901D34C67000A2F274 /* MiniGameViewController.swift */,
 				89EFF7C01D122FBA004DEA93 /* Ball.swift */,
@@ -322,6 +325,7 @@
 				89EE42CD1D1A646E0093538A /* MenuButton.swift in Sources */,
 				89F6A2C01D30DFDE0090618E /* ChangePointViewController.swift in Sources */,
 				8932AD6B1D13BD0100F6AC84 /* Mode.swift in Sources */,
+				8944D3CC1D3C986F00D90023 /* Unlockable.swift in Sources */,
 				DC83DCFC1D1089EA00E1C3F8 /* AppDelegate.swift in Sources */,
 				89B97F811D20F5DB00588A21 /* TitleViewController.swift in Sources */,
 				89B97F821D220CAC00588A21 /* GameScene.swift in Sources */,

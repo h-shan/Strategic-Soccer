@@ -50,6 +50,7 @@ class TitleViewController: UIViewController {
     var defaultMode = Mode.threeMinute
     var defaultPlayers = PlayerOption.three
     var defaultAI = 0
+    var unlockedFlags:[String]!
     
     var playerA = "Afghanistan"
     var playerB = "Albania"
@@ -70,6 +71,10 @@ class TitleViewController: UIViewController {
         if let AIDifficulty = defaults.objectForKey(AIKey){
             defaultAI = AIDifficulty as! Int
         }
+        // bring out unlocked
+        let unlocked = Unlockable()
+        unlockedFlags = unlocked.unlockedFlags
+        
         skView = self.view as! SKView
         skView.ignoresSiblingOrder = true
         scene = GameScene(size: skView.bounds.size)
@@ -126,6 +131,7 @@ class TitleViewController: UIViewController {
             destinationVC.parent = self
             destinationVC.defaultA = playerA
             destinationVC.defaultB = playerB
+            destinationVC.unlockedFlags = unlockedFlags
         }
         if segue.identifier == "SinglePlayerSegue"{
             let destinationVC = segue.destinationViewController as! GameViewController
