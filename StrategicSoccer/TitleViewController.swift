@@ -13,6 +13,7 @@ let modeKey = "Mode"
 let playerAKey = "PlayerA"
 let playerBKey = "PlayerB"
 let playerOptionKey = "PlayerOption"
+let AIKey = "AIDifficulty"
 let gold = UIColor(red: 161/255.0, green: 155/255.0, blue: 75/255.0, alpha: 1.0).CGColor
 let optima = UIFont(name: "Optima", size: 18)
 let screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -48,6 +49,7 @@ class TitleViewController: UIViewController {
     var skView: SKView!
     var defaultMode = Mode.threeMinute
     var defaultPlayers = PlayerOption.three
+    var defaultAI = 0
     
     var playerA = "Afghanistan"
     var playerB = "Albania"
@@ -64,6 +66,9 @@ class TitleViewController: UIViewController {
         }
         if let storedPlayers = defaults.objectForKey(playerOptionKey){
             defaultPlayers = PlayerOption(rawValue: storedPlayers as! Int)!
+        }
+        if let AIDifficulty = defaults.objectForKey(AIKey){
+            defaultAI = AIDifficulty as! Int
         }
         skView = self.view as! SKView
         skView.ignoresSiblingOrder = true
@@ -113,6 +118,7 @@ class TitleViewController: UIViewController {
             let destinationVC = segue.destinationViewController as! SettingsViewController
             destinationVC.defaultMode = self.defaultMode
             destinationVC.defaultPlayers = defaultPlayers
+            destinationVC.defaultAI = defaultAI
             destinationVC.parent = self
         }
         if segue.identifier == "ChangePlayersSegue"{
@@ -127,6 +133,7 @@ class TitleViewController: UIViewController {
             scene.playerOption = defaultPlayers
             scene.countryA = playerA
             scene.countryB = playerB
+            scene.AIDifficulty = defaultAI
             destinationVC.scene = scene
             destinationVC.parent = self
             

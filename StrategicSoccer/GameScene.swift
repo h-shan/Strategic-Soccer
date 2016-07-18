@@ -56,6 +56,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var borderBody: SKPhysicsBody!
 
     var singlePlayer:Bool!
+    var AIDifficulty: Int!
     var cAggro:Int?
     var cDef:Int?
     
@@ -538,31 +539,43 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
-        if (moveTimer?.getElapsedTime())!%0.2<0.1 && (moveTimer?.getElapsedTime())! > 0.4 && !firstTurn{
-            for player in players{
-                if !player.mTeamA{
-                    if detectStraightShot(player){
-                        switchTurns()
-                        return
-                    }
-                    if saveGoal(){
-                        switchTurns()
-                        return
+        
+        if AIDifficulty >= 3 {
+            if (moveTimer?.getElapsedTime())!%0.2<0.1 && (moveTimer?.getElapsedTime())! > 0.4 && !firstTurn{
+                for player in players{
+                    if !player.mTeamA{
+                        if detectStraightShot(player){
+                            switchTurns()
+                            return
+                        }
+                        if AIDifficulty >= 4{
+                            if saveGoal(){
+                                switchTurns()
+                                return
+                            }
+                        }
                     }
                 }
             }
         }
         if moveTimer?.getElapsedTime()>2.5{
-            
             if firstTurn{
                 firstMove()
                 firstTurn = false
             }
             else{
-                improvePosition()
+                switch(AIDifficulty){
+                case 1: hitBallBasic(); break
+                case 2: if !hitBallAdvanced() {hitBallBasic()}; break
+                case 3: if !hitBallAdvanced() {hitBallBasic()}; break
+                case 4: if !hitBallAdvanced() {hitBallBasic()}; break
+                case 5: improvePosition(); break
+                default: break
+                }
             }
             switchTurns()
         }
+        
     }
     func firstMove(){
         //if playerOption == PlayerOption.three{
@@ -745,30 +758,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     func dampVelocity(velocity: CGVector) -> CGVector{
         var dampedVelocity = velocity
-        if velocity.dx < 100 && velocity.dx > 0{
-            dampedVelocity.dy = velocity.dy*100/velocity.dx
-            dampedVelocity.dx = 100
+        let maxX:CGFloat = 500
+        let minX:CGFloat = 100
+        let maxY:CGFloat = 300
+        if velocity.dx < minX && velocity.dx > 0{
+            dampedVelocity.dy = velocity.dy*minX/velocity.dx
+            dampedVelocity.dx = minX
         }
-        if velocity.dx > -100 && velocity.dx < 0{
-            dampedVelocity.dy = -velocity.dy*100/velocity.dx
-            dampedVelocity.dx = -100
+        if velocity.dx > -minX && velocity.dx < 0{
+            dampedVelocity.dy = -velocity.dy*minX/velocity.dx
+            dampedVelocity.dx = -minX
         }
         
-        if velocity.dx > 500{
-            dampedVelocity.dy = velocity.dy*500/velocity.dx
-            dampedVelocity.dx = 500
+        if velocity.dx > maxX{
+            dampedVelocity.dy = velocity.dy*maxX/velocity.dx
+            dampedVelocity.dx = maxX
         }
-        if velocity.dy > 500{
-            dampedVelocity.dx = velocity.dx*500/velocity.dy
-            dampedVelocity.dy = 500
+        if velocity.dy > maxY{
+            dampedVelocity.dx = velocity.dx*maxY/velocity.dy
+            dampedVelocity.dy = maxY
         }
-        if velocity.dx < -500{
-            dampedVelocity.dy = -velocity.dy*500/velocity.dx
-            dampedVelocity.dx = -500
+        if velocity.dx < -maxX{
+            dampedVelocity.dy = -velocity.dy*maxX/velocity.dx
+            dampedVelocity.dx = -maxX
         }
-        if velocity.dy < -500{
-            dampedVelocity.dx = -velocity.dx*500/velocity.dy
-            dampedVelocity.dy = -500
+        if velocity.dy < -maxY{
+            dampedVelocity.dx = -velocity.dx*maxY/velocity.dy
+            dampedVelocity.dy = -maxY
         }
         return dampedVelocity
     }
@@ -777,38 +793,44 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         if Bool.random(){
-            if hitBall(){
+            if hitBallAdvanced(){
                 return
             }
         }
-        getBehindBall()
+        if getBehindBall(){
+            return
+        }
+        deflectPlayer()
     }
     func outOfCorner() -> Bool{
         for player in teamB{
             //check corners
-            if player.position.x > goalPostB1.position.x-goalPostB1.size.width/2 || player.position.x < goalPostA1.position.x + goalPostA1.size.width/2{
+            if player.position.x > goalPostB1.position.x-goalPostB1.size.width || player.position.x < goalPostA1.position.x + goalPostA1.size.width{
+                // player in opponent goal
                 if player.position.x < frame.midX{
                     if player.position.y < goalPostA1.position.y && player.position.y > goalPostA2.position.y{
                         if Bool.random(){
-                            player.physicsBody!.velocity = CGVectorMake(frame.midX - player.position.x, goalPostA1.position.y-player.position.y)
+                            player.physicsBody!.velocity = CGVectorMake((frame.midX - player.position.x)/3, (goalPostA1.position.y-player.position.y)/3)
                         }else{
-                            player.physicsBody!.velocity = CGVectorMake(frame.midX - player.position.x, goalPostA2.position.y - player.position.y)
+                            player.physicsBody!.velocity = CGVectorMake((frame.midX - player.position.x)/3, (goalPostA2.position.y - player.position.y)/3)
                         }
                         addMarker(UIColor.blackColor(), point: player.position)
                         return true
                     }
                 }
+                // player in top corners
                 if player.position.y > goalPostA1.position.y{
                     if abs(player.physicsBody!.velocity.dx) < 100{
-                        player.physicsBody!.velocity = CGVectorMake(frame.midX - player.position.x, goalPostA1.position.y-player.position.y)
+                        player.physicsBody!.velocity = CGVectorMake((frame.midX - player.position.x)/3, (goalPostA1.position.y-player.position.y)/3)
                         addMarker(UIColor.blackColor(), point: player.position)
                         return true
                     }
                     
                 }
+                //player in bottom corners
                 if player.position.y < goalPostA2.position.y{
                     if abs(player.physicsBody!.velocity.dx) < 100{
-                        player.physicsBody!.velocity = CGVectorMake(frame.midX - player.position.x, goalPostA2.position.y - player.position.y)
+                        player.physicsBody!.velocity = CGVectorMake((frame.midX - player.position.x)/3, (goalPostA2.position.y - player.position.y)/3)
                         addMarker(UIColor.blackColor(), point: player.position)
                         return true
                     }
@@ -818,7 +840,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return false
         
     }
-    func hitBall() -> Bool{
+    func hitBallBasic(){
+        let random: UInt32
+        switch(playerOption){
+        case .three: random = arc4random_uniform(3); break
+        case .four: random = arc4random_uniform(4); break
+        }
+        let time:CGFloat = 0.5
+        let selectedPlayer = teamB[Int(random)]
+        let ballFuturePosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*time,ball.position.y + ball.physicsBody!.velocity.dy*time)
+        selectedPlayer.physicsBody!.velocity = dampVelocity(CGVectorMake((ballFuturePosition.x-selectedPlayer.position.x)/time, (ballFuturePosition.y-selectedPlayer.position.y)/time))
+        addMarker(UIColor.magentaColor(), point: selectedPlayer.position)
+    }
+    func hitBallAdvanced() -> Bool{
         let ballMultiplier:CGFloat = 0.5
         var ballFuturePosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*ballMultiplier, ball.position.y + ball.physicsBody!.velocity.dy*ballMultiplier)
         while !frame.contains(ballFuturePosition){
@@ -828,13 +862,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     return false
                 }
                 let secondVelocity = CGVectorMake(-firstVelocity.dx, firstVelocity.dy)
-                ballFuturePosition.x = -ballFuturePosition.x
+                if ballFuturePosition.x < 0{
+                    ballFuturePosition.x = -ballFuturePosition.x
+                }
+                else if ballFuturePosition.x > frame.maxX{
+                    ballFuturePosition.x = 2*frame.maxX-ballFuturePosition.x
+                }
                 if detectBarriers(ball.position,velocity: secondVelocity, xLimit: ballFuturePosition.x, fromRight: secondVelocity.dx < 0) == 100{
                     return false
                 }
 
             }
-            if ballFuturePosition.y < 0 || ballFuturePosition.y>0{
+            if ballFuturePosition.y < 0 || ballFuturePosition.y>frame.maxY{
                 if detectBarriers(ball.position, velocity: firstVelocity, xLimit: ballFuturePosition.x, fromRight: firstVelocity.dx < 0) == 100{
                     return false
                 }
@@ -842,7 +881,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if detectBarriers(ball.position, velocity: firstVelocity, xLimit: ballFuturePosition.x, fromRight: secondVelocity.dx < 0) == 100{
                     return false
                 }
-                ballFuturePosition.y = -ballFuturePosition.y
+                if ballFuturePosition.y < 0{
+                    ballFuturePosition.y = -ballFuturePosition.y
+                }
+                else if ballFuturePosition.y > frame.maxY{
+                    ballFuturePosition.y = 2*frame.maxY-ballFuturePosition.y
+                }
             }
         }
         var shots = [(Player, CGVector, Int)]()
@@ -878,21 +922,49 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let deflater:CGFloat = 1/3
         for player in teamB{
             if player.position.x < frame.maxX/3{
-                player.physicsBody!.velocity = CGVectorMake((goalLineB - player.position.x) * deflater, (frame.midY-player.position.y) * deflater)
+                player.physicsBody!.velocity = dampVelocity(CGVectorMake((goalLineB - player.position.x) * deflater, (frame.midY-player.position.y) * deflater))
                 addMarker(UIColor.purpleColor(), point: player.position)
                 return true
             }
         }
         return false
     }
+    func deflectPlayer(){
+        var closestDistance:CGFloat = 1000
+        var closestOpponent = playerA1
+        for player in teamA{
+            if distance(player.position,point2:ball.position) < closestDistance{
+                closestDistance = distance(player.position, point2: ball.position)
+                closestOpponent = player
+            }
+        }
+        var shots = [(Player,CGVector, Int)]()
+        
+        for player in teamB{
+            let shotVelocity = CGVectorMake(closestOpponent.position.x-player.position.x,closestOpponent.position.y-player.position.y)
+            let numBar = detectBarriers(player.position,velocity: shotVelocity, xLimit: closestOpponent.position.x, fromRight: shotVelocity.dx < 0)
+            shots.append(player,shotVelocity, numBar)
+        }
+        var minBar = 10
+        var bestShot: (Player, CGVector, Int)?
+        for shot in shots{
+            if shot.2 < minBar{
+                minBar = shot.2
+                bestShot = shot
+            }
+        }
+        bestShot!.1 = dampVelocity(bestShot!.1)
+        bestShot!.0.physicsBody!.velocity = bestShot!.1
+        addMarker(UIColor.brownColor(),point: bestShot!.0.position)
+    }
     func addMarker(color: UIColor, point: CGPoint){
-//        let blue = SKSpriteNode(imageNamed: "PlayerA")
-//        blue.runAction(SKAction.colorizeWithColor(color, colorBlendFactor: 1.0, duration: 0.0001))
-//        blue.size = CGSizeMake(10,10)
-//        blue.position = point
-//        blue.zPosition = 2
-//        blue.name = "blue"
-//        addChild(blue)
+        let blue = SKSpriteNode(imageNamed: "PlayerA")
+        blue.runAction(SKAction.colorizeWithColor(color, colorBlendFactor: 1.0, duration: 0.0001))
+        blue.size = CGSizeMake(10,10)
+        blue.position = point
+        blue.zPosition = 2
+        blue.name = "blue"
+        addChild(blue)
     }
 }
 

@@ -33,6 +33,9 @@ public enum Mode:Int {
 public enum type{
     case timed, points
 }
+public enum difficulty{
+    case easy,medium,hard
+}
 public enum PlayerOption:Int{
     case three=3, four=4
 }

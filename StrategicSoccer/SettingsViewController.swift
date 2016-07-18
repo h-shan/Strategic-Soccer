@@ -40,6 +40,7 @@ class SettingsViewController: UIViewController {
     var allButtons: [UIButton]!
     var defaultMode: Mode!
     var defaultPlayers: PlayerOption!
+    var defaultAI: Int!
     var parent: TitleViewController!
     var timeVC: ChangeTimeViewController!
     var pointVC: ChangePointViewController!
@@ -52,6 +53,13 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var ModeTimed: UIButton!
     @IBOutlet weak var CurrentMode: UILabel!
     @IBOutlet weak var CurrentPlayers: UILabel!
+    @IBOutlet weak var AIDifficulty: UISlider!
+    @IBOutlet weak var DiffValue: UILabel!
+    @IBAction func AIDifficulty(sender: AnyObject) {
+        AIDifficulty.setValue(round(AIDifficulty.value), animated: true)
+        DiffValue.text = String(Int(AIDifficulty.value))
+        defaultAI = Int(AIDifficulty.value)
+    }
     @IBAction func PlayerFour(sender: UIButton) {
         playerButtonGroup.selectButton(sender)
         defaultPlayers = PlayerOption.four
@@ -74,7 +82,6 @@ class SettingsViewController: UIViewController {
         defaultMode = Mode.threeMinute
         TimeView.hidden = false
         PointView.hidden = true
-        
     }
 
     override func viewDidLoad() {
@@ -84,6 +91,11 @@ class SettingsViewController: UIViewController {
         TimeView.hidden = true
         PointView.hidden = true
         
+        AIDifficulty.minimumValue = 1
+        AIDifficulty.maximumValue = 5
+        AIDifficulty.setValue(Float(defaultAI), animated: false)
+        DiffValue.text = String(defaultAI)
+
         setBackground()
         let modeButtons: Set<UIButton> = [ModeTimed,ModePoints]
         modeButtonGroup = buttonGroup(buttons: modeButtons)
@@ -127,8 +139,10 @@ class SettingsViewController: UIViewController {
         
         parent.defaultMode = defaultMode
         parent.defaultPlayers = defaultPlayers!
+        parent.defaultAI = defaultAI
         defaults.setInteger(defaultMode.rawValue, forKey: modeKey)
         defaults.setInteger(defaultPlayers!.rawValue, forKey: playerOptionKey)
+        defaults.setInteger(Int(AIDifficulty.value), forKey: AIKey)
     }
     
 
@@ -145,14 +159,14 @@ class SettingsViewController: UIViewController {
     }
     func updateModeLabel(){
         switch(defaultMode.rawValue){
-        case 0:CurrentMode.text = "1 MINUTES"; break
-        case 1:CurrentMode.text = "3 MINUTES"; break
-        case 2:CurrentMode.text = "5 MINUTES"; break
-        case 3:CurrentMode.text = "10 MINUTES"; break
-        case 4:CurrentMode.text = "3 POINTS"; break
-        case 5:CurrentMode.text = "5 POINTS"; break
-        case 6:CurrentMode.text = "10 POINTS"; break
-        case 7:CurrentMode.text = "20 POINTS"; break
+        case 0:CurrentMode.text = "1 MIN"; break
+        case 1:CurrentMode.text = "3 MIN"; break
+        case 2:CurrentMode.text = "5 MIN"; break
+        case 3:CurrentMode.text = "10 MIN"; break
+        case 4:CurrentMode.text = "3 PTS"; break
+        case 5:CurrentMode.text = "5 PTS"; break
+        case 6:CurrentMode.text = "10 PTS"; break
+        case 7:CurrentMode.text = "20 PTS"; break
         default: break
         }
     }
