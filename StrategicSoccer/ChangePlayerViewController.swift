@@ -26,13 +26,34 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
     var parent: TitleViewController!
     var defaultA: String!
     var defaultB: String!
+    var boughtCell: UITableViewCell!
 
-    @IBOutlet var PlayerA: UITableView!
-    @IBOutlet var PlayerB: UITableView!
+    @IBOutlet weak var PlayerA: UITableView!
+    @IBOutlet weak var PlayerB: UITableView!
+    @IBOutlet weak var BuyFlagView: UIView!
+    @IBOutlet weak var warningText: UILabel!
+    @IBOutlet weak var warningFlag: UIImageView!
+    @IBOutlet weak var YesButton: UIButton!
+    @IBOutlet weak var NoButton: UIButton!
+    @IBOutlet weak var flagName: UILabel!
 
     
     @IBAction func BackArrow(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(true)
+    }
+    @IBAction func YesButton(sender: AnyObject){
+        boughtCell.enable(true)
+        for subview in boughtCell.contentView.subviews{
+            if subview.tag == 99{
+                subview.removeFromSuperview()
+            }
+        }
+        boughtCell.selectionStyle = .Default
+        currentUnlocked.append(boughtCell.textLabel!.text!)
+        BuyFlagView.hidden = true
+    }
+    @IBAction func NoButton(sender: AnyObject){
+        BuyFlagView.hidden = true
     }
     
     override func viewDidLoad() {
@@ -43,7 +64,11 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         for country in unlockedFlags{
             lockedFlags.removeAtIndex(lockedFlags.indexOf(country)!)
         }
+        PlayerA.showsVerticalScrollIndicator = false
+        PlayerB.showsVerticalScrollIndicator = false
+
         unlockedFlags = unlockedFlags.sort()
+        BuyFlagView.hidden = true
 
         // Do any additional setup after loading the view.
     }
@@ -119,16 +144,11 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     func unlockFlag(sender:UIButton!){
-        if let cell = sender.superview?.superview as? UITableViewCell{
-            cell.enable(true)
-            for subview in cell.contentView.subviews{
-                if subview.tag == 99{
-                    subview.removeFromSuperview()
-                }
-            }
-            cell.selectionStyle = .Default
-            currentUnlocked.append(cell.textLabel!.text!)
-        }
+        BuyFlagView.hidden = false
+        boughtCell = sender.superview!.superview as! UITableViewCell
+        warningFlag.image = boughtCell.imageView?.image
+        flagName.text = boughtCell.textLabel?.text
+        
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

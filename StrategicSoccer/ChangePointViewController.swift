@@ -26,6 +26,7 @@ class ChangePointViewController: UIViewController, UITableViewDelegate, UITableV
         self.pointOptions.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         items = [threePointKey, fivePointKey, tenPointKey, twentyPointKey]
         // Do any additional setup after loading the view.
+        pointOptions.showsVerticalScrollIndicator = false
     }
     
     override func didReceiveMemoryWarning() {

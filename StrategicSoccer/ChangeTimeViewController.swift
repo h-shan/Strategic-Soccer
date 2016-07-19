@@ -25,6 +25,7 @@ class ChangeTimeViewController: UIViewController, UITableViewDelegate, UITableVi
         self.timeOptions.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         items = [oneMinKey, threeMinKey, fiveMinKey,tenMinKey]
         // Do any additional setup after loading the view.
+        timeOptions.showsVerticalScrollIndicator = false
     }
     
     override func didReceiveMemoryWarning() {
