@@ -22,6 +22,7 @@ class PauseViewController: UIViewController {
         
     }
     @IBAction func Restart(sender: AnyObject) {
+        scene.physicsWorld.speed = 1
         scene = parent.scene
         parent.PauseView.hidden = true
         scene.paused = false
@@ -30,6 +31,7 @@ class PauseViewController: UIViewController {
         scene.firstTurn = true
     }
     @IBAction func Resume(sender: AnyObject) {
+        parent.scene.physicsWorld.speed = 1
         scene = parent.scene
         parent.PauseView.hidden = true
         scene.paused = false

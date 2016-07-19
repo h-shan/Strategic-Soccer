@@ -641,6 +641,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     let numBar = detectBarriers(player.position, velocity: straightShotVelocity, xLimit: goalLineB, fromRight: true)
                     if numBar == 0{
                         player.physicsBody!.velocity = dampVelocity(straightShotVelocity)
+                        addMarker(UIColor.blueColor(), point: player.position)
                         return true
                     }
                     if numBar < minBar{
@@ -773,17 +774,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func dampVelocity(velocity: CGVector) -> CGVector{
         var dampedVelocity = velocity
         let maxX:CGFloat = 500
-        //let minX:CGFloat = 100
         let maxY:CGFloat = 300
-        while abs(dampedVelocity.dx)>maxX || /*abs(velocity.dx)<minX ||*/ abs(dampedVelocity.dy) > maxY{
-//            if velocity.dx < minX && velocity.dx > 0{
-//                dampedVelocity.dy = velocity.dy*minX/velocity.dx
-//                dampedVelocity.dx = minX
-//            }
-//            if velocity.dx > -minX && velocity.dx < 0{
-//                dampedVelocity.dy = -velocity.dy*minX/velocity.dx
-//                dampedVelocity.dx = -minX
-//            }
+        while abs(dampedVelocity.dx)>maxX ||  abs(dampedVelocity.dy) > maxY{
+
             
             if dampedVelocity.dx > maxX{
                 dampedVelocity.dy = velocity.dy * maxX/velocity.dx
@@ -919,7 +912,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if shot.2 < minBar{
                 minBar = shot.2
                 bestShot = shot
-                bestShot!.1 = dampVelocity(bestShot!.1)
             }
         }
         if let finalShot = bestShot{
