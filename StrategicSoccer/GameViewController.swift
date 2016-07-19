@@ -16,6 +16,8 @@ class GameViewController: UIViewController {
     @IBOutlet weak var PauseView: UIView!
     @IBOutlet weak var skView: SKView!
     @IBOutlet weak var PauseButton: UIButton!
+    @IBOutlet weak var WonCoins: UIView!
+    @IBOutlet weak var NumberCoins: UILabel!
     @IBAction func PauseClicked(sender: AnyObject) {
         PauseView.hidden = false
         scene.moveTimer!.pause()
@@ -37,6 +39,7 @@ class GameViewController: UIViewController {
         /* Set the scale mode to scale to fit the window */
         scene.scaleMode = .AspectFill
         PauseView.hidden = true
+        WonCoins.alpha = 0.0
         
     }
     override func viewWillAppear(animated:Bool){
@@ -90,5 +93,13 @@ class GameViewController: UIViewController {
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+    }
+    func displayEarnings(numberWon: Int){
+        NumberCoins.text = String(numberWon)
+        UIView.animateWithDuration(1,delay:0.3,options: .CurveEaseIn, animations: {
+            self.WonCoins.alpha = CGFloat(0.8)
+            },completion: nil)
+        coins += numberWon
+        saveCoins()
     }
 }

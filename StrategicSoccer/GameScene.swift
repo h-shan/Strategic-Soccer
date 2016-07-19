@@ -10,6 +10,11 @@ import SpriteKit
 import Foundation
 import UIKit
 
+let difficulty1Multiplier = 1
+let difficulty2Multiplier = 1.5
+let difficulty3Multiplier = 2
+let difficulty4Multiplier = 3
+let difficulty5Multiplier = 4
 extension SKSpriteNode{
     func fadeIn(){
         self.runAction(SKAction.fadeAlphaTo(0.8, duration: 0.3))
@@ -55,7 +60,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var borderBody: SKPhysicsBody!
 
-    var singlePlayer:Bool!
+    var singlePlayer = false
     var AIDifficulty: Int!
     var cAggro:Int?
     var cDef:Int?
@@ -355,7 +360,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (goalDelay.getElapsedTime()>2){
             goalDelay.reset()
             scoreBackground.fadeOut()
-            score.text = ""
             setDynamicStates(true)
             moveTimer?.restart()
             if mode.getType() == .timed{
@@ -469,6 +473,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreBackground.fadeIn()
         if scoreA > scoreB {
             score.text = "Player A Wins"
+            if singlePlayer{
+                var coinsWon: Int?
+                switch (AIDifficulty){
+                case 1: coinsWon = (scoreA - scoreB)*difficulty1Multiplier; break
+                case 2: coinsWon = Int(round(Double(scoreA - scoreB)*difficulty2Multiplier)); break
+                case 3: coinsWon = (scoreA - scoreB)*difficulty3Multiplier; break
+                case 4: coinsWon = (scoreA - scoreB)*difficulty4Multiplier; break
+                case 5: coinsWon = (scoreA - scoreB)*difficulty5Multiplier; break
+                default: break
+                }
+                viewController.displayEarnings(coinsWon!)
+            }
         }
         else if scoreB > scoreA {
             score.text = "Player B Wins"

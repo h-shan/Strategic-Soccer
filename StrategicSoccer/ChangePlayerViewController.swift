@@ -36,20 +36,31 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var YesButton: UIButton!
     @IBOutlet weak var NoButton: UIButton!
     @IBOutlet weak var flagName: UILabel!
+    @IBOutlet weak var NotEnoughCoins: UIView!
 
     
     @IBAction func BackArrow(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(true)
     }
     @IBAction func YesButton(sender: AnyObject){
-        boughtCell.enable(true)
-        for subview in boughtCell.contentView.subviews{
-            if subview.tag == 99{
-                subview.removeFromSuperview()
+        if coins > 20{
+            coins -= 20
+            boughtCell.enable(true)
+            for subview in boughtCell.contentView.subviews{
+                if subview.tag == 99{
+                    subview.removeFromSuperview()
+                }
             }
+            boughtCell.selectionStyle = .Default
+            currentUnlocked.append(boughtCell.textLabel!.text!)
+            BuyFlagView.hidden = true
         }
-        boughtCell.selectionStyle = .Default
-        currentUnlocked.append(boughtCell.textLabel!.text!)
+        else{
+            NotEnoughCoins.hidden = false
+        }
+    }
+    @IBAction func OKButton(sender: AnyObject){
+        NotEnoughCoins.hidden = true
         BuyFlagView.hidden = true
     }
     @IBAction func NoButton(sender: AnyObject){
@@ -69,6 +80,7 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
 
         unlockedFlags = unlockedFlags.sort()
         BuyFlagView.hidden = true
+        NotEnoughCoins.hidden = true
 
         // Do any additional setup after loading the view.
     }
@@ -172,8 +184,8 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         }
         unlocked.unlockedFlags = unlockedFlags
         parent.unlockedFlags = unlockedFlags
-        NSKeyedArchiver.archiveRootObject(unlockedFlags, toFile: Unlockable.ArchiveURL.path!)
-        
+        NSKeyedArchiver.archiveRootObject(unlockedFlags, toFile: Unlockable.FlagURL.path!)
+        saveCoins()
     }
     func findIndex(flag:String)->Int{
         if unlockedFlags.contains(flag){
@@ -197,6 +209,4 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         // Pass the selected object to the new view controller.
     }
     */
-    
-
 }

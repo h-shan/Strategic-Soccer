@@ -21,6 +21,7 @@ let scalerX = screenSize.width/1136
 let scalerY = screenSize.height/640
 let goalLineB = 1086*scalerX
 let goalLineA = 50*scalerX
+var coins = 50
 extension UIViewController{
     func setBackground(){
         let background = UIImage(named: "SoccerBackground2")
@@ -34,7 +35,6 @@ extension UIViewController{
         view.addSubview(imageView)
         self.view.sendSubviewToBack(imageView)
     }
-   
 }
 class TitleViewController: UIViewController {
     var background = SKScene()
@@ -45,7 +45,7 @@ class TitleViewController: UIViewController {
     @IBOutlet weak var StrategicSoccer: UILabel!
     @IBOutlet weak var ChangePlayersButton: UIButton!
     @IBOutlet weak var SinglePlayer: UIButton!
-    
+    @IBOutlet weak var NumberCoins: UILabel!
     var skView: SKView!
     var defaultMode = Mode.threeMinute
     var defaultPlayers = PlayerOption.three
@@ -73,8 +73,11 @@ class TitleViewController: UIViewController {
         if let AIDifficulty = defaults.objectForKey(AIKey){
             defaultAI = AIDifficulty as! Int
         }
+        if let numCoins = NSKeyedUnarchiver.unarchiveObjectWithFile(Unlockable.CoinURL.path!) as? Int{
+           coins = numCoins
+        }
         // bring out unlocked
-        if let storedUnlock = NSKeyedUnarchiver.unarchiveObjectWithFile(Unlockable.ArchiveURL.path!) as? [String]{
+        if let storedUnlock = NSKeyedUnarchiver.unarchiveObjectWithFile(Unlockable.FlagURL.path!) as? [String]{
             unlockedFlags = storedUnlock
         }
         else{
@@ -104,7 +107,7 @@ class TitleViewController: UIViewController {
         navigationController?.navigationBarHidden = true
         super.viewWillAppear(animated)
         setBackground()
-       
+        NumberCoins.text=String(coins)
     }
     
     
@@ -154,4 +157,7 @@ class TitleViewController: UIViewController {
             scene.singlePlayer = true
         }
     }
+}
+func saveCoins(){
+    NSKeyedArchiver.archiveRootObject(coins, toFile: Unlockable.CoinURL.path!)
 }
