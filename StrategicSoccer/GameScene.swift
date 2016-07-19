@@ -59,6 +59,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var AIDifficulty: Int!
     var cAggro:Int?
     var cDef:Int?
+    var computerCheckPoint:Double = 2
     
     let goalDelay = Timer()
     let gameTimer = Timer()
@@ -518,6 +519,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if mode.getType() == .timed{
             gameTimer.restart()
         }
+        computerCheckPoint = 2
         setPosition()
         setDynamicStates(false)
         setDynamicStates(true)
@@ -533,32 +535,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func computerMove(cAggro: Int, cDef: Int){
         if firstTurn{
             for player in teamA{
-                if player.physicsBody!.velocity.dx > 30 || player.physicsBody!.velocity.dy > 30{
+                if abs(player.physicsBody!.velocity.dx) > 30 || abs(player.physicsBody!.velocity.dy) > 30{
                     firstTurn = false
                     break
                 }
             }
         }
+        let checkInterval = 0.2
+        let timeLimit = 2.5
         
         if AIDifficulty >= 3 {
-            if (moveTimer?.getElapsedTime())!%0.2<0.1 && (moveTimer?.getElapsedTime())! > 0.4 && !firstTurn{
-                for player in players{
-                    if !player.mTeamA{
-                        if detectStraightShot(player){
-                            switchTurns()
-                            return
-                        }
-                        if AIDifficulty >= 4{
-                            if saveGoal(){
-                                switchTurns()
-                                return
-                            }
-                        }
+            if (moveTimer?.getElapsedTime())!>checkInterval*computerCheckPoint && !firstTurn{
+                if straightShot(){
+                    switchTurns()
+                    computerCheckPoint = 2
+                    return
+                }
+                if AIDifficulty >= 4{
+                    if saveGoal(){
+                        switchTurns()
+                        computerCheckPoint = 2
+                        return
                     }
                 }
+                computerCheckPoint += 1
             }
         }
-        if moveTimer?.getElapsedTime()>2.5{
+        if moveTimer?.getElapsedTime()>timeLimit{
             if firstTurn{
                 firstMove()
                 firstTurn = false
@@ -573,6 +576,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 default: break
                 }
             }
+            computerCheckPoint = 2
             switchTurns()
         }
         
@@ -601,46 +605,57 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //}
         
     }
-    func detectStraightShot(player: Player) -> Bool{
-        var multiplier:CGFloat = 0.3
-        while (multiplier <= 0.6){
-            let predictedBallPosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*multiplier, ball.position.y + ball.physicsBody!.velocity.dy*multiplier)
-            if !frame.contains(predictedBallPosition){
-                return false
-            }
-            if detectBarriers(ball.position, velocity: ball.physicsBody!.velocity, xLimit: predictedBallPosition.x, fromRight: predictedBallPosition.x < ball.position.x)>0{
-                return false
-            }
-            let toPointVelocity = CGVectorMake((predictedBallPosition.x-player.position.x),(predictedBallPosition.y - player.position.y))
-            let angle = atan(toPointVelocity.dy/toPointVelocity.dx)
-            let buffer = player.playerSize.width*5/12
-            let predictedPlayerPosition = CGPointMake(predictedBallPosition.x + cos(angle)*buffer,predictedBallPosition.y + sin(angle)*buffer)
-            var straightShotVelocity = CGVectorMake((predictedPlayerPosition.x-player.position.x)/multiplier, (predictedPlayerPosition.y-player.position.y)/multiplier)
-            if straightShotVelocity.dx > 0 {
-                return false
-            }
-            
-            
-            let xDistance = player.position.x - 50*scalerX
-            if xDistance < 0 {
-                return false
-            }
-            if ball.position.x < 50*scalerX{
-                multiplier+=0.1
-                continue
-            }
-            
-            if detectGoal(player.position, velocity: straightShotVelocity, xLimit: goalLineA, fromRight: true){
-                // detectObstacles
-                
-                if detectBarriers(player.position, velocity: straightShotVelocity, xLimit: goalLineB, fromRight: true) <= Int(arc4random_uniform(3)){
-                    straightShotVelocity = dampVelocity(straightShotVelocity)
-                    player.physicsBody!.velocity = straightShotVelocity
-                    addMarker(UIColor.blueColor(), point: player.position)
-                    return true
+    func straightShot() -> Bool{
+        var bestShot:(Player, CGVector, Int)?
+        PLAYERLOOP: for player in teamB{
+            var multiplier:CGFloat = 0.3
+            var minBar = 3
+            while (multiplier <= 0.6){
+                let predictedBallPosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*multiplier, ball.position.y + ball.physicsBody!.velocity.dy*multiplier)
+                if !frame.contains(predictedBallPosition){
+                    return false
                 }
+                if detectBarriers(ball.position, velocity: ball.physicsBody!.velocity, xLimit: predictedBallPosition.x, fromRight: predictedBallPosition.x < ball.position.x)>0{
+                    return false
+                }
+                let toPointVelocity = CGVectorMake((predictedBallPosition.x-player.position.x),(predictedBallPosition.y - player.position.y))
+                let angle = atan(toPointVelocity.dy/toPointVelocity.dx)
+                let buffer = player.playerSize.width*5/12
+                let predictedPlayerPosition = CGPointMake(predictedBallPosition.x + cos(angle)*buffer,predictedBallPosition.y + sin(angle)*buffer)
+                let straightShotVelocity = CGVectorMake((predictedPlayerPosition.x-player.position.x)/multiplier, (predictedPlayerPosition.y-player.position.y)/multiplier)
+                if straightShotVelocity.dx > 0 {
+                    continue PLAYERLOOP
+                }
+                
+                let xDistance = player.position.x - 50*scalerX
+                if xDistance < 0 {
+                    continue PLAYERLOOP
+                }
+                if ball.position.x < 50*scalerX{
+                    multiplier+=0.1
+                    continue
+                }
+                
+                if detectGoal(player.position, velocity: straightShotVelocity, xLimit: goalLineA, fromRight: true){
+                    // detectObstacles
+                    let numBar = detectBarriers(player.position, velocity: straightShotVelocity, xLimit: goalLineB, fromRight: true)
+                    if numBar == 0{
+                        player.physicsBody!.velocity = dampVelocity(straightShotVelocity)
+                        return true
+                    }
+                    if numBar < minBar{
+                        bestShot = (player, straightShotVelocity, numBar)
+                        minBar = numBar
+                    }
+                }
+                multiplier += 0.1
             }
-            multiplier += 0.1
+        }
+        if var shot = bestShot{
+            shot.1 = dampVelocity(shot.1)
+            shot.0.physicsBody!.velocity = shot.1
+            addMarker(UIColor.blueColor(), point: shot.0.position)
+            return true
         }
         return false
     }
@@ -750,7 +765,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             let finalVelocity = dampVelocity(bestShot!.1)
             bestShot!.0.physicsBody!.velocity = finalVelocity
-            print(bestShot!.2)
             addMarker(UIColor.yellowColor(), point: bestShot!.0.position)
             return true
         }
@@ -759,32 +773,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func dampVelocity(velocity: CGVector) -> CGVector{
         var dampedVelocity = velocity
         let maxX:CGFloat = 500
-        let minX:CGFloat = 100
+        //let minX:CGFloat = 100
         let maxY:CGFloat = 300
-        if velocity.dx < minX && velocity.dx > 0{
-            dampedVelocity.dy = velocity.dy*minX/velocity.dx
-            dampedVelocity.dx = minX
-        }
-        if velocity.dx > -minX && velocity.dx < 0{
-            dampedVelocity.dy = -velocity.dy*minX/velocity.dx
-            dampedVelocity.dx = -minX
-        }
-        
-        if velocity.dx > maxX{
-            dampedVelocity.dy = velocity.dy*maxX/velocity.dx
-            dampedVelocity.dx = maxX
-        }
-        if velocity.dy > maxY{
-            dampedVelocity.dx = velocity.dx*maxY/velocity.dy
-            dampedVelocity.dy = maxY
-        }
-        if velocity.dx < -maxX{
-            dampedVelocity.dy = -velocity.dy*maxX/velocity.dx
-            dampedVelocity.dx = -maxX
-        }
-        if velocity.dy < -maxY{
-            dampedVelocity.dx = -velocity.dx*maxY/velocity.dy
-            dampedVelocity.dy = -maxY
+        while abs(dampedVelocity.dx)>maxX || /*abs(velocity.dx)<minX ||*/ abs(dampedVelocity.dy) > maxY{
+//            if velocity.dx < minX && velocity.dx > 0{
+//                dampedVelocity.dy = velocity.dy*minX/velocity.dx
+//                dampedVelocity.dx = minX
+//            }
+//            if velocity.dx > -minX && velocity.dx < 0{
+//                dampedVelocity.dy = -velocity.dy*minX/velocity.dx
+//                dampedVelocity.dx = -minX
+//            }
+            
+            if dampedVelocity.dx > maxX{
+                dampedVelocity.dy = velocity.dy * maxX/velocity.dx
+                dampedVelocity.dx = maxX
+            }
+            if dampedVelocity.dy > maxY{
+                dampedVelocity.dx = velocity.dx * maxY/velocity.dy
+                dampedVelocity.dy = maxY
+            }
+            if dampedVelocity.dx < -maxX{
+                dampedVelocity.dy = velocity.dy * -maxX/velocity.dx
+                dampedVelocity.dx = -maxX
+            }
+            if dampedVelocity.dy < -maxY{
+                dampedVelocity.dx = velocity.dx * -maxY/velocity.dy
+                dampedVelocity.dy = -maxY
+            }
         }
         return dampedVelocity
     }

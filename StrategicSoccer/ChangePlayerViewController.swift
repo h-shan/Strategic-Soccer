@@ -75,7 +75,16 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         lock.addTarget(self, action: #selector(unlockFlag),forControlEvents: .TouchUpInside)
         lock.setImage(UIImage(imageLiteral: "Locked"), forState: .Normal)
         if indexPath.row>=unlockedFlags.count && !currentUnlocked.contains(findFlag(indexPath.row)){
-            cell.contentView.addSubview(lock)
+            var hasLock = false
+            for view in cell.contentView.subviews{
+                if view.tag == 99{
+                    hasLock = true
+                    break
+                }
+            }
+            if !hasLock{
+                cell.contentView.addSubview(lock)
+            }
             cell.enable(false)
             cell.selectionStyle = .None
         }else{
@@ -83,6 +92,7 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
             for subview in cell.contentView.subviews{
                 if subview.tag == 99{
                     subview.removeFromSuperview()
+                    break
                 }
             }
             cell.selectionStyle = .Default
@@ -116,6 +126,7 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
                     subview.removeFromSuperview()
                 }
             }
+            cell.selectionStyle = .Default
             currentUnlocked.append(cell.textLabel!.text!)
         }
     }
