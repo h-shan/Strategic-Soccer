@@ -31,12 +31,13 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var PlayerA: UITableView!
     @IBOutlet weak var PlayerB: UITableView!
     @IBOutlet weak var BuyFlagView: UIView!
-    @IBOutlet weak var warningText: UILabel!
     @IBOutlet weak var warningFlag: UIImageView!
     @IBOutlet weak var YesButton: UIButton!
     @IBOutlet weak var NoButton: UIButton!
     @IBOutlet weak var flagName: UILabel!
     @IBOutlet weak var NotEnoughCoins: UIView!
+    @IBOutlet weak var OKButton: UIButton!
+    @IBOutlet weak var ConfirmationText: UILabel!
 
     
     @IBAction func BackArrow(sender: AnyObject) {
@@ -71,6 +72,10 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         self.PlayerA.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.PlayerB.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        PlayerA.layer.borderWidth = 3
+        PlayerA.layer.borderColor = UIColor.blackColor().CGColor
+        PlayerB.layer.borderWidth = 3
+        PlayerB.layer.borderColor = UIColor.blackColor().CGColor
         setBackground()
         for country in unlockedFlags{
             lockedFlags.removeAtIndex(lockedFlags.indexOf(country)!)
@@ -79,9 +84,18 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         PlayerB.showsVerticalScrollIndicator = false
 
         unlockedFlags = unlockedFlags.sort()
+        BuyFlagView.layer.borderWidth = 5
+        BuyFlagView.layer.borderColor = UIColor.blackColor().CGColor
+        
+        NotEnoughCoins.layer.borderWidth = 5
+        NotEnoughCoins.layer.borderColor = UIColor.blackColor().CGColor
+        OKButton.layer.borderWidth = 3
+        OKButton.layer.borderColor = gold
+        OKButton.backgroundColor = UIColor.blackColor()
         BuyFlagView.hidden = true
         NotEnoughCoins.hidden = true
-
+        ConfirmationText.numberOfLines = 0
+        addCoinImage("DO YOU WANT TO SPEND\n", afterText: "20 TO BUY THIS FLAG?", label: ConfirmationText, numberLines: 2)
         // Do any additional setup after loading the view.
     }
 

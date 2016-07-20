@@ -69,7 +69,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let goalDelay = Timer()
     let gameTimer = Timer()
     var clockBackground:SKShapeNode?
-    let clock = SKLabelNode(fontNamed: "Georgia")
+    let clock = SKLabelNode(fontNamed: "Optima")
     
     var winPoints: Int?
     var baseTime: NSTimeInterval?
@@ -90,7 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreB = 0
     
     var scoreBackground:SKSpriteNode!
-    var score = SKLabelNode(fontNamed: "Georgia")
+    var score = SKLabelNode(fontNamed: "Optima")
     
     var timer: NSTimer?
     
@@ -126,7 +126,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Setup your scene here */
         
         let background = SKSpriteNode(imageNamed: "SoccerField")
-        
+        scoreBoard.label.fontName = "Optima"
+
         scoreBackground = SKSpriteNode(color: UIColor.whiteColor()
             , size: CGSizeMake(800*scalerX,200*scalerY))
         scoreBackground.addChild(score)
@@ -472,7 +473,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setDynamicStates(false)
         scoreBackground.fadeIn()
         if scoreA > scoreB {
-            score.text = "Player A Wins"
+            score.text = "PLAYER A WINS"
             if singlePlayer{
                 var coinsWon: Int?
                 switch (AIDifficulty){
@@ -487,10 +488,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         else if scoreB > scoreA {
-            score.text = "Player B Wins"
+            score.text = "PLAYER B WINS"
         }
         else{
-            score.text = "It's a Tie!"
+            score.text = "IT'S A TIE!"
         }
         _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(goBackToTitle), userInfo: nil, repeats: false)
         gameTimer.elapsedTime = 0
@@ -625,7 +626,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var bestShot:(Player, CGVector, Int)?
         PLAYERLOOP: for player in teamB{
             var multiplier:CGFloat = 0.3
-            var minBar = 3
+            var minBar = Int(arc4random_uniform(4))
             while (multiplier <= 0.6){
                 let predictedBallPosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*multiplier, ball.position.y + ball.physicsBody!.velocity.dy*multiplier)
                 if !frame.contains(predictedBallPosition){

@@ -107,7 +107,7 @@ class TitleViewController: UIViewController {
         navigationController?.navigationBarHidden = true
         super.viewWillAppear(animated)
         setBackground()
-        NumberCoins.text=String(coins)
+        addCoinImage("", afterText: String(coins), label: NumberCoins, numberLines: 1)
     }
     
     
@@ -160,4 +160,19 @@ class TitleViewController: UIViewController {
 }
 func saveCoins(){
     NSKeyedArchiver.archiveRootObject(coins, toFile: Unlockable.CoinURL.path!)
+}
+func addCoinImage(beforeText: String, afterText: String, label: UILabel, numberLines: Int){
+    let coinImage = UIImage(named:"Coins")!
+    let scaleSize = CGSizeMake(0.8*label.frame.height*coinImage.size.width/coinImage.size.height/CGFloat(numberLines),0.8*label.frame.height/CGFloat(numberLines))
+    UIGraphicsBeginImageContextWithOptions(scaleSize, false, 0)
+    coinImage.drawInRect(CGRectMake(0, 0, scaleSize.width, scaleSize.height))
+    let resizedCoins = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    let stackOfCoins = NSTextAttachment()
+    stackOfCoins.image = resizedCoins
+    let attachmentString = NSAttributedString(attachment: stackOfCoins)
+    let coinString = NSMutableAttributedString(string: beforeText)
+    coinString.appendAttributedString(attachmentString)
+    coinString.appendAttributedString(NSAttributedString(string: " " + afterText))
+    label.attributedText = coinString
 }

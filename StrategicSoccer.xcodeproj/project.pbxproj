@@ -67,7 +67,7 @@
 		89F6A2BD1D30CD610090618E /* ChangeTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeTimeViewController.swift; sourceTree = "<group>"; };
 		89F6A2BF1D30DFDE0090618E /* ChangePointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePointViewController.swift; sourceTree = "<group>"; };
 		DC83CF2E1D10CB780044D0E1 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		DC83DCF81D1089EA00E1C3F8 /* StrategicSoccer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StrategicSoccer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC83DCF81D1089EA00E1C3F8 /* Strategic Soccer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Strategic Soccer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC83DCFB1D1089EA00E1C3F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		DC83DD011D1089EA00E1C3F8 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 		DC83DCF91D1089EA00E1C3F8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DC83DCF81D1089EA00E1C3F8 /* StrategicSoccer.app */,
+				DC83DCF81D1089EA00E1C3F8 /* Strategic Soccer.app */,
 				DC83DD101D1089EA00E1C3F8 /* StrategicSoccerTests.xctest */,
 				DC83DD1B1D1089EA00E1C3F8 /* StrategicSoccerUITests.xctest */,
 			);
@@ -132,27 +132,27 @@
 		DC83DCFA1D1089EA00E1C3F8 /* StrategicSoccer */ = {
 			isa = PBXGroup;
 			children = (
+				DC83DCFB1D1089EA00E1C3F8 /* AppDelegate.swift */,
 				DC83DD061D1089EA00E1C3F8 /* Assets.xcassets */,
 				DC83DD031D1089EA00E1C3F8 /* Main.storyboard */,
-				DC83DCFB1D1089EA00E1C3F8 /* AppDelegate.swift */,
+				89B97F801D20F5DB00588A21 /* TitleViewController.swift */,
 				DC83DD011D1089EA00E1C3F8 /* GameViewController.swift */,
 				DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */,
-				8944D3CB1D3C986F00D90023 /* Unlockable.swift */,
-				8932AD6A1D13BD0100F6AC84 /* Mode.swift */,
-				892182901D34C67000A2F274 /* MiniGameViewController.swift */,
-				89EFF7C01D122FBA004DEA93 /* Ball.swift */,
-				89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */,
+				89EEC9831D246D8A0075A85C /* ChangePlayerViewController.swift */,
 				89EEC9811D234CCF0075A85C /* SettingsViewController.swift */,
 				89F6A2BD1D30CD610090618E /* ChangeTimeViewController.swift */,
 				89F6A2BF1D30DFDE0090618E /* ChangePointViewController.swift */,
-				89EEC9831D246D8A0075A85C /* ChangePlayerViewController.swift */,
-				89B97F801D20F5DB00588A21 /* TitleViewController.swift */,
+				8944D3CB1D3C986F00D90023 /* Unlockable.swift */,
 				89B97F851D2221AE00588A21 /* PauseViewController.swift */,
 				DC83DD0B1D1089EA00E1C3F8 /* Info.plist */,
 				DCFEEDD31D14645600D4A259 /* Timer.swift */,
 				893B41C11D2E221B00E191BE /* ScoreBoard.swift */,
 				DC83CF2E1D10CB780044D0E1 /* Player.swift */,
+				89EFF7C01D122FBA004DEA93 /* Ball.swift */,
+				89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */,
+				8932AD6A1D13BD0100F6AC84 /* Mode.swift */,
 				892182921D359BCF00A2F274 /* Game1Scene.swift */,
+				892182901D34C67000A2F274 /* MiniGameViewController.swift */,
 				892182941D35B60100A2F274 /* MiniGoal.swift */,
 				DC83DD081D1089EA00E1C3F8 /* LaunchScreen.storyboard */,
 			);
@@ -194,7 +194,7 @@
 			);
 			name = StrategicSoccer;
 			productName = StrategicSoccer;
-			productReference = DC83DCF81D1089EA00E1C3F8 /* StrategicSoccer.app */;
+			productReference = DC83DCF81D1089EA00E1C3F8 /* Strategic Soccer.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DC83DD0F1D1089EA00E1C3F8 /* StrategicSoccerTests */ = {
@@ -477,7 +477,7 @@
 				INFOPLIST_FILE = StrategicSoccer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.msjhs.StrategicSoccer;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Strategic Soccer";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -492,7 +492,7 @@
 				INFOPLIST_FILE = StrategicSoccer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.msjhs.StrategicSoccer;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Strategic Soccer";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
