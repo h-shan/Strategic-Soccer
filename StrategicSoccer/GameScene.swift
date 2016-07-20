@@ -15,7 +15,7 @@ let difficulty2Multiplier = 1.5
 let difficulty3Multiplier = 2
 let difficulty4Multiplier = 3
 let difficulty5Multiplier = 4
-extension SKSpriteNode{
+extension SKNode{
     func fadeIn(){
         self.runAction(SKAction.fadeAlphaTo(0.8, duration: 0.3))
         
@@ -469,6 +469,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func endGame(){
+        goalDelay.pause()
         gameEnded = true
         setDynamicStates(false)
         scoreBackground.fadeIn()
@@ -579,16 +580,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         if moveTimer?.getElapsedTime()>timeLimit{
-            if firstTurn{
+            if firstTurn && AIDifficulty != 1{
                 firstMove()
                 firstTurn = false
             }
             else{
                 switch(AIDifficulty){
-                case 1: hitBallBasic(); break
-                case 2: if !hitBallAdvanced() {hitBallBasic()}; break
-                case 3: if !hitBallAdvanced() {hitBallBasic()}; break
-                case 4: if !hitBallAdvanced() {hitBallBasic()}; break
+                case 1: hitBallBasic(true); break
+                case 2: hitBallBasic(false); break
+                case 3: if !hitBallAdvanced() {hitBallBasic(false)}; break
+                case 4: if !hitBallAdvanced() {hitBallBasic(false)}; break
                 case 5: improvePosition(); break
                 default: break
                 }
@@ -789,12 +790,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return false
     }
     func dampVelocity(velocity: CGVector) -> CGVector{
+        return dampVelocity(velocity, maxX: 500, maxY: 300)
+    }
+    func dampVelocity(velocity: CGVector, maxX: CGFloat, maxY: CGFloat) -> CGVector{
         var dampedVelocity = velocity
-        let maxX:CGFloat = 500
-        let maxY:CGFloat = 300
         while abs(dampedVelocity.dx)>maxX ||  abs(dampedVelocity.dy) > maxY{
-
-            
             if dampedVelocity.dx > maxX{
                 dampedVelocity.dy = velocity.dy * maxX/velocity.dx
                 dampedVelocity.dx = maxX
@@ -866,16 +866,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return false
         
     }
-    func hitBallBasic(){
-        let random: UInt32
+    func hitBallBasic(random: Bool){
+        
+        let randomPlayer: UInt32
         switch(playerOption){
-        case .three: random = arc4random_uniform(3); break
-        case .four: random = arc4random_uniform(4); break
+        case .three: randomPlayer = arc4random_uniform(3); break
+        case .four: randomPlayer = arc4random_uniform(4); break
         }
         let time:CGFloat = 0.5
-        let selectedPlayer = teamB[Int(random)]
-        let ballFuturePosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*time,ball.position.y + ball.physicsBody!.velocity.dy*time)
-        selectedPlayer.physicsBody!.velocity = dampVelocity(CGVectorMake((ballFuturePosition.x-selectedPlayer.position.x)/time, (ballFuturePosition.y-selectedPlayer.position.y)/time))
+        let selectedPlayer = teamB[Int(randomPlayer)]
+        var ballFuturePosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*time,ball.position.y + ball.physicsBody!.velocity.dy*time)
+        
+        if random{
+            if Bool.random(){
+                ballFuturePosition.x += CGFloat(arc4random_uniform(32))
+            }else{
+                ballFuturePosition.x -= CGFloat(arc4random_uniform(32))
+            }
+            if Bool.random(){
+                ballFuturePosition.y += CGFloat(arc4random_uniform(32))
+            }else{
+                ballFuturePosition.y -= CGFloat(arc4random_uniform(32))
+            }
+        }
+        let shotVelocity = CGVectorMake((ballFuturePosition.x-selectedPlayer.position.x)/time, (ballFuturePosition.y-selectedPlayer.position.y)/time)
+        selectedPlayer.physicsBody!.velocity = random ? dampVelocity(shotVelocity, maxX: CGFloat(300), maxY: CGFloat(180)):dampVelocity(shotVelocity)
+        
+
         addMarker(UIColor.magentaColor(), point: selectedPlayer.position)
     }
     func hitBallAdvanced() -> Bool{

@@ -53,12 +53,56 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var ModeTimed: UIButton!
     @IBOutlet weak var CurrentMode: UILabel!
     @IBOutlet weak var CurrentPlayers: UILabel!
-    @IBOutlet weak var AIDifficulty: UISlider!
     @IBOutlet weak var DiffValue: UILabel!
-    @IBAction func AIDifficulty(sender: AnyObject) {
-        AIDifficulty.setValue(round(AIDifficulty.value), animated: true)
-        DiffValue.text = String(Int(AIDifficulty.value))
-        defaultAI = Int(AIDifficulty.value)
+    @IBOutlet weak var DifficultyView: UIView!
+    @IBOutlet weak var One : UIButton!
+    @IBOutlet weak var Two : UIButton!
+    @IBOutlet weak var Three : UIButton!
+    @IBOutlet weak var Four : UIButton!
+    @IBOutlet weak var Five : UIButton!
+   
+    @IBAction func AIDifficulty(sender: UIButton){
+        switch(sender){
+        case One: selectDifficulty(1); break
+        case Two: selectDifficulty(2); break
+        case Three: selectDifficulty(3); break
+        case Four: selectDifficulty(4); break
+        case Five: selectDifficulty(5); break
+        default: break
+        }
+    }
+    func selectDifficulty(difficulty: Int){
+        defaultAI = difficulty
+        DiffValue.text = String(difficulty)
+        switch(difficulty){
+        case 1:
+            Two.layer.backgroundColor = UIColor.grayColor().CGColor
+            Three.layer.backgroundColor = UIColor.grayColor().CGColor
+            Four.layer.backgroundColor = UIColor.grayColor().CGColor
+            Five.layer.backgroundColor = UIColor.grayColor().CGColor
+        case 2:
+            Two.layer.backgroundColor = UIColor.greenColor().CGColor
+            Three.layer.backgroundColor = UIColor.grayColor().CGColor
+            Four.layer.backgroundColor = UIColor.grayColor().CGColor
+            Five.layer.backgroundColor = UIColor.grayColor().CGColor
+        case 3:
+            Two.layer.backgroundColor = UIColor.greenColor().CGColor
+            Three.layer.backgroundColor = UIColor.greenColor().CGColor
+            Four.layer.backgroundColor = UIColor.grayColor().CGColor
+            Five.layer.backgroundColor = UIColor.grayColor().CGColor
+        case 4:
+            Two.layer.backgroundColor = UIColor.greenColor().CGColor
+            Three.layer.backgroundColor = UIColor.greenColor().CGColor
+            Four.layer.backgroundColor = UIColor.greenColor().CGColor
+            Five.layer.backgroundColor = UIColor.grayColor().CGColor
+        case 5:
+            Two.layer.backgroundColor = UIColor.greenColor().CGColor
+            Three.layer.backgroundColor = UIColor.greenColor().CGColor
+            Four.layer.backgroundColor = UIColor.greenColor().CGColor
+            Five.layer.backgroundColor = UIColor.greenColor().CGColor
+        default:
+            break
+        }
     }
     @IBAction func PlayerFour(sender: UIButton) {
         playerButtonGroup.selectButton(sender)
@@ -91,9 +135,11 @@ class SettingsViewController: UIViewController {
         TimeView.hidden = true
         PointView.hidden = true
         
-        AIDifficulty.minimumValue = 1
-        AIDifficulty.maximumValue = 5
-        AIDifficulty.setValue(Float(defaultAI), animated: false)
+        for button in DifficultyView.subviews{
+            button.layer.borderColor = UIColor.blackColor().CGColor
+            button.layer.borderWidth = 5
+        }
+        selectDifficulty(defaultAI)
         DiffValue.text = String(defaultAI)
 
         setBackground()
@@ -142,7 +188,7 @@ class SettingsViewController: UIViewController {
         parent.defaultAI = defaultAI
         defaults.setInteger(defaultMode.rawValue, forKey: modeKey)
         defaults.setInteger(defaultPlayers!.rawValue, forKey: playerOptionKey)
-        defaults.setInteger(Int(AIDifficulty.value), forKey: AIKey)
+        defaults.setInteger(defaultAI, forKey: AIKey)
     }
     
 

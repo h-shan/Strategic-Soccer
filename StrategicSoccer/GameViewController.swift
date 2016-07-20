@@ -45,6 +45,7 @@ class GameViewController: UIViewController {
         NumberCoins.alpha = 0.0
         Dimmer.alpha = 0.0
         
+        
     }
     override func viewWillAppear(animated:Bool){
         super.viewWillAppear(animated)
