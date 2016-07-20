@@ -11,7 +11,7 @@ import SpriteKit
 
 class GameViewController: UIViewController {
     var scene: GameScene!
-    var parent: TitleViewController!
+    var parent: PlayViewController!
     
     @IBOutlet weak var PauseView: UIView!
     @IBOutlet weak var skView: SKView!
@@ -28,7 +28,7 @@ class GameViewController: UIViewController {
         scene.userInteractionEnabled = false
         scene.paused = true
         UIView.animateWithDuration(0.2,animations:{
-            self.Dimmer.alpha = 0.7
+            self.Dimmer.alpha = 0.5
         })
     }
 
@@ -43,22 +43,38 @@ class GameViewController: UIViewController {
         scene.scaleMode = .AspectFill
         PauseView.hidden = true
         NumberCoins.alpha = 0.0
-        Dimmer.alpha = 0.0
+        //Dimmer.alpha = 1.0
         
         
+    }
+    override func viewDidAppear(animated: Bool) {
+        //removeLoad()
+        UIView.animateWithDuration(1.0, animations: {
+            self.Dimmer.alpha = 0
+        })
     }
     override func viewWillAppear(animated:Bool){
         super.viewWillAppear(animated)
         skView.presentScene(scene)
-        skView.showsNodeCount = true
-
+        //addLoad()
     }
-    
-
+    func addLoad(){
+        let loadView = UIView(frame: screenSize)
+        loadView.tag = 99
+        loadView.backgroundColor = UIColor.greenColor()
+        view.addSubview(loadView)
+    }
+    func removeLoad(){
+        for subview in view.subviews{
+            if subview.tag == 99{
+                subview.removeFromSuperview()
+                break
+            }
+        }
+    }
     override func shouldAutorotate() -> Bool {
         return true
     }
-
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
             return .AllButUpsideDown
@@ -82,7 +98,6 @@ class GameViewController: UIViewController {
         }
     }
     func backToTitle(){
-        parent.scene = GameScene(size: parent.skView.bounds.size)
         navigationController?.popViewControllerAnimated(false)
         self.removeFromParentViewController()
         UIGraphicsBeginImageContext(view.frame.size)
@@ -95,9 +110,6 @@ class GameViewController: UIViewController {
         skView.removeFromSuperview()
         snapShot.removeFromSuperview()
         view = nil
-    }
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
     }
     func displayEarnings(numberWon: Int){
         addCoinImage("YOU WON ", afterText: String(numberWon), label: NumberCoins, numberLines: 1)

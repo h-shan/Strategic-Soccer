@@ -22,6 +22,8 @@ let scalerY = screenSize.height/640
 let goalLineB = 1086*scalerX
 let goalLineA = 50*scalerX
 var coins = 50
+var statistics = [Stats.totalGames:0,Stats.totalWon:0,Stats.totalOne:0,Stats.oneWon:0,Stats.totalTwo:0,Stats.twoWon: 0, Stats.totalThree:0,Stats.threeWon:0,Stats.totalFour:0,Stats.fourWon:0,Stats.totalFive:0,Stats.fiveWon:0]
+
 extension UIViewController{
     func setBackground(){
         let background = UIImage(named: "SoccerBackground2")
@@ -40,11 +42,11 @@ class TitleViewController: UIViewController {
     var background = SKScene()
     var scene: GameScene!
     
-    @IBOutlet weak var TwoPlayers: UIButton!
+    @IBOutlet weak var PlayButton: UIButton!
     @IBOutlet weak var SettingsButton: UIButton!
     @IBOutlet weak var StrategicSoccer: UILabel!
     @IBOutlet weak var ChangePlayersButton: UIButton!
-    @IBOutlet weak var SinglePlayer: UIButton!
+    @IBOutlet weak var StatsButton: UIButton!
     @IBOutlet weak var NumberCoins: UILabel!
     var skView: SKView!
     var defaultMode = Mode.threeMinute
@@ -76,6 +78,9 @@ class TitleViewController: UIViewController {
         if let numCoins = NSKeyedUnarchiver.unarchiveObjectWithFile(Unlockable.CoinURL.path!) as? Int{
            coins = numCoins
         }
+        if let storedStats = NSKeyedUnarchiver.unarchiveObjectWithFile(Unlockable.StatsURl.path!) as? [String:Int]{
+            statistics = storedStats
+        }
         // bring out unlocked
         if let storedUnlock = NSKeyedUnarchiver.unarchiveObjectWithFile(Unlockable.FlagURL.path!) as? [String]{
             unlockedFlags = storedUnlock
@@ -87,13 +92,8 @@ class TitleViewController: UIViewController {
         skView = self.view as! SKView
         skView.ignoresSiblingOrder = true
         scene = GameScene(size: skView.bounds.size)
-        let buttons: [UIButton] = [SettingsButton, TwoPlayers,ChangePlayersButton,SinglePlayer]
-        for button in buttons{
-            button.layer.cornerRadius = 10
-            button.layer.borderWidth = 2
-            button.layer.borderColor = gold
-        }
-        
+        let buttons: [UIButton] = [SettingsButton, PlayButton, ChangePlayersButton, StatsButton]
+        formatMenuButtons(buttons)
 
         // Do any additional setup after loading the view.
     }
@@ -118,15 +118,18 @@ class TitleViewController: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == "TwoPlayerSegue"{
-            let destinationVC = segue.destinationViewController as! GameViewController
+        if segue.identifier == "PlaySegue"{
+            let destinationVC = segue.destinationViewController as! PlayViewController
             scene.mode = defaultMode
             scene.playerOption = defaultPlayers
             scene.countryA = playerA
             scene.countryB = playerB
+            scene.AIDifficulty = defaultAI
             destinationVC.scene = scene
             destinationVC.parent = self
-            scene.singlePlayer = false
+            scene.addPlayers()
+            scene.cAggro = 0
+            scene.cDef = 0
         }
         if segue.identifier == "SettingsSegue"{
             let destinationVC = segue.destinationViewController as! SettingsViewController
@@ -142,25 +145,10 @@ class TitleViewController: UIViewController {
             destinationVC.defaultB = playerB
             destinationVC.unlockedFlags = unlockedFlags
         }
-        if segue.identifier == "SinglePlayerSegue"{
-            let destinationVC = segue.destinationViewController as! GameViewController
-            scene.mode = defaultMode
-            scene.playerOption = defaultPlayers
-            scene.countryA = playerA
-            scene.countryB = playerB
-            scene.AIDifficulty = defaultAI
-            destinationVC.scene = scene
-            destinationVC.parent = self
-            
-            scene.cAggro = 0
-            scene.cDef = 0
-            scene.singlePlayer = true
-        }
+        
     }
 }
-func saveCoins(){
-    NSKeyedArchiver.archiveRootObject(coins, toFile: Unlockable.CoinURL.path!)
-}
+
 func addCoinImage(beforeText: String, afterText: String, label: UILabel, numberLines: Int){
     let coinImage = UIImage(named:"Coins")!
     let scaleSize = CGSizeMake(0.8*label.frame.height*coinImage.size.width/coinImage.size.height/CGFloat(numberLines),0.8*label.frame.height/CGFloat(numberLines))
@@ -175,4 +163,11 @@ func addCoinImage(beforeText: String, afterText: String, label: UILabel, numberL
     coinString.appendAttributedString(attachmentString)
     coinString.appendAttributedString(NSAttributedString(string: " " + afterText))
     label.attributedText = coinString
+}
+func formatMenuButtons(buttons: [UIButton]){
+    for button in buttons{
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 2
+        button.layer.borderColor = gold
+    }
 }

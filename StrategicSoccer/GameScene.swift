@@ -99,35 +99,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override init(size:CGSize){
         super.init(size: size)
         scoreBoard = ScoreBoard(sender: self)
-        
-        
-    }
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    func didBeginContact(contact: SKPhysicsContact){
-        let ballVelocity = ball.physicsBody!.velocity
-        if contact.bodyA == borderBody && contact.bodyB == ball.physicsBody!{
-            if 0 <= ballVelocity.dx && ballVelocity.dx < 20{
-                ball.physicsBody!.velocity = CGVectorMake(20,ball.physicsBody!.velocity.dy)
-            }
-            if -20 < ballVelocity.dx && ballVelocity.dx < 0 {
-                ball.physicsBody!.velocity = CGVectorMake(-20, ball.physicsBody!.velocity.dy)
-            }
-            if 0 <= ballVelocity.dy && ballVelocity.dy < 20{
-                ball.physicsBody!.velocity = CGVectorMake(ball.physicsBody!.velocity.dx,20)
-            }
-            if -20 < ballVelocity.dy && ballVelocity.dy < 0{
-                ball.physicsBody!.velocity = CGVectorMake(ball.physicsBody!.velocity.dx,-20)
-            }
-        }
-    }
-    override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
-        
         let background = SKSpriteNode(imageNamed: "SoccerField")
         scoreBoard.label.fontName = "Optima"
-
+        
         scoreBackground = SKSpriteNode(color: UIColor.whiteColor()
             , size: CGSizeMake(800*scalerX,200*scalerY))
         scoreBackground.addChild(score)
@@ -184,47 +158,57 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(goalPostA2)
         self.addChild(goalPostB1)
         self.addChild(goalPostB2)
-        
-        playerA1 = Player(teamA: true, country: countryA, sender: self)
-        playerA2 = Player(teamA: true, country: countryA, sender: self)
-        playerA3 = Player(teamA: true, country: countryA, sender: self)
-        playerA4 = Player(teamA: true, country: countryA, sender: self)
-        playerB1 = Player(teamA: false, country: countryB, sender: self)
-        playerB2 = Player(teamA: false, country: countryB, sender: self)
-        playerB3 = Player(teamA: false, country: countryB, sender: self)
-        playerB4 = Player(teamA: false, country: countryB, sender: self)
-        
-        switch (playerOption){
-        case PlayerOption.three:
-            players = [playerA1, playerA2, playerA3, playerB1, playerB2, playerB3]
-            teamA = [playerA1,playerA2,playerA3]
-            teamB = [playerB1, playerB2, playerB3]
-            break
-        case PlayerOption.four:
-            players = [playerA1, playerA2, playerA3, playerA4, playerB1, playerB2, playerB3, playerB4]
-            teamA = [playerA1, playerA2, playerA3]
-            teamB = [playerB1, playerB2, playerB3]
-            break;
-        }
-        
-        for node in players{
-            node.zPosition = 2
-            self.addChild(node)
-        }
-        
-        // put ball in middle
-        
-        
         ball = Ball(scene: self)
         ball.zPosition = 2
         setPosition()
         self.addChild(ball)
         ball.physicsBody!.contactTestBitMask = ball.physicsBody!.collisionBitMask
-
-
-        updateLighting()
+        
         moveTimer = Timer()
-        moveTimer?.restart()
+        // set up clock
+        clockBackground = SKShapeNode(rect: CGRectMake(-50*scalerX,-25*scalerY,100*scalerX,50*scalerY), cornerRadius: 10)
+        clockBackground!.fillColor = UIColor.blackColor()
+        clockBackground!.strokeColor = UIColor.whiteColor()
+        clockBackground!.alpha = 0.7
+        clock.fontSize = 15
+        clockBackground!.position = CGPoint(x: frame.midX, y: 7/4*frame.midY)
+        clock.zPosition = 2
+        clock.position = CGPointMake(0,-8*scalerY)
+        clock.fontColor = UIColor.whiteColor()
+        gameTimer.start()
+        clockBackground!.addChild(clock)
+        clockBackground!.zPosition = 4
+        self.addChild(clockBackground!)
+        clockBackground?.hidden = true
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    func didBeginContact(contact: SKPhysicsContact){
+        let ballVelocity = ball.physicsBody!.velocity
+        if contact.bodyA == borderBody && contact.bodyB == ball.physicsBody!{
+            if 0 <= ballVelocity.dx && ballVelocity.dx < 20{
+                ball.physicsBody!.velocity = CGVectorMake(20,ball.physicsBody!.velocity.dy)
+            }
+            if -20 < ballVelocity.dx && ballVelocity.dx < 0 {
+                ball.physicsBody!.velocity = CGVectorMake(-20, ball.physicsBody!.velocity.dy)
+            }
+            if 0 <= ballVelocity.dy && ballVelocity.dy < 20{
+                ball.physicsBody!.velocity = CGVectorMake(ball.physicsBody!.velocity.dx,20)
+            }
+            if -20 < ballVelocity.dy && ballVelocity.dy < 0{
+                ball.physicsBody!.velocity = CGVectorMake(ball.physicsBody!.velocity.dx,-20)
+            }
+        }
+    }
+    override func didMoveToView(view: SKView) {
+        /* Setup your scene here */
+        
+        
+        print(singlePlayer)
+        
+        // put ball in middle
+        
         
         if (mode.getType() == .points){
             switch (mode){
@@ -261,22 +245,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             default:
                 break
             }
-            // set up clock
-            clockBackground = SKShapeNode(rect: CGRectMake(-50*scalerX,-25*scalerY,100*scalerX,50*scalerY), cornerRadius: 10)
-            clockBackground!.fillColor = UIColor.blackColor()
-            clockBackground!.strokeColor = UIColor.whiteColor()
-            clockBackground!.alpha = 0.7
             clock.text = gameTimer.secondsToString(baseTime!)
-            clock.fontSize = 15
-            clockBackground!.position = CGPoint(x: frame.midX, y: 7/4*frame.midY)
-            clock.zPosition = 2
-            clock.position = CGPointMake(0,-8*scalerY)
-            clock.fontColor = UIColor.whiteColor()
-            gameTimer.start()
-            clockBackground!.addChild(clock)
-            clockBackground!.zPosition = 4
-            self.addChild(clockBackground!)
+            clockBackground?.hidden = false
         }
+        restart()
         
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -349,7 +321,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if singlePlayer && !turnA{
-            computerMove(cAggro!, cDef: cDef!)
+            computerMove()
         }
         
         if(moveTimer!.getElapsedTime() > 5){
@@ -430,7 +402,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func setDynamicStates(isDynamic: Bool){
-        for player in self.players{
+        for player in players{
             player.physicsBody!.dynamic = isDynamic
         }
         ball.physicsBody!.dynamic = isDynamic
@@ -476,6 +448,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if scoreA > scoreB {
             score.text = "PLAYER A WINS"
             if singlePlayer{
+                updateStats(true)
                 var coinsWon: Int?
                 switch (AIDifficulty){
                 case 1: coinsWon = (scoreA - scoreB)*difficulty1Multiplier; break
@@ -489,6 +462,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         else if scoreB > scoreA {
+            if singlePlayer{
+                updateStats(false)
+            }
             score.text = "PLAYER B WINS"
         }
         else{
@@ -499,7 +475,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
     func goBackToTitle(){
-        
         viewController.backToTitle()
     }
     
@@ -537,6 +512,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if mode.getType() == .timed{
             gameTimer.restart()
         }
+        updateLighting()
         computerCheckPoint = 2
         setPosition()
         setDynamicStates(false)
@@ -548,9 +524,43 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if !turnA{
             switchTurns()
         }
+        userInteractionEnabled = true
         scoreBoard.label.text = "0    0"
     }
-    func computerMove(cAggro: Int, cDef: Int){
+    func addPlayers(){
+        for child in children{
+            if child is Player{
+                child.removeFromParent()
+            }
+        }
+        playerA1 = Player(teamA: true, country: countryA, sender: self)
+        playerA2 = Player(teamA: true, country: countryA, sender: self)
+        playerA3 = Player(teamA: true, country: countryA, sender: self)
+        playerA4 = Player(teamA: true, country: countryA, sender: self)
+        playerB1 = Player(teamA: false, country: countryB, sender: self)
+        playerB2 = Player(teamA: false, country: countryB, sender: self)
+        playerB3 = Player(teamA: false, country: countryB, sender: self)
+        playerB4 = Player(teamA: false, country: countryB, sender: self)
+        
+        switch (playerOption){
+        case PlayerOption.three:
+            players = [playerA1, playerA2, playerA3, playerB1, playerB2, playerB3]
+            teamA = [playerA1,playerA2,playerA3]
+            teamB = [playerB1, playerB2, playerB3]
+            break
+        case PlayerOption.four:
+            players = [playerA1, playerA2, playerA3, playerA4, playerB1, playerB2, playerB3, playerB4]
+            teamA = [playerA1, playerA2, playerA3]
+            teamB = [playerB1, playerB2, playerB3]
+            break;
+        }
+        
+        for node in players{
+            node.zPosition = 2
+            self.addChild(node)
+        }
+    }
+    func computerMove(){
         if firstTurn{
             for player in teamA{
                 if abs(player.physicsBody!.velocity.dx) > 30 || abs(player.physicsBody!.velocity.dy) > 30{
@@ -580,7 +590,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         if moveTimer?.getElapsedTime()>timeLimit{
-            if firstTurn && AIDifficulty != 1{
+            if firstTurn{
                 firstMove()
                 firstTurn = false
             }
@@ -1000,13 +1010,43 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addMarker(UIColor.brownColor(),point: bestShot!.0.position)
     }
     func addMarker(color: UIColor, point: CGPoint){
-        let blue = SKSpriteNode(imageNamed: "PlayerA")
-        blue.runAction(SKAction.colorizeWithColor(color, colorBlendFactor: 1.0, duration: 0.0001))
-        blue.size = CGSizeMake(10,10)
-        blue.position = point
-        blue.zPosition = 2
-        blue.name = "blue"
-        addChild(blue)
+//        let blue = SKSpriteNode(imageNamed: "PlayerA")
+//        blue.runAction(SKAction.colorizeWithColor(color, colorBlendFactor: 1.0, duration: 0.0001))
+//        blue.size = CGSizeMake(10,10)
+//        blue.position = point
+//        blue.zPosition = 2
+//        blue.name = "blue"
+//        addChild(blue)
+    }
+    func updateStats(won: Bool){
+        statistics[Stats.totalGames]! += 1
+        if won{
+            statistics[Stats.totalWon]! += 1
+        }
+        switch(AIDifficulty){
+        case 1:
+            statistics[Stats.totalOne]! += 1
+            if won{statistics[Stats.oneWon]! += 1}
+            break
+        case 2:
+            statistics[Stats.totalTwo]! += 1
+            if won{statistics[Stats.twoWon]! += 1}
+            break
+        case 3:
+            statistics[Stats.totalThree]! += 1
+            if won{statistics[Stats.threeWon]! += 1}
+            break
+        case 4:
+            statistics[Stats.totalFour]! += 1
+            if won{statistics[Stats.fourWon]! += 1}
+            break
+        case 5:
+            statistics[Stats.totalFive]! += 1
+            if won{statistics[Stats.fiveWon]! += 1}
+            break
+        default:break
+        }
+        saveStats()
     }
 }
 
