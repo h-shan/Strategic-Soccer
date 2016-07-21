@@ -119,9 +119,9 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         cell.textLabel?.font = UIFont(name: "Optima", size: 18)
         
         //let lock = UIImageView(image:UIImage(named:"Locked"))
-        
-        let lock = UIButton(frame: CGRectMake(0,0,1/2*cell.frame.size.height,cell.frame.size.height*3/4))
-        lock.frame.origin = CGPointMake(cell.frame.size.width/2-lock.frame.width/2, cell.frame.size.height/8)
+        let lockWidth = cell.frame.size.height/2
+        let lockHeight = cell.frame.size.height*3/4
+        let lock = UIButton(frame: CGRectMake(cell.frame.size.width/2-lockWidth/2,cell.frame.size.height/8,lockWidth,lockHeight))
         lock.tag = 99
         lock.addTarget(self, action: #selector(unlockFlag),forControlEvents: .TouchUpInside)
         lock.setImage(UIImage(imageLiteral: "Locked"), forState: .Normal)

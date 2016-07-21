@@ -8,10 +8,12 @@
 
 import UIKit
 import SpriteKit
+import MultipeerConnectivity
 
 class GameViewController: UIViewController {
     var scene: GameScene!
     var parent: PlayViewController!
+    
     
     @IBOutlet weak var PauseView: UIView!
     @IBOutlet weak var skView: SKView!
@@ -34,7 +36,7 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         scene.viewController = self
         
         skView.ignoresSiblingOrder = true
@@ -120,3 +122,5 @@ class GameViewController: UIViewController {
         saveCoins()
     }
 }
+    
+

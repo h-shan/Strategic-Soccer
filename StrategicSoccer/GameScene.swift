@@ -60,7 +60,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var borderBody: SKPhysicsBody!
 
-    var singlePlayer = false
+    var gType = gameType.twoPlayer
+    
     var AIDifficulty: Int!
     var cAggro:Int?
     var cDef:Int?
@@ -205,8 +206,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Setup your scene here */
         
         
-        print(singlePlayer)
-        
+
         // put ball in middle
         
         
@@ -260,14 +260,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let location = touch.locationInNode(self)
             let node = nodeAtPoint(location)
 
-            if !singlePlayer || (singlePlayer && turnA){
+            if gType == .twoPlayer || (gType == .onePlayer && turnA) || gType == .twoPhone && turnA{
                 if (node is Player){
                     let touchedPlayer = (node as! Player)
                     if touchedPlayer.mTeamA == turnA {
                         selectedPlayer = touchedPlayer
                         playerSelected = true
                         startPosition = location
-                        selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0.00001))
+                        selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0))
                         
                     }
                 }
@@ -278,7 +278,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                 selectedPlayer = player
                                 playerSelected = true
                                 startPosition = player.position
-                                selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0.00001))
+                                selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0))
                             }
                         }
                     }
@@ -295,6 +295,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let yMovement = 2*(touches.first!.locationInNode(self).y - startPosition!.y)
             
             selectedPlayer!.physicsBody!.velocity = CGVectorMake(xMovement, yMovement)
+            if gType == .twoPhone{
+                viewController.parent.gameService.sendMove(selectedPlayer!, velocity: selectedPlayer!.physicsBody!.velocity)
+            }
             playerSelected = false
             switchTurns()
         }
@@ -320,7 +323,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        if singlePlayer && !turnA{
+        if gType == .onePlayer && !turnA{
             computerMove()
         }
         
@@ -393,7 +396,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if mode.getType() == .timed{
             gameTimer.pause()
         }
-        if singlePlayer == true{
+        if gType == .onePlayer{
             firstTurn = true
         }
         goalDelay.start()
@@ -447,7 +450,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreBackground.fadeIn()
         if scoreA > scoreB {
             score.text = "PLAYER A WINS"
-            if singlePlayer{
+            if gType == .onePlayer{
                 updateStats(true)
                 var coinsWon: Int?
                 switch (AIDifficulty){
@@ -462,7 +465,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         else if scoreB > scoreA {
-            if singlePlayer{
+            if gType == .onePlayer{
                 updateStats(false)
             }
             score.text = "PLAYER B WINS"
@@ -533,14 +536,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 child.removeFromParent()
             }
         }
-        playerA1 = Player(teamA: true, country: countryA, sender: self)
-        playerA2 = Player(teamA: true, country: countryA, sender: self)
-        playerA3 = Player(teamA: true, country: countryA, sender: self)
-        playerA4 = Player(teamA: true, country: countryA, sender: self)
-        playerB1 = Player(teamA: false, country: countryB, sender: self)
-        playerB2 = Player(teamA: false, country: countryB, sender: self)
-        playerB3 = Player(teamA: false, country: countryB, sender: self)
-        playerB4 = Player(teamA: false, country: countryB, sender: self)
+        playerA1 = Player(teamA: true, country: countryA, sender: self, name: "player1")
+        playerA2 = Player(teamA: true, country: countryA, sender: self, name: "player2")
+        playerA3 = Player(teamA: true, country: countryA, sender: self, name: "player3")
+        playerA4 = Player(teamA: true, country: countryA, sender: self, name: "player4")
+        playerB1 = Player(teamA: false, country: countryB, sender: self, name: "player1")
+        playerB2 = Player(teamA: false, country: countryB, sender: self, name: "player2")
+        playerB3 = Player(teamA: false, country: countryB, sender: self, name: "player3")
+        playerB4 = Player(teamA: false, country: countryB, sender: self, name: "player4")
         
         switch (playerOption){
         case PlayerOption.three:

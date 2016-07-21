@@ -30,6 +30,9 @@ public enum Mode:Int {
         }
     }
 }
+public enum gameType{
+    case onePlayer, twoPlayer, twoPhone
+}
 public enum type{
     case timed, points
 }

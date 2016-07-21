@@ -25,8 +25,8 @@ class PauseViewController: UIViewController {
         UIView.animateWithDuration(0.2,animations:{
             self.parent.Dimmer.alpha = 0.0
         })
-        scene.physicsWorld.speed = 1
         scene = parent.scene
+        scene.physicsWorld.speed = 1
         parent.PauseView.hidden = true
         scene.paused = false
         scene.restart()
