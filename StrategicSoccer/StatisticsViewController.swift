@@ -26,14 +26,40 @@ class StatisticsViewController: UIViewController{
     @IBOutlet weak var WP4:UILabel!
     @IBOutlet weak var WP5:UILabel!
     @IBOutlet weak var WPT:UILabel!
+    @IBOutlet weak var StatsView: UIView!
+    @IBOutlet weak var ResetStatistics: UIButton!
+    @IBOutlet weak var NoButton:UIButton!
+    @IBOutlet weak var YesButton:UIButton!
+    @IBOutlet weak var ResetWarning: UIView!
     
     @IBAction func BackButton(sender:AnyObject){
         navigationController?.popViewControllerAnimated(true)
     }
-    override func viewDidLoad(){
-        super.viewDidLoad()
+    @IBAction func resetStatistics(){
+        ResetWarning.hidden = false
+    }
+    @IBAction func NoTapped(){
+        ResetWarning.hidden = true
+    }
+    @IBAction func YesTapped(){
+        for key in statistics{
+            statistics.updateValue(0, forKey: key.0)
+            saveStats()
+        }
+        copyData()
+        ResetWarning.hidden = true
+    }
+    override func viewWillAppear(animated:Bool){
+        super.viewWillAppear(animated)
+        ResetWarning.hidden = true
         setBackground()
         copyData()
+        let buttons: [UIButton] = [ResetStatistics, NoButton, YesButton]
+        formatMenuButtons(buttons)
+        ResetWarning.layer.borderWidth = 5
+        ResetWarning.layer.borderColor = UIColor.blackColor().CGColor
+        StatsView.layer.borderWidth = 5
+        StatsView.layer.borderColor = UIColor.blackColor().CGColor
     }
     func copyData(){
         GW1.text = String(statistics[Stats.oneWon]!)

@@ -61,6 +61,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var borderBody: SKPhysicsBody!
 
     var gType = gameType.twoPlayer
+    var isHost = false
     
     var AIDifficulty: Int!
     var cAggro:Int?
@@ -107,7 +108,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             , size: CGSizeMake(800*scalerX,200*scalerY))
         scoreBackground.addChild(score)
         scoreBackground.zPosition = 4
-        scoreBackground.alpha = 0.0
         score.fontSize = 50
         score.fontColor = UIColor.blackColor()
         scoreBackground.position = CGPoint(x: frame.midX, y: 1.3*frame.midY)
@@ -204,8 +204,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        
-        
+        scoreBackground.alpha = 0.0
+
+        if (gType == .twoPlayer){
+            viewController.parent.gameService.sendScreenSize(screenSize)
+
+        }
 
         // put ball in middle
         
@@ -311,6 +315,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
    
     override func update(currentTime: CFTimeInterval) {
+        if (gType == .twoPhone){
+            viewController.parent.gameService.sendPosition(self)
+        }
         if (!goalAccounted && 200*scalerY < ball.position.y && ball.position.y < 440*scalerY){
             if ball.position.x<50*scalerX{
                 
@@ -444,7 +451,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func endGame(){
-        goalDelay.pause()
+        goalDelay.reset()
         gameEnded = true
         setDynamicStates(false)
         scoreBackground.fadeIn()
@@ -527,6 +534,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if !turnA{
             switchTurns()
         }
+        gameEnded = false
         userInteractionEnabled = true
         scoreBoard.label.text = "0    0"
     }

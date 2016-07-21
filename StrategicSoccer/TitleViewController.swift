@@ -51,7 +51,7 @@ class TitleViewController: UIViewController {
     var skView: SKView!
     var defaultMode = Mode.threeMinute
     var defaultPlayers = PlayerOption.three
-    var defaultAI = 0
+    var defaultAI = 1
     var unlockedFlags:[String]!
     
     var playerA = "AFGHANISTAN"

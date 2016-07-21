@@ -68,8 +68,8 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         BuyFlagView.hidden = true
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated:Bool) {
+        super.viewWillAppear(animated)
         self.PlayerA.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.PlayerB.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         PlayerA.layer.borderWidth = 3
@@ -89,13 +89,19 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         
         NotEnoughCoins.layer.borderWidth = 5
         NotEnoughCoins.layer.borderColor = UIColor.blackColor().CGColor
-        OKButton.layer.borderWidth = 3
-        OKButton.layer.borderColor = gold
-        OKButton.backgroundColor = UIColor.blackColor()
+        
+        let buttons: [UIButton] = [YesButton, NoButton, OKButton]
+        formatMenuButtons(buttons)
         BuyFlagView.hidden = true
         NotEnoughCoins.hidden = true
         ConfirmationText.numberOfLines = 0
         addCoinImage("DO YOU WANT TO SPEND\n", afterText: "20 TO BUY THIS FLAG?", label: ConfirmationText, numberLines: 2)
+        let indexPathA = NSIndexPath(forItem: findIndex(defaultA), inSection: 0)
+        let indexPathB = NSIndexPath(forItem: findIndex(defaultB), inSection: 0)
+        
+        PlayerA.selectRowAtIndexPath(indexPathA, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+        
+        PlayerB.selectRowAtIndexPath(indexPathB, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
         // Do any additional setup after loading the view.
     }
 
@@ -118,7 +124,6 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         cell.textLabel?.text = findFlag(indexPath.row)
         cell.textLabel?.font = UIFont(name: "Optima", size: 18)
         
-        //let lock = UIImageView(image:UIImage(named:"Locked"))
         let lockWidth = cell.frame.size.height/2
         let lockHeight = cell.frame.size.height*3/4
         let lock = UIButton(frame: CGRectMake(cell.frame.size.width/2-lockWidth/2,cell.frame.size.height/8,lockWidth,lockHeight))
@@ -175,15 +180,6 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         warningFlag.image = boughtCell.imageView?.image
         flagName.text = boughtCell.textLabel?.text
         
-    }
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        let indexPathA = NSIndexPath(forItem: findIndex(defaultA), inSection: 0)
-        let indexPathB = NSIndexPath(forItem: findIndex(defaultB), inSection: 0)
-        
-        PlayerA.selectRowAtIndexPath(indexPathA, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
-        
-        PlayerB.selectRowAtIndexPath(indexPathB, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)

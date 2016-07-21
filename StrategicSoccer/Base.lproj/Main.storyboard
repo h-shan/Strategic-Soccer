@@ -67,13 +67,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLAYER B" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knW-p5-Ua8">
-                                <rect key="frame" x="374.5" y="66.5" width="102.5" height="28.5"/>
+                                <rect key="frame" x="374" y="66" width="102.5" height="28.5"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="24"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2G-d5-zRw">
-                                <rect key="frame" x="109" y="115" width="350" height="150"/>
+                                <rect key="frame" x="109" y="127" width="350" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pzG-xD-wJr">
                                         <rect key="frame" x="8" y="60" width="85" height="85"/>
@@ -82,12 +82,12 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwR-5i-HHG">
-                                        <rect key="frame" x="98" y="92" width="167" height="21"/>
+                                        <rect key="frame" x="98" y="88" width="147" height="28.5"/>
                                         <attributedString key="attributedText">
                                             <fragment content="F">
                                                 <attributes>
                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <font key="NSFont" size="18" name="Optima-Regular"/>
+                                                    <font key="NSFont" size="24" name="Optima-Regular"/>
                                                     <font key="NSOriginalFont" size="18" name="Optima-Regular"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
@@ -95,68 +95,51 @@
                                             <fragment content="LAG">
                                                 <attributes>
                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <font key="NSFont" size="18" name="Optima-Regular"/>
+                                                    <font key="NSFont" size="24" name="Optima-Regular"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qxx-k4-ZXp">
-                                        <rect key="frame" x="285" y="65" width="40" height="30"/>
-                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qxx-k4-ZXp">
+                                        <rect key="frame" x="265" y="65" width="60" height="34"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="G6e-76-2YA"/>
+                                            <constraint firstAttribute="width" constant="60" id="G6e-76-2YA"/>
                                         </constraints>
-                                        <state key="normal">
-                                            <attributedString key="attributedTitle">
-                                                <fragment content="YES">
-                                                    <attributes>
-                                                        <font key="NSFont" size="15" name="Optima-Regular"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <state key="normal" title="YES">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="YesButton:" destination="5yu-Xs-09g" eventType="touchUpInside" id="tZ8-Ac-WjU"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uU7-ed-h3s">
-                                        <rect key="frame" x="285" y="110" width="40" height="30"/>
-                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal">
-                                            <attributedString key="attributedTitle">
-                                                <fragment content="NO">
-                                                    <attributes>
-                                                        <font key="NSFont" size="15" name="Optima-Regular"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uU7-ed-h3s">
+                                        <rect key="frame" x="265" y="106" width="60" height="34"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <state key="normal" title="NO">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="NoButton:" destination="5yu-Xs-09g" eventType="touchUpInside" id="vKu-sT-bTX"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5Y-hb-S2h">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5Y-hb-S2h">
                                         <rect key="frame" x="52" y="10" width="246" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="9Fq-2A-1UE"/>
                                         </constraints>
-                                        <attributedString key="attributedText">
-                                            <fragment>
-                                                <string key="content">DO YOU WANT TO SPEND
+                                        <string key="text">DO YOU WANT TO SPEND
 20 COINS TO BUY THIS FLAG?</string>
-                                                <attributes>
-                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <font key="NSFont" size="18" name="Optima-Regular"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="e5Y-hb-S2h" firstAttribute="top" secondItem="e2G-d5-zRw" secondAttribute="top" constant="10" id="1Nh-20-idZ"/>
                                     <constraint firstItem="Qxx-k4-ZXp" firstAttribute="top" secondItem="pzG-xD-wJr" secondAttribute="top" constant="5" id="2ww-su-s1Q"/>
@@ -175,14 +158,16 @@
                                     <constraint firstItem="KwR-5i-HHG" firstAttribute="leading" secondItem="pzG-xD-wJr" secondAttribute="trailing" constant="5" id="xX5-TI-XmR"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITK-Nn-2uB" userLabel="NotEnoughCoins">
-                                <rect key="frame" x="119" y="130" width="330" height="120"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITK-Nn-2uB" userLabel="NotEnoughCoins">
+                                <rect key="frame" x="119" y="142" width="330" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3F-y8-doZ">
                                         <rect key="frame" x="140" y="76" width="50" height="34"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="wTc-Jh-Cwz"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                         <state key="normal" title="OK">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -202,7 +187,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="bMa-4r-fWd" firstAttribute="top" secondItem="ITK-Nn-2uB" secondAttribute="top" constant="21" id="9ji-ks-HdQ"/>
                                     <constraint firstItem="D3F-y8-doZ" firstAttribute="bottom" secondItem="ITK-Nn-2uB" secondAttribute="bottom" constant="-10" id="E8U-NZ-FnT"/>
@@ -220,8 +205,8 @@ PLAY MORE GAMES TO EARN COINS.</string>
                             <constraint firstItem="hX3-ee-hi8" firstAttribute="top" secondItem="lXJ-Kt-b82" secondAttribute="bottom" constant="10" id="L3E-qX-gwl"/>
                             <constraint firstItem="vj5-wL-u9h" firstAttribute="top" secondItem="knW-p5-Ua8" secondAttribute="bottom" constant="10" id="Neb-Mn-PIn"/>
                             <constraint firstItem="vj5-wL-u9h" firstAttribute="bottom" secondItem="hX3-ee-hi8" secondAttribute="bottom" id="PE9-Gt-xzf"/>
-                            <constraint firstItem="e2G-d5-zRw" firstAttribute="top" secondItem="hX3-ee-hi8" secondAttribute="top" constant="10" id="PnP-yg-qs9"/>
                             <constraint firstItem="e2G-d5-zRw" firstAttribute="centerX" secondItem="uoo-jQ-ZfU" secondAttribute="centerX" id="SXn-wU-WKr"/>
+                            <constraint firstItem="e2G-d5-zRw" firstAttribute="centerY" secondItem="hX3-ee-hi8" secondAttribute="centerY" id="a94-LS-6An"/>
                             <constraint firstItem="hX3-ee-hi8" firstAttribute="trailing" secondItem="uoo-jQ-ZfU" secondAttribute="centerXWithinMargins" constant="-20" id="fD3-lq-zuf"/>
                             <constraint firstItem="vj5-wL-u9h" firstAttribute="top" secondItem="hX3-ee-hi8" secondAttribute="top" id="fVd-QC-hVH"/>
                             <constraint firstItem="TdJ-HU-drd" firstAttribute="centerX" secondItem="uoo-jQ-ZfU" secondAttribute="centerX" id="ggJ-Mj-vLc"/>
@@ -494,7 +479,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  PLAYERS:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rep-hV-DSt">
-                                <rect key="frame" x="60" y="72" width="100" height="35"/>
+                                <rect key="frame" x="60" y="87.5" width="100" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="400-hS-C1A"/>
@@ -505,7 +490,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x1V-wF-2Rs">
-                                <rect key="frame" x="304" y="162" width="100" height="35"/>
+                                <rect key="frame" x="304" y="177.5" width="100" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="gHE-pw-1xl" userLabel="width = 130"/>
@@ -526,7 +511,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xfv-5N-ocI">
-                                <rect key="frame" x="424" y="162" width="100" height="35"/>
+                                <rect key="frame" x="424" y="177.5" width="100" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="FPK-zK-VUI"/>
@@ -558,19 +543,22 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="66D-1E-wB0" userLabel="BackButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="66D-1E-wB0" userLabel="BackButton">
                                 <rect key="frame" x="10" y="10" width="100" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="iQZ-yP-NeZ"/>
                                     <constraint firstAttribute="width" constant="100" id="zpN-0a-E3S"/>
                                 </constraints>
-                                <state key="normal" image="BackArrow"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="BackArrow">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="BackButton:" destination="1lU-lZ-m6k" eventType="touchUpInside" id="v55-1g-JqN"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gdt-er-Qx4">
-                                <rect key="frame" x="304" y="72" width="100" height="35"/>
+                                <rect key="frame" x="304" y="87.5" width="100" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="3XE-12-OrP"/>
@@ -591,7 +579,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cbl-8U-uwl">
-                                <rect key="frame" x="424" y="72" width="100" height="35"/>
+                                <rect key="frame" x="424" y="87.5" width="100" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="7kS-qi-ME6"/>
@@ -612,7 +600,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  MODE:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXJ-xE-DP7">
-                                <rect key="frame" x="60" y="162" width="100" height="35"/>
+                                <rect key="frame" x="60" y="177.5" width="100" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="IYK-hi-KTL"/>
@@ -622,7 +610,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aoE-XK-syY">
-                                <rect key="frame" x="304" y="197" width="100" height="100"/>
+                                <rect key="frame" x="304" y="212.5" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="mtB-zt-aRn"/>
                                 </constraints>
@@ -631,7 +619,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKg-cr-rHi">
-                                <rect key="frame" x="160" y="162" width="100" height="35"/>
+                                <rect key="frame" x="160" y="177.5" width="100" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Akn-o6-3Fr"/>
@@ -648,20 +636,20 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCQ-Fd-NTk">
-                                <rect key="frame" x="160" y="72" width="100" height="35"/>
+                                <rect key="frame" x="160" y="87.5" width="100" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BWt-8S-NPU">
-                                <rect key="frame" x="424" y="197" width="100" height="100"/>
+                                <rect key="frame" x="424" y="212.5" width="100" height="100"/>
                                 <connections>
                                     <segue destination="loy-k9-g4a" kind="embed" identifier="ChangePoint" id="v76-At-Qxj"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  AI DIFFICULTY:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGo-f3-n2c">
-                                <rect key="frame" x="60" y="117" width="140" height="35"/>
+                                <rect key="frame" x="60" y="132.5" width="140" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="M8n-b5-PFP"/>
@@ -671,14 +659,14 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3g-Jt-8ef">
-                                <rect key="frame" x="200" y="117" width="60" height="35"/>
+                                <rect key="frame" x="200" y="132.5" width="60" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EHr-2Z-8sL" userLabel="DifficultyView">
-                                <rect key="frame" x="304" y="117" width="220" height="35"/>
+                                <rect key="frame" x="304" y="132.5" width="220" height="35"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jj2-Zj-ELT">
                                         <rect key="frame" x="44" y="1" width="44" height="34"/>
@@ -756,6 +744,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                             <constraint firstItem="x1V-wF-2Rs" firstAttribute="bottom" secondItem="jXJ-xE-DP7" secondAttribute="bottom" id="4w9-5v-Nte"/>
                             <constraint firstItem="x1V-wF-2Rs" firstAttribute="centerX" secondItem="Tce-jn-p8V" secondAttribute="centerX" constant="70" id="5or-Fu-d7b"/>
                             <constraint firstItem="Cbl-8U-uwl" firstAttribute="centerY" secondItem="gdt-er-Qx4" secondAttribute="centerY" id="7AA-bJ-HyO"/>
+                            <constraint firstItem="jXJ-xE-DP7" firstAttribute="top" secondItem="LGo-f3-n2c" secondAttribute="bottom" constant="10" id="CLx-qo-L0M"/>
                             <constraint firstItem="66D-1E-wB0" firstAttribute="top" secondItem="Tce-jn-p8V" secondAttribute="top" constant="10" id="DoL-1w-rrs"/>
                             <constraint firstItem="gdt-er-Qx4" firstAttribute="trailing" secondItem="x1V-wF-2Rs" secondAttribute="trailing" id="E9D-4b-ETx"/>
                             <constraint firstItem="gdt-er-Qx4" firstAttribute="centerY" secondItem="rep-hV-DSt" secondAttribute="centerY" id="Ej6-be-Omd"/>
@@ -768,7 +757,6 @@ PLAY MORE GAMES TO EARN COINS.</string>
                             <constraint firstItem="uKg-cr-rHi" firstAttribute="bottom" secondItem="x1V-wF-2Rs" secondAttribute="bottom" id="NRR-ja-mf5"/>
                             <constraint firstItem="BWt-8S-NPU" firstAttribute="top" secondItem="xfv-5N-ocI" secondAttribute="bottom" id="NfN-XX-wAA"/>
                             <constraint firstItem="xfv-5N-ocI" firstAttribute="bottom" secondItem="jXJ-xE-DP7" secondAttribute="bottom" id="PhJ-xD-mJu"/>
-                            <constraint firstItem="jXJ-xE-DP7" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="20" id="PmH-QQ-ahS"/>
                             <constraint firstItem="EHr-2Z-8sL" firstAttribute="trailing" secondItem="Cbl-8U-uwl" secondAttribute="trailing" id="Pv0-54-vbJ"/>
                             <constraint firstItem="LGo-f3-n2c" firstAttribute="top" secondItem="rep-hV-DSt" secondAttribute="bottom" constant="10" id="QSO-4J-Zvd"/>
                             <constraint firstItem="aoE-XK-syY" firstAttribute="trailing" secondItem="x1V-wF-2Rs" secondAttribute="trailing" id="SQb-sI-1Q9"/>
@@ -791,7 +779,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                             <constraint firstItem="BWt-8S-NPU" firstAttribute="trailing" secondItem="xfv-5N-ocI" secondAttribute="trailing" id="oQB-ss-LFk"/>
                             <constraint firstItem="OCQ-Fd-NTk" firstAttribute="trailing" secondItem="uKg-cr-rHi" secondAttribute="trailing" id="puj-h7-aH7"/>
                             <constraint firstItem="66D-1E-wB0" firstAttribute="leading" secondItem="Tce-jn-p8V" secondAttribute="leading" constant="10" id="qo1-hb-PB5"/>
-                            <constraint firstItem="rep-hV-DSt" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="-70" id="rJE-fJ-NMe"/>
+                            <constraint firstItem="rep-hV-DSt" firstAttribute="centerY" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="-55" id="rJE-fJ-NMe"/>
                             <constraint firstItem="Cbl-8U-uwl" firstAttribute="trailing" secondItem="xfv-5N-ocI" secondAttribute="trailing" id="sLR-gL-yT4"/>
                             <constraint firstItem="In0-Pn-ZYX" firstAttribute="centerX" secondItem="Tce-jn-p8V" secondAttribute="centerX" id="vEz-23-Rck"/>
                             <constraint firstItem="Cbl-8U-uwl" firstAttribute="leading" secondItem="xfv-5N-ocI" secondAttribute="leading" id="vdk-YA-MU7"/>
@@ -858,7 +846,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                     <segue destination="BV1-FR-VrT" kind="show" identifier="TwoPlayersSegue" animates="NO" id="TGp-vV-m0U"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wfU-na-WDg" userLabel="BackButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wfU-na-WDg" userLabel="BackButton">
                                 <rect key="frame" x="10" y="10" width="100" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="AIm-1Z-H87"/>
@@ -877,39 +865,91 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BV1-FR-VrT" kind="show" identifier="TwoPhoneSegue" id="j7g-p7-Lav"/>
+                                    <action selector="showConnections:" destination="f1z-UW-r5Y" eventType="touchUpInside" id="yhF-KI-yaP"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yUE-Y9-Sg1">
-                                <rect key="frame" x="134" y="85" width="300" height="150"/>
+                                <rect key="frame" x="109" y="60" width="350" height="200"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVAILABLE GAMES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ph-lw-414">
-                                        <rect key="frame" x="76" y="5" width="147.5" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVAILABLE GAMES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ph-lw-414">
+                                        <rect key="frame" x="72" y="10" width="205.5" height="28.5"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ObI-8h-DPS">
-                                        <rect key="frame" x="66" y="34" width="168" height="61"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ObI-8h-DPS">
+                                        <rect key="frame" x="50" y="60" width="250" height="80"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="mav-qj-Rh3"/>
+                                            <constraint firstAttribute="width" constant="250" id="qCR-yU-L0B"/>
+                                        </constraints>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="zl6-qQ-tVy">
+                                                <rect key="frame" x="0.0" y="28" width="250" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zl6-qQ-tVy" id="I5c-gs-cdk">
+                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="f1z-UW-r5Y" id="cfQ-En-9f6"/>
+                                            <outlet property="delegate" destination="f1z-UW-r5Y" id="UYF-9I-1Nm"/>
+                                        </connections>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7fq-lP-MXf">
-                                        <rect key="frame" x="45" y="111" width="210" height="34"/>
+                                        <rect key="frame" x="50" y="154" width="115" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="dQg-dC-zn2"/>
+                                            <constraint firstAttribute="width" constant="115" id="ttD-3Q-fJo"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                        <state key="normal" title="HOST YOUR OWN GAME">
+                                        <state key="normal" title="HOST GAME">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="hostGame:" destination="f1z-UW-r5Y" eventType="touchUpInside" id="4Gz-Sl-Qc3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0X-YL-jgI">
+                                        <rect key="frame" x="185" y="156" width="115" height="34"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <state key="normal" title="JOIN GAME"/>
+                                        <connections>
+                                            <segue destination="BV1-FR-VrT" kind="show" identifier="TwoPhoneSegue" id="VE4-qM-sKA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Wv-K9-6HS" userLabel="XButton">
+                                        <rect key="frame" x="10" y="10" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="vRz-x7-aRt"/>
+                                            <constraint firstAttribute="width" constant="30" id="yad-4b-mD5"/>
+                                        </constraints>
+                                        <state key="normal" image="ClosingX"/>
+                                        <connections>
+                                            <action selector="hideConnections:" destination="f1z-UW-r5Y" eventType="touchUpInside" id="yzk-75-hyx"/>
+                                        </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.56820989290000001" blue="0.31144493610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="7fq-lP-MXf" firstAttribute="centerX" secondItem="yUE-Y9-Sg1" secondAttribute="centerX" id="C9V-os-ThF"/>
-                                    <constraint firstAttribute="width" constant="300" id="DtX-Mq-ERh"/>
-                                    <constraint firstAttribute="height" constant="150" id="E2R-7t-27f"/>
+                                    <constraint firstItem="7fq-lP-MXf" firstAttribute="bottom" secondItem="X0X-YL-jgI" secondAttribute="bottom" id="8BR-eR-XqU"/>
+                                    <constraint firstItem="7fq-lP-MXf" firstAttribute="trailing" secondItem="yUE-Y9-Sg1" secondAttribute="centerX" constant="-10" id="C9V-os-ThF"/>
+                                    <constraint firstAttribute="width" constant="350" id="DtX-Mq-ERh"/>
+                                    <constraint firstAttribute="height" constant="200" id="E2R-7t-27f"/>
+                                    <constraint firstItem="6Wv-K9-6HS" firstAttribute="top" secondItem="yUE-Y9-Sg1" secondAttribute="top" constant="10" id="HPw-Zg-laQ"/>
+                                    <constraint firstItem="ObI-8h-DPS" firstAttribute="centerY" secondItem="yUE-Y9-Sg1" secondAttribute="centerY" id="Kcl-kt-vmj"/>
+                                    <constraint firstItem="ObI-8h-DPS" firstAttribute="centerX" secondItem="yUE-Y9-Sg1" secondAttribute="centerX" id="aOW-ck-mMx"/>
+                                    <constraint firstItem="6Wv-K9-6HS" firstAttribute="leading" secondItem="yUE-Y9-Sg1" secondAttribute="leading" constant="10" id="aoo-s7-Flg"/>
+                                    <constraint firstItem="X0X-YL-jgI" firstAttribute="leading" secondItem="yUE-Y9-Sg1" secondAttribute="centerX" constant="10" id="iu5-za-RdV"/>
                                     <constraint firstItem="3ph-lw-414" firstAttribute="centerX" secondItem="yUE-Y9-Sg1" secondAttribute="centerX" id="jak-Ez-pjV"/>
-                                    <constraint firstItem="7fq-lP-MXf" firstAttribute="bottom" secondItem="yUE-Y9-Sg1" secondAttribute="bottom" constant="-5" id="nSS-Bu-Gmi"/>
-                                    <constraint firstItem="3ph-lw-414" firstAttribute="top" secondItem="yUE-Y9-Sg1" secondAttribute="top" constant="5" id="rMv-Ji-Yee"/>
+                                    <constraint firstItem="X0X-YL-jgI" firstAttribute="bottom" secondItem="yUE-Y9-Sg1" secondAttribute="bottom" constant="-10" id="mEc-Qv-Teh"/>
+                                    <constraint firstItem="3ph-lw-414" firstAttribute="top" secondItem="yUE-Y9-Sg1" secondAttribute="top" constant="10" id="rMv-Ji-Yee"/>
+                                    <constraint firstItem="X0X-YL-jgI" firstAttribute="width" secondItem="7fq-lP-MXf" secondAttribute="width" id="za5-9a-Anu"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -933,8 +973,11 @@ PLAY MORE GAMES TO EARN COINS.</string>
                     <connections>
                         <outlet property="ConnectToAnotherDevice" destination="eEW-WU-dEc" id="JD4-xe-pnx"/>
                         <outlet property="ConnectionView" destination="yUE-Y9-Sg1" id="Bw9-mG-bxQ"/>
+                        <outlet property="HostGame" destination="7fq-lP-MXf" id="ksh-Zv-obt"/>
+                        <outlet property="JoinGame" destination="X0X-YL-jgI" id="hAd-TG-ZJp"/>
                         <outlet property="SinglePlayer" destination="jS9-Co-kiM" id="do9-A7-HyA"/>
                         <outlet property="TwoPlayers" destination="rOR-Lg-LEu" id="r3L-yy-s1s"/>
+                        <outlet property="gameTableView" destination="ObI-8h-DPS" id="FA0-XU-le7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="63R-nO-eZn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1061,153 +1104,361 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KxG-of-17L" userLabel="StatsView">
-                                <rect key="frame" x="5" y="90" width="558" height="220"/>
+                            <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KxG-of-17L" userLabel="StatsView">
+                                <rect key="frame" x="10" y="90" width="548" height="165"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RB0-fZ-REi">
+                                        <rect key="frame" x="15" y="10" width="120" height="25"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="DIFFICULTY">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="18" name="Optima-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54p-rO-7Es">
+                                        <rect key="frame" x="15" y="50" width="120" height="25"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="GAMES WON">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="18" name="Optima-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Btm-79-5Hq">
+                                        <rect key="frame" x="15" y="90" width="120" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="H59-5a-5G8"/>
+                                            <constraint firstAttribute="width" constant="120" id="qAU-3m-taM"/>
+                                        </constraints>
+                                        <attributedString key="attributedText">
+                                            <fragment content="TOTAL GAMES">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="18" name="Optima-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="toP-C2-UDz">
+                                        <rect key="frame" x="15" y="130" width="120" height="25"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="WIN %">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="18" name="Optima-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IT9-Cv-KBJ">
+                                        <rect key="frame" x="165" y="10" width="10.5" height="25"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="1">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="18" name="Optima-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RhL-fX-L8p">
+                                        <rect key="frame" x="225" y="10" width="11" height="25"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2S-93-Lcd">
+                                        <rect key="frame" x="286" y="10" width="11" height="25"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ub7-Wb-3us">
+                                        <rect key="frame" x="347" y="10" width="11" height="25"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmV-F2-aT4">
+                                        <rect key="frame" x="408" y="10" width="11" height="25"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tc8-8N-x7s">
+                                        <rect key="frame" x="149" y="52" width="42.5" height="21"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="GW1">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="18" name="Optima-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GW2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R63-JW-RQl">
+                                        <rect key="frame" x="209" y="51" width="43" height="22"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GW3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWM-vv-DXg">
+                                        <rect key="frame" x="270" y="51" width="43" height="22"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GW4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CWM-bI-eL1">
+                                        <rect key="frame" x="331" y="51" width="43" height="22"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GW5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUS-OO-xEc">
+                                        <rect key="frame" x="392" y="51" width="43" height="22"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxZ-ch-oK3">
+                                        <rect key="frame" x="153" y="92" width="34.5" height="21"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="TG1">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="18" name="Optima-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TG2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="do4-5d-oWE">
+                                        <rect key="frame" x="213" y="91" width="35" height="22"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TG3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFf-uZ-4z1">
+                                        <rect key="frame" x="274" y="91" width="35" height="22"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TG4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNU-xn-cwb">
+                                        <rect key="frame" x="335" y="91" width="35" height="22"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TG5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRq-A4-g1D">
+                                        <rect key="frame" x="396" y="91" width="35" height="22"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WP1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJN-DQ-art">
+                                        <rect key="frame" x="151" y="131.5" width="38.5" height="22"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WP2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9F-4e-CMZ">
+                                        <rect key="frame" x="211" y="131" width="38.5" height="22"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WP3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ki5-9L-Eq6">
+                                        <rect key="frame" x="272" y="131.5" width="38.5" height="22"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WP4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Llc-3o-W8t">
+                                        <rect key="frame" x="333" y="131.5" width="38.5" height="22"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WP5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aS4-EL-fgh">
+                                        <rect key="frame" x="394" y="131.5" width="38.5" height="22"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPn-M9-JFr">
+                                        <rect key="frame" x="469" y="10" width="53.5" height="25"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="TOTAL">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="18" name="Optima-Regular"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GWT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilY-FT-oqV">
+                                        <rect key="frame" x="474" y="51" width="43" height="22"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TGT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDh-dJ-abT">
+                                        <rect key="frame" x="478" y="91" width="34.5" height="22"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WPT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQe-O0-Rwz">
+                                        <rect key="frame" x="476" y="131.5" width="38.5" height="22"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gml-0v-PD4" userLabel="ResetWarning">
+                                        <rect key="frame" x="99" y="8" width="350" height="150"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ARE YOU SURE YOU WANT TO RESET YOUR SINGLE PLAYER STATISTICS? THIS CANNOT BE UNDONE." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwk-yD-1hj" userLabel="ResetText">
+                                                <rect key="frame" x="22" y="0.0" width="306" height="93"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="306" id="37g-lL-B3A"/>
+                                                    <constraint firstAttribute="height" constant="93" id="gtn-IU-uUe"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICo-IF-KrG">
+                                                <rect key="frame" x="90" y="100" width="50" height="30"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="aAu-tV-SVB"/>
+                                                    <constraint firstAttribute="width" constant="50" id="hSW-by-c7w"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                                <state key="normal" title="YES">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="YesTapped" destination="2pK-Tn-fJ1" eventType="touchUpInside" id="daK-ut-y8B"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRG-pr-fR5">
+                                                <rect key="frame" x="210" y="100" width="50" height="30"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                                <state key="normal" title="NO">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="NoTapped" destination="2pK-Tn-fJ1" eventType="touchUpInside" id="6vO-8g-zOE"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="WRG-pr-fR5" firstAttribute="centerX" secondItem="gml-0v-PD4" secondAttribute="centerX" constant="60" id="42c-Ae-ynT"/>
+                                            <constraint firstItem="ICo-IF-KrG" firstAttribute="centerX" secondItem="gml-0v-PD4" secondAttribute="centerX" constant="-60" id="4ji-KY-A4z"/>
+                                            <constraint firstAttribute="width" constant="350" id="Bc8-GE-SAE"/>
+                                            <constraint firstItem="WRG-pr-fR5" firstAttribute="top" secondItem="ICo-IF-KrG" secondAttribute="top" id="Dq9-9R-F6X"/>
+                                            <constraint firstAttribute="height" constant="150" id="JQo-Yo-qNC"/>
+                                            <constraint firstItem="ICo-IF-KrG" firstAttribute="centerY" secondItem="gml-0v-PD4" secondAttribute="centerY" constant="40" id="MaI-tH-Fsl"/>
+                                            <constraint firstItem="WRG-pr-fR5" firstAttribute="bottom" secondItem="ICo-IF-KrG" secondAttribute="bottom" id="X9k-1Z-rpI"/>
+                                            <constraint firstItem="xwk-yD-1hj" firstAttribute="centerX" secondItem="gml-0v-PD4" secondAttribute="centerX" id="a4L-Q7-GH6"/>
+                                            <constraint firstItem="WRG-pr-fR5" firstAttribute="width" secondItem="ICo-IF-KrG" secondAttribute="width" id="iLe-vh-fX2"/>
+                                            <constraint firstItem="xwk-yD-1hj" firstAttribute="top" secondItem="gml-0v-PD4" secondAttribute="top" id="vks-Bx-3On"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IT9-Cv-KBJ">
-                                <rect key="frame" x="177" y="90" width="10.5" height="25"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="1">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="18" name="Optima-Regular"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RhL-fX-L8p">
-                                <rect key="frame" x="238" y="90" width="11" height="25"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ub7-Wb-3us">
-                                <rect key="frame" x="360" y="90" width="11" height="25"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmV-F2-aT4">
-                                <rect key="frame" x="421" y="90" width="11" height="25"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54p-rO-7Es">
-                                <rect key="frame" x="10" y="140" width="120" height="25"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="GAMES WON">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="18" name="Optima-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Btm-79-5Hq">
-                                <rect key="frame" x="10" y="190" width="120" height="25"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="H59-5a-5G8"/>
-                                    <constraint firstAttribute="width" constant="120" id="qAU-3m-taM"/>
+                                    <constraint firstItem="R63-JW-RQl" firstAttribute="centerY" secondItem="tc8-8N-x7s" secondAttribute="centerY" id="08b-ZS-RVS"/>
+                                    <constraint firstItem="FUS-OO-xEc" firstAttribute="centerX" secondItem="KmV-F2-aT4" secondAttribute="centerX" id="0I0-WO-iJC"/>
+                                    <constraint firstItem="aS4-EL-fgh" firstAttribute="centerY" secondItem="WJN-DQ-art" secondAttribute="centerY" id="11A-eO-TPh"/>
+                                    <constraint firstItem="zRq-A4-g1D" firstAttribute="centerY" secondItem="dxZ-ch-oK3" secondAttribute="centerY" id="1BX-Wl-2Jc"/>
+                                    <constraint firstItem="Btm-79-5Hq" firstAttribute="height" secondItem="RB0-fZ-REi" secondAttribute="height" id="1MM-Lj-Jci"/>
+                                    <constraint firstItem="a2S-93-Lcd" firstAttribute="bottom" secondItem="IT9-Cv-KBJ" secondAttribute="bottom" id="2HR-Q1-gk9"/>
+                                    <constraint firstItem="aS4-EL-fgh" firstAttribute="centerX" secondItem="KmV-F2-aT4" secondAttribute="centerX" id="2OZ-Lv-Gh5"/>
+                                    <constraint firstItem="gml-0v-PD4" firstAttribute="centerY" secondItem="KxG-of-17L" secondAttribute="centerY" id="4HX-sI-ZL2"/>
+                                    <constraint firstItem="Btm-79-5Hq" firstAttribute="width" secondItem="RB0-fZ-REi" secondAttribute="width" id="4gh-ia-iRP"/>
+                                    <constraint firstItem="ub7-Wb-3us" firstAttribute="top" secondItem="IT9-Cv-KBJ" secondAttribute="top" id="5Pb-Ro-aJ7"/>
+                                    <constraint firstItem="dxZ-ch-oK3" firstAttribute="centerX" secondItem="IT9-Cv-KBJ" secondAttribute="centerX" id="5qs-XD-amf"/>
+                                    <constraint firstItem="c9F-4e-CMZ" firstAttribute="centerY" secondItem="WJN-DQ-art" secondAttribute="centerY" id="63F-A9-Dt7"/>
+                                    <constraint firstItem="rQe-O0-Rwz" firstAttribute="centerY" secondItem="WJN-DQ-art" secondAttribute="centerY" id="6Al-d8-wI3"/>
+                                    <constraint firstItem="toP-C2-UDz" firstAttribute="height" secondItem="RB0-fZ-REi" secondAttribute="height" id="6ds-ic-av3"/>
+                                    <constraint firstItem="lFf-uZ-4z1" firstAttribute="centerY" secondItem="dxZ-ch-oK3" secondAttribute="centerY" id="7B6-FQ-veL"/>
+                                    <constraint firstItem="toP-C2-UDz" firstAttribute="centerY" secondItem="Btm-79-5Hq" secondAttribute="centerY" constant="40" id="7K6-yh-Sl8"/>
+                                    <constraint firstItem="ki5-9L-Eq6" firstAttribute="centerX" secondItem="fWM-vv-DXg" secondAttribute="centerX" id="7lu-w2-9jN"/>
+                                    <constraint firstItem="XPn-M9-JFr" firstAttribute="top" secondItem="IT9-Cv-KBJ" secondAttribute="top" id="901-8B-DIN"/>
+                                    <constraint firstItem="CWM-bI-eL1" firstAttribute="centerX" secondItem="ub7-Wb-3us" secondAttribute="centerX" id="Aji-qK-gnG"/>
+                                    <constraint firstAttribute="bottom" secondItem="toP-C2-UDz" secondAttribute="bottom" constant="10" id="BlS-7G-7aY"/>
+                                    <constraint firstItem="54p-rO-7Es" firstAttribute="leading" secondItem="RB0-fZ-REi" secondAttribute="leading" id="DWG-oz-Oco"/>
+                                    <constraint firstItem="TNU-xn-cwb" firstAttribute="centerY" secondItem="dxZ-ch-oK3" secondAttribute="centerY" id="DzW-cj-uCz"/>
+                                    <constraint firstItem="54p-rO-7Es" firstAttribute="width" secondItem="RB0-fZ-REi" secondAttribute="width" id="E50-rW-W2x"/>
+                                    <constraint firstItem="CWM-bI-eL1" firstAttribute="centerY" secondItem="tc8-8N-x7s" secondAttribute="centerY" id="Heo-u2-oqh"/>
+                                    <constraint firstItem="ilY-FT-oqV" firstAttribute="centerY" secondItem="tc8-8N-x7s" secondAttribute="centerY" id="MEA-KL-cDq"/>
+                                    <constraint firstItem="fWM-vv-DXg" firstAttribute="centerY" secondItem="R63-JW-RQl" secondAttribute="centerY" id="Mzr-08-55D"/>
+                                    <constraint firstItem="ub7-Wb-3us" firstAttribute="bottom" secondItem="IT9-Cv-KBJ" secondAttribute="bottom" id="Ncw-QR-lRN"/>
+                                    <constraint firstItem="c9F-4e-CMZ" firstAttribute="centerX" secondItem="R63-JW-RQl" secondAttribute="centerX" id="P0Q-cs-keD"/>
+                                    <constraint firstItem="Llc-3o-W8t" firstAttribute="centerY" secondItem="WJN-DQ-art" secondAttribute="centerY" id="PVJ-fU-P8Y"/>
+                                    <constraint firstItem="a2S-93-Lcd" firstAttribute="top" secondItem="IT9-Cv-KBJ" secondAttribute="top" id="Prb-4K-DPc"/>
+                                    <constraint firstItem="do4-5d-oWE" firstAttribute="centerX" secondItem="RhL-fX-L8p" secondAttribute="centerX" id="RK0-8s-yN9"/>
+                                    <constraint firstItem="TNU-xn-cwb" firstAttribute="centerX" secondItem="ub7-Wb-3us" secondAttribute="centerX" id="RRo-6a-tZ4"/>
+                                    <constraint firstItem="IT9-Cv-KBJ" firstAttribute="top" secondItem="RB0-fZ-REi" secondAttribute="top" id="SlX-6y-3pp"/>
+                                    <constraint firstItem="ub7-Wb-3us" firstAttribute="leading" secondItem="a2S-93-Lcd" secondAttribute="trailing" constant="50" id="SvL-KT-lRc"/>
+                                    <constraint firstItem="RB0-fZ-REi" firstAttribute="leading" secondItem="KxG-of-17L" secondAttribute="leading" constant="15" id="VEN-aX-pAO"/>
+                                    <constraint firstItem="tc8-8N-x7s" firstAttribute="centerY" secondItem="54p-rO-7Es" secondAttribute="centerY" id="Wtk-tc-e6k"/>
+                                    <constraint firstItem="WJN-DQ-art" firstAttribute="centerY" secondItem="toP-C2-UDz" secondAttribute="centerY" id="ZXM-uJ-ZB8"/>
+                                    <constraint firstItem="KmV-F2-aT4" firstAttribute="top" secondItem="IT9-Cv-KBJ" secondAttribute="top" id="a5k-dK-9MB"/>
+                                    <constraint firstItem="54p-rO-7Es" firstAttribute="height" secondItem="RB0-fZ-REi" secondAttribute="height" id="aaI-gI-NeN"/>
+                                    <constraint firstItem="ilY-FT-oqV" firstAttribute="centerX" secondItem="XPn-M9-JFr" secondAttribute="centerX" id="bat-Ez-15R"/>
+                                    <constraint firstItem="Llc-3o-W8t" firstAttribute="centerX" secondItem="ub7-Wb-3us" secondAttribute="centerX" id="cpB-I9-CqC"/>
+                                    <constraint firstItem="do4-5d-oWE" firstAttribute="centerY" secondItem="dxZ-ch-oK3" secondAttribute="centerY" id="cz4-Gp-3lZ"/>
+                                    <constraint firstItem="dxZ-ch-oK3" firstAttribute="centerY" secondItem="Btm-79-5Hq" secondAttribute="centerY" id="e33-c6-8tq"/>
+                                    <constraint firstItem="54p-rO-7Es" firstAttribute="centerY" secondItem="RB0-fZ-REi" secondAttribute="centerY" constant="40" id="f5c-yx-49l"/>
+                                    <constraint firstItem="Btm-79-5Hq" firstAttribute="leading" secondItem="RB0-fZ-REi" secondAttribute="leading" id="fKt-pF-rRM"/>
+                                    <constraint firstItem="zRq-A4-g1D" firstAttribute="centerX" secondItem="KmV-F2-aT4" secondAttribute="centerX" id="ggW-Z7-YS1"/>
+                                    <constraint firstItem="tc8-8N-x7s" firstAttribute="centerX" secondItem="IT9-Cv-KBJ" secondAttribute="centerX" id="imp-SW-89e"/>
+                                    <constraint firstItem="XPn-M9-JFr" firstAttribute="leading" secondItem="KmV-F2-aT4" secondAttribute="trailing" constant="50" id="j1s-yZ-rV4"/>
+                                    <constraint firstItem="RhL-fX-L8p" firstAttribute="top" secondItem="IT9-Cv-KBJ" secondAttribute="top" id="jDu-Di-Sta"/>
+                                    <constraint firstItem="toP-C2-UDz" firstAttribute="width" secondItem="RB0-fZ-REi" secondAttribute="width" id="mS6-rm-5mO"/>
+                                    <constraint firstItem="R63-JW-RQl" firstAttribute="centerX" secondItem="RhL-fX-L8p" secondAttribute="centerX" id="mZq-rb-d7s"/>
+                                    <constraint firstItem="FUS-OO-xEc" firstAttribute="centerY" secondItem="tc8-8N-x7s" secondAttribute="centerY" id="nfN-Xe-RY6"/>
+                                    <constraint firstItem="toP-C2-UDz" firstAttribute="leading" secondItem="RB0-fZ-REi" secondAttribute="leading" id="nv6-8B-HQk"/>
+                                    <constraint firstItem="rQe-O0-Rwz" firstAttribute="centerX" secondItem="XPn-M9-JFr" secondAttribute="centerX" id="o7f-Y0-wTs"/>
+                                    <constraint firstItem="RhL-fX-L8p" firstAttribute="leading" secondItem="IT9-Cv-KBJ" secondAttribute="trailing" constant="50" id="pRE-9V-ePJ"/>
+                                    <constraint firstItem="RB0-fZ-REi" firstAttribute="top" secondItem="KxG-of-17L" secondAttribute="top" constant="10" id="pVU-Z1-4NO"/>
+                                    <constraint firstItem="KmV-F2-aT4" firstAttribute="leading" secondItem="ub7-Wb-3us" secondAttribute="trailing" constant="50" id="pg3-dk-tRo"/>
+                                    <constraint firstItem="Btm-79-5Hq" firstAttribute="centerY" secondItem="54p-rO-7Es" secondAttribute="centerY" constant="40" id="qVt-h5-oDQ"/>
+                                    <constraint firstItem="MDh-dJ-abT" firstAttribute="centerY" secondItem="dxZ-ch-oK3" secondAttribute="centerY" id="tg3-rd-fUz"/>
+                                    <constraint firstItem="WJN-DQ-art" firstAttribute="centerX" secondItem="IT9-Cv-KBJ" secondAttribute="centerX" id="tny-ew-OPl"/>
+                                    <constraint firstItem="a2S-93-Lcd" firstAttribute="leading" secondItem="RhL-fX-L8p" secondAttribute="trailing" constant="50" id="tvK-PP-L7v"/>
+                                    <constraint firstItem="lFf-uZ-4z1" firstAttribute="centerX" secondItem="a2S-93-Lcd" secondAttribute="centerX" id="tyv-A5-wM6"/>
+                                    <constraint firstItem="gml-0v-PD4" firstAttribute="centerX" secondItem="KxG-of-17L" secondAttribute="centerX" id="uDe-1A-SJV"/>
+                                    <constraint firstItem="MDh-dJ-abT" firstAttribute="centerX" secondItem="XPn-M9-JFr" secondAttribute="centerX" id="uaE-9i-L41"/>
+                                    <constraint firstItem="IT9-Cv-KBJ" firstAttribute="bottom" secondItem="RB0-fZ-REi" secondAttribute="bottom" id="uvb-oK-XuO"/>
+                                    <constraint firstItem="RhL-fX-L8p" firstAttribute="bottom" secondItem="IT9-Cv-KBJ" secondAttribute="bottom" id="vFX-hl-Vie"/>
+                                    <constraint firstItem="IT9-Cv-KBJ" firstAttribute="leading" secondItem="RB0-fZ-REi" secondAttribute="trailing" constant="30" id="vcd-QR-dhN"/>
+                                    <constraint firstItem="XPn-M9-JFr" firstAttribute="bottom" secondItem="IT9-Cv-KBJ" secondAttribute="bottom" id="xTd-hu-9eZ"/>
+                                    <constraint firstItem="KmV-F2-aT4" firstAttribute="bottom" secondItem="IT9-Cv-KBJ" secondAttribute="bottom" id="yYg-ek-pgk"/>
+                                    <constraint firstItem="ki5-9L-Eq6" firstAttribute="centerY" secondItem="WJN-DQ-art" secondAttribute="centerY" id="z1D-tT-hIb"/>
+                                    <constraint firstItem="fWM-vv-DXg" firstAttribute="centerX" secondItem="a2S-93-Lcd" secondAttribute="centerX" id="zNP-XR-v9t"/>
                                 </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="TOTAL GAMES">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="18" name="Optima-Regular"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RB0-fZ-REi">
-                                <rect key="frame" x="10" y="90" width="120" height="25"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="DIFFICULTY">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="18" name="Optima-Regular"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tc8-8N-x7s">
-                                <rect key="frame" x="161" y="142" width="42.5" height="21"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="GW1">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="18" name="Optima-Regular"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GW2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R63-JW-RQl">
-                                <rect key="frame" x="222" y="142" width="43" height="22"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GW3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWM-vv-DXg">
-                                <rect key="frame" x="283" y="142" width="43" height="22"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GW4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CWM-bI-eL1">
-                                <rect key="frame" x="344" y="142" width="43" height="22"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GW5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUS-OO-xEc">
-                                <rect key="frame" x="405" y="142" width="43" height="22"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxZ-ch-oK3">
-                                <rect key="frame" x="165" y="192" width="34.5" height="21"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="TG1">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="18" name="Optima-Regular"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TG2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="do4-5d-oWE">
-                                <rect key="frame" x="226" y="192" width="35" height="22"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TG3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFf-uZ-4z1">
-                                <rect key="frame" x="287" y="192" width="35" height="22"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TG4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNU-xn-cwb">
-                                <rect key="frame" x="348" y="192" width="35" height="22"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TG5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRq-A4-g1D">
-                                <rect key="frame" x="409" y="192" width="35" height="22"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcP-qc-loX">
                                 <rect key="frame" x="195" y="8" width="177" height="43"/>
                                 <attributedString key="attributedText">
@@ -1218,85 +1469,6 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2S-93-Lcd">
-                                <rect key="frame" x="299" y="90" width="11" height="25"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="toP-C2-UDz">
-                                <rect key="frame" x="10" y="240" width="120" height="25"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="WIN %">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="18" name="Optima-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WP1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJN-DQ-art">
-                                <rect key="frame" x="163" y="241" width="38.5" height="22"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WP2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9F-4e-CMZ">
-                                <rect key="frame" x="224" y="241" width="38.5" height="22"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WP3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ki5-9L-Eq6">
-                                <rect key="frame" x="285" y="241" width="38.5" height="22"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WP4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Llc-3o-W8t">
-                                <rect key="frame" x="346" y="241" width="38.5" height="22"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WP5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aS4-EL-fgh">
-                                <rect key="frame" x="407" y="241" width="38.5" height="22"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPn-M9-JFr">
-                                <rect key="frame" x="492" y="90" width="53.5" height="25"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="TOTAL">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="18" name="Optima-Regular"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GWT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilY-FT-oqV">
-                                <rect key="frame" x="497" y="142" width="43" height="22"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TGT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDh-dJ-abT">
-                                <rect key="frame" x="501" y="192" width="34.5" height="22"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WPT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQe-O0-Rwz">
-                                <rect key="frame" x="499" y="241" width="38.5" height="22"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrZ-pF-0wE" userLabel="BackButton">
@@ -1310,85 +1482,33 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                     <action selector="BackButton:" destination="2pK-Tn-fJ1" eventType="touchUpInside" id="5cz-Fl-fBZ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAk-cw-lPc">
+                                <rect key="frame" x="184" y="270" width="200" height="32"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="Jya-BP-0OB"/>
+                                    <constraint firstAttribute="width" constant="200" id="V1P-n8-cvE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                <state key="normal" title="RESET STATISTICS">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetStatistics" destination="2pK-Tn-fJ1" eventType="touchUpInside" id="TTu-UT-cuS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KmV-F2-aT4" firstAttribute="bottom" secondItem="IT9-Cv-KBJ" secondAttribute="bottom" id="0EP-gt-aAS"/>
-                            <constraint firstItem="RhL-fX-L8p" firstAttribute="bottom" secondItem="IT9-Cv-KBJ" secondAttribute="bottom" id="0ke-8p-V2c"/>
                             <constraint firstItem="nrZ-pF-0wE" firstAttribute="top" secondItem="Sby-Sx-pEB" secondAttribute="top" constant="10" id="1bZ-Vp-mFC"/>
-                            <constraint firstItem="do4-5d-oWE" firstAttribute="centerY" secondItem="dxZ-ch-oK3" secondAttribute="centerY" id="26v-Yv-zrJ"/>
-                            <constraint firstItem="a2S-93-Lcd" firstAttribute="leading" secondItem="RhL-fX-L8p" secondAttribute="trailing" constant="50" id="2rN-kX-6Z1"/>
-                            <constraint firstItem="ub7-Wb-3us" firstAttribute="leading" secondItem="a2S-93-Lcd" secondAttribute="trailing" constant="50" id="6iY-nn-65v"/>
-                            <constraint firstItem="Llc-3o-W8t" firstAttribute="centerX" secondItem="ub7-Wb-3us" secondAttribute="centerX" id="6jV-gu-cnC"/>
-                            <constraint firstItem="dxZ-ch-oK3" firstAttribute="centerY" secondItem="Btm-79-5Hq" secondAttribute="centerY" id="8w2-Yt-cbv"/>
-                            <constraint firstItem="zRq-A4-g1D" firstAttribute="centerX" secondItem="KmV-F2-aT4" secondAttribute="centerX" id="AEf-hP-M9A"/>
-                            <constraint firstItem="FUS-OO-xEc" firstAttribute="centerX" secondItem="KmV-F2-aT4" secondAttribute="centerX" id="ASU-bl-mQa"/>
                             <constraint firstItem="nrZ-pF-0wE" firstAttribute="leading" secondItem="Sby-Sx-pEB" secondAttribute="leading" constant="10" id="AZx-0r-54d"/>
-                            <constraint firstItem="CWM-bI-eL1" firstAttribute="centerX" secondItem="ub7-Wb-3us" secondAttribute="centerX" id="BZD-c8-PGF"/>
-                            <constraint firstItem="toP-C2-UDz" firstAttribute="centerY" secondItem="Btm-79-5Hq" secondAttribute="centerY" constant="50" id="F77-dj-Ny2"/>
-                            <constraint firstItem="toP-C2-UDz" firstAttribute="height" secondItem="Btm-79-5Hq" secondAttribute="height" id="FNJ-hh-ubu"/>
-                            <constraint firstItem="RB0-fZ-REi" firstAttribute="leading" secondItem="Sby-Sx-pEB" secondAttribute="leading" constant="10" id="Fbc-oO-mfb"/>
-                            <constraint firstItem="RhL-fX-L8p" firstAttribute="leading" secondItem="IT9-Cv-KBJ" secondAttribute="trailing" constant="50" id="G9S-Op-GNi"/>
-                            <constraint firstItem="FUS-OO-xEc" firstAttribute="centerY" secondItem="tc8-8N-x7s" secondAttribute="centerY" id="Gi9-h5-diK"/>
-                            <constraint firstItem="c9F-4e-CMZ" firstAttribute="centerY" secondItem="WJN-DQ-art" secondAttribute="centerY" id="JNx-4C-kdr"/>
-                            <constraint firstItem="Llc-3o-W8t" firstAttribute="centerY" secondItem="WJN-DQ-art" secondAttribute="centerY" id="KAn-CD-Xz8"/>
-                            <constraint firstItem="c9F-4e-CMZ" firstAttribute="centerX" secondItem="RhL-fX-L8p" secondAttribute="centerX" id="KWz-r9-u3z"/>
-                            <constraint firstItem="KmV-F2-aT4" firstAttribute="leading" secondItem="ub7-Wb-3us" secondAttribute="trailing" constant="50" id="Kha-ts-rm8"/>
-                            <constraint firstItem="54p-rO-7Es" firstAttribute="centerY" secondItem="RB0-fZ-REi" secondAttribute="centerY" constant="50" id="Kv3-b9-IyB"/>
-                            <constraint firstItem="Btm-79-5Hq" firstAttribute="centerY" secondItem="RB0-fZ-REi" secondAttribute="centerY" constant="100" id="MEk-Sz-Jhx"/>
-                            <constraint firstItem="IT9-Cv-KBJ" firstAttribute="leading" secondItem="RB0-fZ-REi" secondAttribute="trailing" constant="47.5" id="Nbp-9h-MlF"/>
-                            <constraint firstItem="IT9-Cv-KBJ" firstAttribute="top" secondItem="RB0-fZ-REi" secondAttribute="top" id="OVs-o4-bhC"/>
-                            <constraint firstItem="CWM-bI-eL1" firstAttribute="centerY" secondItem="tc8-8N-x7s" secondAttribute="centerY" id="Oc6-IT-ED9"/>
-                            <constraint firstItem="rQe-O0-Rwz" firstAttribute="centerY" secondItem="aS4-EL-fgh" secondAttribute="centerY" id="OeC-xH-Pva"/>
-                            <constraint firstItem="tc8-8N-x7s" firstAttribute="centerY" secondItem="54p-rO-7Es" secondAttribute="centerY" id="P0Z-x5-Orl"/>
-                            <constraint firstItem="RB0-fZ-REi" firstAttribute="width" secondItem="Btm-79-5Hq" secondAttribute="width" id="P0k-KP-GMR"/>
-                            <constraint firstItem="toP-C2-UDz" firstAttribute="trailing" secondItem="Btm-79-5Hq" secondAttribute="trailing" id="P71-MV-7Rw"/>
-                            <constraint firstItem="TNU-xn-cwb" firstAttribute="centerY" secondItem="dxZ-ch-oK3" secondAttribute="centerY" id="PPd-T2-LFv"/>
-                            <constraint firstItem="MDh-dJ-abT" firstAttribute="centerX" secondItem="XPn-M9-JFr" secondAttribute="centerX" id="R86-Ud-pem"/>
-                            <constraint firstItem="54p-rO-7Es" firstAttribute="height" secondItem="Btm-79-5Hq" secondAttribute="height" id="RFq-9p-AhJ"/>
-                            <constraint firstItem="aS4-EL-fgh" firstAttribute="centerX" secondItem="KmV-F2-aT4" secondAttribute="centerX" id="RaA-NP-YCB"/>
-                            <constraint firstItem="KxG-of-17L" firstAttribute="trailing" secondItem="Sby-Sx-pEB" secondAttribute="trailing" constant="-5" id="S4z-cl-nYw"/>
-                            <constraint firstItem="R63-JW-RQl" firstAttribute="centerY" secondItem="tc8-8N-x7s" secondAttribute="centerY" id="Tsq-1m-erc"/>
-                            <constraint firstItem="ub7-Wb-3us" firstAttribute="top" secondItem="IT9-Cv-KBJ" secondAttribute="top" id="Vl5-qV-vTu"/>
-                            <constraint firstItem="WJN-DQ-art" firstAttribute="centerX" secondItem="IT9-Cv-KBJ" secondAttribute="centerX" id="WJ1-6c-Vwt"/>
-                            <constraint firstItem="fWM-vv-DXg" firstAttribute="centerY" secondItem="tc8-8N-x7s" secondAttribute="centerY" id="XjD-3o-KKe"/>
-                            <constraint firstItem="Btm-79-5Hq" firstAttribute="leading" secondItem="RB0-fZ-REi" secondAttribute="leading" id="Z3E-1G-p6q"/>
-                            <constraint firstItem="ki5-9L-Eq6" firstAttribute="centerY" secondItem="WJN-DQ-art" secondAttribute="centerY" id="Zdl-UE-nwP"/>
-                            <constraint firstItem="KmV-F2-aT4" firstAttribute="top" secondItem="IT9-Cv-KBJ" secondAttribute="top" id="Zt5-Fb-Ajc"/>
-                            <constraint firstItem="54p-rO-7Es" firstAttribute="leading" secondItem="RB0-fZ-REi" secondAttribute="leading" id="aOw-db-e0j"/>
-                            <constraint firstItem="rQe-O0-Rwz" firstAttribute="centerX" secondItem="XPn-M9-JFr" secondAttribute="centerX" id="an0-Qj-ZsY"/>
-                            <constraint firstItem="aS4-EL-fgh" firstAttribute="centerY" secondItem="WJN-DQ-art" secondAttribute="centerY" id="bCw-TM-IaG"/>
-                            <constraint firstItem="54p-rO-7Es" firstAttribute="width" secondItem="Btm-79-5Hq" secondAttribute="width" id="bel-2l-p1S"/>
-                            <constraint firstItem="KxG-of-17L" firstAttribute="leading" secondItem="Sby-Sx-pEB" secondAttribute="leading" constant="5" id="cMs-gs-lro"/>
-                            <constraint firstItem="RB0-fZ-REi" firstAttribute="top" secondItem="nrZ-pF-0wE" secondAttribute="bottom" constant="5" id="cqM-lU-bfG"/>
-                            <constraint firstItem="dxZ-ch-oK3" firstAttribute="centerX" secondItem="IT9-Cv-KBJ" secondAttribute="centerX" id="ewf-RO-WgT"/>
-                            <constraint firstItem="lFf-uZ-4z1" firstAttribute="centerX" secondItem="a2S-93-Lcd" secondAttribute="centerX" id="f1d-AE-9ll"/>
-                            <constraint firstItem="lFf-uZ-4z1" firstAttribute="centerY" secondItem="dxZ-ch-oK3" secondAttribute="centerY" id="fOC-FF-00L"/>
-                            <constraint firstItem="do4-5d-oWE" firstAttribute="centerX" secondItem="RhL-fX-L8p" secondAttribute="centerX" id="fus-av-SaR"/>
-                            <constraint firstItem="TNU-xn-cwb" firstAttribute="centerX" secondItem="ub7-Wb-3us" secondAttribute="centerX" id="g6T-X5-l1x"/>
-                            <constraint firstItem="WJN-DQ-art" firstAttribute="centerY" secondItem="toP-C2-UDz" secondAttribute="centerY" id="hY1-Ed-fhI"/>
-                            <constraint firstItem="tc8-8N-x7s" firstAttribute="centerX" secondItem="IT9-Cv-KBJ" secondAttribute="centerX" id="hoq-kc-cvg"/>
-                            <constraint firstItem="ilY-FT-oqV" firstAttribute="centerY" secondItem="FUS-OO-xEc" secondAttribute="centerY" id="iBy-E3-dMw"/>
-                            <constraint firstItem="R63-JW-RQl" firstAttribute="centerX" secondItem="RhL-fX-L8p" secondAttribute="centerX" id="iSd-dd-wgK"/>
-                            <constraint firstItem="XPn-M9-JFr" firstAttribute="leading" secondItem="KmV-F2-aT4" secondAttribute="trailing" constant="60" id="kzC-VU-JYY"/>
-                            <constraint firstItem="a2S-93-Lcd" firstAttribute="bottom" secondItem="IT9-Cv-KBJ" secondAttribute="bottom" id="lSA-MQ-y4u"/>
-                            <constraint firstItem="ki5-9L-Eq6" firstAttribute="centerX" secondItem="a2S-93-Lcd" secondAttribute="centerX" id="mWa-7M-fpw"/>
-                            <constraint firstItem="toP-C2-UDz" firstAttribute="leading" secondItem="Btm-79-5Hq" secondAttribute="leading" id="n2N-Ib-Lzo"/>
+                            <constraint firstItem="SAk-cw-lPc" firstAttribute="centerX" secondItem="Sby-Sx-pEB" secondAttribute="centerX" id="OAE-2I-wai"/>
+                            <constraint firstItem="SAk-cw-lPc" firstAttribute="top" secondItem="KxG-of-17L" secondAttribute="bottom" constant="15" id="RLJ-i5-b5T"/>
+                            <constraint firstItem="KxG-of-17L" firstAttribute="trailing" secondItem="Sby-Sx-pEB" secondAttribute="trailing" constant="-10" id="S4z-cl-nYw"/>
+                            <constraint firstItem="KxG-of-17L" firstAttribute="leading" secondItem="Sby-Sx-pEB" secondAttribute="leading" constant="10" id="cMs-gs-lro"/>
                             <constraint firstItem="mcP-qc-loX" firstAttribute="centerX" secondItem="Sby-Sx-pEB" secondAttribute="centerX" id="nim-hS-ifO"/>
-                            <constraint firstItem="IT9-Cv-KBJ" firstAttribute="bottom" secondItem="RB0-fZ-REi" secondAttribute="bottom" id="oIj-lu-CgV"/>
-                            <constraint firstItem="KxG-of-17L" firstAttribute="bottom" secondItem="Sby-Sx-pEB" secondAttribute="bottom" constant="-10" id="ody-UX-8OH"/>
-                            <constraint firstItem="zRq-A4-g1D" firstAttribute="centerY" secondItem="dxZ-ch-oK3" secondAttribute="centerY" id="omW-BR-v0r"/>
-                            <constraint firstItem="RB0-fZ-REi" firstAttribute="height" secondItem="Btm-79-5Hq" secondAttribute="height" id="ooF-4C-syB"/>
                             <constraint firstItem="KxG-of-17L" firstAttribute="top" secondItem="nrZ-pF-0wE" secondAttribute="bottom" constant="5" id="prX-f8-8J0"/>
-                            <constraint firstItem="RhL-fX-L8p" firstAttribute="top" secondItem="IT9-Cv-KBJ" secondAttribute="top" id="sDd-oD-EpH"/>
                             <constraint firstItem="mcP-qc-loX" firstAttribute="centerY" secondItem="Sby-Sx-pEB" secondAttribute="top" constant="30" id="tWy-xa-TBm"/>
-                            <constraint firstItem="XPn-M9-JFr" firstAttribute="top" secondItem="KmV-F2-aT4" secondAttribute="top" id="uQA-aN-Aep"/>
-                            <constraint firstItem="a2S-93-Lcd" firstAttribute="top" secondItem="IT9-Cv-KBJ" secondAttribute="top" id="wGj-DZ-wvW"/>
-                            <constraint firstItem="fWM-vv-DXg" firstAttribute="centerX" secondItem="a2S-93-Lcd" secondAttribute="centerX" id="ws3-GL-PDW"/>
-                            <constraint firstItem="XPn-M9-JFr" firstAttribute="bottom" secondItem="KmV-F2-aT4" secondAttribute="bottom" id="xGm-s1-Vhe"/>
-                            <constraint firstItem="MDh-dJ-abT" firstAttribute="centerY" secondItem="zRq-A4-g1D" secondAttribute="centerY" id="ypH-UL-Ktn"/>
-                            <constraint firstItem="ub7-Wb-3us" firstAttribute="bottom" secondItem="IT9-Cv-KBJ" secondAttribute="bottom" id="yvV-g0-GXF"/>
-                            <constraint firstItem="ilY-FT-oqV" firstAttribute="centerX" secondItem="XPn-M9-JFr" secondAttribute="centerX" id="ztJ-5h-zyr"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1398,6 +1518,10 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <outlet property="GW4" destination="CWM-bI-eL1" id="XHy-VP-gJq"/>
                         <outlet property="GW5" destination="FUS-OO-xEc" id="lG9-zF-Rpz"/>
                         <outlet property="GWT" destination="ilY-FT-oqV" id="cRg-Kb-W25"/>
+                        <outlet property="NoButton" destination="WRG-pr-fR5" id="auZ-eE-S4g"/>
+                        <outlet property="ResetStatistics" destination="SAk-cw-lPc" id="Jl2-Kh-oBC"/>
+                        <outlet property="ResetWarning" destination="gml-0v-PD4" id="nOp-bS-Vt1"/>
+                        <outlet property="StatsView" destination="KxG-of-17L" id="USU-cR-a6P"/>
                         <outlet property="TG1" destination="dxZ-ch-oK3" id="Psp-o4-aOy"/>
                         <outlet property="TG2" destination="do4-5d-oWE" id="k1k-lt-nhF"/>
                         <outlet property="TG3" destination="lFf-uZ-4z1" id="MOo-mH-Zzb"/>
@@ -1410,6 +1534,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <outlet property="WP4" destination="Llc-3o-W8t" id="gxz-Z0-0bW"/>
                         <outlet property="WP5" destination="aS4-EL-fgh" id="y2S-q5-Uem"/>
                         <outlet property="WPT" destination="rQe-O0-Rwz" id="5YM-lC-RCQ"/>
+                        <outlet property="YesButton" destination="ICo-IF-KrG" id="zot-Yz-QpO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2e6-jn-iXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1493,9 +1618,10 @@ PLAY MORE GAMES TO EARN COINS.</string>
     </scenes>
     <resources>
         <image name="BackArrow" width="100" height="75"/>
+        <image name="ClosingX" width="50" height="50"/>
         <image name="Pause" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="j7g-p7-Lav"/>
+        <segue reference="VE4-qM-sKA"/>
     </inferredMetricsTieBreakers>
 </document>
