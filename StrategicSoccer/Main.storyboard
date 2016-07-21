@@ -364,7 +364,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="Strategic_Soccer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameViewController" id="BV1-FR-VrT" customClass="GameViewController" customModule="Strategic_Soccer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8aa-yV-Osq"/>
                         <viewControllerLayoutGuide type="bottom" id="qHh-Mt-9TT"/>
@@ -920,7 +920,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                         <state key="normal" title="JOIN GAME"/>
                                         <connections>
-                                            <segue destination="BV1-FR-VrT" kind="show" identifier="TwoPhoneSegue" id="VE4-qM-sKA"/>
+                                            <action selector="joinGame:" destination="f1z-UW-r5Y" eventType="touchUpInside" id="ph1-XJ-aF2"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Wv-K9-6HS" userLabel="XButton">
@@ -1622,6 +1622,6 @@ PLAY MORE GAMES TO EARN COINS.</string>
         <image name="Pause" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VE4-qM-sKA"/>
+        <segue reference="1at-5C-yaR"/>
     </inferredMetricsTieBreakers>
 </document>

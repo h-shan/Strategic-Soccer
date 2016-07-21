@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 public enum Mode:Int {
     case oneMinute = 0, threeMinute, fiveMinute, tenMinute, threePoint, fivePoint, tenPoint, twentyPoint
     func getType()-> type{
@@ -29,6 +30,7 @@ public enum Mode:Int {
             return .points
         }
     }
+    
 }
 public enum gameType{
     case onePlayer, twoPlayer, twoPhone

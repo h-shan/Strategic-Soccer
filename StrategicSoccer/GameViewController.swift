@@ -60,20 +60,7 @@ class GameViewController: UIViewController {
         skView.presentScene(scene)
         //addLoad()
     }
-    func addLoad(){
-        let loadView = UIView(frame: screenSize)
-        loadView.tag = 99
-        loadView.backgroundColor = UIColor.greenColor()
-        view.addSubview(loadView)
-    }
-    func removeLoad(){
-        for subview in view.subviews{
-            if subview.tag == 99{
-                subview.removeFromSuperview()
-                break
-            }
-        }
-    }
+    
     override func shouldAutorotate() -> Bool {
         return true
     }

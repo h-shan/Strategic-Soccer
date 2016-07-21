@@ -5,7 +5,8 @@
 //  Created by Howard Shan on 6/26/16.
 //  Copyright © 2016 HS. All rights reserved.
 //
-
+var modeString = [Mode: String]()
+var stringMode = [String:Mode]()
 import UIKit
 import SpriteKit
 let defaults = NSUserDefaults.standardUserDefaults()
@@ -108,6 +109,23 @@ class TitleViewController: UIViewController {
         super.viewWillAppear(animated)
         setBackground()
         addCoinImage("", afterText: String(coins), label: NumberCoins, numberLines: 1)
+        modeString[Mode.oneMinute] = "oneMinute"
+        modeString[Mode.threeMinute] = "threeMinute"
+        modeString[Mode.fiveMinute] = "fiveMinute"
+        modeString[Mode.tenMinute] = "tenMinute"
+        modeString[Mode.threePoint] = "threePoint"
+        modeString[Mode.fivePoint] = "fivePoint"
+        modeString[Mode.tenPoint] = "tenPoint"
+        modeString[Mode.twentyPoint] = "twentyPoint"
+        stringMode["oneMinute"] = Mode.oneMinute
+        stringMode["threeMinute"] = Mode.threeMinute
+        stringMode["fiveMinute"] = Mode.fiveMinute
+        stringMode["tenMinute"] = Mode.tenMinute
+        stringMode["threePoint"] = Mode.threePoint
+        stringMode["fivePoint"] = Mode.fivePoint
+        stringMode["tenPoint"] = Mode.tenPoint
+        stringMode["twentyPoint"] = Mode.twentyPoint
+
     }
     
     

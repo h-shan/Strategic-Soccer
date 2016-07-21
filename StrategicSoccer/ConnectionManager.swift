@@ -7,23 +7,23 @@
 //
 
 import MultipeerConnectivity
-import MultipeerConnectivity
 protocol ConnectionManagerDelegate {
     func connectedDevicesChanged(manager : ConnectionManager, connectedDevices: [String])
     func receiveMove(manager : ConnectionManager, move: [String])
     func receivePositions(manager : ConnectionManager, positions: [String])
     func receiveScreenSize(manager : ConnectionManager, size: [String])
+    func receiveStartMessage(manager: ConnectionManager, settings: [String])
 }
 class ConnectionManager : NSObject{
     private let serviceBrowser : MCNearbyServiceBrowser
     private let SoccerServiceType = "Strat-Soccer"
     private let myPeerId = MCPeerID(displayName: UIDevice.currentDevice().name)
     private let serviceAdvertiser : MCNearbyServiceAdvertiser
+    var connectedDevice:[MCPeerID]?
     var delegate:ConnectionManagerDelegate?
     
     override init(){
         self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: SoccerServiceType)
-        self.serviceAdvertiser.startAdvertisingPeer()
         self.serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: SoccerServiceType)
         super.init()
         self.serviceAdvertiser.delegate = self
@@ -37,6 +37,13 @@ class ConnectionManager : NSObject{
     func getServiceAdvertiser() -> MCNearbyServiceAdvertiser{
         return serviceAdvertiser
     }
+    func connectToDevice(deviceName: String){
+        for peer in session.connectedPeers{
+            if peer.displayName == deviceName{
+                connectedDevice = [peer]
+            }
+        }
+    }
     lazy var session : MCSession = {
         let session = MCSession(peer: self.myPeerId, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.Required)
         session.delegate = self
@@ -44,26 +51,16 @@ class ConnectionManager : NSObject{
     }()
     func sendScreenSize(screenSize: CGRect){
         let sendString = String(format: "%f %f", screenSize.width, screenSize.height)
-        if session.connectedPeers.count > 0 {
-            do {
-                try self.session.sendData(sendString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
-            }
-            catch{
-                NSLog("%@","\(error)")
-            }
+        if connectedDevice != nil{
+            stringSend(sendString)
         }
         
     }
     func sendMove(player:Player, velocity: CGVector) {
         NSLog("%@", "player: \(player.name), x:\(velocity.dx), y:\(velocity.dy)")
         let sendString = String(format:"%@ %f %f", player.name!, velocity.dx, velocity.dy)
-        if session.connectedPeers.count > 0 {
-            do {
-                try self.session.sendData(sendString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
-            }
-            catch{
-                NSLog("%@","\(error)")
-            }
+        if connectedDevice != nil{
+            stringSend(sendString)
         }
     }
     func sendPosition(scene: GameScene){
@@ -72,13 +69,22 @@ class ConnectionManager : NSObject{
         for player in scene.players{
             sendString += String(format: "%f %f ",player.position.x, player.position.y)
         }
-        if session.connectedPeers.count > 0 {
-            do {
-                try self.session.sendData(sendString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
-            }
-            catch{
-                NSLog("%@","\(error)")
-            }
+        if connectedDevice != nil{
+            stringSend(sendString)
+        }
+    }
+    func startGame(mode:String){
+        print("startGame")
+        if connectedDevice != nil{
+            stringSend(mode)
+        }
+    }
+    func stringSend(message: String){
+        do {
+            try self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, toPeers: connectedDevice!, withMode: MCSessionSendDataMode.Reliable)
+        }
+        catch{
+            NSLog("%@","\(error)")
         }
     }
 }
@@ -136,12 +142,14 @@ extension ConnectionManager : MCSessionDelegate {
         NSLog("%@", "didReceiveData: \(data)")
         let str = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
         let strArr = str.characters.split{$0 == " "}.map(String.init)
-        if strArr.count == 3{
-            self.delegate?.receiveMove(self, move: strArr)
-        }else if strArr.count == 2{
-            self.delegate?.receiveScreenSize(self, size: strArr)
-        }else{
-            self.delegate?.receivePositions(self, positions: strArr)
+        switch(strArr.count){
+        case 1:
+            connectedDevice = [peerID]
+            self.delegate?.receiveStartMessage(self, settings: strArr);
+            break
+        case 2:self.delegate?.receiveScreenSize(self, size: strArr); break
+        case 3:self.delegate?.receiveMove(self, move: strArr); break
+        default:self.delegate?.receivePositions(self, positions: strArr); break
         }
     }
     

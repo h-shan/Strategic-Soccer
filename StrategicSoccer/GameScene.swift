@@ -252,6 +252,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             clock.text = gameTimer.secondsToString(baseTime!)
             clockBackground?.hidden = false
         }
+        addPlayers()
         restart()
         
     }
@@ -315,7 +316,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        if (gType == .twoPhone){
+        if (gType == .twoPhone && isHost){
             viewController.parent.gameService.sendPosition(self)
         }
         if (!goalAccounted && 200*scalerY < ball.position.y && ball.position.y < 440*scalerY){
@@ -561,8 +562,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             break
         case PlayerOption.four:
             players = [playerA1, playerA2, playerA3, playerA4, playerB1, playerB2, playerB3, playerB4]
-            teamA = [playerA1, playerA2, playerA3]
-            teamB = [playerB1, playerB2, playerB3]
+            teamA = [playerA1, playerA2, playerA3, playerA4]
+            teamB = [playerB1, playerB2, playerB3, playerB4]
             break;
         }
         

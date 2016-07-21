@@ -15,6 +15,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     var scaleFactorX: CGFloat!
     var scaleFactorY: CGFloat!
     var parent: TitleViewController!
+    var connectedDevice: String?
     @IBOutlet weak var SinglePlayer: UIButton!
     @IBOutlet weak var TwoPlayers: UIButton!
     @IBOutlet weak var ConnectToAnotherDevice: UIButton!
@@ -31,9 +32,20 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func hostGame(sender: AnyObject){
         gameService.getServiceAdvertiser().startAdvertisingPeer()
         self.gameTableView.reloadData()
+        HostGame.userInteractionEnabled = false
+        HostGame.alpha = 0.5
+    }
+    @IBAction func joinGame(sender: AnyObject){
+        scene.isHost = false
+        gameService.startGame(modeString[scene.mode]!)
+        moveToScene()
+        
     }
     @IBAction func hideConnections(sender: AnyObject){
         ConnectionView.hidden = true
+        gameService.getServiceAdvertiser().stopAdvertisingPeer()
+        HostGame.userInteractionEnabled = true
+        HostGame.alpha = 1
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,8 +82,10 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.JoinGame.userInteractionEnabled = true
+        connectedDevice = self.hostedGames[indexPath.row]
         self.JoinGame.alpha = 1
+        self.JoinGame.userInteractionEnabled = true
+        gameService.connectToDevice(connectedDevice!)
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
@@ -87,8 +101,15 @@ extension PlayViewController : ConnectionManagerDelegate {
         NSOperationQueue.mainQueue().addOperationWithBlock {
             self.hostedGames = connectedDevices
             self.gameTableView.reloadData()
-            
         }
+    }
+    func receiveStartMessage(manager: ConnectionManager, settings:[String]){
+        print("receiveStart")
+        scene.isHost = true
+        scene.mode = stringMode[settings.first!]!
+        moveToScene()
+        gameService.sendScreenSize(screenSize)
+        connectedDevice = gameService.connectedDevice!.first?.displayName
     }
     func receiveScreenSize(manager: ConnectionManager, size: [String]) {
         scaleFactorX = screenSize.width/CGFloat((size[0] as NSString).doubleValue)
@@ -99,10 +120,9 @@ extension PlayViewController : ConnectionManagerDelegate {
             let playerName = move[0]
             let velocityX = CGFloat((move[1] as NSString).doubleValue)
             let velocityY = CGFloat((move[2] as NSString).doubleValue)
-            print(playerName)
             for player in self.scene.teamB{
                 if playerName == player.name{
-                    player.physicsBody!.velocity = CGVectorMake(-velocityX, -velocityY)
+                    player.physicsBody!.velocity = CGVectorMake(-velocityX, velocityY)
                     self.scene.switchTurns()
                     break
                 }
@@ -111,11 +131,12 @@ extension PlayViewController : ConnectionManagerDelegate {
     }
     func receivePositions(manager: ConnectionManager, positions: [String]){
         NSOperationQueue.mainQueue().addOperationWithBlock{
-            let ballPosition = CGPointMake(CGFloat((positions[0] as NSString).doubleValue), CGFloat((positions[1] as NSString).doubleValue))
+            print("receivePositions")
+            let ballPosition = CGPointMake(self.view.frame.maxX - CGFloat((positions[0] as NSString).doubleValue)*self.scaleFactorX, CGFloat((positions[1] as NSString).doubleValue)*self.scaleFactorX)
             self.scene.ball.position = ballPosition
             var i = 2
             while i < positions.count{
-                let point = CGPointMake(CGFloat((positions[i] as NSString).doubleValue)*self.scaleFactorX, CGFloat((positions[i+1] as NSString).doubleValue)*self.scaleFactorY)
+                let point = CGPointMake(self.view.frame.maxX - CGFloat((positions[i] as NSString).doubleValue)*self.scaleFactorX, CGFloat((positions[i+1] as NSString).doubleValue)*self.scaleFactorY)
                 self.scene.players[self.convertToIndex(i)].position = point
                 i+=2
             }
@@ -125,15 +146,22 @@ extension PlayViewController : ConnectionManagerDelegate {
         let rawIndex = index/2-1
         switch(scene.playerOption){
         case .three:
-            if rawIndex <= 3{
+            if rawIndex <= 2{
                 return rawIndex + 3
             }
             return rawIndex-3
         case .four:
-            if rawIndex <= 4{
+            if rawIndex <= 3{
                 return rawIndex+4
             }; return rawIndex-4
         }
+    }
+    func moveToScene(){
+        let gameVC = self.storyboard!.instantiateViewControllerWithIdentifier("GameViewController") as! GameViewController
+        gameVC.scene = scene
+        gameVC.parent = self
+        scene.gType = .twoPhone
+        self.navigationController!.pushViewController(gameVC, animated: true)
     }
 }
 
