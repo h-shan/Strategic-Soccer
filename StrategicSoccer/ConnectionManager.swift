@@ -11,8 +11,7 @@ protocol ConnectionManagerDelegate {
     func connectedDevicesChanged(manager : ConnectionManager, connectedDevices: [String])
     func receiveMove(manager : ConnectionManager, move: [String])
     func receivePositions(manager : ConnectionManager, positions: [String])
-    func receiveScreenSize(manager : ConnectionManager, size: [String])
-    func receiveStartMessage(manager: ConnectionManager, settings: [String])
+    func receiveStart(manager: ConnectionManager, settings: [String])
 }
 class ConnectionManager : NSObject{
     private let serviceBrowser : MCNearbyServiceBrowser
@@ -49,23 +48,16 @@ class ConnectionManager : NSObject{
         session.delegate = self
         return session
     }()
-    func sendScreenSize(screenSize: CGRect){
-        let sendString = String(format: "%f %f", screenSize.width, screenSize.height)
-        if connectedDevice != nil{
-            stringSend(sendString)
-        }
-        
-    }
     func sendMove(player:Player, velocity: CGVector) {
         NSLog("%@", "player: \(player.name), x:\(velocity.dx), y:\(velocity.dy)")
-        let sendString = String(format:"%@ %f %f", player.name!, velocity.dx, velocity.dy)
+        let sendString = String(format:"%@ %@ %f %f", "move",player.name!, velocity.dx, velocity.dy)
         if connectedDevice != nil{
             stringSend(sendString)
         }
     }
     func sendPosition(scene: GameScene){
         NSLog("sendPosition")
-        var sendString = String(format:"%f %f ",scene.ball.position.x, scene.ball.position.y)
+        var sendString = String(format:"%@ %f %f ","position",scene.ball.position.x, scene.ball.position.y)
         for player in scene.players{
             sendString += String(format: "%f %f ",player.position.x, player.position.y)
         }
@@ -73,19 +65,27 @@ class ConnectionManager : NSObject{
             stringSend(sendString)
         }
     }
-    func startGame(mode:String){
-        print("startGame")
+    func sendStart(mode:String?, flag: String){
+        print("sendStart")
+        var gameMode = ""
+        if mode == nil{
+            gameMode = "joined"
+        }else{
+            gameMode = mode!
+        }
         if connectedDevice != nil{
-            stringSend(mode)
+            stringSend(String(format: "%@ %@ %@ %f %f","start", gameMode, flag, screenSize.width, screenSize.height))
         }
     }
     func stringSend(message: String){
-        do {
-            try self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, toPeers: connectedDevice!, withMode: MCSessionSendDataMode.Reliable)
-        }
-        catch{
-            NSLog("%@","\(error)")
-        }
+        dispatch_async(dispatch_get_main_queue(), {
+            do {
+                try self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, toPeers: self.connectedDevice!, withMode: MCSessionSendDataMode.Unreliable)
+            }
+            catch{
+                NSLog("%@","\(error)")
+            }
+        })
     }
 }
 
@@ -117,8 +117,6 @@ extension ConnectionManager : MCNearbyServiceBrowserDelegate {
         NSLog("%@", "lostPeer: \(peerID)")
         
     }
-    
-    
 }
 extension MCSessionState {
     
@@ -134,23 +132,28 @@ extension MCSessionState {
 extension ConnectionManager : MCSessionDelegate {
     
     func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState) {
-        NSLog("%@", "peer \(peerID) didChangeState: \(state.stringValue())")
-        self.delegate?.connectedDevicesChanged(self, connectedDevices: session.connectedPeers.map({$0.displayName}))
+        dispatch_async(dispatch_get_main_queue(), {
+            NSLog("%@", "peer \(peerID) didChangeState: \(state.stringValue())")
+            self.delegate?.connectedDevicesChanged(self, connectedDevices: session.connectedPeers.map({$0.displayName}))
+        })
     }
     
     func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
         NSLog("%@", "didReceiveData: \(data)")
-        let str = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
-        let strArr = str.characters.split{$0 == " "}.map(String.init)
-        switch(strArr.count){
-        case 1:
-            connectedDevice = [peerID]
-            self.delegate?.receiveStartMessage(self, settings: strArr);
-            break
-        case 2:self.delegate?.receiveScreenSize(self, size: strArr); break
-        case 3:self.delegate?.receiveMove(self, move: strArr); break
-        default:self.delegate?.receivePositions(self, positions: strArr); break
-        }
+        dispatch_async(dispatch_get_main_queue(), {
+            let str = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
+            var strArr = str.characters.split{$0 == " "}.map(String.init)
+            let tag = strArr.removeFirst()
+            switch(tag){
+            case "start":
+                self.connectedDevice = [peerID]
+                self.delegate?.receiveStart(self, settings: strArr);
+                break
+            case "move":self.delegate?.receiveMove(self, move: strArr); break
+            case "position":self.delegate?.receivePositions(self, positions: strArr); break
+            default: print("Unidentified data"); break
+            }
+        })
     }
     
     func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

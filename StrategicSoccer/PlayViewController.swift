@@ -16,6 +16,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     var scaleFactorY: CGFloat!
     var parent: TitleViewController!
     var connectedDevice: String?
+    var sentData = false
     @IBOutlet weak var SinglePlayer: UIButton!
     @IBOutlet weak var TwoPlayers: UIButton!
     @IBOutlet weak var ConnectToAnotherDevice: UIButton!
@@ -31,15 +32,14 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     @IBAction func hostGame(sender: AnyObject){
         gameService.getServiceAdvertiser().startAdvertisingPeer()
+        
         self.gameTableView.reloadData()
         HostGame.userInteractionEnabled = false
         HostGame.alpha = 0.5
     }
     @IBAction func joinGame(sender: AnyObject){
-        scene.isHost = false
-        gameService.startGame(modeString[scene.mode]!)
-        moveToScene()
-        
+        gameService.sendStart(nil, flag: scene.countryA)
+        sentData = true
     }
     @IBAction func hideConnections(sender: AnyObject){
         ConnectionView.hidden = true
@@ -103,17 +103,24 @@ extension PlayViewController : ConnectionManagerDelegate {
             self.gameTableView.reloadData()
         }
     }
-    func receiveStartMessage(manager: ConnectionManager, settings:[String]){
+    func receiveStart(manager: ConnectionManager, settings:[String]){
+        
+        connectedDevice = gameService.connectedDevice!.first?.displayName
         print("receiveStart")
         scene.isHost = true
-        scene.mode = stringMode[settings.first!]!
+        if settings.first! != "joined"{
+            scene.isHost = false
+            scene.isPuppet = true
+            scene.mode = stringMode[settings.first!]!
+        }
+        scene.countryB = settings[1]
+        scaleFactorX = screenSize.width/CGFloat((settings[2] as NSString).doubleValue)
+        scaleFactorY = screenSize.height/CGFloat((settings[3] as NSString).doubleValue)
         moveToScene()
-        gameService.sendScreenSize(screenSize)
-        connectedDevice = gameService.connectedDevice!.first?.displayName
-    }
-    func receiveScreenSize(manager: ConnectionManager, size: [String]) {
-        scaleFactorX = screenSize.width/CGFloat((size[0] as NSString).doubleValue)
-        scaleFactorY = screenSize.height/CGFloat((size[1] as NSString).doubleValue)
+        if !sentData{
+            gameService.sendStart(modeString[scene.mode]!,flag: scene.countryA)
+            sentData = true
+        }
     }
     func receiveMove(manager: ConnectionManager, move: [String]) {
         NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -122,7 +129,9 @@ extension PlayViewController : ConnectionManagerDelegate {
             let velocityY = CGFloat((move[2] as NSString).doubleValue)
             for player in self.scene.teamB{
                 if playerName == player.name{
-                    player.physicsBody!.velocity = CGVectorMake(-velocityX, velocityY)
+                    if !self.scene.isPuppet{
+                        player.physicsBody!.velocity = CGVectorMake(-velocityX, velocityY)
+                    }
                     self.scene.switchTurns()
                     break
                 }
@@ -131,7 +140,6 @@ extension PlayViewController : ConnectionManagerDelegate {
     }
     func receivePositions(manager: ConnectionManager, positions: [String]){
         NSOperationQueue.mainQueue().addOperationWithBlock{
-            print("receivePositions")
             let ballPosition = CGPointMake(self.view.frame.maxX - CGFloat((positions[0] as NSString).doubleValue)*self.scaleFactorX, CGFloat((positions[1] as NSString).doubleValue)*self.scaleFactorX)
             self.scene.ball.position = ballPosition
             var i = 2

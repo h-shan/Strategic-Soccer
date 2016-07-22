@@ -50,7 +50,6 @@ class GameViewController: UIViewController {
         
     }
     override func viewDidAppear(animated: Bool) {
-        //removeLoad()
         UIView.animateWithDuration(1.0, animations: {
             self.Dimmer.alpha = 0
         })
@@ -58,7 +57,6 @@ class GameViewController: UIViewController {
     override func viewWillAppear(animated:Bool){
         super.viewWillAppear(animated)
         skView.presentScene(scene)
-        //addLoad()
     }
     
     override func shouldAutorotate() -> Bool {
@@ -99,6 +97,7 @@ class GameViewController: UIViewController {
         skView.removeFromSuperview()
         snapShot.removeFromSuperview()
         view = nil
+        parent.sentData = false
     }
     func displayEarnings(numberWon: Int){
         addCoinImage("YOU WON ", afterText: String(numberWon), label: NumberCoins, numberLines: 1)

@@ -62,6 +62,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     var gType = gameType.twoPlayer
     var isHost = false
+    var isPuppet = false
     
     var AIDifficulty: Int!
     var cAggro:Int?
@@ -206,11 +207,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         /* Setup your scene here */
         scoreBackground.alpha = 0.0
 
-        if (gType == .twoPlayer){
-            viewController.parent.gameService.sendScreenSize(screenSize)
-
-        }
-
         // put ball in middle
         
         
@@ -298,10 +294,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             let xMovement = 2*(touches.first!.locationInNode(self).x - startPosition!.x)
             let yMovement = 2*(touches.first!.locationInNode(self).y - startPosition!.y)
-            
-            selectedPlayer!.physicsBody!.velocity = CGVectorMake(xMovement, yMovement)
+            if !isPuppet{
+                selectedPlayer!.physicsBody!.velocity = CGVectorMake(xMovement, yMovement)
+            }
             if gType == .twoPhone{
-                viewController.parent.gameService.sendMove(selectedPlayer!, velocity: selectedPlayer!.physicsBody!.velocity)
+                viewController.parent.gameService.sendMove(selectedPlayer!, velocity: CGVectorMake(xMovement, yMovement))
             }
             playerSelected = false
             switchTurns()
@@ -434,7 +431,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func showTime(){
-        gameTime = baseTime! - gameTimer.getElapsedTime()
+        if let baseTime = baseTime{
+            gameTime = baseTime - gameTimer.getElapsedTime()
+        }else{
+            gameTime = 100
+        }
         if (gameTime<=0){
             clock.text = "0:00"
             gameTimer.pause()
