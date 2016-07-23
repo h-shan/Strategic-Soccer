@@ -18,8 +18,10 @@ let AIKey = "AIDifficulty"
 let gold = UIColor(red: 161/255.0, green: 155/255.0, blue: 75/255.0, alpha: 1.0).CGColor
 let optima = UIFont(name: "Optima", size: 18)
 let screenSize: CGRect = UIScreen.mainScreen().bounds
-let scalerX = screenSize.width/1136
-let scalerY = screenSize.height/640
+var screenWidth:CGFloat = 0
+var screenHeight:CGFloat = 0
+var scalerX:CGFloat = 0
+var scalerY:CGFloat = 0
 let goalLineB = 1086*scalerX
 let goalLineA = 50*scalerX
 var coins = 50
@@ -92,6 +94,10 @@ class TitleViewController: UIViewController {
         
         skView = self.view as! SKView
         skView.ignoresSiblingOrder = true
+        screenWidth = view.frame.maxX
+        scalerX = screenWidth/1136
+        screenHeight = view.frame.maxY
+        scalerY = screenHeight/640
         scene = GameScene(size: skView.bounds.size)
         let buttons: [UIButton] = [SettingsButton, PlayButton, ChangePlayersButton, StatsButton]
         formatMenuButtons(buttons)
@@ -101,7 +107,7 @@ class TitleViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        // Disbse of any resources that can be recreated.
     }
     
     override func viewWillAppear(animated: Bool){
@@ -125,7 +131,7 @@ class TitleViewController: UIViewController {
         stringMode["fivePoint"] = Mode.fivePoint
         stringMode["tenPoint"] = Mode.tenPoint
         stringMode["twentyPoint"] = Mode.twentyPoint
-
+        
     }
     
     

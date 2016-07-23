@@ -869,16 +869,16 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yUE-Y9-Sg1">
-                                <rect key="frame" x="109" y="60" width="350" height="200"/>
+                                <rect key="frame" x="84" y="80" width="400" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVAILABLE GAMES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ph-lw-414">
-                                        <rect key="frame" x="72" y="10" width="205.5" height="28.5"/>
+                                        <rect key="frame" x="97" y="10" width="205.5" height="28.5"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ObI-8h-DPS">
-                                        <rect key="frame" x="50" y="60" width="250" height="80"/>
+                                        <rect key="frame" x="75" y="60" width="250" height="80"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="mav-qj-Rh3"/>
@@ -899,23 +899,8 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                             <outlet property="delegate" destination="f1z-UW-r5Y" id="UYF-9I-1Nm"/>
                                         </connections>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7fq-lP-MXf">
-                                        <rect key="frame" x="50" y="154" width="115" height="36"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="dQg-dC-zn2"/>
-                                            <constraint firstAttribute="width" constant="115" id="ttD-3Q-fJo"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                        <state key="normal" title="HOST GAME">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="hostGame:" destination="f1z-UW-r5Y" eventType="touchUpInside" id="4Gz-Sl-Qc3"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0X-YL-jgI">
-                                        <rect key="frame" x="185" y="156" width="115" height="34"/>
+                                        <rect key="frame" x="210" y="156" width="150" height="34"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                         <state key="normal" title="JOIN GAME"/>
@@ -934,12 +919,27 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                             <action selector="hideConnections:" destination="f1z-UW-r5Y" eventType="touchUpInside" id="yzk-75-hyx"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7fq-lP-MXf">
+                                        <rect key="frame" x="40" y="154" width="150" height="36"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="dQg-dC-zn2"/>
+                                            <constraint firstAttribute="width" constant="150" id="ttD-3Q-fJo"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <state key="normal" title="SEARCH NEARBY">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="hostGame:" destination="f1z-UW-r5Y" eventType="touchUpInside" id="4Gz-Sl-Qc3"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="7fq-lP-MXf" firstAttribute="bottom" secondItem="X0X-YL-jgI" secondAttribute="bottom" id="8BR-eR-XqU"/>
                                     <constraint firstItem="7fq-lP-MXf" firstAttribute="trailing" secondItem="yUE-Y9-Sg1" secondAttribute="centerX" constant="-10" id="C9V-os-ThF"/>
-                                    <constraint firstAttribute="width" constant="350" id="DtX-Mq-ERh"/>
+                                    <constraint firstAttribute="width" constant="400" id="DtX-Mq-ERh"/>
                                     <constraint firstAttribute="height" constant="200" id="E2R-7t-27f"/>
                                     <constraint firstItem="6Wv-K9-6HS" firstAttribute="top" secondItem="yUE-Y9-Sg1" secondAttribute="top" constant="10" id="HPw-Zg-laQ"/>
                                     <constraint firstItem="ObI-8h-DPS" firstAttribute="centerY" secondItem="yUE-Y9-Sg1" secondAttribute="centerY" id="Kcl-kt-vmj"/>
@@ -958,7 +958,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                             <constraint firstItem="rOR-Lg-LEu" firstAttribute="bottom" secondItem="jS9-Co-kiM" secondAttribute="bottom" id="9nw-Px-8ld"/>
                             <constraint firstItem="yUE-Y9-Sg1" firstAttribute="centerX" secondItem="fvG-zO-Dea" secondAttribute="centerX" id="EkO-6t-RWa"/>
                             <constraint firstItem="eEW-WU-dEc" firstAttribute="leading" secondItem="jS9-Co-kiM" secondAttribute="leading" id="JD9-nn-dI5"/>
-                            <constraint firstItem="yUE-Y9-Sg1" firstAttribute="centerY" secondItem="fvG-zO-Dea" secondAttribute="centerY" id="NF0-fd-Ond"/>
+                            <constraint firstItem="yUE-Y9-Sg1" firstAttribute="centerY" secondItem="fvG-zO-Dea" secondAttribute="centerY" constant="20" id="NF0-fd-Ond"/>
                             <constraint firstItem="rOR-Lg-LEu" firstAttribute="width" secondItem="jS9-Co-kiM" secondAttribute="width" id="OMQ-bK-Zhr"/>
                             <constraint firstItem="rOR-Lg-LEu" firstAttribute="centerX" secondItem="fvG-zO-Dea" secondAttribute="centerX" constant="100" id="REc-aY-c19"/>
                             <constraint firstItem="jS9-Co-kiM" firstAttribute="centerX" secondItem="fvG-zO-Dea" secondAttribute="centerX" constant="-100" id="VzH-2C-OV5"/>
@@ -1617,7 +1617,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="BackArrow" width="100" height="75"/>
+        <image name="BackArrow" width="150" height="94"/>
         <image name="ClosingX" width="50" height="50"/>
         <image name="Pause" width="50" height="50"/>
     </resources>

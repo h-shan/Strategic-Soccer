@@ -7,6 +7,7 @@
 //
 
 import UIKit
+let dampingFactor:CGFloat = 0.7
 class PlayViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     var scene: GameScene!
     let gameService = ConnectionManager()
@@ -17,6 +18,8 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     var parent: TitleViewController!
     var connectedDevice: String?
     var sentData = false
+    var sentPause = false
+    var sentPauseAction = false
     @IBOutlet weak var SinglePlayer: UIButton!
     @IBOutlet weak var TwoPlayers: UIButton!
     @IBOutlet weak var ConnectToAnotherDevice: UIButton!
@@ -32,7 +35,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     @IBAction func hostGame(sender: AnyObject){
         gameService.getServiceAdvertiser().startAdvertisingPeer()
-        
+        gameService.getServiceBrowser().startBrowsingForPeers()
         self.gameTableView.reloadData()
         HostGame.userInteractionEnabled = false
         HostGame.alpha = 0.5
@@ -40,6 +43,8 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func joinGame(sender: AnyObject){
         gameService.sendStart(nil, flag: scene.countryA)
         sentData = true
+        JoinGame.alpha = 0.5
+        JoinGame.userInteractionEnabled = false
     }
     @IBAction func hideConnections(sender: AnyObject){
         ConnectionView.hidden = true
@@ -75,9 +80,6 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         case "SinglePlayerSegue":
             scene.gType = .onePlayer
             break
-        case "TwoPhoneSegue":
-            scene.gType = .twoPhone
-            break
         default: break
         }
     }
@@ -103,53 +105,146 @@ extension PlayViewController : ConnectionManagerDelegate {
             self.gameTableView.reloadData()
         }
     }
-    func receiveStart(manager: ConnectionManager, settings:[String]){
-        
-        connectedDevice = gameService.connectedDevice!.first?.displayName
-        print("receiveStart")
-        scene.isHost = true
-        if settings.first! != "joined"{
-            scene.isHost = false
-            scene.isPuppet = true
-            scene.mode = stringMode[settings.first!]!
-        }
-        scene.countryB = settings[1]
-        scaleFactorX = screenSize.width/CGFloat((settings[2] as NSString).doubleValue)
-        scaleFactorY = screenSize.height/CGFloat((settings[3] as NSString).doubleValue)
-        moveToScene()
-        if !sentData{
-            gameService.sendStart(modeString[scene.mode]!,flag: scene.countryA)
-            sentData = true
+    func receivePause(manager: ConnectionManager, pauseType: String){
+        switch pauseType{
+        case "pause":self.scene.viewController.PauseClicked(0); break
+        case "resume": self.scene.viewController.pauseVC.Resume(0); break
+        case "quit": self.scene.viewController.pauseVC.Quit(0); break
+        case "restart": self.scene.viewController.pauseVC.Restart(0);break
+        default: break
         }
     }
-    func receiveMove(manager: ConnectionManager, move: [String]) {
-        NSOperationQueue.mainQueue().addOperationWithBlock {
-            let playerName = move[0]
-            let velocityX = CGFloat((move[1] as NSString).doubleValue)
-            let velocityY = CGFloat((move[2] as NSString).doubleValue)
-            for player in self.scene.teamB{
-                if playerName == player.name{
-                    if !self.scene.isPuppet{
-                        player.physicsBody!.velocity = CGVectorMake(-velocityX, velocityY)
-                    }
-                    self.scene.switchTurns()
-                    break
+    func receiveMisc(manager:ConnectionManager, message: [String]){
+        switch(message[0]){
+        case "goal":
+            if !scene.goalAccounted{
+                scene.reset(!message[1].toBool()!)
+                break
+            }
+        default: break
+        }
+    }
+    func receivePositionMove(manager: ConnectionManager, positionMove: [String]){
+        print("receivePositionMove")
+        NSOperationQueue.mainQueue().addOperationWithBlock({
+            let nameA = positionMove[0]
+            //let positionA = CGPointMake(screenWidth-positionMove[1].toFloat()*self.scaleFactorX, positionMove[2].toFloat()*self.scaleFactorY)
+            let velocityA = CGVectorMake(-positionMove[3].toFloat()*self.scaleFactorX*dampingFactor,positionMove[4].toFloat()*self.scaleFactorY*dampingFactor)
+            let nameB = positionMove[5]
+            //let positionB = CGPointMake(screenWidth-positionMove[6].toFloat()*self.scaleFactorX, positionMove[7].toFloat()*self.scaleFactorY)
+            
+            let velocityB = CGVectorMake(-positionMove[8].toFloat()*self.scaleFactorX*dampingFactor, positionMove[9].toFloat()*self.scaleFactorY*dampingFactor)
+            
+            let nodeA = self.scene.childNodeWithName(self.convertTeams(nameA))!
+            let nodeB = self.scene.childNodeWithName(self.convertTeams(nameB))!
+            if nodeA != self.scene.borderBodyNode{
+                //nodeA.position = positionA
+                if !self.scene.isHost{
+                    nodeA.physicsBody!.velocity = CGVectorMake(velocityA.dx * dampingFactor, velocityA.dy * dampingFactor)
                 }
+                else{
+                    nodeA.physicsBody!.velocity = velocityA
+                }
+            }
+            if nodeB != self.scene.borderBodyNode{
+                //nodeB.position = positionB
+                if !self.scene.isHost{
+                    nodeB.physicsBody!.velocity = CGVectorMake(velocityB.dx * dampingFactor, velocityB.dy * dampingFactor)
+                }
+                else{
+                    nodeB.physicsBody!.velocity = velocityB
+                }
+            }
+        })
+    }
+    func receiveVelocities(manager: ConnectionManager, velocities:[String]){
+        print("receiveVelocities")
+        NSOperationQueue.mainQueue().addOperationWithBlock{
+            let ballVelocity = CGVectorMake(-velocities[0].toFloat()*self.scaleFactorX, velocities[1].toFloat()*self.scaleFactorY)
+            self.scene.ball.physicsBody!.velocity = ballVelocity
+            var i = 2
+            while i < velocities.count{
+                let velocity = CGVectorMake(-velocities[i].toFloat()*self.scaleFactorX, velocities[i+1].toFloat()*self.scaleFactorY)
+                self.scene.players[self.convertToIndex(i)].physicsBody!.velocity = velocity
+                i+=2
             }
         }
     }
+
+    func receiveStart(manager: ConnectionManager, settings:[String]){
+        dispatch_async(dispatch_get_main_queue(),{
+            self.connectedDevice = self.gameService.connectedDevice!.first?.displayName
+            print("receiveStart")
+            self.scene.isHost = true
+            if settings.first! != "joined"{
+                self.scene.isHost = false
+                self.scene.mode = stringMode[settings.first!]!
+            }
+            self.scene.countryB = settings[1]
+            self.scaleFactorX = screenWidth/settings[2].toFloat()
+            self.scaleFactorY = screenHeight/settings[3].toFloat()
+            self.moveToScene()
+            if !self.sentData{
+                self.gameService.sendStart(modeString[self.scene.mode]!,flag: self.scene.countryA)
+                self.sentData = true
+            }
+        })
+    }
+    func receiveSync(manager: ConnectionManager, turn: String, gameTime: String){
+        if turn == "true"{
+            if scene.turnA{
+                scene.switchTurns()
+            }else{
+                scene.moveTimer?.restart()
+            }
+        }else{
+            if !scene.turnA{
+                scene.switchTurns()
+            }else{
+                scene.moveTimer?.restart()
+            }
+        }
+        if scene.mode.getType() == .timed{
+            scene.gameTime = NSTimeInterval(gameTime.toFloat())
+        }
+    }
+    func receiveMove(manager: ConnectionManager, move: [String]) {
+        print("receiveMove")
+        dispatch_async(dispatch_get_main_queue(), {
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                let playerName = self.convertTeams(move[0])
+                let velocityX = move[1].toFloat()
+                let velocityY = move[2].toFloat()
+                let position = CGPointMake(screenWidth-move[3].toFloat()*self.scaleFactorX, move[4].toFloat()*self.scaleFactorY)
+                for player in self.scene.teamB{
+                    if playerName == player.name{
+                        if self.scene.isHost{
+                            player.physicsBody!.velocity = CGVectorMake(-velocityX*self.scaleFactorX, velocityY*self.scaleFactorY)
+                        }else{
+                            player.physicsBody!.velocity = CGVectorMake(-velocityX*self.scaleFactorX*dampingFactor, velocityY*self.scaleFactorY*dampingFactor)
+                        }
+                        player.position = position
+                        self.scene.switchTurns()
+                        break
+                    }
+                }
+            }
+        })
+    }
     func receivePositions(manager: ConnectionManager, positions: [String]){
+        print("receivePositions")
         NSOperationQueue.mainQueue().addOperationWithBlock{
-            let ballPosition = CGPointMake(self.view.frame.maxX - CGFloat((positions[0] as NSString).doubleValue)*self.scaleFactorX, CGFloat((positions[1] as NSString).doubleValue)*self.scaleFactorX)
+            let ballPosition = CGPointMake(screenWidth - positions[0].toFloat()*self.scaleFactorX, positions[1].toFloat()*self.scaleFactorY)
             self.scene.ball.position = ballPosition
             var i = 2
             while i < positions.count{
-                let point = CGPointMake(self.view.frame.maxX - CGFloat((positions[i] as NSString).doubleValue)*self.scaleFactorX, CGFloat((positions[i+1] as NSString).doubleValue)*self.scaleFactorY)
+                let point = CGPointMake(screenWidth - positions[i].toFloat()*self.scaleFactorX, positions[i+1].toFloat()*self.scaleFactorY)
                 self.scene.players[self.convertToIndex(i)].position = point
                 i+=2
             }
         }
     }
+
     func convertToIndex(index: Int) -> Int{
         let rawIndex = index/2-1
         switch(scene.playerOption){
@@ -164,12 +259,55 @@ extension PlayViewController : ConnectionManagerDelegate {
             }; return rawIndex-4
         }
     }
+    func convertTeams(player:String)->String{
+        var newPlayer = player
+        if player.characters.count == 8{
+            if player[6]=="A"{
+                newPlayer=player.replace("A",withString: "B")
+            }else{
+                newPlayer = player.replace("B", withString: "A")
+        }
+            return newPlayer
+        }
+        return player
+    }
     func moveToScene(){
         let gameVC = self.storyboard!.instantiateViewControllerWithIdentifier("GameViewController") as! GameViewController
         gameVC.scene = scene
         gameVC.parent = self
         scene.gType = .twoPhone
+        gameService.getServiceBrowser().stopBrowsingForPeers()
+        gameService.getServiceAdvertiser().stopAdvertisingPeer()
         self.navigationController!.pushViewController(gameVC, animated: true)
     }
 }
+extension String {
+    
+    subscript (i: Int) -> Character {
+        return self[self.startIndex.advancedBy(i)]
+    }
+    func replace(target: String, withString: String) -> String {
+        return self.stringByReplacingOccurrencesOfString(target, withString: withString, options: NSStringCompareOptions.LiteralSearch, range: nil)
+    }
+    func toFloat() -> CGFloat{
+        return CGFloat((self as NSString).doubleValue)
+    }
+    func toBool() -> Bool?{
+        if self == "true"{
+            return true
+        }else if self == "false"{
+            return false
+        }
+        return nil
+    }
+}
+extension Bool{
+    func toString() -> String{
+        if self{
+            return "true"
+        }
+        return "false"
+    }
+}
+
 

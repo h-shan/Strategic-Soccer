@@ -21,7 +21,6 @@ class GoalPost: SKSpriteNode {
         let body = self.physicsBody!
         body.linearDamping = 0
         body.dynamic = false
-        body.categoryBitMask = 1
         body.usesPreciseCollisionDetection = true
         body.restitution = 1
     }

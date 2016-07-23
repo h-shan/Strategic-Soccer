@@ -13,14 +13,19 @@ import MultipeerConnectivity
 class GameViewController: UIViewController {
     var scene: GameScene!
     var parent: PlayViewController!
-    
+    var pauseVC: PauseViewController!
     
     @IBOutlet weak var PauseView: UIView!
     @IBOutlet weak var skView: SKView!
     @IBOutlet weak var PauseButton: UIButton!
     @IBOutlet weak var NumberCoins: UILabel!
-    @IBOutlet weak var Dimmer: UIView!
+    @IBOutlet weak var Dimmer: UIView?
     @IBAction func PauseClicked(sender: AnyObject) {
+        if scene.gType == .twoPhone && !parent.sentPause{
+            parent.gameService.sendPause("pause")
+        }
+        parent.sentPauseAction = false
+        parent.sentPause = true
         PauseView.hidden = false
         scene.moveTimer!.pause()
         if scene.mode.getType() == .timed{
@@ -30,7 +35,7 @@ class GameViewController: UIViewController {
         scene.userInteractionEnabled = false
         scene.paused = true
         UIView.animateWithDuration(0.2,animations:{
-            self.Dimmer.alpha = 0.5
+            self.Dimmer?.alpha = 0.5
         })
     }
 
@@ -51,7 +56,7 @@ class GameViewController: UIViewController {
     }
     override func viewDidAppear(animated: Bool) {
         UIView.animateWithDuration(1.0, animations: {
-            self.Dimmer.alpha = 0
+            self.Dimmer?.alpha = 0
         })
     }
     override func viewWillAppear(animated:Bool){
@@ -80,8 +85,9 @@ class GameViewController: UIViewController {
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "Pause"{
-            let destinationVC = segue.destinationViewController as! PauseViewController
-            destinationVC.parent = self
+            pauseVC = segue.destinationViewController as! PauseViewController
+            pauseVC.parent = self
+            pauseVC.scene = scene
         }
     }
     func backToTitle(){
@@ -98,6 +104,9 @@ class GameViewController: UIViewController {
         snapShot.removeFromSuperview()
         view = nil
         parent.sentData = false
+        parent.sentPause = false
+        scene.isSynced = false
+    
     }
     func displayEarnings(numberWon: Int){
         addCoinImage("YOU WON ", afterText: String(numberWon), label: NumberCoins, numberLines: 1)

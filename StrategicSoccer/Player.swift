@@ -36,7 +36,6 @@ class Player: SKSpriteNode {
         
         let body:SKPhysicsBody = self.physicsBody!
         body.usesPreciseCollisionDetection = true
-        body.categoryBitMask = 1
         // change back linear damping and friction
         body.linearDamping = 0.3
         body.restitution = 1
@@ -54,7 +53,6 @@ class Player: SKSpriteNode {
         self.zPosition = 2
         let body:SKPhysicsBody = self.physicsBody!
         body.usesPreciseCollisionDetection = true
-        body.categoryBitMask = 1
         // change back linear damping and friction
         body.linearDamping = 0.3
         body.restitution = 1

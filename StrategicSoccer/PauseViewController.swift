@@ -16,15 +16,26 @@ class PauseViewController: UIViewController {
     @IBOutlet weak var Restart: UIButton!
     @IBOutlet weak var Resume: UIButton!
     @IBAction func Quit(sender: AnyObject) {
+        if scene.gType == .twoPhone && !parent.parent.sentPauseAction{
+            parent.parent.gameService.sendPause("quit")
+        }
+        parent.parent.sentPauseAction = true
+        parent.parent.sentPause = false
         scene = parent.scene
         parent.PauseView.hidden = true
         scene.goBackToTitle()
         
     }
     @IBAction func Restart(sender: AnyObject) {
+        if scene.gType == gameType.twoPhone && !parent.parent.sentPauseAction{
+            parent.parent.gameService.sendPause("restart")
+        }
+        parent.parent.sentPauseAction = true
+        parent.parent.sentPause = false
         UIView.animateWithDuration(0.2,animations:{
-            self.parent.Dimmer.alpha = 0.0
+            self.parent.Dimmer?.alpha = 0.0
         })
+
         scene = parent.scene
         scene.physicsWorld.speed = 1
         parent.PauseView.hidden = true
@@ -32,11 +43,19 @@ class PauseViewController: UIViewController {
         scene.restart()
         scene.userInteractionEnabled = true
         scene.firstTurn = true
+        scene.isSynced = false
     }
     @IBAction func Resume(sender: AnyObject) {
+        if scene.gType == .twoPhone && !parent.parent.sentPauseAction{
+            parent.parent.gameService.sendPause("resume")
+        }
+        parent.parent.sentPauseAction = false
+        parent.parent.sentPause = true
         UIView.animateWithDuration(0.5,animations:{
-            self.parent.Dimmer.alpha = 0.0
+            self.parent.Dimmer?.alpha = 0.0
         })
+        parent.parent.sentPause = false
+
         parent.scene.physicsWorld.speed = 1
         scene = parent.scene
         parent.PauseView.hidden = true

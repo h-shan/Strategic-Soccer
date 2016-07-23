@@ -12,6 +12,11 @@ protocol ConnectionManagerDelegate {
     func receiveMove(manager : ConnectionManager, move: [String])
     func receivePositions(manager : ConnectionManager, positions: [String])
     func receiveStart(manager: ConnectionManager, settings: [String])
+    func receivePause(manager: ConnectionManager, pauseType: String)
+    func receivePositionMove(manager: ConnectionManager, positionMove:[String])
+    func receiveVelocities(manager: ConnectionManager, velocities:[String])
+    func receiveSync(manager: ConnectionManager, turn: String, gameTime: String)
+    func receiveMisc(manager: ConnectionManager, message: [String])
 }
 class ConnectionManager : NSObject{
     private let serviceBrowser : MCNearbyServiceBrowser
@@ -27,7 +32,6 @@ class ConnectionManager : NSObject{
         super.init()
         self.serviceAdvertiser.delegate = self
         self.serviceBrowser.delegate = self
-        self.serviceBrowser.startBrowsingForPeers()
     }
     deinit{
         self.serviceAdvertiser.stopAdvertisingPeer()
@@ -35,6 +39,9 @@ class ConnectionManager : NSObject{
     }
     func getServiceAdvertiser() -> MCNearbyServiceAdvertiser{
         return serviceAdvertiser
+    }
+    func getServiceBrowser() -> MCNearbyServiceBrowser{
+        return serviceBrowser
     }
     func connectToDevice(deviceName: String){
         for peer in session.connectedPeers{
@@ -48,9 +55,23 @@ class ConnectionManager : NSObject{
         session.delegate = self
         return session
     }()
-    func sendMove(player:Player, velocity: CGVector) {
+    func sendMove(player:Player, velocity: CGVector, position: CGPoint) {
         NSLog("%@", "player: \(player.name), x:\(velocity.dx), y:\(velocity.dy)")
-        let sendString = String(format:"%@ %@ %f %f", "move",player.name!, velocity.dx, velocity.dy)
+        let sendString = String(format:"%@ %@ %f %f %f %f", "move",player.name!, velocity.dx, velocity.dy, position.x, position.y)
+        if connectedDevice != nil{
+            stringSend(sendString)
+        }
+    }
+    func sendPause(pauseType: String){
+        if connectedDevice != nil{
+            stringSend("pause " + pauseType)
+        }
+    }
+    func sendVelocities(scene: GameScene){
+        var sendString = String(format:"%@ %f %f ","velocities",scene.ball.physicsBody!.velocity.dx, scene.ball.physicsBody!.velocity.dy)
+        for player in scene.players{
+            sendString += String(format: "%f %f ",player.physicsBody!.velocity.dx, player.physicsBody!.velocity.dy)
+        }
         if connectedDevice != nil{
             stringSend(sendString)
         }
@@ -74,13 +95,26 @@ class ConnectionManager : NSObject{
             gameMode = mode!
         }
         if connectedDevice != nil{
-            stringSend(String(format: "%@ %@ %@ %f %f","start", gameMode, flag, screenSize.width, screenSize.height))
+            stringSend(String(format: "%@ %@ %@ %f %f","start", gameMode, flag, screenWidth, screenHeight))
+        }
+    }
+    func sendPositionMove(nodeA: String, positionA: CGPoint, velocityA: CGVector, nodeB: String, positionB: CGPoint, velocityB: CGVector){
+        let sendString = String(format: "%@ %@ %f %f %f %f %@ %f %f %f %f", "positionMove", nodeA, positionA.x, positionA.y, velocityA.dx, velocityA.dy, nodeB, positionB.x, positionB.y, velocityB.dx, velocityB.dy)
+        if connectedDevice != nil{
+            stringSend(sendString)
+        }
+    }
+    func sendSync(turnA: Bool, time:String){
+        let appendBool = turnA.toString()
+        let sendString = String(format:"%@ %@ %@", "sendSync", appendBool, time)
+        if connectedDevice != nil{
+            stringSend(sendString)
         }
     }
     func stringSend(message: String){
         dispatch_async(dispatch_get_main_queue(), {
             do {
-                try self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, toPeers: self.connectedDevice!, withMode: MCSessionSendDataMode.Unreliable)
+                try self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, toPeers: self.connectedDevice!, withMode: MCSessionSendDataMode.Reliable)
             }
             catch{
                 NSLog("%@","\(error)")
@@ -139,7 +173,6 @@ extension ConnectionManager : MCSessionDelegate {
     }
     
     func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
-        NSLog("%@", "didReceiveData: \(data)")
         dispatch_async(dispatch_get_main_queue(), {
             let str = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
             var strArr = str.characters.split{$0 == " "}.map(String.init)
@@ -151,7 +184,11 @@ extension ConnectionManager : MCSessionDelegate {
                 break
             case "move":self.delegate?.receiveMove(self, move: strArr); break
             case "position":self.delegate?.receivePositions(self, positions: strArr); break
-            default: print("Unidentified data"); break
+            case "pause":self.delegate?.receivePause(self, pauseType:strArr[0]); break
+            case "positionMove": self.delegate?.receivePositionMove(self, positionMove: strArr); break
+            case "velocities": self.delegate?.receiveVelocities(self, velocities: strArr); break
+            case "sendSync": self.delegate?.receiveSync(self, turn: strArr[0], gameTime: strArr[1]); break
+            default: self.delegate?.receiveMisc(self, message: strArr); break
             }
         })
     }

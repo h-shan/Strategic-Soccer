@@ -37,7 +37,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playerSelected = false
     var goalA : Bool?
     var ball = Ball()
-    
+
+    var nameNode = [String:SKSpriteNode]()
     var playerA1 = Player()
     var playerA2 = Player()
     var playerA3 = Player()
@@ -53,16 +54,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var viewController: GameViewController!
     var goalAccounted = false
     
+    var isSynced = false
     var firstTurn = true
     var ownGoal = false
     var countryA:String!
     var countryB:String!
     
+    var borderBodyNode: SKNode!
     var borderBody: SKPhysicsBody!
 
     var gType = gameType.twoPlayer
     var isHost = false
-    var isPuppet = false
     
     var AIDifficulty: Int!
     var cAggro:Int?
@@ -127,9 +129,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         borderBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         borderBody.linearDamping = 0
         borderBody.angularDamping = 0
-        self.physicsBody = borderBody
+        borderBody.dynamic = false
+        borderBodyNode = SKNode()
+        borderBodyNode.physicsBody = borderBody
+        borderBodyNode.name = "edge"
+        self.addChild(borderBodyNode)
         self.physicsWorld.contactDelegate = self
-        
         
         physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
         
@@ -164,8 +169,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ball.zPosition = 2
         setPosition()
         self.addChild(ball)
-        ball.physicsBody!.contactTestBitMask = ball.physicsBody!.collisionBitMask
-        
         moveTimer = Timer()
         // set up clock
         clockBackground = SKShapeNode(rect: CGRectMake(-50*scalerX,-25*scalerY,100*scalerX,50*scalerY), cornerRadius: 10)
@@ -188,7 +191,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     func didBeginContact(contact: SKPhysicsContact){
         let ballVelocity = ball.physicsBody!.velocity
-        if contact.bodyA == borderBody && contact.bodyB == ball.physicsBody!{
+        if (contact.bodyA == borderBody && contact.bodyB == ball.physicsBody!) || (contact.bodyB == borderBody && contact.bodyA == ball.physicsBody!){
             if 0 <= ballVelocity.dx && ballVelocity.dx < 20{
                 ball.physicsBody!.velocity = CGVectorMake(20,ball.physicsBody!.velocity.dy)
             }
@@ -201,6 +204,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if -20 < ballVelocity.dy && ballVelocity.dy < 0{
                 ball.physicsBody!.velocity = CGVectorMake(ball.physicsBody!.velocity.dx,-20)
             }
+        }
+        if gType == .twoPhone && isHost{
+            viewController.parent.gameService.sendPositionMove(contact.bodyA.node!.name!, positionA: contact.bodyA.node!.position, velocityA: contact.bodyA.velocity,  nodeB: contact.bodyB.node!.name!, positionB: contact.bodyB.node!.position, velocityB: contact.bodyB.velocity)
+        }
+    }
+    func didEndContact(contact: SKPhysicsContact) {
+        if gType == .twoPhone && isHost{
+            viewController.parent.gameService.sendPositionMove(contact.bodyA.node!.name!, positionA: contact.bodyA.node!.position, velocityA: contact.bodyA.velocity,  nodeB: contact.bodyB.node!.name!, positionB: contact.bodyB.node!.position, velocityB: contact.bodyB.velocity)
         }
     }
     override func didMoveToView(view: SKView) {
@@ -249,8 +260,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             clockBackground?.hidden = false
         }
         addPlayers()
+        for node in children{
+            if let body = node.physicsBody{
+                body.collisionBitMask = 1
+                body.contactTestBitMask = 1
+                body.categoryBitMask = 1
+            }
+        }
         restart()
+
         
+    }
+    func sendPosition(){
+        viewController.parent.gameService.sendPosition(self)
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
         {
@@ -269,7 +291,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         playerSelected = true
                         startPosition = location
                         selectedPlayer!.runAction(SKAction.colorizeWithColor(UIColor.redColor(), colorBlendFactor: 0.4, duration: 0))
-                        
                     }
                 }
                 else{
@@ -294,11 +315,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             let xMovement = 2*(touches.first!.locationInNode(self).x - startPosition!.x)
             let yMovement = 2*(touches.first!.locationInNode(self).y - startPosition!.y)
-            if !isPuppet{
-                selectedPlayer!.physicsBody!.velocity = CGVectorMake(xMovement, yMovement)
-            }
+            selectedPlayer!.physicsBody!.velocity = CGVectorMake(xMovement, yMovement)
+            
             if gType == .twoPhone{
-                viewController.parent.gameService.sendMove(selectedPlayer!, velocity: CGVectorMake(xMovement, yMovement))
+                viewController.parent.gameService.sendMove(selectedPlayer!, velocity: selectedPlayer!.physicsBody!.velocity, position: selectedPlayer!.position)
+                if !isHost{
+                    selectedPlayer!.physicsBody!.velocity = CGVectorMake(xMovement*dampingFactor, yMovement*dampingFactor)
+                }
             }
             playerSelected = false
             switchTurns()
@@ -313,17 +336,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        if (gType == .twoPhone && isHost){
+        if gType == .twoPhone && isHost{
+            //viewController.parent.gameService.sendVelocities(self)
             viewController.parent.gameService.sendPosition(self)
         }
         if (!goalAccounted && 200*scalerY < ball.position.y && ball.position.y < 440*scalerY){
             if ball.position.x<50*scalerX{
-                
                 self.reset(false)
+                if gType == .twoPhone && isHost && viewController.parent.gameService.connectedDevice != nil{
+                    viewController.parent.gameService.stringSend(String(format: "%@ %@ %@","misc", "goal", false.toString()))
+                }
             }
             else if 1086*scalerX < ball.position.x {
-                
-                
+                if gType == .twoPhone && isHost && viewController.parent.gameService.connectedDevice != nil{
+                    viewController.parent.gameService.stringSend(String(format:"%@ %@ %@","misc", "goal", true.toString()))
+                }
                 self.reset(true)
             }
         }
@@ -339,26 +366,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             showTime()
         }
         if (goalDelay.getElapsedTime()>2){
-            goalDelay.reset()
             scoreBackground.fadeOut()
             setDynamicStates(true)
             moveTimer?.restart()
             if mode.getType() == .timed{
                 gameTimer.start()
             }
-            for child in children{
-                if child.name == "blue"{
-                    child.removeFromParent()
-                }
-            }
-    
+//            for child in children{
+//                if child.name == "blue"{
+//                    child.removeFromParent()
+//                }
+//            }
             setPosition()
-            goalAccounted = false
             userInteractionEnabled = true
             if ownGoal{
                 switchTurns()
                 ownGoal = false
             }
+        }
+        if goalDelay.getElapsedTime()>3{
+            goalDelay.reset()
+            goalAccounted = false
         }
         /* Called before each frame is rendered */
     }
@@ -420,7 +448,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func switchTurns(){
         turnA = !turnA
-        
+        if gType == .twoPhone && isHost && !isSynced{
+            if mode.getType() == .timed{
+                viewController.parent.gameService.sendSync(turnA, time: String(gameTime!))
+            }else{
+                viewController.parent.gameService.sendSync(turnA, time: "PointMode")
+            }
+        }
         if playerSelected == true {
             playerSelected = false
         }
@@ -546,14 +580,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 child.removeFromParent()
             }
         }
-        playerA1 = Player(teamA: true, country: countryA, sender: self, name: "player1")
-        playerA2 = Player(teamA: true, country: countryA, sender: self, name: "player2")
-        playerA3 = Player(teamA: true, country: countryA, sender: self, name: "player3")
-        playerA4 = Player(teamA: true, country: countryA, sender: self, name: "player4")
-        playerB1 = Player(teamA: false, country: countryB, sender: self, name: "player1")
-        playerB2 = Player(teamA: false, country: countryB, sender: self, name: "player2")
-        playerB3 = Player(teamA: false, country: countryB, sender: self, name: "player3")
-        playerB4 = Player(teamA: false, country: countryB, sender: self, name: "player4")
+        playerA1 = Player(teamA: true, country: countryA, sender: self, name: "playerA1")
+        playerA2 = Player(teamA: true, country: countryA, sender: self, name: "playerA2")
+        playerA3 = Player(teamA: true, country: countryA, sender: self, name: "playerA3")
+        playerA4 = Player(teamA: true, country: countryA, sender: self, name: "playerA4")
+        playerB1 = Player(teamA: false, country: countryB, sender: self, name: "playerB1")
+        playerB2 = Player(teamA: false, country: countryB, sender: self, name: "playerB2")
+        playerB3 = Player(teamA: false, country: countryB, sender: self, name: "playerB3")
+        playerB4 = Player(teamA: false, country: countryB, sender: self, name: "playerB4")
         
         switch (playerOption){
         case PlayerOption.three:
@@ -567,7 +601,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             teamB = [playerB1, playerB2, playerB3, playerB4]
             break;
         }
-        
         for node in players{
             node.zPosition = 2
             self.addChild(node)
