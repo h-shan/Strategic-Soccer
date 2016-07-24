@@ -49,8 +49,7 @@ class PauseViewController: UIViewController {
         if scene.gType == .twoPhone && !parent.parent.sentPauseAction{
             parent.parent.gameService.sendPause("resume")
         }
-        parent.parent.sentPauseAction = false
-        parent.parent.sentPause = true
+        parent.parent.sentPauseAction = true
         UIView.animateWithDuration(0.5,animations:{
             self.parent.Dimmer?.alpha = 0.0
         })

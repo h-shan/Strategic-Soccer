@@ -49,8 +49,10 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func hideConnections(sender: AnyObject){
         ConnectionView.hidden = true
         gameService.getServiceAdvertiser().stopAdvertisingPeer()
+        gameService.getServiceBrowser().stopBrowsingForPeers()
         HostGame.userInteractionEnabled = true
         HostGame.alpha = 1
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,6 +98,9 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return hostedGames.count
+    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
     }
 }
 extension PlayViewController : ConnectionManagerDelegate {
@@ -164,7 +169,7 @@ extension PlayViewController : ConnectionManagerDelegate {
             self.scene.ball.physicsBody!.velocity = ballVelocity
             var i = 2
             while i < velocities.count{
-                let velocity = CGVectorMake(-velocities[i].toFloat()*self.scaleFactorX, velocities[i+1].toFloat()*self.scaleFactorY)
+                let velocity = CGVectorMake(-velocities[i].toFloat()*self.scaleFactorX*dampingFactor, velocities[i+1].toFloat()*self.scaleFactorY*dampingFactor)
                 self.scene.players[self.convertToIndex(i)].physicsBody!.velocity = velocity
                 i+=2
             }
@@ -232,20 +237,20 @@ extension PlayViewController : ConnectionManagerDelegate {
         })
     }
     func receivePositions(manager: ConnectionManager, positions: [String]){
-        print("receivePositions")
+        print(dampingFactor)
         NSOperationQueue.mainQueue().addOperationWithBlock{
             let ballPosition = CGPointMake(screenWidth - positions[0].toFloat()*self.scaleFactorX, positions[1].toFloat()*self.scaleFactorY)
             if self.scene.ball.physicsBody!.velocity.dx < 0{
-                if self.scene.ball.position.x < ballPosition.x{
+                if self.scene.ball.position.x < ballPosition.x-2{
                     dampingFactor -= 0.01
-                }else if self.scene.ball.position.x > ballPosition.x{
+                }else if self.scene.ball.position.x > ballPosition.x+2{
                     dampingFactor += 0.01
                 }
             }
             else{
-                if self.scene.ball.position.x > ballPosition.x{
+                if self.scene.ball.position.x > ballPosition.x+2{
                     dampingFactor -= 0.01
-                }else if self.scene.ball.position.x < ballPosition.x{
+                }else if self.scene.ball.position.x < ballPosition.x-2{
                     dampingFactor += 0.01
                 }
             }

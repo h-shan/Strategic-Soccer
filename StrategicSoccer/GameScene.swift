@@ -206,14 +206,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 ball.physicsBody!.velocity = CGVectorMake(ball.physicsBody!.velocity.dx,-20)
             }
         }
-        if gType == .twoPhone && isHost{
-            viewController.parent.gameService.sendPositionMove(contact.bodyA.node!.name!, positionA: contact.bodyA.node!.position, velocityA: contact.bodyA.velocity,  nodeB: contact.bodyB.node!.name!, positionB: contact.bodyB.node!.position, velocityB: contact.bodyB.velocity)
-        }
+//        if gType == .twoPhone && isHost{
+//            viewController.parent.gameService.sendPositionMove(contact.bodyA.node!.name!, positionA: contact.bodyA.node!.position, velocityA: contact.bodyA.velocity,  nodeB: contact.bodyB.node!.name!, positionB: contact.bodyB.node!.position, velocityB: contact.bodyB.velocity)
+//        }
     }
     func didEndContact(contact: SKPhysicsContact) {
-        if gType == .twoPhone && isHost{
-            viewController.parent.gameService.sendPositionMove(contact.bodyA.node!.name!, positionA: contact.bodyA.node!.position, velocityA: contact.bodyA.velocity,  nodeB: contact.bodyB.node!.name!, positionB: contact.bodyB.node!.position, velocityB: contact.bodyB.velocity)
-        }
+//        if gType == .twoPhone && isHost{
+//            viewController.parent.gameService.sendPositionMove(contact.bodyA.node!.name!, positionA: contact.bodyA.node!.position, velocityA: contact.bodyA.velocity,  nodeB: contact.bodyB.node!.name!, positionB: contact.bodyB.node!.position, velocityB: contact.bodyB.velocity)
+//        }
     }
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -340,6 +340,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if gType == .twoPhone && isHost{
             //viewController.parent.gameService.sendVelocities(self)
             viewController.parent.gameService.sendPosition(self)
+            viewController.parent.gameService.sendVelocities(self)
         }
         if (!goalAccounted && 200*scalerY < ball.position.y && ball.position.y < 440*scalerY){
             if ball.position.x<50*scalerX{
