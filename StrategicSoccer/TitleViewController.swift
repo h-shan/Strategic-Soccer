@@ -52,6 +52,13 @@ class TitleViewController: UIViewController {
     @IBOutlet weak var ChangePlayersButton: UIButton!
     @IBOutlet weak var StatsButton: UIButton!
     @IBOutlet weak var NumberCoins: UILabel!
+    @IBOutlet weak var CoinInfo: UILabel!
+    @IBAction func clickCoin(sender: AnyObject){
+        UIView.animateWithDuration(0.2, animations: {
+            self.CoinInfo.alpha = 0.8
+            _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(self.hideCoinInfo), userInfo: nil, repeats: false)
+        })
+    }
     var skView: SKView!
     var defaultMode = Mode.threeMinute
     var defaultPlayers = PlayerOption.three
@@ -137,10 +144,15 @@ class TitleViewController: UIViewController {
         stringMode["tenPoint"] = Mode.tenPoint
         stringMode["twentyPoint"] = Mode.twentyPoint
         
+        CoinInfo.alpha = 0
     }
     
     
-
+    func hideCoinInfo(){
+        UIView.animateWithDuration(0.2, animations: {
+            self.CoinInfo.alpha = 0
+        })
+    }
     
     // MARK: - Navigation
 

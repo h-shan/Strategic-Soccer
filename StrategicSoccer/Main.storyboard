@@ -255,6 +255,15 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nrx-pZ-cFj">
+                                <rect key="frame" x="418" y="130" width="140" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="16"/>
+                                <state key="normal" title="SETTINGS"/>
+                                <connections>
+                                    <segue destination="1lU-lZ-m6k" kind="show" identifier="SettingsSegue" id="nEl-sp-Cra"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L89-lv-x1T">
                                 <rect key="frame" x="244" y="190" width="140" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -316,24 +325,37 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                     <segue destination="2pK-Tn-fJ1" kind="show" id="0So-TI-Vyd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nrx-pZ-cFj">
-                                <rect key="frame" x="418" y="130" width="140" height="40"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="16"/>
-                                <state key="normal" title="SETTINGS"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mj8-de-RBO">
+                                <rect key="frame" x="8" y="5" width="90" height="25"/>
                                 <connections>
-                                    <segue destination="1lU-lZ-m6k" kind="show" identifier="SettingsSegue" id="nEl-sp-Cra"/>
+                                    <action selector="clickCoin:" destination="fkE-IQ-IGn" eventType="touchUpInside" id="47B-Zn-yGb"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COINS CAN BE USED TO UNLOCK FLAGS!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ie5-Fh-HGY">
+                                <rect key="frame" x="101" y="5" width="350" height="25"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="WW1-oG-fMZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Nrx-pZ-cFj" firstAttribute="width" secondItem="NLw-HV-UYu" secondAttribute="width" id="0qc-XP-YMy"/>
                             <constraint firstItem="Nrx-pZ-cFj" firstAttribute="trailing" secondItem="QOX-e5-Slf" secondAttribute="trailing" constant="-10" id="40q-TR-3XM"/>
+                            <constraint firstItem="Mj8-de-RBO" firstAttribute="top" secondItem="swr-cO-YAJ" secondAttribute="top" id="4Bq-78-zVW"/>
+                            <constraint firstItem="ie5-Fh-HGY" firstAttribute="leading" secondItem="Mj8-de-RBO" secondAttribute="trailing" constant="3" id="CPo-ON-m3c"/>
                             <constraint firstItem="L89-lv-x1T" firstAttribute="bottom" secondItem="0Fz-Vu-XYw" secondAttribute="bottom" id="EZk-am-ZkE"/>
                             <constraint firstItem="L89-lv-x1T" firstAttribute="top" secondItem="0Fz-Vu-XYw" secondAttribute="top" id="Kb3-HN-J0l"/>
+                            <constraint firstItem="ie5-Fh-HGY" firstAttribute="bottom" secondItem="Mj8-de-RBO" secondAttribute="bottom" id="NQo-7K-SWF"/>
                             <constraint firstItem="0Fz-Vu-XYw" firstAttribute="leading" secondItem="Nrx-pZ-cFj" secondAttribute="leading" id="PNY-yX-6dz"/>
+                            <constraint firstItem="Mj8-de-RBO" firstAttribute="trailing" secondItem="swr-cO-YAJ" secondAttribute="trailing" id="Rd8-Tl-Thc"/>
+                            <constraint firstItem="Mj8-de-RBO" firstAttribute="bottom" secondItem="swr-cO-YAJ" secondAttribute="bottom" id="XXS-B1-Hwv"/>
                             <constraint firstItem="NLw-HV-UYu" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" constant="30" id="Xwq-QD-F52"/>
                             <constraint firstItem="L89-lv-x1T" firstAttribute="leading" secondItem="NLw-HV-UYu" secondAttribute="leading" id="YcY-lk-vwE"/>
+                            <constraint firstItem="Mj8-de-RBO" firstAttribute="leading" secondItem="swr-cO-YAJ" secondAttribute="leading" id="Ygj-bU-SO3"/>
                             <constraint firstItem="9Ub-az-A73" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="-100" id="cQw-ac-cx8"/>
                             <constraint firstItem="0Fz-Vu-XYw" firstAttribute="trailing" secondItem="Nrx-pZ-cFj" secondAttribute="trailing" id="cXt-TP-xlR"/>
                             <constraint firstItem="0Fz-Vu-XYw" firstAttribute="height" secondItem="Nrx-pZ-cFj" secondAttribute="height" id="fxF-nm-AXd"/>
@@ -344,6 +366,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                             <constraint firstItem="Nrx-pZ-cFj" firstAttribute="bottom" secondItem="NLw-HV-UYu" secondAttribute="bottom" id="mOa-I7-JqB"/>
                             <constraint firstItem="9Ub-az-A73" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" id="nes-bR-1WZ"/>
                             <constraint firstItem="0Fz-Vu-XYw" firstAttribute="top" secondItem="Nrx-pZ-cFj" secondAttribute="bottom" constant="20" id="qPi-wq-nrF"/>
+                            <constraint firstItem="ie5-Fh-HGY" firstAttribute="top" secondItem="Mj8-de-RBO" secondAttribute="top" id="sXY-0p-VOw"/>
                             <constraint firstItem="Nrx-pZ-cFj" firstAttribute="top" secondItem="NLw-HV-UYu" secondAttribute="top" id="v2h-I6-b8G"/>
                         </constraints>
                     </view>
@@ -351,6 +374,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="ChangePlayersButton" destination="L89-lv-x1T" id="2Qq-Kt-ABA"/>
+                        <outlet property="CoinInfo" destination="ie5-Fh-HGY" id="4pN-kt-GfJ"/>
                         <outlet property="NumberCoins" destination="swr-cO-YAJ" id="U9i-co-fuH"/>
                         <outlet property="PlayButton" destination="NLw-HV-UYu" id="Tpg-h6-61c"/>
                         <outlet property="SettingsButton" destination="Nrx-pZ-cFj" id="alY-kp-y6k"/>
@@ -360,7 +384,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0y-G1-wOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="274" y="-346"/>
+            <point key="canvasLocation" x="229" y="-341"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
