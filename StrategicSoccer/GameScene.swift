@@ -66,6 +66,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gType = gameType.twoPlayer
     var isHost = false
     
+    var sensitivity: Float!
     var AIDifficulty: Int!
     var cAggro:Int?
     var cDef:Int?
@@ -313,8 +314,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?){
         if (playerSelected == true) {
             
-            let xMovement = 2*(touches.first!.locationInNode(self).x - startPosition!.x)
-            let yMovement = 2*(touches.first!.locationInNode(self).y - startPosition!.y)
+            let xMovement = CGFloat(sensitivity)*(touches.first!.locationInNode(self).x - startPosition!.x)
+            let yMovement = CGFloat(sensitivity)*(touches.first!.locationInNode(self).y - startPosition!.y)
             selectedPlayer!.physicsBody!.velocity = CGVectorMake(xMovement, yMovement)
             
             if gType == .twoPhone{
@@ -521,6 +522,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
     func goBackToTitle(){
+        clockBackground?.hidden = true
         viewController.backToTitle()
     }
     

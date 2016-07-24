@@ -15,6 +15,7 @@ let playerAKey = "PlayerA"
 let playerBKey = "PlayerB"
 let playerOptionKey = "PlayerOption"
 let AIKey = "AIDifficulty"
+let playerSensitivityKey = "PlayerSensitivity"
 let gold = UIColor(red: 161/255.0, green: 155/255.0, blue: 75/255.0, alpha: 1.0).CGColor
 let optima = UIFont(name: "Optima", size: 18)
 let screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -55,10 +56,11 @@ class TitleViewController: UIViewController {
     var defaultMode = Mode.threeMinute
     var defaultPlayers = PlayerOption.three
     var defaultAI = 1
+    var defaultSensitivity: Float = 2
     var unlockedFlags:[String]!
     
-    var playerA = "AFGHANISTAN"
-    var playerB = "ALBANIA"
+    var playerA = "AUSTRALIA"
+    var playerB = "CANADA"
     
     override func viewDidLoad() {
         UIView.setAnimationsEnabled(true)
@@ -83,6 +85,9 @@ class TitleViewController: UIViewController {
         }
         if let storedStats = NSKeyedUnarchiver.unarchiveObjectWithFile(Unlockable.StatsURl.path!) as? [String:Int]{
             statistics = storedStats
+        }
+        if let storedSensitivity = defaults.objectForKey(playerSensitivityKey){
+            defaultSensitivity = storedSensitivity as! Float
         }
         // bring out unlocked
         if let storedUnlock = NSKeyedUnarchiver.unarchiveObjectWithFile(Unlockable.FlagURL.path!) as? [String]{
@@ -149,6 +154,7 @@ class TitleViewController: UIViewController {
             scene.countryA = playerA
             scene.countryB = playerB
             scene.AIDifficulty = defaultAI
+            scene.sensitivity = defaultSensitivity
             destinationVC.scene = scene
             destinationVC.parent = self
             scene.addPlayers()
@@ -160,6 +166,7 @@ class TitleViewController: UIViewController {
             destinationVC.defaultMode = self.defaultMode
             destinationVC.defaultPlayers = defaultPlayers
             destinationVC.defaultAI = defaultAI
+            destinationVC.defaultSensitivity = defaultSensitivity
             destinationVC.parent = self
         }
         if segue.identifier == "ChangePlayersSegue"{

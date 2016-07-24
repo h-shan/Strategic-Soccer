@@ -9,7 +9,7 @@
 import UIKit
 extension UIButton{
     func selectButton(){
-        self.layer.borderWidth = 2
+        self.layer.borderWidth = 3.5
     }
     func unselectButton(){
         self.layer.borderWidth = 0
@@ -38,9 +38,12 @@ class SettingsViewController: UIViewController {
     var modeButtonGroup: buttonGroup!
     var playerButtonGroup: buttonGroup!
     var allButtons: [UIButton]!
+    
     var defaultMode: Mode!
     var defaultPlayers: PlayerOption!
     var defaultAI: Int!
+    var defaultSensitivity: Float!
+
     var parent: TitleViewController!
     var timeVC: ChangeTimeViewController!
     var pointVC: ChangePointViewController!
@@ -60,6 +63,9 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var Three : UIButton!
     @IBOutlet weak var Four : UIButton!
     @IBOutlet weak var Five : UIButton!
+    @IBOutlet weak var ButtonWidth: NSLayoutConstraint!
+    @IBOutlet weak var SensitivitySlider: UISlider!
+    @IBOutlet weak var SensitivityLabel: UILabel!
    
     @IBAction func AIDifficulty(sender: UIButton){
         switch(sender){
@@ -127,6 +133,10 @@ class SettingsViewController: UIViewController {
         TimeView.hidden = false
         PointView.hidden = true
     }
+    func setSensitivity(sender: UISlider){
+        defaultSensitivity = sender.value.roundToPlaces(1)
+        SensitivityLabel.text = String(defaultSensitivity) + " "
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,15 +175,20 @@ class SettingsViewController: UIViewController {
         else{
             modeButtonGroup.selectButton(ModePoints)
         }
+        ButtonWidth.constant = DifficultyView.layer.frame.width/5
         updateModeLabel()
-        
+        SensitivitySlider.addTarget(self, action: #selector(setSensitivity), forControlEvents: UIControlEvents.ValueChanged)
+        SensitivitySlider.minimumValue = 1
+        SensitivitySlider.maximumValue = 5
+        SensitivitySlider.setValue(defaultSensitivity, animated: false)
+        SensitivityLabel.text = String(defaultSensitivity) + " "
+
 
         // Do any additional setup after loading the view.
     }
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         TimeView.hidden = true
         PointView.hidden = true
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -186,9 +201,11 @@ class SettingsViewController: UIViewController {
         parent.defaultMode = defaultMode
         parent.defaultPlayers = defaultPlayers!
         parent.defaultAI = defaultAI
+        parent.defaultSensitivity = defaultSensitivity
         defaults.setInteger(defaultMode.rawValue, forKey: modeKey)
         defaults.setInteger(defaultPlayers!.rawValue, forKey: playerOptionKey)
         defaults.setInteger(defaultAI, forKey: AIKey)
+        defaults.setFloat(defaultSensitivity, forKey: playerSensitivityKey)
     }
     
 
@@ -215,5 +232,12 @@ class SettingsViewController: UIViewController {
         case 7:CurrentMode.text = "20 PTS"; break
         default: break
         }
+    }
+}
+extension Float {
+    /// Rounds the double to decimal places value
+    func roundToPlaces(places:Int) -> Float {
+        let divisor = pow(10.0, Float(places))
+        return round(self * divisor) / divisor
     }
 }
