@@ -21,9 +21,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TdJ-HU-drd">
-                                <rect key="frame" x="134" y="9" width="300" height="43"/>
+                                <rect key="frame" x="152" y="9" width="264.5" height="43"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="CHANGE PLAYERS">
+                                    <fragment content="CHANGE FLAGS">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="36" name="Optima-Regular"/>
@@ -74,10 +74,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITK-Nn-2uB" userLabel="NotEnoughCoins">
-                                <rect key="frame" x="106.5" y="142" width="355" height="120"/>
+                                <rect key="frame" x="106" y="142" width="355" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3F-y8-doZ">
-                                        <rect key="frame" x="152.5" y="76" width="50" height="34"/>
+                                        <rect key="frame" x="152" y="76" width="50" height="34"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="wTc-Jh-Cwz"/>
@@ -91,7 +91,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMa-4r-fWd" userLabel="NotEnoughCoinsText">
-                                        <rect key="frame" x="18.5" y="21" width="318.5" height="44"/>
+                                        <rect key="frame" x="18" y="21" width="318.5" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="3ve-PH-SI3"/>
                                         </constraints>
@@ -112,7 +112,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2G-d5-zRw">
-                                <rect key="frame" x="96.5" y="127" width="375" height="150"/>
+                                <rect key="frame" x="96" y="127" width="375" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pzG-xD-wJr">
                                         <rect key="frame" x="8" y="60" width="85" height="85"/>
@@ -167,7 +167,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5Y-hb-S2h">
-                                        <rect key="frame" x="64.5" y="10" width="246" height="45"/>
+                                        <rect key="frame" x="64" y="10" width="246" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="9Fq-2A-1UE"/>
                                         </constraints>
@@ -255,17 +255,8 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nrx-pZ-cFj">
-                                <rect key="frame" x="244" y="200" width="140" height="40"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="16"/>
-                                <state key="normal" title="SETTINGS"/>
-                                <connections>
-                                    <segue destination="1lU-lZ-m6k" kind="show" identifier="SettingsSegue" id="nEl-sp-Cra"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L89-lv-x1T">
-                                <rect key="frame" x="244" y="260" width="140" height="40"/>
+                                <rect key="frame" x="244" y="190" width="140" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="16"/>
                                 <state key="normal" title="CHANGE FLAGS"/>
@@ -274,7 +265,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLw-HV-UYu">
-                                <rect key="frame" x="244" y="140" width="140" height="40"/>
+                                <rect key="frame" x="244" y="130" width="140" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="gJ5-t2-Hbt"/>
@@ -317,7 +308,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Fz-Vu-XYw">
-                                <rect key="frame" x="418" y="200" width="140" height="40"/>
+                                <rect key="frame" x="418" y="190" width="140" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="16"/>
                                 <state key="normal" title="STATISTICS"/>
@@ -325,26 +316,35 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                     <segue destination="2pK-Tn-fJ1" kind="show" id="0So-TI-Vyd"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nrx-pZ-cFj">
+                                <rect key="frame" x="418" y="130" width="140" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="16"/>
+                                <state key="normal" title="SETTINGS"/>
+                                <connections>
+                                    <segue destination="1lU-lZ-m6k" kind="show" identifier="SettingsSegue" id="nEl-sp-Cra"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="L89-lv-x1T" firstAttribute="leading" secondItem="Nrx-pZ-cFj" secondAttribute="leading" id="0uO-1P-qzG"/>
-                            <constraint firstItem="0Fz-Vu-XYw" firstAttribute="trailing" secondItem="QOX-e5-Slf" secondAttribute="trailingMargin" constant="10" id="3Z1-vu-VsQ"/>
-                            <constraint firstItem="0Fz-Vu-XYw" firstAttribute="width" secondItem="Nrx-pZ-cFj" secondAttribute="width" id="KG4-hR-70q"/>
-                            <constraint firstItem="Nrx-pZ-cFj" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="60" id="RXP-y0-Pnw"/>
-                            <constraint firstItem="Nrx-pZ-cFj" firstAttribute="trailing" secondItem="NLw-HV-UYu" secondAttribute="trailing" id="Td1-Wr-Yui"/>
-                            <constraint firstItem="0Fz-Vu-XYw" firstAttribute="bottom" secondItem="Nrx-pZ-cFj" secondAttribute="bottom" id="Vhm-EB-qSD"/>
+                            <constraint firstItem="Nrx-pZ-cFj" firstAttribute="width" secondItem="NLw-HV-UYu" secondAttribute="width" id="0qc-XP-YMy"/>
+                            <constraint firstItem="Nrx-pZ-cFj" firstAttribute="trailing" secondItem="QOX-e5-Slf" secondAttribute="trailing" constant="-10" id="40q-TR-3XM"/>
+                            <constraint firstItem="L89-lv-x1T" firstAttribute="bottom" secondItem="0Fz-Vu-XYw" secondAttribute="bottom" id="EZk-am-ZkE"/>
+                            <constraint firstItem="L89-lv-x1T" firstAttribute="top" secondItem="0Fz-Vu-XYw" secondAttribute="top" id="Kb3-HN-J0l"/>
+                            <constraint firstItem="0Fz-Vu-XYw" firstAttribute="leading" secondItem="Nrx-pZ-cFj" secondAttribute="leading" id="PNY-yX-6dz"/>
                             <constraint firstItem="NLw-HV-UYu" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" constant="30" id="Xwq-QD-F52"/>
-                            <constraint firstItem="Nrx-pZ-cFj" firstAttribute="height" secondItem="NLw-HV-UYu" secondAttribute="height" id="aJc-X9-LhK"/>
-                            <constraint firstItem="L89-lv-x1T" firstAttribute="top" secondItem="Nrx-pZ-cFj" secondAttribute="bottom" constant="20" id="c9J-TQ-jIT"/>
+                            <constraint firstItem="L89-lv-x1T" firstAttribute="leading" secondItem="NLw-HV-UYu" secondAttribute="leading" id="YcY-lk-vwE"/>
                             <constraint firstItem="9Ub-az-A73" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="-100" id="cQw-ac-cx8"/>
+                            <constraint firstItem="0Fz-Vu-XYw" firstAttribute="trailing" secondItem="Nrx-pZ-cFj" secondAttribute="trailing" id="cXt-TP-xlR"/>
+                            <constraint firstItem="0Fz-Vu-XYw" firstAttribute="height" secondItem="Nrx-pZ-cFj" secondAttribute="height" id="fxF-nm-AXd"/>
                             <constraint firstItem="swr-cO-YAJ" firstAttribute="top" secondItem="QOX-e5-Slf" secondAttribute="top" constant="5" id="jbV-98-Hh0"/>
-                            <constraint firstItem="L89-lv-x1T" firstAttribute="trailing" secondItem="Nrx-pZ-cFj" secondAttribute="trailing" id="jd3-tr-gNn"/>
-                            <constraint firstItem="NLw-HV-UYu" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" id="jsD-Ci-3JT"/>
-                            <constraint firstItem="L89-lv-x1T" firstAttribute="height" secondItem="NLw-HV-UYu" secondAttribute="height" id="l79-GV-deD"/>
+                            <constraint firstItem="NLw-HV-UYu" firstAttribute="centerY" secondItem="QOX-e5-Slf" secondAttribute="centerY" constant="-10" id="jsD-Ci-3JT"/>
+                            <constraint firstItem="L89-lv-x1T" firstAttribute="trailing" secondItem="NLw-HV-UYu" secondAttribute="trailing" id="kV5-M9-zee"/>
                             <constraint firstItem="swr-cO-YAJ" firstAttribute="leading" secondItem="QOX-e5-Slf" secondAttribute="leadingMargin" constant="-12" id="lLw-Ti-tTz"/>
-                            <constraint firstItem="0Fz-Vu-XYw" firstAttribute="top" secondItem="Nrx-pZ-cFj" secondAttribute="top" id="nYK-dd-4lQ"/>
+                            <constraint firstItem="Nrx-pZ-cFj" firstAttribute="bottom" secondItem="NLw-HV-UYu" secondAttribute="bottom" id="mOa-I7-JqB"/>
                             <constraint firstItem="9Ub-az-A73" firstAttribute="centerX" secondItem="QOX-e5-Slf" secondAttribute="centerX" id="nes-bR-1WZ"/>
-                            <constraint firstItem="Nrx-pZ-cFj" firstAttribute="leading" secondItem="NLw-HV-UYu" secondAttribute="leading" id="rLR-MA-g7z"/>
+                            <constraint firstItem="0Fz-Vu-XYw" firstAttribute="top" secondItem="Nrx-pZ-cFj" secondAttribute="bottom" constant="20" id="qPi-wq-nrF"/>
+                            <constraint firstItem="Nrx-pZ-cFj" firstAttribute="top" secondItem="NLw-HV-UYu" secondAttribute="top" id="v2h-I6-b8G"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xgG-MR-dDW"/>
@@ -1014,7 +1014,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="63R-nO-eZn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="828" y="-859"/>
+            <point key="canvasLocation" x="832" y="-843"/>
         </scene>
         <!--Pause View Controller-->
         <scene sceneID="HdW-SH-cCy">

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-let dampingFactor:CGFloat = 0.7
+var dampingFactor:CGFloat = 0.7
 class PlayViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     var scene: GameScene!
     let gameService = ConnectionManager()
@@ -235,6 +235,20 @@ extension PlayViewController : ConnectionManagerDelegate {
         print("receivePositions")
         NSOperationQueue.mainQueue().addOperationWithBlock{
             let ballPosition = CGPointMake(screenWidth - positions[0].toFloat()*self.scaleFactorX, positions[1].toFloat()*self.scaleFactorY)
+            if self.scene.ball.physicsBody!.velocity.dx < 0{
+                if self.scene.ball.position.x < ballPosition.x{
+                    dampingFactor -= 0.01
+                }else if self.scene.ball.position.x > ballPosition.x{
+                    dampingFactor += 0.01
+                }
+            }
+            else{
+                if self.scene.ball.position.x > ballPosition.x{
+                    dampingFactor -= 0.01
+                }else if self.scene.ball.position.x < ballPosition.x{
+                    dampingFactor += 0.01
+                }
+            }
             self.scene.ball.position = ballPosition
             var i = 2
             while i < positions.count{

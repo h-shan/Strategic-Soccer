@@ -455,6 +455,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }else{
                 viewController.parent.gameService.sendSync(turnA, time: "PointMode")
             }
+            isSynced = true
         }
         if playerSelected == true {
             playerSelected = false
