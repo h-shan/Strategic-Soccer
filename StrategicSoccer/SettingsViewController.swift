@@ -63,9 +63,15 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var Three : UIButton!
     @IBOutlet weak var Four : UIButton!
     @IBOutlet weak var Five : UIButton!
+    
     @IBOutlet weak var ButtonWidth: NSLayoutConstraint!
+    @IBOutlet weak var GreenButtonWidth: NSLayoutConstraint!
+    @IBOutlet weak var leadingMargin: NSLayoutConstraint!
+    @IBOutlet weak var endingMargin: NSLayoutConstraint!
+    
     @IBOutlet weak var SensitivitySlider: UISlider!
     @IBOutlet weak var SensitivityLabel: UILabel!
+    
    
     @IBAction func AIDifficulty(sender: UIButton){
         switch(sender){
@@ -135,7 +141,7 @@ class SettingsViewController: UIViewController {
     }
     func setSensitivity(sender: UISlider){
         defaultSensitivity = sender.value.roundToPlaces(1)
-        SensitivityLabel.text = String(defaultSensitivity) + " "
+        SensitivityLabel.text = String(defaultSensitivity) + " \u{200c}"
     }
 
     override func viewDidLoad() {
@@ -175,15 +181,12 @@ class SettingsViewController: UIViewController {
         else{
             modeButtonGroup.selectButton(ModePoints)
         }
-        ButtonWidth.constant = DifficultyView.layer.frame.width/5
         updateModeLabel()
         SensitivitySlider.addTarget(self, action: #selector(setSensitivity), forControlEvents: UIControlEvents.ValueChanged)
         SensitivitySlider.minimumValue = 1
         SensitivitySlider.maximumValue = 5
         SensitivitySlider.setValue(defaultSensitivity, animated: false)
-        SensitivityLabel.text = String(defaultSensitivity) + " "
-
-
+        
         // Do any additional setup after loading the view.
     }
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -233,11 +236,41 @@ class SettingsViewController: UIViewController {
         default: break
         }
     }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        ButtonWidth.constant = 46.8/568*screenWidth
+        SensitivitySlider.setMinimumTrackImage(UIImage(named: "SliderBar"), forState: UIControlState.Normal)
+        SensitivitySlider.setMaximumTrackImage(UIImage(named: "SliderBarEnd"), forState: UIControlState.Normal)
+        let sliderThumb = UIImage(named: "SliderThumb")
+        SensitivitySlider.setThumbImage(sliderThumb, forState: .Normal)
+        SensitivityLabel.text = String(defaultSensitivity) + " \u{200c}"
+        GreenButtonWidth.constant = 110/568*screenWidth
+        
+        leadingMargin.constant = 30/568*screenWidth
+        endingMargin.constant = -30/568*screenWidth
+        print(ButtonWidth.constant)
+        print(DifficultyView.layer.frame.width)
+       
+    }
 }
 extension Float {
     /// Rounds the double to decimal places value
     func roundToPlaces(places:Int) -> Float {
         let divisor = pow(10.0, Float(places))
         return round(self * divisor) / divisor
+    }
+}
+class CustomUISlider : UISlider
+{
+    override func trackRectForBounds(bounds: CGRect) -> CGRect {
+        var newBounds = super.trackRectForBounds(bounds)
+        newBounds.size.height = 12
+        return newBounds
+    }
+    
+    //while we are here, why not change the image here as well? (bonus material)
+    override func awakeFromNib() {
+        self.setThumbImage(UIImage(named: "customThumb"), forState: .Normal)
+        super.awakeFromNib()
     }
 }

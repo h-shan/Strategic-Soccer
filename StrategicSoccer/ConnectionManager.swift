@@ -7,6 +7,7 @@
 //
 
 import MultipeerConnectivity
+import SpriteKit
 protocol ConnectionManagerDelegate {
     func connectedDevicesChanged(manager : ConnectionManager, connectedDevices: [String])
     func receiveMove(manager : ConnectionManager, move: [String])
@@ -17,6 +18,7 @@ protocol ConnectionManagerDelegate {
     func receiveVelocities(manager: ConnectionManager, velocities:[String])
     func receiveSync(manager: ConnectionManager, turn: String, gameTime: String)
     func receiveMisc(manager: ConnectionManager, message: [String])
+    func receiveLoad(manager: ConnectionManager, load: [String])
 }
 class ConnectionManager : NSObject{
     private let serviceBrowser : MCNearbyServiceBrowser
@@ -120,6 +122,10 @@ class ConnectionManager : NSObject{
                 NSLog("%@","\(error)")
             }
         })
+    }
+    func sendLoad(node: SKNode){
+        let sendString = String(format:"%@ %f %f %f %f", "position", node.position.x, node.position.y, node.physicsBody!.velocity.dx, node.physicsBody!.velocity.dy)
+        stringSend(sendString)
     }
 }
 

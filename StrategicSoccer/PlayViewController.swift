@@ -126,6 +126,11 @@ extension PlayViewController : ConnectionManagerDelegate {
                 scene.reset(!message[1].toBool()!)
                 break
             }
+        case "loaded":
+            scene.userInteractionEnabled = true
+            UIView.animateWithDuration(0.5, animations: {
+                self.scene.viewController.Dimmer?.alpha = 0
+            })
         default: break
         }
     }
@@ -237,7 +242,7 @@ extension PlayViewController : ConnectionManagerDelegate {
         })
     }
     func receivePositions(manager: ConnectionManager, positions: [String]){
-        print(dampingFactor)
+        //print(dampingFactor)
         NSOperationQueue.mainQueue().addOperationWithBlock{
             let ballPosition = CGPointMake(screenWidth - positions[0].toFloat()*self.scaleFactorX, positions[1].toFloat()*self.scaleFactorY)
             if self.scene.ball.physicsBody!.velocity.dx < 0{
@@ -262,6 +267,28 @@ extension PlayViewController : ConnectionManagerDelegate {
                 i+=2
             }
         }
+    }
+    func receiveLoad(manager:ConnectionManager, load: [String]){
+        let position = CGPointMake(screenWidth - load[0].toFloat(), load[1].toFloat())
+        let velocity = CGVectorMake(load[2].toFloat()*dampingFactor*scaleFactorX, load[3].toFloat()*scaleFactorY*dampingFactor)
+        if velocity.dx > 0{
+            if position.x > self.scene.loadNode.position.x+2{
+                dampingFactor += 0.01
+            }else if position.x < self.scene.loadNode.position.x-2{
+                dampingFactor -= 0.01
+            }else{
+                gameService.stringSend("loaded")
+            }
+        }else{
+            if position.x < self.scene.loadNode.position.x - 2{
+                dampingFactor += 0.01
+            }
+            else if position.x > self.scene.loadNode.position.x + 2{
+                dampingFactor -= 0.01
+            }
+        }
+        scene.loadNode.position = position
+        scene.loadNode.physicsBody!.velocity = velocity
     }
 
     func convertToIndex(index: Int) -> Int{

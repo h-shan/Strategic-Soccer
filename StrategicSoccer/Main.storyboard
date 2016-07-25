@@ -33,10 +33,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZE-MR-P07" userLabel="BackButton">
-                                <rect key="frame" x="10" y="10" width="100" height="75"/>
+                                <rect key="frame" x="10" y="10" width="60" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="8hq-E7-EVR"/>
-                                    <constraint firstAttribute="width" constant="100" id="mte-TI-lja"/>
+                                    <constraint firstAttribute="height" constant="50" id="8hq-E7-EVR"/>
+                                    <constraint firstAttribute="width" constant="60" id="mte-TI-lja"/>
                                 </constraints>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="BackArrow"/>
@@ -46,7 +46,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" alpha="0.90000000000000002" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hX3-ee-hi8">
-                                <rect key="frame" x="40" y="105" width="224" height="195"/>
+                                <rect key="frame" x="40" y="100" width="224" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="5yu-Xs-09g" id="nSh-0t-2PQ"/>
@@ -54,7 +54,7 @@
                                 </connections>
                             </tableView>
                             <tableView clipsSubviews="YES" alpha="0.90000000000000002" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vj5-wL-u9h">
-                                <rect key="frame" x="304" y="105" width="224" height="195"/>
+                                <rect key="frame" x="304" y="100" width="224" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="5yu-Xs-09g" id="7KW-Xm-Hy6"/>
@@ -62,19 +62,19 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLAYER A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lXJ-Kt-b82">
-                                <rect key="frame" x="100" y="66" width="103" height="28.5"/>
+                                <rect key="frame" x="100" y="61" width="103" height="28.5"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="24"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLAYER B" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knW-p5-Ua8">
-                                <rect key="frame" x="364" y="66" width="102.5" height="28.5"/>
+                                <rect key="frame" x="364" y="61" width="102.5" height="28.5"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="24"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITK-Nn-2uB" userLabel="NotEnoughCoins">
-                                <rect key="frame" x="106" y="142" width="355" height="120"/>
+                                <rect key="frame" x="106" y="139.5" width="355" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3F-y8-doZ">
                                         <rect key="frame" x="152" y="76" width="50" height="34"/>
@@ -112,7 +112,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2G-d5-zRw">
-                                <rect key="frame" x="96" y="127" width="375" height="150"/>
+                                <rect key="frame" x="96" y="124.5" width="375" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pzG-xD-wJr">
                                         <rect key="frame" x="8" y="60" width="85" height="85"/>
@@ -212,7 +212,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                             <constraint firstItem="vj5-wL-u9h" firstAttribute="top" secondItem="hX3-ee-hi8" secondAttribute="top" id="fVd-QC-hVH"/>
                             <constraint firstItem="TdJ-HU-drd" firstAttribute="centerX" secondItem="uoo-jQ-ZfU" secondAttribute="centerX" id="ggJ-Mj-vLc"/>
                             <constraint firstItem="ITK-Nn-2uB" firstAttribute="leading" secondItem="e2G-d5-zRw" secondAttribute="leading" constant="10" id="iwI-Ua-z1T"/>
-                            <constraint firstItem="hX3-ee-hi8" firstAttribute="top" secondItem="bZE-MR-P07" secondAttribute="bottom" constant="20" id="jGi-b2-kId"/>
+                            <constraint firstItem="hX3-ee-hi8" firstAttribute="top" secondItem="bZE-MR-P07" secondAttribute="bottom" constant="40" id="jGi-b2-kId"/>
                             <constraint firstItem="knW-p5-Ua8" firstAttribute="centerX" secondItem="vj5-wL-u9h" secondAttribute="centerX" id="lPH-im-o7l"/>
                             <constraint firstItem="kpx-4h-sXL" firstAttribute="top" secondItem="hX3-ee-hi8" secondAttribute="bottom" constant="20" id="lTZ-gg-Bx8"/>
                             <constraint firstItem="bZE-MR-P07" firstAttribute="leading" secondItem="uoo-jQ-ZfU" secondAttribute="leading" constant="10" id="oFr-nu-biu"/>
@@ -332,10 +332,10 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COINS CAN BE USED TO UNLOCK FLAGS!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ie5-Fh-HGY">
-                                <rect key="frame" x="101" y="5" width="350" height="25"/>
+                                <rect key="frame" x="101" y="5" width="400" height="25"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="350" id="WW1-oG-fMZ"/>
+                                    <constraint firstAttribute="width" constant="400" id="WW1-oG-fMZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -373,6 +373,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                     <navigationItem key="navigationItem" id="xgG-MR-dDW"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="ButtonWidth" destination="gJ5-t2-Hbt" id="b68-oh-tmp"/>
                         <outlet property="ChangePlayersButton" destination="L89-lv-x1T" id="2Qq-Kt-ABA"/>
                         <outlet property="CoinInfo" destination="ie5-Fh-HGY" id="4pN-kt-GfJ"/>
                         <outlet property="NumberCoins" destination="swr-cO-YAJ" id="U9i-co-fuH"/>
@@ -500,11 +501,11 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <viewControllerLayoutGuide type="bottom" id="lpn-at-Vew"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Tce-jn-p8V">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  PLAYERS:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rep-hV-DSt">
-                                <rect key="frame" x="60" y="87" width="100" height="35"/>
+                                <rect key="frame" x="40" y="87" width="100" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="400-hS-C1A"/>
@@ -515,10 +516,9 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x1V-wF-2Rs">
-                                <rect key="frame" x="304" y="125" width="100" height="35"/>
+                                <rect key="frame" x="255" y="125" width="90" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="gHE-pw-1xl" userLabel="width = 130"/>
                                     <constraint firstAttribute="height" constant="35" id="uo4-9d-hfv"/>
                                 </constraints>
                                 <state key="normal">
@@ -536,11 +536,10 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xfv-5N-ocI">
-                                <rect key="frame" x="424" y="125" width="100" height="35"/>
+                                <rect key="frame" x="350" y="125" width="90" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="FPK-zK-VUI"/>
-                                    <constraint firstAttribute="width" constant="100" id="bQT-pa-abp" userLabel="width = 130"/>
                                 </constraints>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -557,7 +556,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="In0-Pn-ZYX">
-                                <rect key="frame" x="204" y="8" width="160.5" height="43"/>
+                                <rect key="frame" x="160" y="8" width="160.5" height="43"/>
                                 <attributedString key="attributedText">
                                     <fragment content="SETTINGS">
                                         <attributes>
@@ -569,10 +568,10 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="66D-1E-wB0" userLabel="BackButton">
-                                <rect key="frame" x="10" y="10" width="100" height="75"/>
+                                <rect key="frame" x="10" y="10" width="60" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="iQZ-yP-NeZ"/>
-                                    <constraint firstAttribute="width" constant="100" id="zpN-0a-E3S"/>
+                                    <constraint firstAttribute="height" constant="50" id="iQZ-yP-NeZ"/>
+                                    <constraint firstAttribute="width" constant="60" id="zpN-0a-E3S"/>
                                 </constraints>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="BackArrow">
@@ -583,7 +582,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cbl-8U-uwl">
-                                <rect key="frame" x="174" y="125" width="90" height="35"/>
+                                <rect key="frame" x="130" y="125" width="90" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="7kS-qi-ME6"/>
@@ -603,7 +602,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  MODE:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXJ-xE-DP7">
-                                <rect key="frame" x="304" y="87" width="120" height="35"/>
+                                <rect key="frame" x="255" y="87" width="120" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="IYK-hi-KTL"/>
@@ -614,14 +613,14 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCQ-Fd-NTk">
-                                <rect key="frame" x="160" y="87" width="104" height="35"/>
+                                <rect key="frame" x="140" y="87" width="80" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  AI DIFFICULTY:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGo-f3-n2c">
-                                <rect key="frame" x="60" y="180" width="140" height="35"/>
+                                <rect key="frame" x="40" y="180" width="140" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="M8n-b5-PFP"/>
@@ -631,18 +630,18 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3g-Jt-8ef">
-                                <rect key="frame" x="200" y="180" width="64" height="35"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3g-Jt-8ef">
+                                <rect key="frame" x="180" y="180" width="40" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EHr-2Z-8sL" userLabel="DifficultyView">
-                                <rect key="frame" x="60" y="218" width="204" height="35"/>
+                                <rect key="frame" x="40" y="218" width="180" height="35"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0id-CV-Ed3">
-                                        <rect key="frame" x="88" y="1" width="44" height="34"/>
+                                        <rect key="frame" x="0.0" y="1" width="0.0" height="34"/>
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <accessibility key="accessibilityConfiguration" label="Three"/>
                                         <connections>
@@ -650,7 +649,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xS6-jV-qAJ">
-                                        <rect key="frame" x="132" y="1" width="44" height="34"/>
+                                        <rect key="frame" x="0.0" y="1" width="0.0" height="34"/>
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <accessibility key="accessibilityConfiguration" label="Four"/>
                                         <connections>
@@ -658,7 +657,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mpx-NK-1WM">
-                                        <rect key="frame" x="176" y="1" width="44" height="34"/>
+                                        <rect key="frame" x="0.0" y="1" width="0.0" height="34"/>
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <accessibility key="accessibilityConfiguration" label="Five"/>
                                         <connections>
@@ -666,11 +665,11 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lMl-2V-vbM">
-                                        <rect key="frame" x="0.0" y="1" width="44" height="34"/>
+                                        <rect key="frame" x="0.0" y="1" width="0.0" height="34"/>
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <accessibility key="accessibilityConfiguration" label="One"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="44" id="CuK-TU-qym"/>
+                                            <constraint firstAttribute="width" id="CuK-TU-qym"/>
                                             <constraint firstAttribute="height" constant="34" id="Lbf-nE-3d3"/>
                                         </constraints>
                                         <connections>
@@ -678,7 +677,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jj2-Zj-ELT">
-                                        <rect key="frame" x="44" y="1" width="44" height="34"/>
+                                        <rect key="frame" x="0.0" y="1" width="0.0" height="34"/>
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <accessibility key="accessibilityConfiguration" label="Two"/>
                                         <connections>
@@ -709,7 +708,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </constraints>
                             </view>
                             <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gdt-er-Qx4">
-                                <rect key="frame" x="60" y="125" width="90" height="35"/>
+                                <rect key="frame" x="40" y="125" width="90" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="90" id="3XE-12-OrP"/>
@@ -729,41 +728,38 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                     <action selector="PlayerThree:" destination="1lU-lZ-m6k" eventType="touchUpInside" id="j8Z-tg-XVy"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" PLAYER SENSITIVITY:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9m4-7s-RGa">
-                                <rect key="frame" x="304" y="180" width="220" height="35"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKg-cr-rHi">
-                                <rect key="frame" x="424" y="87" width="100" height="35"/>
+                                <rect key="frame" x="375" y="87" width="65" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="Akn-o6-3Fr"/>
-                                </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="Mode">
                                         <attributes>
                                             <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <font key="NSFont" size="18" name="Optima-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lJZ-We-Te0" userLabel="Sensitivity Slider">
-                                <rect key="frame" x="302" y="218" width="224" height="36"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lJZ-We-Te0" userLabel="Sensitivity Slider" customClass="CustomUISlider" customModule="Strategic_Soccer" customModuleProvider="target">
+                                <rect key="frame" x="253" y="218" width="189" height="36"/>
                             </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.99 " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgm-b6-Gde">
-                                <rect key="frame" x="483.5" y="180" width="40.5" height="35"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" PLAYER SENSITIVITY:       " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="9m4-7s-RGa">
+                                <rect key="frame" x="255" y="180" width="185" height="35"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.99 " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgm-b6-Gde">
+                                <rect key="frame" x="399" y="180" width="40.5" height="35"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aoE-XK-syY">
-                                <rect key="frame" x="304" y="160" width="100" height="100"/>
+                                <rect key="frame" x="255" y="160" width="90" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="mtB-zt-aRn"/>
                                 </constraints>
@@ -772,7 +768,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BWt-8S-NPU">
-                                <rect key="frame" x="424" y="160" width="100" height="100"/>
+                                <rect key="frame" x="350" y="160" width="90" height="100"/>
                                 <connections>
                                     <segue destination="loy-k9-g4a" kind="embed" identifier="ChangePoint" id="v76-At-Qxj"/>
                                 </connections>
@@ -787,6 +783,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                             <constraint firstItem="uKg-cr-rHi" firstAttribute="top" secondItem="jXJ-xE-DP7" secondAttribute="top" id="4nj-r0-r4h"/>
                             <constraint firstItem="jXJ-xE-DP7" firstAttribute="bottom" secondItem="OCQ-Fd-NTk" secondAttribute="bottom" id="54u-Ln-6dJ"/>
                             <constraint firstItem="gdt-er-Qx4" firstAttribute="top" secondItem="rep-hV-DSt" secondAttribute="bottom" constant="3" id="7Qa-Om-rgH"/>
+                            <constraint firstItem="OCQ-Fd-NTk" firstAttribute="trailing" secondItem="Tce-jn-p8V" secondAttribute="centerX" constant="-20" id="8Pf-3V-eUi"/>
                             <constraint firstItem="aoE-XK-syY" firstAttribute="top" secondItem="x1V-wF-2Rs" secondAttribute="bottom" id="9Ud-71-djG"/>
                             <constraint firstItem="9m4-7s-RGa" firstAttribute="leading" secondItem="jXJ-xE-DP7" secondAttribute="leading" id="9fY-iF-xOO"/>
                             <constraint firstItem="xfv-5N-ocI" firstAttribute="bottom" secondItem="x1V-wF-2Rs" secondAttribute="bottom" id="B8N-tR-j9g"/>
@@ -794,9 +791,11 @@ PLAY MORE GAMES TO EARN COINS.</string>
                             <constraint firstItem="jXJ-xE-DP7" firstAttribute="height" secondItem="OCQ-Fd-NTk" secondAttribute="height" id="Chh-KR-Gc2"/>
                             <constraint firstItem="66D-1E-wB0" firstAttribute="top" secondItem="Tce-jn-p8V" secondAttribute="top" constant="10" id="DoL-1w-rrs"/>
                             <constraint firstItem="aoE-XK-syY" firstAttribute="leading" secondItem="x1V-wF-2Rs" secondAttribute="leading" id="DsV-Q3-2te"/>
+                            <constraint firstItem="xfv-5N-ocI" firstAttribute="width" secondItem="gdt-er-Qx4" secondAttribute="width" id="F9A-n7-XyM"/>
                             <constraint firstItem="gdt-er-Qx4" firstAttribute="leading" secondItem="rep-hV-DSt" secondAttribute="leading" id="GG1-ov-OF8"/>
                             <constraint firstItem="pgm-b6-Gde" firstAttribute="trailing" secondItem="9m4-7s-RGa" secondAttribute="trailing" id="GXn-t9-yyJ"/>
                             <constraint firstItem="Cbl-8U-uwl" firstAttribute="trailing" secondItem="EHr-2Z-8sL" secondAttribute="trailing" id="Gjy-6V-aTu"/>
+                            <constraint firstItem="EHr-2Z-8sL" firstAttribute="trailing" secondItem="Tce-jn-p8V" secondAttribute="centerX" constant="-20" placeholder="YES" id="Ht7-EW-cpZ"/>
                             <constraint firstItem="EHr-2Z-8sL" firstAttribute="leading" secondItem="LGo-f3-n2c" secondAttribute="leading" id="IC4-WI-j0l"/>
                             <constraint firstItem="xfv-5N-ocI" firstAttribute="top" secondItem="x1V-wF-2Rs" secondAttribute="top" id="Ipv-0A-vEF"/>
                             <constraint firstItem="uKg-cr-rHi" firstAttribute="bottom" secondItem="jXJ-xE-DP7" secondAttribute="bottom" id="JVX-Sq-Qhe"/>
@@ -808,23 +807,25 @@ PLAY MORE GAMES TO EARN COINS.</string>
                             <constraint firstItem="aoE-XK-syY" firstAttribute="trailing" secondItem="x1V-wF-2Rs" secondAttribute="trailing" id="P4h-p1-uin"/>
                             <constraint firstItem="n3g-Jt-8ef" firstAttribute="top" secondItem="LGo-f3-n2c" secondAttribute="top" id="QWI-Py-cBQ"/>
                             <constraint firstItem="xfv-5N-ocI" firstAttribute="trailing" secondItem="uKg-cr-rHi" secondAttribute="trailing" id="Qtx-pm-FtZ"/>
-                            <constraint firstItem="EHr-2Z-8sL" firstAttribute="trailing" secondItem="Tce-jn-p8V" secondAttribute="centerX" constant="-20" id="Rs2-ov-dIO"/>
                             <constraint firstItem="OCQ-Fd-NTk" firstAttribute="top" secondItem="rep-hV-DSt" secondAttribute="top" id="TA0-uq-RKt"/>
                             <constraint firstItem="In0-Pn-ZYX" firstAttribute="centerX" secondItem="Tce-jn-p8V" secondAttribute="centerX" id="UST-Wd-klO"/>
-                            <constraint firstItem="rep-hV-DSt" firstAttribute="leading" secondItem="Tce-jn-p8V" secondAttribute="leadingMargin" constant="40" id="UqY-FH-rDd"/>
+                            <constraint firstItem="rep-hV-DSt" firstAttribute="leading" secondItem="Tce-jn-p8V" secondAttribute="leading" constant="40" id="UqY-FH-rDd"/>
                             <constraint firstItem="n3g-Jt-8ef" firstAttribute="bottom" secondItem="LGo-f3-n2c" secondAttribute="bottom" id="V7g-5O-H6A"/>
                             <constraint firstItem="Cbl-8U-uwl" firstAttribute="top" secondItem="gdt-er-Qx4" secondAttribute="top" id="VNM-nU-mBJ"/>
                             <constraint firstItem="OCQ-Fd-NTk" firstAttribute="leading" secondItem="rep-hV-DSt" secondAttribute="trailing" id="XHQ-gA-Zjq"/>
                             <constraint firstItem="lJZ-We-Te0" firstAttribute="leading" secondItem="9m4-7s-RGa" secondAttribute="leading" id="YTq-s3-ObE"/>
+                            <constraint firstItem="x1V-wF-2Rs" firstAttribute="width" secondItem="gdt-er-Qx4" secondAttribute="width" id="aVe-qb-puZ"/>
                             <constraint firstItem="BWt-8S-NPU" firstAttribute="bottom" secondItem="aoE-XK-syY" secondAttribute="bottom" id="abg-CZ-SH2"/>
                             <constraint firstItem="pgm-b6-Gde" firstAttribute="bottom" secondItem="9m4-7s-RGa" secondAttribute="bottom" id="bpu-d2-cda"/>
                             <constraint firstItem="lJZ-We-Te0" firstAttribute="trailing" secondItem="9m4-7s-RGa" secondAttribute="trailing" id="czX-G7-5vC"/>
                             <constraint firstItem="x1V-wF-2Rs" firstAttribute="leading" secondItem="jXJ-xE-DP7" secondAttribute="leading" id="eK0-5Z-ydB"/>
                             <constraint firstItem="gdt-er-Qx4" firstAttribute="bottom" secondItem="Tce-jn-p8V" secondAttribute="centerY" id="eY1-eS-xwW"/>
+                            <constraint firstItem="uKg-cr-rHi" firstAttribute="trailing" secondItem="Tce-jn-p8V" secondAttribute="trailing" constant="-40" id="g2d-pi-LBw"/>
                             <constraint firstItem="BWt-8S-NPU" firstAttribute="trailing" secondItem="xfv-5N-ocI" secondAttribute="trailing" id="ggt-ym-Mvc"/>
                             <constraint firstItem="LGo-f3-n2c" firstAttribute="top" secondItem="Tce-jn-p8V" secondAttribute="centerY" constant="20" id="j9L-Pv-nhm"/>
-                            <constraint firstItem="jXJ-xE-DP7" firstAttribute="leading" secondItem="Tce-jn-p8V" secondAttribute="centerX" constant="20" id="juO-8d-PqH"/>
-                            <constraint firstItem="OCQ-Fd-NTk" firstAttribute="trailing" secondItem="EHr-2Z-8sL" secondAttribute="trailing" id="mBc-Fb-m9F"/>
+                            <constraint firstItem="jXJ-xE-DP7" firstAttribute="leading" secondItem="Tce-jn-p8V" secondAttribute="centerX" constant="15" id="juO-8d-PqH"/>
+                            <constraint firstItem="uKg-cr-rHi" firstAttribute="leading" secondItem="jXJ-xE-DP7" secondAttribute="trailing" id="kxP-76-bke"/>
+                            <constraint firstItem="EHr-2Z-8sL" firstAttribute="trailing" secondItem="OCQ-Fd-NTk" secondAttribute="trailing" id="mBc-Fb-m9F"/>
                             <constraint firstItem="9m4-7s-RGa" firstAttribute="trailing" secondItem="uKg-cr-rHi" secondAttribute="trailing" id="mfK-Rl-Sec"/>
                             <constraint firstItem="n3g-Jt-8ef" firstAttribute="trailing" secondItem="EHr-2Z-8sL" secondAttribute="trailing" id="nAO-jI-Ylx"/>
                             <constraint firstItem="9m4-7s-RGa" firstAttribute="top" secondItem="n3g-Jt-8ef" secondAttribute="top" id="oEh-Jx-SS5"/>
@@ -832,7 +833,6 @@ PLAY MORE GAMES TO EARN COINS.</string>
                             <constraint firstItem="BWt-8S-NPU" firstAttribute="leading" secondItem="xfv-5N-ocI" secondAttribute="leading" id="pgx-cL-8eJ"/>
                             <constraint firstItem="66D-1E-wB0" firstAttribute="leading" secondItem="Tce-jn-p8V" secondAttribute="leading" constant="10" id="qo1-hb-PB5"/>
                             <constraint firstItem="lJZ-We-Te0" firstAttribute="bottom" secondItem="EHr-2Z-8sL" secondAttribute="bottom" id="rsE-Et-mml"/>
-                            <constraint firstItem="uKg-cr-rHi" firstAttribute="leading" secondItem="jXJ-xE-DP7" secondAttribute="trailing" id="s89-tt-1kp"/>
                             <constraint firstItem="LGo-f3-n2c" firstAttribute="leading" secondItem="gdt-er-Qx4" secondAttribute="leading" id="wnB-eP-84x"/>
                             <constraint firstItem="pgm-b6-Gde" firstAttribute="top" secondItem="9m4-7s-RGa" secondAttribute="top" id="wwa-Qx-taY"/>
                             <constraint firstItem="jXJ-xE-DP7" firstAttribute="top" secondItem="OCQ-Fd-NTk" secondAttribute="top" id="yGS-xv-dDX"/>
@@ -840,6 +840,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="ButtonWidth" destination="CuK-TU-qym" id="V4t-hr-1lk"/>
                         <outlet property="CurrentMode" destination="uKg-cr-rHi" id="rfl-ge-5DA"/>
@@ -848,6 +849,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <outlet property="DifficultyView" destination="EHr-2Z-8sL" id="FY5-xO-9DF"/>
                         <outlet property="Five" destination="Mpx-NK-1WM" id="zzN-2L-avD"/>
                         <outlet property="Four" destination="xS6-jV-qAJ" id="z4Z-Kt-8qY"/>
+                        <outlet property="GreenButtonWidth" destination="3XE-12-OrP" id="Cm9-Go-3Fe"/>
                         <outlet property="ModePoints" destination="xfv-5N-ocI" id="Xec-kd-M3S"/>
                         <outlet property="ModeTimed" destination="x1V-wF-2Rs" id="Wan-sX-RsC"/>
                         <outlet property="One" destination="lMl-2V-vbM" id="rEv-za-OH8"/>
@@ -859,6 +861,8 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <outlet property="Three" destination="0id-CV-Ed3" id="Ewo-Qb-vU2"/>
                         <outlet property="TimeView" destination="aoE-XK-syY" id="rco-Me-5I6"/>
                         <outlet property="Two" destination="jj2-Zj-ELT" id="FBb-uX-Rqy"/>
+                        <outlet property="endingMargin" destination="g2d-pi-LBw" id="PMS-cN-gT0"/>
+                        <outlet property="leadingMargin" destination="UqY-FH-rDd" id="XFH-aX-NyM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jmZ-J4-8VC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -903,10 +907,10 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wfU-na-WDg" userLabel="BackButton">
-                                <rect key="frame" x="10" y="10" width="100" height="75"/>
+                                <rect key="frame" x="10" y="10" width="60" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="AIm-1Z-H87"/>
-                                    <constraint firstAttribute="width" constant="100" id="F7U-wa-cOM"/>
+                                    <constraint firstAttribute="height" constant="50" id="AIm-1Z-H87"/>
+                                    <constraint firstAttribute="width" constant="60" id="F7U-wa-cOM"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="BackArrow"/>
                                 <connections>
@@ -1161,7 +1165,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KxG-of-17L" userLabel="StatsView">
-                                <rect key="frame" x="10" y="90" width="548" height="165"/>
+                                <rect key="frame" x="10" y="65" width="548" height="165"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RB0-fZ-REi">
                                         <rect key="frame" x="15" y="10" width="120" height="25"/>
@@ -1326,7 +1330,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WP1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJN-DQ-art">
-                                        <rect key="frame" x="151" y="131.5" width="38.5" height="22"/>
+                                        <rect key="frame" x="151" y="131" width="38.5" height="22"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1338,49 +1342,50 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WP3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ki5-9L-Eq6">
-                                        <rect key="frame" x="272" y="131.5" width="38.5" height="22"/>
+                                        <rect key="frame" x="272" y="131" width="38.5" height="22"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WP4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Llc-3o-W8t">
-                                        <rect key="frame" x="333" y="131.5" width="38.5" height="22"/>
+                                        <rect key="frame" x="333" y="131" width="38.5" height="22"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WP5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aS4-EL-fgh">
-                                        <rect key="frame" x="394" y="131.5" width="38.5" height="22"/>
+                                        <rect key="frame" x="394" y="131" width="38.5" height="22"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPn-M9-JFr">
-                                        <rect key="frame" x="469" y="10" width="53.5" height="25"/>
+                                        <rect key="frame" x="469" y="10" width="30.5" height="25"/>
                                         <attributedString key="attributedText">
-                                            <fragment content="TOTAL">
+                                            <fragment content="ALL">
                                                 <attributes>
                                                     <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <font key="NSFont" size="18" name="Optima-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GWT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilY-FT-oqV">
-                                        <rect key="frame" x="474" y="51" width="43" height="22"/>
+                                        <rect key="frame" x="462.5" y="51" width="43" height="22"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TGT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDh-dJ-abT">
-                                        <rect key="frame" x="478" y="91" width="34.5" height="22"/>
+                                        <rect key="frame" x="467" y="91" width="34.5" height="22"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WPT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQe-O0-Rwz">
-                                        <rect key="frame" x="476" y="131.5" width="38.5" height="22"/>
+                                        <rect key="frame" x="464.5" y="131" width="38.5" height="22"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1528,10 +1533,10 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrZ-pF-0wE" userLabel="BackButton">
-                                <rect key="frame" x="10" y="10" width="100" height="75"/>
+                                <rect key="frame" x="10" y="10" width="60" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="xIh-6A-IBE"/>
-                                    <constraint firstAttribute="height" constant="75" id="zms-X8-P8x"/>
+                                    <constraint firstAttribute="width" constant="60" id="xIh-6A-IBE"/>
+                                    <constraint firstAttribute="height" constant="50" id="zms-X8-P8x"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="BackArrow"/>
                                 <connections>
@@ -1539,7 +1544,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAk-cw-lPc">
-                                <rect key="frame" x="184" y="270" width="200" height="32"/>
+                                <rect key="frame" x="184" y="245" width="200" height="32"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="Jya-BP-0OB"/>
@@ -1568,6 +1573,12 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ButtonSpacing1" destination="vcd-QR-dhN" id="bpd-Qp-fG2"/>
+                        <outlet property="ButtonSpacing2" destination="pRE-9V-ePJ" id="Mda-Fz-Lof"/>
+                        <outlet property="ButtonSpacing3" destination="tvK-PP-L7v" id="zAA-XL-ef0"/>
+                        <outlet property="ButtonSpacing4" destination="SvL-KT-lRc" id="UfJ-iW-Ydm"/>
+                        <outlet property="ButtonSpacing5" destination="pg3-dk-tRo" id="8fN-gv-Rim"/>
+                        <outlet property="ButtonSpacing6" destination="j1s-yZ-rV4" id="iFc-VQ-l09"/>
                         <outlet property="GW1" destination="tc8-8N-x7s" id="EXQ-vy-PFl"/>
                         <outlet property="GW2" destination="R63-JW-RQl" id="p1p-EI-HOd"/>
                         <outlet property="GW3" destination="fWM-vv-DXg" id="gCC-Lc-hNd"/>
@@ -1606,11 +1617,11 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <viewControllerLayoutGuide type="bottom" id="KBc-1r-GE5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Pfd-F3-8ju">
-                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="90" height="100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zUJ-AB-ArL">
-                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="90" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="loy-k9-g4a" id="8Y1-ao-dbW"/>
@@ -1643,11 +1654,11 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <viewControllerLayoutGuide type="bottom" id="QGR-ZE-pk1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="X5W-NA-K6t">
-                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="90" height="100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hUk-WK-T5S">
-                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="90" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Aq4-5H-fVw" id="vbJ-sL-Zzz"/>

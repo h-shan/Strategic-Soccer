@@ -50,20 +50,20 @@ class GameViewController: UIViewController {
         scene.scaleMode = .AspectFill
         PauseView.hidden = true
         NumberCoins.alpha = 0.0
-        //Dimmer.alpha = 1.0
-        
-        
+        Dimmer?.alpha = 1.0
     }
     override func viewDidAppear(animated: Bool) {
-        UIView.animateWithDuration(1.0, animations: {
-            self.Dimmer?.alpha = 0
-        })
+        super.viewDidAppear(animated)
+        if scene.gType == .twoPhone{
+            UIView.animateWithDuration(1.0, animations: {
+                self.Dimmer?.alpha = 0
+            })
+        }
     }
     override func viewWillAppear(animated:Bool){
         super.viewWillAppear(animated)
         skView.presentScene(scene)
     }
-    
     override func shouldAutorotate() -> Bool {
         return true
     }

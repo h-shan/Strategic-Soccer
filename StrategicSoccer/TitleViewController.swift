@@ -53,8 +53,10 @@ class TitleViewController: UIViewController {
     @IBOutlet weak var StatsButton: UIButton!
     @IBOutlet weak var NumberCoins: UILabel!
     @IBOutlet weak var CoinInfo: UILabel!
+    
+    @IBOutlet weak var ButtonWidth: NSLayoutConstraint!
     @IBAction func clickCoin(sender: AnyObject){
-        UIView.animateWithDuration(0.2, animations: {
+        UIView.animateWithDuration(0.5, animations: {
             self.CoinInfo.alpha = 0.8
             _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(self.hideCoinInfo), userInfo: nil, repeats: false)
         })
@@ -113,6 +115,7 @@ class TitleViewController: UIViewController {
         scene = GameScene(size: skView.bounds.size)
         let buttons: [UIButton] = [SettingsButton, PlayButton, ChangePlayersButton, StatsButton]
         formatMenuButtons(buttons)
+        ButtonWidth.constant = 150/568*screenWidth
 
         // Do any additional setup after loading the view.
     }
@@ -149,7 +152,7 @@ class TitleViewController: UIViewController {
     
     
     func hideCoinInfo(){
-        UIView.animateWithDuration(0.2, animations: {
+        UIView.animateWithDuration(0.5, animations: {
             self.CoinInfo.alpha = 0
         })
     }

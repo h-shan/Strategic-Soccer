@@ -53,6 +53,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameEnded = false
     var viewController: GameViewController!
     var goalAccounted = false
+    var loaded = false
     
     var isSynced = false
     var firstTurn = true
@@ -65,7 +66,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     var gType = gameType.twoPlayer
     var isHost = false
-    
+    let loadNode = SKNode()
     var sensitivity: Float!
     var AIDifficulty: Int!
     var cAggro:Int?
@@ -186,6 +187,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         clockBackground!.zPosition = 4
         self.addChild(clockBackground!)
         clockBackground?.hidden = true
+        
+        if gType == .twoPhone{
+            loadNode.physicsBody = SKPhysicsBody(circleOfRadius: 50)
+            loadNode.physicsBody!.categoryBitMask = 1
+            loadNode.physicsBody!.collisionBitMask = 1
+            self.addChild(loadNode)
+            loadNode.physicsBody!.velocity = CGVectorMake(200,0)
+        }
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -337,10 +346,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        if gType == .twoPhone && isHost{
+        if gType == .twoPhone && isHost && loaded{
             //viewController.parent.gameService.sendVelocities(self)
             viewController.parent.gameService.sendPosition(self)
             viewController.parent.gameService.sendVelocities(self)
+        }else{
         }
         if (!goalAccounted && 200*scalerY < ball.position.y && ball.position.y < 440*scalerY){
             if ball.position.x<50*scalerX{

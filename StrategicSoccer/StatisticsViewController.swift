@@ -31,6 +31,12 @@ class StatisticsViewController: UIViewController{
     @IBOutlet weak var NoButton:UIButton!
     @IBOutlet weak var YesButton:UIButton!
     @IBOutlet weak var ResetWarning: UIView!
+    @IBOutlet weak var ButtonSpacing1 : NSLayoutConstraint!
+    @IBOutlet weak var ButtonSpacing2 : NSLayoutConstraint!
+    @IBOutlet weak var ButtonSpacing3 : NSLayoutConstraint!
+    @IBOutlet weak var ButtonSpacing4 : NSLayoutConstraint!
+    @IBOutlet weak var ButtonSpacing5 : NSLayoutConstraint!
+    @IBOutlet weak var ButtonSpacing6 : NSLayoutConstraint!
     
     @IBAction func BackButton(sender:AnyObject){
         navigationController?.popViewControllerAnimated(true)
@@ -60,6 +66,12 @@ class StatisticsViewController: UIViewController{
         ResetWarning.layer.borderColor = UIColor.blackColor().CGColor
         StatsView.layer.borderWidth = 5
         StatsView.layer.borderColor = UIColor.blackColor().CGColor
+        ButtonSpacing1.constant = 30/568*screenWidth
+        ButtonSpacing2.constant = 50/568*screenWidth
+        ButtonSpacing3.constant = 50/568*screenWidth
+        ButtonSpacing4.constant = 50/568*screenWidth
+        ButtonSpacing5.constant = 50/568*screenWidth
+        ButtonSpacing6.constant = 30/568*screenWidth
     }
     func copyData(){
         GW1.text = String(statistics[Stats.oneWon]!)
