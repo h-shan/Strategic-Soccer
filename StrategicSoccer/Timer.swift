@@ -23,7 +23,6 @@ class Timer{
     //Calling start() will cause the timer to begin counting or resume after a pause.
     func start(){
         guard !started else{
-            print("Tried to start timer when it was already started.")
             return
         }
         startTime = NSDate()

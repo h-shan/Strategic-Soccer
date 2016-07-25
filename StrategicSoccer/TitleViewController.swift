@@ -166,13 +166,10 @@ class TitleViewController: UIViewController {
             let destinationVC = segue.destinationViewController as! PlayViewController
             scene.mode = defaultMode
             scene.playerOption = defaultPlayers
-            scene.countryA = playerA
-            scene.countryB = playerB
             scene.AIDifficulty = defaultAI
             scene.sensitivity = defaultSensitivity
             destinationVC.scene = scene
             destinationVC.parent = self
-            scene.addPlayers()
             scene.cAggro = 0
             scene.cDef = 0
         }

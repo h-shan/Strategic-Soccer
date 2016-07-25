@@ -38,8 +38,9 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var NotEnoughCoins: UIView!
     @IBOutlet weak var OKButton: UIButton!
     @IBOutlet weak var ConfirmationText: UILabel!
+    @IBOutlet weak var BackButtonWidth: NSLayoutConstraint!
+    @IBOutlet weak var BackButtonHeight: NSLayoutConstraint!
 
-    
     @IBAction func BackArrow(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(true)
     }
@@ -70,6 +71,8 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillAppear(animated:Bool) {
         super.viewWillAppear(animated)
+        BackButtonWidth.constant = 80/568*screenWidth
+        BackButtonHeight.constant = 60/568*screenWidth
         self.PlayerA.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.PlayerB.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         PlayerA.layer.borderWidth = 3

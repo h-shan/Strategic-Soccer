@@ -68,6 +68,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var GreenButtonWidth: NSLayoutConstraint!
     @IBOutlet weak var leadingMargin: NSLayoutConstraint!
     @IBOutlet weak var endingMargin: NSLayoutConstraint!
+    @IBOutlet weak var BackButtonWidth: NSLayoutConstraint!
+    @IBOutlet weak var BackButtonHeight: NSLayoutConstraint!
     
     @IBOutlet weak var SensitivitySlider: UISlider!
     @IBOutlet weak var SensitivityLabel: UILabel!
@@ -85,7 +87,7 @@ class SettingsViewController: UIViewController {
     }
     func selectDifficulty(difficulty: Int){
         defaultAI = difficulty
-        DiffValue.text = String(difficulty)
+        DiffValue.text = String(difficulty)  +  " \u{200c}"
         switch(difficulty){
         case 1:
             Two.layer.backgroundColor = UIColor.grayColor().CGColor
@@ -119,12 +121,12 @@ class SettingsViewController: UIViewController {
     @IBAction func PlayerFour(sender: UIButton) {
         playerButtonGroup.selectButton(sender)
         defaultPlayers = PlayerOption.four
-        CurrentPlayers.text = "FOUR"
+        CurrentPlayers.text = "FOUR " +  " \u{200c}"
     }
     @IBAction func PlayerThree(sender: UIButton) {
         playerButtonGroup.selectButton(sender)
         defaultPlayers = PlayerOption.three
-        CurrentPlayers.text = "THREE"
+        CurrentPlayers.text = "THREE" + " \u{200c}"
     }
     @IBAction func BackButton(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(true)
@@ -150,13 +152,14 @@ class SettingsViewController: UIViewController {
         PointView.layer.zPosition = 2
         TimeView.hidden = true
         PointView.hidden = true
-        
+        BackButtonWidth.constant = 80/568*screenWidth
+        BackButtonHeight.constant = 60/568*screenWidth
         for button in DifficultyView.subviews{
             button.layer.borderColor = UIColor.blackColor().CGColor
             button.layer.borderWidth = 5
         }
         selectDifficulty(defaultAI)
-        DiffValue.text = String(defaultAI)
+        DiffValue.text = String(defaultAI) + " \u{200c}"
 
         setBackground()
         let modeButtons: Set<UIButton> = [ModeTimed,ModePoints]
@@ -168,11 +171,11 @@ class SettingsViewController: UIViewController {
         switch (defaultPlayers!){
             case PlayerOption.three:
                 playerButtonGroup.selectButton(PlayerThree)
-                CurrentPlayers.text = "THREE"
+                CurrentPlayers.text = "THREE \u{200c}"
                 break
             case PlayerOption.four:
                 playerButtonGroup.selectButton(PlayerFour)
-                CurrentPlayers.text = "FOUR"
+                CurrentPlayers.text = "FOUR \u{200c}"
                 break
         }
         if (defaultMode.getType() == .timed){
@@ -235,6 +238,7 @@ class SettingsViewController: UIViewController {
         case 7:CurrentMode.text = "20 PTS"; break
         default: break
         }
+        CurrentMode.text =  CurrentMode.text! + " \u{200c}"
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

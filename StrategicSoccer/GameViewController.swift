@@ -46,23 +46,22 @@ class GameViewController: UIViewController {
         
         skView.ignoresSiblingOrder = true
         
-        /* Set the scale mode to scale to fit the window */
         scene.scaleMode = .AspectFill
         PauseView.hidden = true
         NumberCoins.alpha = 0.0
-        Dimmer?.alpha = 1.0
+        scene.userInteractionEnabled = false
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if scene.gType == .twoPhone{
-            UIView.animateWithDuration(1.0, animations: {
-                self.Dimmer?.alpha = 0
-            })
+        if scene.gType != .twoPhone{
+            self.Dimmer?.fadeIn(1.0)
+            scene.userInteractionEnabled = true
         }
     }
     override func viewWillAppear(animated:Bool){
         super.viewWillAppear(animated)
         skView.presentScene(scene)
+        self.Dimmer?.alpha = 0.8
     }
     override func shouldAutorotate() -> Bool {
         return true
@@ -106,6 +105,7 @@ class GameViewController: UIViewController {
         parent.sentData = false
         parent.sentPause = false
         scene.isSynced = false
+        scene.loaded = false
     
     }
     func displayEarnings(numberWon: Int){
@@ -115,6 +115,13 @@ class GameViewController: UIViewController {
             },completion: nil)
         coins += numberWon
         saveCoins()
+    }
+}
+extension UIView{
+    func fadeIn(time:Double){
+        UIView.animateWithDuration(time, animations: {
+            self.alpha = 0
+        })
     }
 }
     

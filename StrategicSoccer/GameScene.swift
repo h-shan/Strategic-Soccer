@@ -187,14 +187,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         clockBackground!.zPosition = 4
         self.addChild(clockBackground!)
         clockBackground?.hidden = true
+        loadNode.physicsBody = SKPhysicsBody(circleOfRadius: 5*scalerX)
+        loadNode.physicsBody!.categoryBitMask = 5
+        loadNode.physicsBody!.collisionBitMask = 5
+        loadNode.physicsBody!.contactTestBitMask = 5
+        loadNode.name = "loadNode"
         
-        if gType == .twoPhone{
-            loadNode.physicsBody = SKPhysicsBody(circleOfRadius: 50)
-            loadNode.physicsBody!.categoryBitMask = 1
-            loadNode.physicsBody!.collisionBitMask = 1
-            self.addChild(loadNode)
-            loadNode.physicsBody!.velocity = CGVectorMake(200,0)
-        }
+        
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -271,10 +270,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         addPlayers()
         for node in children{
-            if let body = node.physicsBody{
-                body.collisionBitMask = 1
-                body.contactTestBitMask = 1
-                body.categoryBitMask = 1
+            if node != loadNode{
+                if let body = node.physicsBody{
+                    body.collisionBitMask = 1
+                    body.contactTestBitMask = 1
+                    body.categoryBitMask = 1
+                }
             }
         }
         restart()
@@ -346,11 +347,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        if gType == .twoPhone && isHost && loaded{
-            //viewController.parent.gameService.sendVelocities(self)
-            viewController.parent.gameService.sendPosition(self)
-            viewController.parent.gameService.sendVelocities(self)
-        }else{
+        print(dampingFactor)
+        if gType == .twoPhone && isHost{
+            if loaded{
+                viewController.parent.gameService.sendPosition(self)
+                viewController.parent.gameService.sendVelocities(self)
+            }else{
+                print(String(format:"%@ %f %f", "position",loadNode.position.x, loadNode.position.y))
+                print(String(format:"%@ %f %f", "velocity", loadNode.physicsBody!.velocity.dx, loadNode.physicsBody!.velocity.dy))
+
+                viewController.parent.gameService.sendLoad(loadNode)
+            }
         }
         if (!goalAccounted && 200*scalerY < ball.position.y && ball.position.y < 440*scalerY){
             if ball.position.x<50*scalerX{
@@ -586,13 +593,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         gameEnded = false
         userInteractionEnabled = true
+        print("restart")
         scoreBoard.label.text = "0    0"
     }
     func addPlayers(){
         for child in children{
             if child is Player{
                 child.removeFromParent()
+            }else if child.name == "loadNode"{
+                child.removeFromParent()
             }
+        }
+        if gType == .twoPhone{
+            if isHost{
+                loadNode.position = CGPointMake(60*scalerX, 60*scalerX)
+            }
+            self.addChild(loadNode)
+            loadNode.physicsBody!.velocity = CGVectorMake(500*scalerX,0)
         }
         playerA1 = Player(teamA: true, country: countryA, sender: self, name: "playerA1")
         playerA2 = Player(teamA: true, country: countryA, sender: self, name: "playerA2")

@@ -37,6 +37,8 @@ class StatisticsViewController: UIViewController{
     @IBOutlet weak var ButtonSpacing4 : NSLayoutConstraint!
     @IBOutlet weak var ButtonSpacing5 : NSLayoutConstraint!
     @IBOutlet weak var ButtonSpacing6 : NSLayoutConstraint!
+    @IBOutlet weak var BackButtonWidth: NSLayoutConstraint!
+    @IBOutlet weak var BackButtonHeight: NSLayoutConstraint!
     
     @IBAction func BackButton(sender:AnyObject){
         navigationController?.popViewControllerAnimated(true)
@@ -60,6 +62,8 @@ class StatisticsViewController: UIViewController{
         ResetWarning.hidden = true
         setBackground()
         copyData()
+        BackButtonWidth.constant = 80/568*screenWidth
+        BackButtonHeight.constant = 60/568*screenWidth
         let buttons: [UIButton] = [ResetStatistics, NoButton, YesButton]
         formatMenuButtons(buttons)
         ResetWarning.layer.borderWidth = 5

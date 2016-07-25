@@ -212,9 +212,9 @@ PLAY MORE GAMES TO EARN COINS.</string>
                             <constraint firstItem="vj5-wL-u9h" firstAttribute="top" secondItem="hX3-ee-hi8" secondAttribute="top" id="fVd-QC-hVH"/>
                             <constraint firstItem="TdJ-HU-drd" firstAttribute="centerX" secondItem="uoo-jQ-ZfU" secondAttribute="centerX" id="ggJ-Mj-vLc"/>
                             <constraint firstItem="ITK-Nn-2uB" firstAttribute="leading" secondItem="e2G-d5-zRw" secondAttribute="leading" constant="10" id="iwI-Ua-z1T"/>
-                            <constraint firstItem="hX3-ee-hi8" firstAttribute="top" secondItem="bZE-MR-P07" secondAttribute="bottom" constant="40" id="jGi-b2-kId"/>
                             <constraint firstItem="knW-p5-Ua8" firstAttribute="centerX" secondItem="vj5-wL-u9h" secondAttribute="centerX" id="lPH-im-o7l"/>
                             <constraint firstItem="kpx-4h-sXL" firstAttribute="top" secondItem="hX3-ee-hi8" secondAttribute="bottom" constant="20" id="lTZ-gg-Bx8"/>
+                            <constraint firstItem="hX3-ee-hi8" firstAttribute="top" secondItem="uoo-jQ-ZfU" secondAttribute="centerY" constant="-60" id="n82-SF-9gX"/>
                             <constraint firstItem="bZE-MR-P07" firstAttribute="leading" secondItem="uoo-jQ-ZfU" secondAttribute="leading" constant="10" id="oFr-nu-biu"/>
                             <constraint firstItem="ITK-Nn-2uB" firstAttribute="centerY" secondItem="e2G-d5-zRw" secondAttribute="centerY" id="odF-X2-9Pg"/>
                             <constraint firstItem="ITK-Nn-2uB" firstAttribute="centerX" secondItem="e2G-d5-zRw" secondAttribute="centerX" id="qJ6-Bu-Klf"/>
@@ -227,6 +227,8 @@ PLAY MORE GAMES TO EARN COINS.</string>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="BackButtonHeight" destination="8hq-E7-EVR" id="cia-bR-Ekf"/>
+                        <outlet property="BackButtonWidth" destination="mte-TI-lja" id="Wfy-tH-X8c"/>
                         <outlet property="BuyFlagView" destination="e2G-d5-zRw" id="dlw-RC-I0B"/>
                         <outlet property="ConfirmationText" destination="e5Y-hb-S2h" id="mqC-qU-gto"/>
                         <outlet property="NoButton" destination="uU7-ed-h3s" id="sbP-Ur-PPD"/>
@@ -470,7 +472,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1504" y="-936"/>
+            <point key="canvasLocation" x="1652" y="-548"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="a3F-uW-CET">
@@ -612,7 +614,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCQ-Fd-NTk">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCQ-Fd-NTk">
                                 <rect key="frame" x="140" y="87" width="80" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
@@ -745,7 +747,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lJZ-We-Te0" userLabel="Sensitivity Slider" customClass="CustomUISlider" customModule="Strategic_Soccer" customModuleProvider="target">
                                 <rect key="frame" x="253" y="218" width="189" height="36"/>
                             </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" PLAYER SENSITIVITY:       " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="9m4-7s-RGa">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  PLAYER SENSITIVITY:       " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="9m4-7s-RGa">
                                 <rect key="frame" x="255" y="180" width="185" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
@@ -842,6 +844,8 @@ PLAY MORE GAMES TO EARN COINS.</string>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="BackButtonHeight" destination="iQZ-yP-NeZ" id="UF5-7q-a6y"/>
+                        <outlet property="BackButtonWidth" destination="zpN-0a-E3S" id="0Li-XK-tS6"/>
                         <outlet property="ButtonWidth" destination="CuK-TU-qym" id="V4t-hr-1lk"/>
                         <outlet property="CurrentMode" destination="uKg-cr-rHi" id="rfl-ge-5DA"/>
                         <outlet property="CurrentPlayers" destination="OCQ-Fd-NTk" id="AQ3-TE-uvI"/>
@@ -1031,6 +1035,8 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="BackButtonHeight" destination="AIm-1Z-H87" id="Fxk-Uo-RHU"/>
+                        <outlet property="BackButtonWidth" destination="F7U-wa-cOM" id="JTt-TX-qGN"/>
                         <outlet property="ConnectToAnotherDevice" destination="eEW-WU-dEc" id="JD4-xe-pnx"/>
                         <outlet property="ConnectionView" destination="yUE-Y9-Sg1" id="Bw9-mG-bxQ"/>
                         <outlet property="HostGame" destination="7fq-lP-MXf" id="ksh-Zv-obt"/>
@@ -1042,7 +1048,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="63R-nO-eZn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="832" y="-843"/>
+            <point key="canvasLocation" x="912" y="-543"/>
         </scene>
         <!--Pause View Controller-->
         <scene sceneID="HdW-SH-cCy">
@@ -1150,7 +1156,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KH0-50-fKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1520" y="-466.5"/>
+            <point key="canvasLocation" x="1528" y="-156.5"/>
         </scene>
         <!--Statistics View Controller-->
         <scene sceneID="x5l-FC-dFP">
@@ -1573,6 +1579,8 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="BackButtonHeight" destination="zms-X8-P8x" id="wnp-NG-hHG"/>
+                        <outlet property="BackButtonWidth" destination="xIh-6A-IBE" id="IOe-Oz-7Kn"/>
                         <outlet property="ButtonSpacing1" destination="vcd-QR-dhN" id="bpd-Qp-fG2"/>
                         <outlet property="ButtonSpacing2" destination="pRE-9V-ePJ" id="Mda-Fz-Lof"/>
                         <outlet property="ButtonSpacing3" destination="tvK-PP-L7v" id="zAA-XL-ef0"/>

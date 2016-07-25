@@ -79,7 +79,6 @@ class ConnectionManager : NSObject{
         }
     }
     func sendPosition(scene: GameScene){
-        NSLog("sendPosition")
         var sendString = String(format:"%@ %f %f ","position",scene.ball.position.x, scene.ball.position.y)
         for player in scene.players{
             sendString += String(format: "%f %f ",player.position.x, player.position.y)
@@ -124,7 +123,7 @@ class ConnectionManager : NSObject{
         })
     }
     func sendLoad(node: SKNode){
-        let sendString = String(format:"%@ %f %f %f %f", "position", node.position.x, node.position.y, node.physicsBody!.velocity.dx, node.physicsBody!.velocity.dy)
+        let sendString = String(format:"%@ %f %f %f %f", "load", node.position.x, node.position.y, node.physicsBody!.velocity.dx, node.physicsBody!.velocity.dy)
         stringSend(sendString)
     }
 }
@@ -194,6 +193,7 @@ extension ConnectionManager : MCSessionDelegate {
             case "positionMove": self.delegate?.receivePositionMove(self, positionMove: strArr); break
             case "velocities": self.delegate?.receiveVelocities(self, velocities: strArr); break
             case "sendSync": self.delegate?.receiveSync(self, turn: strArr[0], gameTime: strArr[1]); break
+            case "load": self.delegate?.receiveLoad(self, load: strArr); break
             default: self.delegate?.receiveMisc(self, message: strArr); break
             }
         })
