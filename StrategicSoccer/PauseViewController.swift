@@ -32,7 +32,7 @@ class PauseViewController: UIViewController {
         }
         parent.parent.sentPauseAction = true
         parent.parent.sentPause = false
-        self.parent.Dimmer?.fadeIn(0.2)
+        self.parent.Dimmer?.fadeOut(0.2)
 
         scene = parent.scene
         scene.physicsWorld.speed = 1
@@ -48,7 +48,7 @@ class PauseViewController: UIViewController {
             parent.parent.gameService.sendPause("resume")
         }
         parent.parent.sentPauseAction = true
-        self.parent.Dimmer?.fadeIn(0.2)
+        self.parent.Dimmer?.fadeOut(0.2)
         parent.parent.sentPause = false
 
         parent.scene.physicsWorld.speed = 1

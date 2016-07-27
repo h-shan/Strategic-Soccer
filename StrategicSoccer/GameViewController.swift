@@ -14,7 +14,7 @@ class GameViewController: UIViewController {
     var scene: GameScene!
     var parent: PlayViewController!
     var pauseVC: PauseViewController!
-    
+    @IBOutlet var loadingView: UIView!
     @IBOutlet weak var PauseView: UIView!
     @IBOutlet weak var skView: SKView!
     @IBOutlet weak var PauseButton: UIButton!
@@ -41,7 +41,8 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        loadingView.layer.borderWidth = 5
+        loadingView.layer.borderColor = gold
         scene.viewController = self
         
         skView.ignoresSiblingOrder = true
@@ -54,7 +55,7 @@ class GameViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if scene.gType != .twoPhone{
-            self.Dimmer?.fadeIn(1.0)
+            self.Dimmer?.fadeOut(1.0)
             scene.userInteractionEnabled = true
         }
     }
@@ -62,6 +63,11 @@ class GameViewController: UIViewController {
         super.viewWillAppear(animated)
         skView.presentScene(scene)
         self.Dimmer?.alpha = 0.8
+        if scene.gType != .twoPhone{
+            loadingView.alpha = 0
+        }else{
+            loadingView.alpha = 0.8
+        }
     }
     override func shouldAutorotate() -> Bool {
         return true
@@ -73,7 +79,6 @@ class GameViewController: UIViewController {
             return .All
         }
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
@@ -91,6 +96,7 @@ class GameViewController: UIViewController {
     }
     func backToTitle(){
         navigationController?.popViewControllerAnimated(false)
+
         self.removeFromParentViewController()
         UIGraphicsBeginImageContext(view.frame.size)
         view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
@@ -106,6 +112,7 @@ class GameViewController: UIViewController {
         parent.sentPause = false
         scene.isSynced = false
         scene.loaded = false
+        print("GameViewController backToTitle")
     
     }
     func displayEarnings(numberWon: Int){
@@ -118,9 +125,14 @@ class GameViewController: UIViewController {
     }
 }
 extension UIView{
-    func fadeIn(time:Double){
+    func fadeOut(time:Double){
         UIView.animateWithDuration(time, animations: {
             self.alpha = 0
+        })
+    }
+    func fadeIn(time: Double){
+        UIView.animateWithDuration(time, animations: {
+            self.alpha = 0.8;
         })
     }
 }

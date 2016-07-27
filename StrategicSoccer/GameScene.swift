@@ -53,7 +53,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameEnded = false
     var viewController: GameViewController!
     var goalAccounted = false
-    var loaded = false
+    var loaded = true
     
     var isSynced = false
     var firstTurn = true
@@ -279,6 +279,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         restart()
+        if gType == .twoPhone{
+            moveTimer?.pause()
+            self.userInteractionEnabled = false
+        }
 
         
     }
@@ -347,18 +351,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        print(dampingFactor)
         if gType == .twoPhone && isHost{
             if loaded{
                 viewController.parent.gameService.sendPosition(self)
                 viewController.parent.gameService.sendVelocities(self)
             }else{
-                print(String(format:"%@ %f %f", "position",loadNode.position.x, loadNode.position.y))
-                print(String(format:"%@ %f %f", "velocity", loadNode.physicsBody!.velocity.dx, loadNode.physicsBody!.velocity.dy))
-
                 viewController.parent.gameService.sendLoad(loadNode)
             }
         }
+        
         if (!goalAccounted && 200*scalerY < ball.position.y && ball.position.y < 440*scalerY){
             if ball.position.x<50*scalerX{
                 self.reset(false)
@@ -468,11 +469,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func switchTurns(){
         turnA = !turnA
         if gType == .twoPhone && isHost && !isSynced{
-            if mode.getType() == .timed{
-                viewController.parent.gameService.sendSync(turnA, time: String(gameTime!))
-            }else{
-                viewController.parent.gameService.sendSync(turnA, time: "PointMode")
-            }
+//            if mode.getType() == .timed{
+//                viewController.parent.gameService.sendSync(turnA, time: String(gameTime!))
+//            }else{
+//                viewController.parent.gameService.sendSync(turnA, time: "PointMode")
+//            }
             isSynced = true
         }
         if playerSelected == true {
@@ -591,6 +592,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if !turnA{
             switchTurns()
         }
+        if gType == .twoPhone && !isHost{
+            switchTurns()
+        }
         gameEnded = false
         userInteractionEnabled = true
         print("restart")
@@ -607,9 +611,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if gType == .twoPhone{
             if isHost{
                 loadNode.position = CGPointMake(60*scalerX, 60*scalerX)
+                loadNode.physicsBody!.velocity = CGVectorMake(500*scalerX,0)
             }
             self.addChild(loadNode)
-            loadNode.physicsBody!.velocity = CGVectorMake(500*scalerX,0)
         }
         playerA1 = Player(teamA: true, country: countryA, sender: self, name: "playerA1")
         playerA2 = Player(teamA: true, country: countryA, sender: self, name: "playerA2")
