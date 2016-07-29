@@ -36,7 +36,6 @@ class StatisticsViewController: UIViewController{
     @IBOutlet weak var ButtonSpacing3 : NSLayoutConstraint!
     @IBOutlet weak var ButtonSpacing4 : NSLayoutConstraint!
     @IBOutlet weak var ButtonSpacing5 : NSLayoutConstraint!
-    @IBOutlet weak var ButtonSpacing6 : NSLayoutConstraint!
     @IBOutlet weak var BackButtonWidth: NSLayoutConstraint!
     @IBOutlet weak var BackButtonHeight: NSLayoutConstraint!
     
@@ -75,7 +74,6 @@ class StatisticsViewController: UIViewController{
         ButtonSpacing3.constant = 50/568*screenWidth
         ButtonSpacing4.constant = 50/568*screenWidth
         ButtonSpacing5.constant = 50/568*screenWidth
-        ButtonSpacing6.constant = 30/568*screenWidth
     }
     func copyData(){
         GW1.text = String(statistics[Stats.oneWon]!)

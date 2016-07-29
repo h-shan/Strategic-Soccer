@@ -20,6 +20,11 @@ class GameViewController: UIViewController {
     @IBOutlet weak var PauseButton: UIButton!
     @IBOutlet weak var NumberCoins: UILabel!
     @IBOutlet weak var Dimmer: UIView?
+    @IBOutlet weak var QuitWarningView: UIView!
+    @IBOutlet weak var QuitWarningText: UILabel!
+    @IBOutlet weak var YesQuit: UIButton!
+    @IBOutlet weak var NoQuit: UIButton!
+    
     @IBAction func PauseClicked(sender: AnyObject) {
         if scene.gType == .twoPhone && !parent.sentPause{
             parent.gameService.sendPause("pause")
@@ -38,11 +43,28 @@ class GameViewController: UIViewController {
             self.Dimmer?.alpha = 0.5
         })
     }
+    @IBAction func YesQuit(sender: AnyObject){
+        QuitWarningView.hidden = true
+        PauseView.userInteractionEnabled = true
+        switch(pauseVC.action){
+        case .quit:
+            pauseVC.pauseQuit()
+            break
+        case .restart:
+            pauseVC.pauseRestart()
+        }
+    }
+    @IBAction func NoQuit(sender: AnyObject){
+        PauseView.userInteractionEnabled = true
+        QuitWarningView.hidden = true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         loadingView.layer.borderWidth = 5
-        loadingView.layer.borderColor = gold
+        loadingView.layer.borderColor = UIColor.blackColor().CGColor
+        QuitWarningView.layer.borderWidth = 5
+        QuitWarningView.layer.borderColor = UIColor.blackColor().CGColor
         scene.viewController = self
         
         skView.ignoresSiblingOrder = true
@@ -51,6 +73,7 @@ class GameViewController: UIViewController {
         PauseView.hidden = true
         NumberCoins.alpha = 0.0
         scene.userInteractionEnabled = false
+        QuitWarningView.hidden = true
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -66,7 +89,7 @@ class GameViewController: UIViewController {
         if scene.gType != .twoPhone{
             loadingView.alpha = 0
         }else{
-            loadingView.alpha = 0.8
+            loadingView.alpha = 0.9
         }
     }
     override func shouldAutorotate() -> Bool {

@@ -73,44 +73,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITK-Nn-2uB" userLabel="NotEnoughCoins">
-                                <rect key="frame" x="106" y="139.5" width="355" height="120"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3F-y8-doZ">
-                                        <rect key="frame" x="152" y="76" width="50" height="34"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="wTc-Jh-Cwz"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                        <state key="normal" title="OK">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="OKButton:" destination="5yu-Xs-09g" eventType="touchUpInside" id="fcO-VN-9Zw"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMa-4r-fWd" userLabel="NotEnoughCoinsText">
-                                        <rect key="frame" x="18" y="21" width="318.5" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="3ve-PH-SI3"/>
-                                        </constraints>
-                                        <string key="text">YOU DO NOT HAVE ENOUGH COINS!
-PLAY MORE GAMES TO EARN COINS.</string>
-                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="bMa-4r-fWd" firstAttribute="top" secondItem="ITK-Nn-2uB" secondAttribute="top" constant="21" id="9ji-ks-HdQ"/>
-                                    <constraint firstItem="D3F-y8-doZ" firstAttribute="bottom" secondItem="ITK-Nn-2uB" secondAttribute="bottom" constant="-10" id="E8U-NZ-FnT"/>
-                                    <constraint firstItem="D3F-y8-doZ" firstAttribute="centerX" secondItem="ITK-Nn-2uB" secondAttribute="centerX" id="F7H-yv-93g"/>
-                                    <constraint firstAttribute="height" constant="120" id="Zno-6A-fiH"/>
-                                    <constraint firstItem="bMa-4r-fWd" firstAttribute="centerX" secondItem="ITK-Nn-2uB" secondAttribute="centerX" id="rCd-cw-Bw6"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2G-d5-zRw">
                                 <rect key="frame" x="96" y="124.5" width="375" height="150"/>
                                 <subviews>
@@ -195,6 +157,44 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                     <constraint firstItem="pzG-xD-wJr" firstAttribute="top" secondItem="e5Y-hb-S2h" secondAttribute="bottom" constant="5" id="tpO-LN-ZmI"/>
                                     <constraint firstItem="pzG-xD-wJr" firstAttribute="bottom" secondItem="e2G-d5-zRw" secondAttribute="bottom" constant="-5" id="uMy-sa-k29"/>
                                     <constraint firstItem="KwR-5i-HHG" firstAttribute="leading" secondItem="pzG-xD-wJr" secondAttribute="trailing" constant="5" id="xX5-TI-XmR"/>
+                                </constraints>
+                            </view>
+                            <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITK-Nn-2uB" userLabel="NotEnoughCoins">
+                                <rect key="frame" x="106" y="140" width="355" height="120"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3F-y8-doZ">
+                                        <rect key="frame" x="152" y="76" width="50" height="34"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="wTc-Jh-Cwz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <state key="normal" title="OK">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="OKButton:" destination="5yu-Xs-09g" eventType="touchUpInside" id="fcO-VN-9Zw"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMa-4r-fWd" userLabel="NotEnoughCoinsText">
+                                        <rect key="frame" x="18" y="21" width="318.5" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="3ve-PH-SI3"/>
+                                        </constraints>
+                                        <string key="text">YOU DO NOT HAVE ENOUGH COINS!
+PLAY MORE GAMES TO EARN COINS.</string>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="bMa-4r-fWd" firstAttribute="top" secondItem="ITK-Nn-2uB" secondAttribute="top" constant="21" id="9ji-ks-HdQ"/>
+                                    <constraint firstItem="D3F-y8-doZ" firstAttribute="bottom" secondItem="ITK-Nn-2uB" secondAttribute="bottom" constant="-10" id="E8U-NZ-FnT"/>
+                                    <constraint firstItem="D3F-y8-doZ" firstAttribute="centerX" secondItem="ITK-Nn-2uB" secondAttribute="centerX" id="F7H-yv-93g"/>
+                                    <constraint firstAttribute="height" constant="120" id="Zno-6A-fiH"/>
+                                    <constraint firstItem="bMa-4r-fWd" firstAttribute="centerX" secondItem="ITK-Nn-2uB" secondAttribute="centerX" id="rCd-cw-Bw6"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -404,20 +404,6 @@ PLAY MORE GAMES TO EARN COINS.</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lmz-fY-9xw" customClass="SKView">
                                 <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                                 <subviews>
-                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cH7-m2-uYW" userLabel="Dimmer">
-                                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3eD-OI-ThD">
-                                        <rect key="frame" x="169" y="57" width="230" height="205"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="230" id="QnN-fR-ian"/>
-                                            <constraint firstAttribute="height" constant="205" id="kHE-XD-TYC"/>
-                                        </constraints>
-                                        <connections>
-                                            <segue destination="jas-UU-nYs" kind="embed" identifier="Pause" id="Nem-WV-SRb"/>
-                                        </connections>
-                                    </containerView>
                                     <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paz-pH-qnx">
                                         <rect key="frame" x="5" y="5" width="50" height="50"/>
                                         <state key="normal" image="Pause"/>
@@ -437,24 +423,26 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cH7-m2-uYW" userLabel="Dimmer">
+                                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="paz-pH-qnx" firstAttribute="top" secondItem="Lmz-fY-9xw" secondAttribute="top" constant="5" id="EAV-fw-KcS"/>
-                                    <constraint firstItem="3eD-OI-ThD" firstAttribute="centerY" secondItem="Lmz-fY-9xw" secondAttribute="centerY" id="IGE-Jd-3Qb"/>
                                     <constraint firstItem="cH7-m2-uYW" firstAttribute="trailing" secondItem="Lmz-fY-9xw" secondAttribute="trailing" id="LLH-EH-Mq8"/>
                                     <constraint firstItem="cH7-m2-uYW" firstAttribute="top" secondItem="Lmz-fY-9xw" secondAttribute="top" id="NaG-EX-ylv"/>
-                                    <constraint firstItem="3eD-OI-ThD" firstAttribute="centerX" secondItem="Lmz-fY-9xw" secondAttribute="centerX" id="YJT-Hc-Gn8"/>
                                     <constraint firstItem="cH7-m2-uYW" firstAttribute="leading" secondItem="Lmz-fY-9xw" secondAttribute="leading" id="kxt-sq-4DR"/>
                                     <constraint firstItem="cH7-m2-uYW" firstAttribute="bottom" secondItem="Lmz-fY-9xw" secondAttribute="bottom" id="ono-IU-158"/>
                                     <constraint firstItem="paz-pH-qnx" firstAttribute="leading" secondItem="Lmz-fY-9xw" secondAttribute="leading" constant="5" id="uxB-ca-LwV"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79a-dm-a6g">
-                                <rect key="frame" x="196.5" y="135" width="175" height="50"/>
+                                <rect key="frame" x="196" y="135" width="175" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOADING..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Qd-Cr-TSW">
-                                        <rect key="frame" x="22.5" y="11" width="130" height="28.5"/>
+                                        <rect key="frame" x="22" y="11" width="130" height="28.5"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="24"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -468,25 +456,113 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                     <constraint firstAttribute="width" constant="175" id="r50-Pj-YsF"/>
                                 </constraints>
                             </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3eD-OI-ThD">
+                                <rect key="frame" x="169" y="58" width="230" height="205"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="230" id="QnN-fR-ian"/>
+                                    <constraint firstAttribute="height" constant="205" id="kHE-XD-TYC"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="jas-UU-nYs" kind="embed" identifier="Pause" id="Nem-WV-SRb"/>
+                                </connections>
+                            </containerView>
+                            <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dWH-5P-CjR">
+                                <rect key="frame" x="134" y="96" width="300" height="128"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqb-F3-nlZ" userLabel="Quit Warning">
+                                        <rect key="frame" x="20" y="10" width="260" height="64.5"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="ARE YOU SURE YOU WANT TO RESTART? THIS WILL COUNT AS A LOSS IN YOUR STATISTICS.">
+                                                <attributes>
+                                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <font key="NSFont" size="18" name="Optima-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H3g-e1-udh">
+                                        <rect key="frame" x="70" y="82" width="50" height="33.5"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="3S6-XJ-yvV"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="YES">
+                                                    <attributes>
+                                                        <font key="NSFont" size="18" name="Optima-Regular"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
+                                        <connections>
+                                            <action selector="YesQuit:" destination="BV1-FR-VrT" eventType="touchUpInside" id="xmq-Cx-Qlt"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YD5-1K-n6m">
+                                        <rect key="frame" x="180" y="82" width="50" height="33.5"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="NO">
+                                                    <attributes>
+                                                        <font key="NSFont" size="18" name="Optima-Regular"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
+                                        <connections>
+                                            <action selector="NoQuit:" destination="BV1-FR-VrT" eventType="touchUpInside" id="gN0-UL-zIl"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="oqb-F3-nlZ" firstAttribute="centerX" secondItem="dWH-5P-CjR" secondAttribute="centerX" id="0Fg-5q-WJ0"/>
+                                    <constraint firstItem="YD5-1K-n6m" firstAttribute="top" secondItem="H3g-e1-udh" secondAttribute="top" id="12q-Pn-nwP"/>
+                                    <constraint firstItem="YD5-1K-n6m" firstAttribute="trailing" secondItem="dWH-5P-CjR" secondAttribute="trailing" constant="-70" id="1Pu-yh-Fdf"/>
+                                    <constraint firstItem="oqb-F3-nlZ" firstAttribute="leading" secondItem="dWH-5P-CjR" secondAttribute="leading" constant="20" id="I15-rO-ITa"/>
+                                    <constraint firstItem="H3g-e1-udh" firstAttribute="leading" secondItem="dWH-5P-CjR" secondAttribute="leading" constant="70" id="J2q-tA-BIN"/>
+                                    <constraint firstAttribute="height" constant="128" id="MO1-cw-jpq"/>
+                                    <constraint firstItem="H3g-e1-udh" firstAttribute="top" secondItem="oqb-F3-nlZ" secondAttribute="bottom" constant="7.5" id="Oiq-Z9-0NM"/>
+                                    <constraint firstItem="YD5-1K-n6m" firstAttribute="bottom" secondItem="H3g-e1-udh" secondAttribute="bottom" id="gGA-72-lg9"/>
+                                    <constraint firstAttribute="width" constant="300" id="lHc-Qg-iqf"/>
+                                    <constraint firstItem="oqb-F3-nlZ" firstAttribute="top" secondItem="dWH-5P-CjR" secondAttribute="top" constant="10" id="riQ-SL-Q9i"/>
+                                    <constraint firstItem="oqb-F3-nlZ" firstAttribute="trailing" secondItem="dWH-5P-CjR" secondAttribute="trailing" constant="-20" id="tpN-Dd-gSp"/>
+                                    <constraint firstItem="YD5-1K-n6m" firstAttribute="width" secondItem="H3g-e1-udh" secondAttribute="width" id="xYP-9K-B8H"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="RVF-qi-W3D" firstAttribute="bottom" secondItem="3se-qz-xqx" secondAttribute="bottom" constant="-10" id="5kB-Mp-ph9"/>
                             <constraint firstItem="79a-dm-a6g" firstAttribute="centerY" secondItem="3se-qz-xqx" secondAttribute="centerY" id="6Pu-O5-Kge"/>
                             <constraint firstItem="Lmz-fY-9xw" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" id="BAx-jX-DTe"/>
+                            <constraint firstItem="dWH-5P-CjR" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="Fyi-WE-AeR"/>
                             <constraint firstItem="RVF-qi-W3D" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="Jav-Wp-UMP"/>
+                            <constraint firstItem="3eD-OI-ThD" firstAttribute="centerY" secondItem="3se-qz-xqx" secondAttribute="centerY" id="Sdu-Gp-tC7"/>
                             <constraint firstItem="Lmz-fY-9xw" firstAttribute="trailing" secondItem="3se-qz-xqx" secondAttribute="trailing" id="YkC-Ni-q4J"/>
                             <constraint firstItem="Lmz-fY-9xw" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" id="fju-Mv-4b7"/>
                             <constraint firstItem="79a-dm-a6g" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="h8N-dR-52s"/>
                             <constraint firstItem="Lmz-fY-9xw" firstAttribute="bottom" secondItem="3se-qz-xqx" secondAttribute="bottom" id="jMR-9i-tpj"/>
+                            <constraint firstItem="3eD-OI-ThD" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="jma-78-KsK"/>
+                            <constraint firstItem="dWH-5P-CjR" firstAttribute="centerY" secondItem="3se-qz-xqx" secondAttribute="centerY" id="mXZ-G7-2Jr"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="Dimmer" destination="cH7-m2-uYW" id="xXx-lV-cBn"/>
+                        <outlet property="NoQuit" destination="YD5-1K-n6m" id="HDt-Wj-Lu0"/>
                         <outlet property="NumberCoins" destination="RVF-qi-W3D" id="4gD-ei-LIv"/>
                         <outlet property="PauseButton" destination="paz-pH-qnx" id="nx9-ev-t9a"/>
                         <outlet property="PauseView" destination="3eD-OI-ThD" id="roI-CZ-e1d"/>
+                        <outlet property="QuitWarningText" destination="oqb-F3-nlZ" id="YYO-fO-tbH"/>
+                        <outlet property="QuitWarningView" destination="dWH-5P-CjR" id="una-0C-NiU"/>
+                        <outlet property="YesQuit" destination="H3g-e1-udh" id="1GP-43-6n8"/>
                         <outlet property="loadingView" destination="79a-dm-a6g" id="yGt-3p-TrC"/>
                         <outlet property="skView" destination="Lmz-fY-9xw" id="llx-HK-deh"/>
                     </connections>
@@ -1177,7 +1253,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KH0-50-fKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1528" y="-156.5"/>
+            <point key="canvasLocation" x="1647" y="-123.5"/>
         </scene>
         <!--Statistics View Controller-->
         <scene sceneID="x5l-FC-dFP">
@@ -1387,7 +1463,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPn-M9-JFr">
-                                        <rect key="frame" x="469" y="10" width="30.5" height="25"/>
+                                        <rect key="frame" x="497.5" y="10" width="30.5" height="25"/>
                                         <attributedString key="attributedText">
                                             <fragment content="ALL">
                                                 <attributes>
@@ -1400,19 +1476,19 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GWT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilY-FT-oqV">
-                                        <rect key="frame" x="462.5" y="51" width="43" height="22"/>
+                                        <rect key="frame" x="491" y="51" width="43" height="22"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TGT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDh-dJ-abT">
-                                        <rect key="frame" x="467" y="91" width="34.5" height="22"/>
+                                        <rect key="frame" x="495.5" y="91" width="34.5" height="22"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WPT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQe-O0-Rwz">
-                                        <rect key="frame" x="464.5" y="131" width="38.5" height="22"/>
+                                        <rect key="frame" x="493" y="131" width="38.5" height="22"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1521,7 +1597,6 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                     <constraint firstItem="Btm-79-5Hq" firstAttribute="leading" secondItem="RB0-fZ-REi" secondAttribute="leading" id="fKt-pF-rRM"/>
                                     <constraint firstItem="zRq-A4-g1D" firstAttribute="centerX" secondItem="KmV-F2-aT4" secondAttribute="centerX" id="ggW-Z7-YS1"/>
                                     <constraint firstItem="tc8-8N-x7s" firstAttribute="centerX" secondItem="IT9-Cv-KBJ" secondAttribute="centerX" id="imp-SW-89e"/>
-                                    <constraint firstItem="XPn-M9-JFr" firstAttribute="leading" secondItem="KmV-F2-aT4" secondAttribute="trailing" constant="50" id="j1s-yZ-rV4"/>
                                     <constraint firstItem="RhL-fX-L8p" firstAttribute="top" secondItem="IT9-Cv-KBJ" secondAttribute="top" id="jDu-Di-Sta"/>
                                     <constraint firstItem="toP-C2-UDz" firstAttribute="width" secondItem="RB0-fZ-REi" secondAttribute="width" id="mS6-rm-5mO"/>
                                     <constraint firstItem="R63-JW-RQl" firstAttribute="centerX" secondItem="RhL-fX-L8p" secondAttribute="centerX" id="mZq-rb-d7s"/>
@@ -1532,6 +1607,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                     <constraint firstItem="RB0-fZ-REi" firstAttribute="top" secondItem="KxG-of-17L" secondAttribute="top" constant="10" id="pVU-Z1-4NO"/>
                                     <constraint firstItem="KmV-F2-aT4" firstAttribute="leading" secondItem="ub7-Wb-3us" secondAttribute="trailing" constant="50" id="pg3-dk-tRo"/>
                                     <constraint firstItem="Btm-79-5Hq" firstAttribute="centerY" secondItem="54p-rO-7Es" secondAttribute="centerY" constant="40" id="qVt-h5-oDQ"/>
+                                    <constraint firstItem="XPn-M9-JFr" firstAttribute="trailing" secondItem="KxG-of-17L" secondAttribute="trailing" constant="-20" id="tPZ-yv-ozv"/>
                                     <constraint firstItem="MDh-dJ-abT" firstAttribute="centerY" secondItem="dxZ-ch-oK3" secondAttribute="centerY" id="tg3-rd-fUz"/>
                                     <constraint firstItem="WJN-DQ-art" firstAttribute="centerX" secondItem="IT9-Cv-KBJ" secondAttribute="centerX" id="tny-ew-OPl"/>
                                     <constraint firstItem="a2S-93-Lcd" firstAttribute="leading" secondItem="RhL-fX-L8p" secondAttribute="trailing" constant="50" id="tvK-PP-L7v"/>
@@ -1607,7 +1683,6 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <outlet property="ButtonSpacing3" destination="tvK-PP-L7v" id="zAA-XL-ef0"/>
                         <outlet property="ButtonSpacing4" destination="SvL-KT-lRc" id="UfJ-iW-Ydm"/>
                         <outlet property="ButtonSpacing5" destination="pg3-dk-tRo" id="8fN-gv-Rim"/>
-                        <outlet property="ButtonSpacing6" destination="j1s-yZ-rV4" id="iFc-VQ-l09"/>
                         <outlet property="GW1" destination="tc8-8N-x7s" id="EXQ-vy-PFl"/>
                         <outlet property="GW2" destination="R63-JW-RQl" id="p1p-EI-HOd"/>
                         <outlet property="GW3" destination="fWM-vv-DXg" id="gCC-Lc-hNd"/>

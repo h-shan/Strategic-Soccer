@@ -256,20 +256,24 @@ extension PlayViewController : ConnectionManagerDelegate {
         //print(dampingFactor)
         NSOperationQueue.mainQueue().addOperationWithBlock{
             let ballPosition = CGPointMake(screenWidth - positions[0].toFloat()*self.scaleFactorX, positions[1].toFloat()*self.scaleFactorY)
-//            if self.scene.ball.physicsBody!.velocity.dx < 0{
-//                if self.scene.ball.position.x < ballPosition.x-2{
-//                    dampingFactor -= 0.01
-//                }else if self.scene.ball.position.x > ballPosition.x+2{
-//                    dampingFactor += 0.01
-//                }
-//            }
-//            else{
-//                if self.scene.ball.position.x > ballPosition.x+2{
-//                    dampingFactor -= 0.01
-//                }else if self.scene.ball.position.x < ballPosition.x-2{
-//                    dampingFactor += 0.01
-//                }
-//            }
+            if self.scene.ball.physicsBody!.velocity.dx < 0{
+                if self.scene.ball.position.x < ballPosition.x-1{
+                    dampingFactor -= 0.01
+                    print(dampingFactor)
+                }else if self.scene.ball.position.x > ballPosition.x+1{
+                    dampingFactor += 0.01
+                    print(dampingFactor)
+                }
+            }
+            else{
+                if self.scene.ball.position.x > ballPosition.x+1{
+                    dampingFactor -= 0.01
+                    print(dampingFactor)
+                }else if self.scene.ball.position.x < ballPosition.x-1{
+                    dampingFactor += 0.01
+                    print(dampingFactor)
+                }
+            }
             self.scene.ball.position = ballPosition
             var i = 2
             while i < positions.count{
@@ -286,8 +290,10 @@ extension PlayViewController : ConnectionManagerDelegate {
         if velocity.dx > 0{
             if position.x > self.scene.loadNode.position.x + 0.1{
                 dampingFactor += 0.01
+                print(dampingFactor)
             }else if position.x < self.scene.loadNode.position.x - 0.1{
                 dampingFactor -= 0.01
+                print(dampingFactor)
             }else{
                 gameService.stringSend("tag loaded")
                 scene.restart()
@@ -302,9 +308,11 @@ extension PlayViewController : ConnectionManagerDelegate {
         }else if velocity.dx < 0{
             if position.x < self.scene.loadNode.position.x - 0.1{
                 dampingFactor += 0.01
+                print(dampingFactor)
             }
             else if position.x > self.scene.loadNode.position.x + 0.1{
                 dampingFactor -= 0.01
+                print(dampingFactor)
             }
             else{
                 gameService.stringSend("tag loaded")

@@ -38,6 +38,9 @@ public enum gameType{
 public enum type{
     case timed, points
 }
+public enum pauseAction{
+    case restart, quit
+}
 public enum difficulty{
     case easy,medium,hard
 }

@@ -11,37 +11,32 @@ import UIKit
 class PauseViewController: UIViewController {
     var parent:GameViewController!
     var scene: GameScene!
+    var action: pauseAction = .restart
     
     @IBOutlet weak var Quit: UIButton!
     @IBOutlet weak var Restart: UIButton!
     @IBOutlet weak var Resume: UIButton!
     @IBAction func Quit(sender: AnyObject) {
-        if scene.gType == .twoPhone && !parent.parent.sentPauseAction{
-            parent.parent.gameService.sendPause("quit")
+        if scene.gType == .onePlayer{
+            parent.PauseView.userInteractionEnabled = false
+            parent.QuitWarningText.text = "ARE YOU SURE YOU WANT TO QUIT? THIS WILL COUNT AS A LOSS IN YOUR STATISTICS."
+            parent.QuitWarningView.hidden = false
+            action = .quit
+        }else{
+            pauseQuit()
         }
-        parent.parent.sentPauseAction = true
-        parent.parent.sentPause = false
-        scene = parent.scene
-        parent.PauseView.hidden = true
-        scene.goBackToTitle()
         
     }
     @IBAction func Restart(sender: AnyObject) {
-        if scene.gType == gameType.twoPhone && !parent.parent.sentPauseAction{
-            parent.parent.gameService.sendPause("restart")
+        if scene.gType == .onePlayer{
+            parent.PauseView.userInteractionEnabled = false
+            parent.QuitWarningText.text = "ARE YOU SURE YOU WANT TO RESTART? THIS WILL COUNT AS A LOSS IN YOUR STATISTICS."
+            parent.QuitWarningView.hidden = false
+            action = .restart
         }
-        parent.parent.sentPauseAction = true
-        parent.parent.sentPause = false
-        self.parent.Dimmer?.fadeOut(0.2)
-
-        scene = parent.scene
-        scene.physicsWorld.speed = 1
-        parent.PauseView.hidden = true
-        scene.paused = false
-        scene.restart()
-        scene.userInteractionEnabled = true
-        scene.firstTurn = true
-        scene.isSynced = false
+        else{
+            pauseRestart()
+        }
     }
     @IBAction func Resume(sender: AnyObject) {
         if scene.gType == .twoPhone && !parent.parent.sentPauseAction{
@@ -81,7 +76,33 @@ class PauseViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    func pauseRestart(){
+        if scene.gType == gameType.twoPhone && !parent.parent.sentPauseAction{
+            parent.parent.gameService.sendPause("restart")
+        }
+        parent.parent.sentPauseAction = true
+        parent.parent.sentPause = false
+        self.parent.Dimmer?.fadeOut(0.2)
+        
+        scene = parent.scene
+        scene.physicsWorld.speed = 1
+        parent.PauseView.hidden = true
+        scene.paused = false
+        scene.restart()
+        scene.userInteractionEnabled = true
+        scene.firstTurn = true
+        scene.isSynced = false
+    }
+    func pauseQuit(){
+        if scene.gType == .twoPhone && !parent.parent.sentPauseAction{
+            parent.parent.gameService.sendPause("quit")
+        }
+        parent.parent.sentPauseAction = true
+        parent.parent.sentPause = false
+        scene = parent.scene
+        parent.PauseView.hidden = true
+        scene.goBackToTitle()
+    }
 
     /*
     // MARK: - Navigation
