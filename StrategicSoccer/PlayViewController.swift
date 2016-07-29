@@ -58,7 +58,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        ConnectToAnotherDevice.hidden = true
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

@@ -349,8 +349,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
    
     override func update(currentTime: CFTimeInterval) {
         if gType == .twoPhone && isHost{
-            viewController.parent.gameService.sendPosition(self)
-            viewController.parent.gameService.sendVelocities(self)
+            if loaded{
+                viewController.parent.gameService.sendPosition(self)
+                viewController.parent.gameService.sendVelocities(self)
+            }
             if !loaded{
                 viewController.parent.gameService.sendLoad(loadNode)
             }

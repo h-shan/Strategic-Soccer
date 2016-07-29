@@ -115,7 +115,7 @@ class ConnectionManager : NSObject{
     func stringSend(message: String){
         dispatch_async(dispatch_get_main_queue(), {
             do {
-                try self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, toPeers: self.connectedDevice!, withMode: MCSessionSendDataMode.Reliable)
+                try self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, toPeers: self.connectedDevice!, withMode: MCSessionSendDataMode.Unreliable)
             }
             catch{
                 NSLog("%@","\(error)")

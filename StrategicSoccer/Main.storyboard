@@ -981,10 +981,11 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jS9-Co-kiM">
-                                <rect key="frame" x="109" y="143" width="150" height="34"/>
+                                <rect key="frame" x="94" y="140" width="180" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="VgR-FN-lEF"/>
+                                    <constraint firstAttribute="height" constant="40" id="Q0i-VD-8xE"/>
+                                    <constraint firstAttribute="width" constant="180" id="VgR-FN-lEF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                 <state key="normal" title="SINGLE PLAYER">
@@ -995,7 +996,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rOR-Lg-LEu">
-                                <rect key="frame" x="309" y="143" width="150" height="34"/>
+                                <rect key="frame" x="294" y="140" width="180" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                 <state key="normal" title="TWO PLAYERS">
@@ -1017,7 +1018,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eEW-WU-dEc">
-                                <rect key="frame" x="109" y="217" width="350" height="34"/>
+                                <rect key="frame" x="94" y="220" width="380" height="34"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                 <state key="normal" title="CONNECT TO ANOTHER DEVICE">
