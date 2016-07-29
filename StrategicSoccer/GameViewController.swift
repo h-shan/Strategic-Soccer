@@ -46,6 +46,7 @@ class GameViewController: UIViewController {
     @IBAction func YesQuit(sender: AnyObject){
         QuitWarningView.hidden = true
         PauseView.userInteractionEnabled = true
+        scene.updateStats(false)
         switch(pauseVC.action){
         case .quit:
             pauseVC.pauseQuit()
@@ -63,10 +64,9 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         loadingView.layer.borderWidth = 5
         loadingView.layer.borderColor = UIColor.blackColor().CGColor
-        QuitWarningView.layer.borderWidth = 5
-        QuitWarningView.layer.borderColor = UIColor.blackColor().CGColor
         scene.viewController = self
-        
+        NumberCoins.layer.borderWidth = 5
+        NumberCoins.layer.borderColor = UIColor.blackColor().CGColor
         skView.ignoresSiblingOrder = true
         
         scene.scaleMode = .AspectFill

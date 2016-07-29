@@ -282,31 +282,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             moveTimer?.pause()
             self.userInteractionEnabled = false
         }
-        if gType == .onePlayer{
-            statistics[Stats.totalGames]! += 1
-            switch(AIDifficulty){
-            case 1:
-                statistics[Stats.totalOne]! += 1
-                break
-            case 2:
-                statistics[Stats.totalTwo]! += 1
-                break
-            case 3:
-                statistics[Stats.totalThree]! += 1
-                break
-            case 4:
-                statistics[Stats.totalFour]! += 1
-                break
-            case 5:
-                statistics[Stats.totalFive]! += 1
-                break
-            default:break
-            }
-
-            saveStats()
-        }
-
-        
     }
     func sendPosition(){
         viewController.parent.gameService.sendPosition(self)
@@ -406,7 +381,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if mode.getType() == .timed && !gameEnded{
             showTime()
         }
-        if (goalDelay.getElapsedTime()>2){
+        if (goalDelay.getElapsedTime()>2 && !gameEnded){
             scoreBackground.fadeOut()
             setDynamicStates(true)
             moveTimer?.restart()
@@ -1121,23 +1096,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        addChild(blue)
     }
     func updateStats(won: Bool){
+        statistics[Stats.totalGames]! += 1
         if won{
             statistics[Stats.totalWon]! += 1
         }
         switch(AIDifficulty){
         case 1:
+            statistics[Stats.totalOne]! += 1
             if won{statistics[Stats.oneWon]! += 1}
             break
         case 2:
+            statistics[Stats.totalTwo]! += 1
             if won{statistics[Stats.twoWon]! += 1}
             break
         case 3:
+            statistics[Stats.totalThree]! += 1
             if won{statistics[Stats.threeWon]! += 1}
             break
         case 4:
+            statistics[Stats.totalFour]! += 1
             if won{statistics[Stats.fourWon]! += 1}
             break
         case 5:
+            statistics[Stats.totalFive]! += 1
             if won{statistics[Stats.fiveWon]! += 1}
             break
         default:break
