@@ -9,8 +9,11 @@
 import UIKit
 import SpriteKit
 import MultipeerConnectivity
+import GoogleMobileAds
 
 class GameViewController: UIViewController {
+    var interstitial: GADInterstitial!
+
     var scene: GameScene!
     var parent: PlayViewController!
     var pauseVC: PauseViewController!
@@ -117,7 +120,7 @@ class GameViewController: UIViewController {
             pauseVC.scene = scene
         }
     }
-    func backToTitle(){
+       func backToTitle(){
         navigationController?.popViewControllerAnimated(false)
 
         self.removeFromParentViewController()
@@ -136,8 +139,10 @@ class GameViewController: UIViewController {
         scene.isSynced = false
         scene.loaded = false
         print("GameViewController backToTitle")
+        
     
     }
+    
     func displayEarnings(numberWon: Int){
         addCoinImage("YOU WON ", afterText: String(numberWon), label: NumberCoins, numberLines: 1)
         UIView.animateWithDuration(1,delay:0.3,options: .CurveEaseIn, animations: {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C698CF2DAAF9391C28A595B /* Pods_StrategicSoccer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC28C73467EDC4E8B4DBE998 /* Pods_StrategicSoccer.framework */; };
 		8904A2611D400CDD004D4EC6 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8904A2601D400CDD004D4EC6 /* PlayViewController.swift */; };
 		8904A2631D403472004D4EC6 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8904A2621D403472004D4EC6 /* ConnectionManager.swift */; };
 		8904A2651D414336004D4EC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8904A2641D414336004D4EC6 /* Main.storyboard */; };
@@ -20,6 +21,10 @@
 		89B97F811D20F5DB00588A21 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B97F801D20F5DB00588A21 /* TitleViewController.swift */; };
 		89B97F821D220CAC00588A21 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */; };
 		89B97F861D2221AE00588A21 /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B97F851D2221AE00588A21 /* PauseViewController.swift */; };
+		89BF2EED1D4C46FA00224F5E /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89BF2EEC1D4C46FA00224F5E /* GoogleMobileAds.framework */; };
+		89BF2EF21D4C4D4400224F5E /* AppLovinCustomEventInter.m in Sources */ = {isa = PBXBuildFile; fileRef = 89BF2EF11D4C4D4400224F5E /* AppLovinCustomEventInter.m */; };
+		89BF2EF41D4C4F6700224F5E /* headers in Resources */ = {isa = PBXBuildFile; fileRef = 89BF2EF31D4C4F6700224F5E /* headers */; };
+		89BF2EF61D4C4F7E00224F5E /* libAppLovinSdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89BF2EF51D4C4F7E00224F5E /* libAppLovinSdk.a */; };
 		89EEC9821D234CCF0075A85C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEC9811D234CCF0075A85C /* SettingsViewController.swift */; };
 		89EEC9841D246D8A0075A85C /* ChangePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEC9831D246D8A0075A85C /* ChangePlayerViewController.swift */; };
 		89EFF7BD1D1208C3004DEA93 /* GoalPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */; };
@@ -27,6 +32,8 @@
 		89EFF7C11D122FBA004DEA93 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EFF7C01D122FBA004DEA93 /* Ball.swift */; };
 		89F6A2BE1D30CD610090618E /* ChangeTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F6A2BD1D30CD610090618E /* ChangeTimeViewController.swift */; };
 		89F6A2C01D30DFDE0090618E /* ChangePointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F6A2BF1D30DFDE0090618E /* ChangePointViewController.swift */; };
+		9B1DE3ABE73C4090FBB1E551 /* Pods_StrategicSoccer_StrategicSoccerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 837200584C8A283C582EA5C4 /* Pods_StrategicSoccer_StrategicSoccerTests.framework */; };
+		B06F1AF1BF1C67B4CEDD0926 /* Pods_StrategicSoccer_StrategicSoccerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288537DC0A7CF065D8747AE7 /* Pods_StrategicSoccer_StrategicSoccerUITests.framework */; };
 		DC83CF2F1D10CB780044D0E1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83CF2E1D10CB780044D0E1 /* Player.swift */; };
 		DC83DCFC1D1089EA00E1C3F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DCFB1D1089EA00E1C3F8 /* AppDelegate.swift */; };
 		DC83DD021D1089EA00E1C3F8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DD011D1089EA00E1C3F8 /* GameViewController.swift */; };
@@ -55,6 +62,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0DA77BB0E799ACBEF903511C /* Pods-StrategicSoccer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StrategicSoccer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StrategicSoccer/Pods-StrategicSoccer.debug.xcconfig"; sourceTree = "<group>"; };
+		288537DC0A7CF065D8747AE7 /* Pods_StrategicSoccer_StrategicSoccerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StrategicSoccer_StrategicSoccerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		321D27511DFE81CC7354706C /* Pods-StrategicSoccer-StrategicSoccerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StrategicSoccer-StrategicSoccerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StrategicSoccer-StrategicSoccerTests/Pods-StrategicSoccer-StrategicSoccerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		49F59674154E12C25A7B075C /* Pods-StrategicSoccer-StrategicSoccerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StrategicSoccer-StrategicSoccerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StrategicSoccer-StrategicSoccerTests/Pods-StrategicSoccer-StrategicSoccerTests.release.xcconfig"; sourceTree = "<group>"; };
+		837200584C8A283C582EA5C4 /* Pods_StrategicSoccer_StrategicSoccerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StrategicSoccer_StrategicSoccerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		87D30EF8FB79434E51746B1C /* Pods-StrategicSoccer-StrategicSoccerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StrategicSoccer-StrategicSoccerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StrategicSoccer-StrategicSoccerUITests/Pods-StrategicSoccer-StrategicSoccerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8904A2601D400CDD004D4EC6 /* PlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		8904A2621D403472004D4EC6 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		8904A2641D414336004D4EC6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -67,12 +80,20 @@
 		898DE5A71D3F3DCA00602111 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		89B97F801D20F5DB00588A21 /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		89B97F851D2221AE00588A21 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
+		89BF2EEC1D4C46FA00224F5E /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		89BF2EF01D4C4D4400224F5E /* StrategicSoccer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StrategicSoccer-Bridging-Header.h"; sourceTree = "<group>"; };
+		89BF2EF11D4C4D4400224F5E /* AppLovinCustomEventInter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLovinCustomEventInter.m; sourceTree = "<group>"; };
+		89BF2EF31D4C4F6700224F5E /* headers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = headers; sourceTree = "<group>"; };
+		89BF2EF51D4C4F7E00224F5E /* libAppLovinSdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAppLovinSdk.a; sourceTree = "<group>"; };
 		89EEC9811D234CCF0075A85C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		89EEC9831D246D8A0075A85C /* ChangePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePlayerViewController.swift; sourceTree = "<group>"; };
 		89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalPost.swift; sourceTree = "<group>"; };
 		89EFF7C01D122FBA004DEA93 /* Ball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
 		89F6A2BD1D30CD610090618E /* ChangeTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeTimeViewController.swift; sourceTree = "<group>"; };
 		89F6A2BF1D30DFDE0090618E /* ChangePointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePointViewController.swift; sourceTree = "<group>"; };
+		BE352F119E300728D5159C3B /* Pods-StrategicSoccer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StrategicSoccer.release.xcconfig"; path = "Pods/Target Support Files/Pods-StrategicSoccer/Pods-StrategicSoccer.release.xcconfig"; sourceTree = "<group>"; };
+		CC6D0429B012160CB1DF893D /* Pods-StrategicSoccer-StrategicSoccerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StrategicSoccer-StrategicSoccerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StrategicSoccer-StrategicSoccerUITests/Pods-StrategicSoccer-StrategicSoccerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		DC28C73467EDC4E8B4DBE998 /* Pods_StrategicSoccer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StrategicSoccer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC83CF2E1D10CB780044D0E1 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		DC83DCF81D1089EA00E1C3F8 /* Strategic Soccer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Strategic Soccer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC83DCFB1D1089EA00E1C3F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +116,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89BF2EF61D4C4F7E00224F5E /* libAppLovinSdk.a in Frameworks */,
+				89BF2EED1D4C46FA00224F5E /* GoogleMobileAds.framework in Frameworks */,
+				6C698CF2DAAF9391C28A595B /* Pods_StrategicSoccer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B1DE3ABE73C4090FBB1E551 /* Pods_StrategicSoccer_StrategicSoccerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,19 +134,46 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B06F1AF1BF1C67B4CEDD0926 /* Pods_StrategicSoccer_StrategicSoccerUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		29FA6145F9384017A35C3131 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0DA77BB0E799ACBEF903511C /* Pods-StrategicSoccer.debug.xcconfig */,
+				BE352F119E300728D5159C3B /* Pods-StrategicSoccer.release.xcconfig */,
+				321D27511DFE81CC7354706C /* Pods-StrategicSoccer-StrategicSoccerTests.debug.xcconfig */,
+				49F59674154E12C25A7B075C /* Pods-StrategicSoccer-StrategicSoccerTests.release.xcconfig */,
+				87D30EF8FB79434E51746B1C /* Pods-StrategicSoccer-StrategicSoccerUITests.debug.xcconfig */,
+				CC6D0429B012160CB1DF893D /* Pods-StrategicSoccer-StrategicSoccerUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		93095D5E5CA2F103FB18E48E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DC28C73467EDC4E8B4DBE998 /* Pods_StrategicSoccer.framework */,
+				837200584C8A283C582EA5C4 /* Pods_StrategicSoccer_StrategicSoccerTests.framework */,
+				288537DC0A7CF065D8747AE7 /* Pods_StrategicSoccer_StrategicSoccerUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DC83DCEF1D1089E900E1C3F8 = {
 			isa = PBXGroup;
 			children = (
+				89BF2EEC1D4C46FA00224F5E /* GoogleMobileAds.framework */,
 				DC83DCFA1D1089EA00E1C3F8 /* StrategicSoccer */,
 				DC83DD131D1089EA00E1C3F8 /* StrategicSoccerTests */,
 				DC83DD1E1D1089EA00E1C3F8 /* StrategicSoccerUITests */,
 				DC83DCF91D1089EA00E1C3F8 /* Products */,
+				29FA6145F9384017A35C3131 /* Pods */,
+				93095D5E5CA2F103FB18E48E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,15 +191,19 @@
 			isa = PBXGroup;
 			children = (
 				DC83DCFB1D1089EA00E1C3F8 /* AppDelegate.swift */,
+				89BF2EF11D4C4D4400224F5E /* AppLovinCustomEventInter.m */,
+				89BF2EF01D4C4D4400224F5E /* StrategicSoccer-Bridging-Header.h */,
 				DC83DD061D1089EA00E1C3F8 /* Assets.xcassets */,
 				89B97F801D20F5DB00588A21 /* TitleViewController.swift */,
 				8904A2601D400CDD004D4EC6 /* PlayViewController.swift */,
 				8904A2641D414336004D4EC6 /* Main.storyboard */,
 				89EEC9811D234CCF0075A85C /* SettingsViewController.swift */,
+				89BF2EF51D4C4F7E00224F5E /* libAppLovinSdk.a */,
 				8904A2621D403472004D4EC6 /* ConnectionManager.swift */,
 				DC83DD011D1089EA00E1C3F8 /* GameViewController.swift */,
 				89B97F851D2221AE00588A21 /* PauseViewController.swift */,
 				DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */,
+				89BF2EF31D4C4F6700224F5E /* headers */,
 				898DE5A71D3F3DCA00602111 /* StatisticsViewController.swift */,
 				89EEC9831D246D8A0075A85C /* ChangePlayerViewController.swift */,
 				89F6A2BD1D30CD610090618E /* ChangeTimeViewController.swift */,
@@ -193,9 +249,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DC83DD241D1089EA00E1C3F8 /* Build configuration list for PBXNativeTarget "StrategicSoccer" */;
 			buildPhases = (
+				9E7722D9FED6E375395E950F /* [CP] Check Pods Manifest.lock */,
 				DC83DCF41D1089EA00E1C3F8 /* Sources */,
 				DC83DCF51D1089EA00E1C3F8 /* Frameworks */,
 				DC83DCF61D1089EA00E1C3F8 /* Resources */,
+				79A87F80E886BADDFFDF1A2B /* [CP] Embed Pods Frameworks */,
+				CF1EF97A817B501D5D090C98 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -210,9 +269,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DC83DD271D1089EA00E1C3F8 /* Build configuration list for PBXNativeTarget "StrategicSoccerTests" */;
 			buildPhases = (
+				85223D347712B6E839851EC1 /* [CP] Check Pods Manifest.lock */,
 				DC83DD0C1D1089EA00E1C3F8 /* Sources */,
 				DC83DD0D1D1089EA00E1C3F8 /* Frameworks */,
 				DC83DD0E1D1089EA00E1C3F8 /* Resources */,
+				D55B9697533513C593191552 /* [CP] Embed Pods Frameworks */,
+				EEAC356FD581BB485C78CBE0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -228,9 +290,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DC83DD2A1D1089EA00E1C3F8 /* Build configuration list for PBXNativeTarget "StrategicSoccerUITests" */;
 			buildPhases = (
+				27F651EC7FA44B34A78AB844 /* [CP] Check Pods Manifest.lock */,
 				DC83DD171D1089EA00E1C3F8 /* Sources */,
 				DC83DD181D1089EA00E1C3F8 /* Frameworks */,
 				DC83DD191D1089EA00E1C3F8 /* Resources */,
+				EEB79251CBA5AEFD6187C5FB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -294,6 +358,7 @@
 				DC83DD0A1D1089EA00E1C3F8 /* LaunchScreen.storyboard in Resources */,
 				DC83DD071D1089EA00E1C3F8 /* Assets.xcassets in Resources */,
 				8904A2651D414336004D4EC6 /* Main.storyboard in Resources */,
+				89BF2EF41D4C4F6700224F5E /* headers in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +377,129 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		27F651EC7FA44B34A78AB844 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		79A87F80E886BADDFFDF1A2B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StrategicSoccer/Pods-StrategicSoccer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		85223D347712B6E839851EC1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9E7722D9FED6E375395E950F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CF1EF97A817B501D5D090C98 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StrategicSoccer/Pods-StrategicSoccer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D55B9697533513C593191552 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StrategicSoccer-StrategicSoccerTests/Pods-StrategicSoccer-StrategicSoccerTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EEAC356FD581BB485C78CBE0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StrategicSoccer-StrategicSoccerTests/Pods-StrategicSoccer-StrategicSoccerTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EEB79251CBA5AEFD6187C5FB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StrategicSoccer-StrategicSoccerUITests/Pods-StrategicSoccer-StrategicSoccerUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DC83DCF41D1089EA00E1C3F8 /* Sources */ = {
@@ -338,6 +526,7 @@
 				89F6A2BE1D30CD610090618E /* ChangeTimeViewController.swift in Sources */,
 				892182911D34C67000A2F274 /* MiniGameViewController.swift in Sources */,
 				DCFEEDD41D14645600D4A259 /* Timer.swift in Sources */,
+				89BF2EF21D4C4D4400224F5E /* AppLovinCustomEventInter.m in Sources */,
 				8904A2611D400CDD004D4EC6 /* PlayViewController.swift in Sources */,
 				893B41C21D2E221B00E191BE /* ScoreBoard.swift in Sources */,
 			);
@@ -474,36 +663,60 @@
 		};
 		DC83DD251D1089EA00E1C3F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0DA77BB0E799ACBEF903511C /* Pods-StrategicSoccer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = StrategicSoccer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/StrategicSoccer",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.msjhs.StrategicSoccer;
 				PRODUCT_NAME = "Strategic Soccer";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "StrategicSoccer/StrategicSoccer-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		DC83DD261D1089EA00E1C3F8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE352F119E300728D5159C3B /* Pods-StrategicSoccer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = StrategicSoccer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/StrategicSoccer",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.msjhs.StrategicSoccer;
 				PRODUCT_NAME = "Strategic Soccer";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "StrategicSoccer/StrategicSoccer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 		DC83DD281D1089EA00E1C3F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 321D27511DFE81CC7354706C /* Pods-StrategicSoccer-StrategicSoccerTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -517,6 +730,7 @@
 		};
 		DC83DD291D1089EA00E1C3F8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49F59674154E12C25A7B075C /* Pods-StrategicSoccer-StrategicSoccerTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = StrategicSoccerTests/Info.plist;
@@ -529,6 +743,7 @@
 		};
 		DC83DD2B1D1089EA00E1C3F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87D30EF8FB79434E51746B1C /* Pods-StrategicSoccer-StrategicSoccerUITests.debug.xcconfig */;
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = StrategicSoccerUITests/Info.plist;
@@ -541,6 +756,7 @@
 		};
 		DC83DD2C1D1089EA00E1C3F8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC6D0429B012160CB1DF893D /* Pods-StrategicSoccer-StrategicSoccerUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = StrategicSoccerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

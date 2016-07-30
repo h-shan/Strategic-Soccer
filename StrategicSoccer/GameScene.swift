@@ -506,6 +506,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func endGame(){
+        
         goalDelay.reset()
         gameEnded = true
         setDynamicStates(false)

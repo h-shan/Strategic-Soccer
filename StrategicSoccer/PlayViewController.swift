@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 var dampingFactor:CGFloat = 0.5
 class PlayViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     var scene: GameScene!
@@ -20,6 +21,8 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     var sentData = false
     var sentPause = false
     var sentPauseAction = false
+    var interstitial: GADInterstitial!
+
     @IBOutlet weak var SinglePlayer: UIButton!
     @IBOutlet weak var TwoPlayers: UIButton!
     @IBOutlet weak var ConnectToAnotherDevice: UIButton!
@@ -58,6 +61,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        createAndLoadInterstitial()
         ConnectToAnotherDevice.hidden = true
     }
     override func viewWillAppear(animated: Bool) {
@@ -76,7 +80,21 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         scene.countryA = parent.playerA
         scene.countryB = parent.playerB
         scene.addPlayers()
+        if interstitial.isReady{
+            interstitial.presentFromRootViewController(self)
+        }else{
+            print("Ad wasn't ready")
+        }
     }
+    private func createAndLoadInterstitial() {
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        let request = GADRequest()
+        // Request test ads on devices you specify. Your test device ID is printed to the console when
+        // an ad request is made.
+        request.testDevices = [ kGADSimulatorID, "2077ef9a63d2b398840261c8221a0c9b" ]
+        interstitial.loadRequest(request)
+    }
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let destinationVC = segue.destinationViewController as! GameViewController
         destinationVC.scene = scene

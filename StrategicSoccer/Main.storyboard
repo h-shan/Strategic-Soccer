@@ -82,7 +82,7 @@
                                             <constraint firstAttribute="width" secondItem="pzG-xD-wJr" secondAttribute="height" multiplier="1:1" id="JxJ-ht-mO4"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="KwR-5i-HHG">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="KwR-5i-HHG">
                                         <rect key="frame" x="98" y="89" width="172" height="26.5"/>
                                         <attributedString key="attributedText">
                                             <fragment content="F">
