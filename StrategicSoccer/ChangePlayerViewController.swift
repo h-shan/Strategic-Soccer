@@ -45,7 +45,7 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         navigationController?.popViewControllerAnimated(true)
     }
     @IBAction func YesButton(sender: AnyObject){
-        if coins > 20{
+        if coins >= 20{
             coins -= 20
             boughtCell.enable(true)
             for subview in boughtCell.contentView.subviews{

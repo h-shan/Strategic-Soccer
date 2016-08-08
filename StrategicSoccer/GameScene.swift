@@ -37,6 +37,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playerSelected = false
     var goalA : Bool?
     var ball = Ball()
+    var timeLimit:Double = 2.5
+
 
     var nameNode = [String:SKSpriteNode]()
     var playerA1 = Player()
@@ -192,6 +194,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         loadNode.physicsBody!.collisionBitMask = 5
         loadNode.physicsBody!.contactTestBitMask = 5
         loadNode.name = "loadNode"
+        
+        if AIDifficulty == 5{
+            timeLimit = 4.5
+        }
         
         
     }
@@ -640,6 +646,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     func computerMove(){
+        if moveTimer?.getElapsedTime()<0.1{
+            return
+        }
         if firstTurn{
             for player in teamA{
                 if abs(player.physicsBody!.velocity.dx) > 30 || abs(player.physicsBody!.velocity.dy) > 30{
@@ -648,24 +657,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
-        let checkInterval = 0.2
-        let timeLimit = 2.5
+        //let checkInterval = 0.2
         
-        if AIDifficulty >= 3 {
-            if (moveTimer?.getElapsedTime())!>checkInterval*computerCheckPoint && !firstTurn{
+//        if AIDifficulty >= 3 {
+//            if (moveTimer?.getElapsedTime())!>checkInterval*computerCheckPoint && !firstTurn{
+//                if straightShot(){
+//                    switchTurns()
+//                    computerCheckPoint = 2
+//                    return
+//                }
+//                if AIDifficulty >= 4{
+//                    if saveGoal(){
+//                        switchTurns()
+//                        computerCheckPoint = 2
+//                        return
+//                    }
+//                }
+//                computerCheckPoint += 1
+//            }
+//        }
+        if AIDifficulty >= 3{
+            if !firstTurn{
                 if straightShot(){
                     switchTurns()
-                    computerCheckPoint = 2
                     return
                 }
                 if AIDifficulty >= 4{
                     if saveGoal(){
                         switchTurns()
-                        computerCheckPoint = 2
                         return
                     }
                 }
-                computerCheckPoint += 1
             }
         }
         if moveTimer?.getElapsedTime()>timeLimit{
@@ -718,7 +740,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             var multiplier:CGFloat = 0.3
             var minBar = Int(arc4random_uniform(4))
             while (multiplier <= 0.6){
-                let predictedBallPosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*multiplier, ball.position.y + ball.physicsBody!.velocity.dy*multiplier)
+                let predictedBallPosition = CGPointMake(ball.position.x + ball.physicsBody!.velocity.dx*multiplier*0.9, ball.position.y + ball.physicsBody!.velocity.dy*multiplier*0.9)
                 if !frame.contains(predictedBallPosition){
                     return false
                 }
@@ -879,7 +901,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return false
     }
     func dampVelocity(velocity: CGVector) -> CGVector{
-        return dampVelocity(velocity, maxX: 500, maxY: 300)
+        return dampVelocity(velocity, maxX: 1000, maxY: 500)
     }
     func dampVelocity(velocity: CGVector, maxX: CGFloat, maxY: CGFloat) -> CGVector{
         var dampedVelocity = velocity
