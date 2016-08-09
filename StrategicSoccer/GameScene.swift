@@ -195,9 +195,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         loadNode.physicsBody!.contactTestBitMask = 5
         loadNode.name = "loadNode"
         
-        if AIDifficulty == 5{
-            timeLimit = 4.5
-        }
+        
         
         
     }
@@ -283,21 +281,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
-        restart()
         if gType == .twoPhone{
             moveTimer?.pause()
             self.userInteractionEnabled = false
         }
+        if gType == .onePlayer && AIDifficulty == 5{
+            timeLimit = 4.5
+        }
+        restart()
+        updateLighting()
+        NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: #selector(updateLighting), userInfo: nil, repeats: false)
     }
     func sendPosition(){
         viewController.parent.gameService.sendPosition(self)
     }
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
-        {
-       /* Called when a touch begins */
-        
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
         for touch in touches {
-            
             let location = touch.locationInNode(self)
             let node = nodeAtPoint(location)
 
@@ -396,11 +395,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if mode.getType() == .timed{
                 gameTimer.start()
             }
-//            for child in children{
-//                if child.name == "blue"{
-//                    child.removeFromParent()
-//                }
-//            }
             setPosition()
             userInteractionEnabled = true
             if ownGoal{
@@ -584,7 +578,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if mode.getType() == .timed{
             gameTimer.restart()
         }
-        updateLighting()
         computerCheckPoint = 2
         setPosition()
         setDynamicStates(false)
@@ -601,8 +594,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         gameEnded = false
         userInteractionEnabled = true
-        print("restart")
         scoreBoard.label.text = "0    0"
+        updateLighting()
+
     }
     func addPlayers(){
         for child in children{
