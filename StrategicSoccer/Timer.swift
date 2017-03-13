@@ -10,7 +10,7 @@ import Foundation
 
 class Timer{
     
-    var startTime:NSDate?
+    var startTime:Date?
     var elapsedTime:Double
     var started:Bool
     
@@ -25,7 +25,7 @@ class Timer{
         guard !started else{
             return
         }
-        startTime = NSDate()
+        startTime = Date()
         started = true
     }
     
@@ -46,7 +46,7 @@ class Timer{
     //getElapsedTime() returns the number of seconds that the timer has been running since the start time. Calling this function does not stop the timer.
     
     func getElapsedTime() -> Double{
-        return started ? NSDate().timeIntervalSinceDate(startTime!) + elapsedTime : elapsedTime
+        return started ? Date().timeIntervalSince(startTime!) + elapsedTime : elapsedTime
     }
     
     //restart() calls starts a clean timer running.
@@ -56,9 +56,9 @@ class Timer{
         self.start()
     }
     
-    func secondsToString (seconds : NSTimeInterval) -> (String) {
+    func secondsToString (_ seconds : TimeInterval) -> (String) {
         let minutes = Int(seconds/60)
-        let seconds = Int(seconds%60)
+        let seconds = Int(seconds.truncatingRemainder(dividingBy: 60))
         if seconds < 10 {
             return String.localizedStringWithFormat("%d:0%d", minutes,seconds)
         }

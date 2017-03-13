@@ -27,39 +27,39 @@ struct Stats{
 
 }
 class Unlockable: NSObject, NSCoding{
-    static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-    static let FlagURL = DocumentsDirectory.URLByAppendingPathComponent("flags")
-    static let CoinURL = DocumentsDirectory.URLByAppendingPathComponent("coins")
-    static let StatsURl = DocumentsDirectory.URLByAppendingPathComponent("statistics")
+    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+    static let FlagURL = DocumentsDirectory.appendingPathComponent("flags")
+    static let CoinURL = DocumentsDirectory.appendingPathComponent("coins")
+    static let StatsURl = DocumentsDirectory.appendingPathComponent("statistics")
     var unlockedFlags: [String] = ["UNITED STATES", "FRANCE", "CHINA", "JAPAN","CANADA","GERMANY", "MEXICO", "AUSTRALIA","SPAIN","ITALY"]
     var numberCoins = 50
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
-        if aDecoder.decodeObjectForKey(PropertyKey.flagKey) == nil{
-            aDecoder.encodeObject(unlockedFlags, forKey: PropertyKey.flagKey)
+        if aDecoder.decodeObject(forKey: PropertyKey.flagKey) == nil{
+            aDecoder.encode(unlockedFlags, forKey: PropertyKey.flagKey)
         }else{
-            unlockedFlags = aDecoder.decodeObjectForKey(PropertyKey.flagKey) as! [String]
+            unlockedFlags = aDecoder.decodeObject(forKey: PropertyKey.flagKey) as! [String]
         }
-        if aDecoder.decodeObjectForKey(PropertyKey.coinKey) == nil{
-            aDecoder.encodeObject(numberCoins, forKey: PropertyKey.coinKey)
+        if aDecoder.decodeObject(forKey: PropertyKey.coinKey) == nil{
+            aDecoder.encode(numberCoins, forKey: PropertyKey.coinKey)
         }else{
-            numberCoins = aDecoder.decodeObjectForKey(PropertyKey.coinKey) as! Int
+            numberCoins = aDecoder.decodeObject(forKey: PropertyKey.coinKey) as! Int
         }
-        if aDecoder.decodeObjectForKey(PropertyKey.statsKey) == nil{
-            aDecoder.encodeObject(statistics, forKey: PropertyKey.statsKey)
+        if aDecoder.decodeObject(forKey: PropertyKey.statsKey) == nil{
+            aDecoder.encode(statistics, forKey: PropertyKey.statsKey)
         }else{
-            statistics = aDecoder.decodeObjectForKey(PropertyKey.statsKey) as! [String:Int]
+            statistics = aDecoder.decodeObject(forKey: PropertyKey.statsKey) as! [String:Int]
         }
     }
-    func encodeWithCoder(aCoder: NSCoder){
-        aCoder.encodeObject(unlockedFlags, forKey: PropertyKey.flagKey)
-        aCoder.encodeObject(numberCoins, forKey: PropertyKey.coinKey)
-        aCoder.encodeObject(statistics, forKey: PropertyKey.statsKey)
+    func encode(with aCoder: NSCoder){
+        aCoder.encode(unlockedFlags, forKey: PropertyKey.flagKey)
+        aCoder.encode(numberCoins, forKey: PropertyKey.coinKey)
+        aCoder.encode(statistics, forKey: PropertyKey.statsKey)
     }
 }
 func saveCoins(){
-    NSKeyedArchiver.archiveRootObject(coins, toFile: Unlockable.CoinURL.path!)
+    NSKeyedArchiver.archiveRootObject(coins, toFile: Unlockable.CoinURL.path)
 }
 func saveStats(){
-    NSKeyedArchiver.archiveRootObject(statistics, toFile: Unlockable.StatsURl.path!)
+    NSKeyedArchiver.archiveRootObject(statistics, toFile: Unlockable.StatsURl.path)
 }

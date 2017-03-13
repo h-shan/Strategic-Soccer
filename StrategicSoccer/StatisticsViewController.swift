@@ -39,14 +39,14 @@ class StatisticsViewController: UIViewController{
     @IBOutlet weak var BackButtonWidth: NSLayoutConstraint!
     @IBOutlet weak var BackButtonHeight: NSLayoutConstraint!
     
-    @IBAction func BackButton(sender:AnyObject){
-        navigationController?.popViewControllerAnimated(true)
+    @IBAction func BackButton(_ sender:AnyObject){
+        navigationController?.popViewController(animated: true)
     }
     @IBAction func resetStatistics(){
-        ResetWarning.hidden = false
+        ResetWarning.isHidden = false
     }
     @IBAction func NoTapped(){
-        ResetWarning.hidden = true
+        ResetWarning.isHidden = true
     }
     @IBAction func YesTapped(){
         for key in statistics{
@@ -54,11 +54,11 @@ class StatisticsViewController: UIViewController{
             saveStats()
         }
         copyData()
-        ResetWarning.hidden = true
+        ResetWarning.isHidden = true
     }
-    override func viewWillAppear(animated:Bool){
+    override func viewWillAppear(_ animated:Bool){
         super.viewWillAppear(animated)
-        ResetWarning.hidden = true
+        ResetWarning.isHidden = true
         setBackground()
         copyData()
         BackButtonWidth.constant = 80/568*screenWidth
@@ -66,9 +66,9 @@ class StatisticsViewController: UIViewController{
         let buttons: [UIButton] = [ResetStatistics, NoButton, YesButton]
         formatMenuButtons(buttons)
         ResetWarning.layer.borderWidth = 5
-        ResetWarning.layer.borderColor = UIColor.blackColor().CGColor
+        ResetWarning.layer.borderColor = UIColor.black.cgColor
         StatsView.layer.borderWidth = 5
-        StatsView.layer.borderColor = UIColor.blackColor().CGColor
+        StatsView.layer.borderColor = UIColor.black.cgColor
         ButtonSpacing1.constant = 30/568*screenWidth
         ButtonSpacing2.constant = 50/568*screenWidth
         ButtonSpacing3.constant = 50/568*screenWidth
@@ -95,7 +95,7 @@ class StatisticsViewController: UIViewController{
         WP5.text = formatPercentage(statistics[Stats.fiveWon]!, total: statistics[Stats.totalFive]!)
         WPT.text = formatPercentage(statistics[Stats.totalWon]!, total: statistics[Stats.totalGames]!)
     }
-    func formatPercentage(won: Int, total: Int) -> String{
+    func formatPercentage(_ won: Int, total: Int) -> String{
         if won == 0{
             return "0%"
         }

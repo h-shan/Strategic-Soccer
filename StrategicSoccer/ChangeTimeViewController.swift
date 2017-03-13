@@ -14,7 +14,7 @@ class ChangeTimeViewController: UIViewController, UITableViewDelegate, UITableVi
     let fiveMinKey = "5 MIN"
     let tenMinKey = "10 MIN"
     var items: [String]!
-    var parent: SettingsViewController!
+    var parentVC: SettingsViewController!
     var timedMode: Mode?
     
     @IBOutlet var timeOptions: UITableView!
@@ -22,7 +22,7 @@ class ChangeTimeViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.timeOptions.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.timeOptions.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         items = [oneMinKey, threeMinKey, fiveMinKey,tenMinKey]
         // Do any additional setup after loading the view.
         timeOptions.showsVerticalScrollIndicator = false
@@ -32,42 +32,42 @@ class ChangeTimeViewController: UIViewController, UITableViewDelegate, UITableVi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         cell.textLabel?.text = self.items[indexPath.row]
         cell.textLabel?.font = optima
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        parent.pointVC.pointOptions.selectRowAtIndexPath(nil, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        parentVC.pointVC.pointOptions.selectRow(at: nil, animated: false, scrollPosition: UITableViewScrollPosition.middle)
         timedMode = Mode(rawValue: indexPath.row)
-        parent.defaultMode = timedMode
+        parentVC.defaultMode = timedMode
         
-        _ = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(hideView), userInfo: nil, repeats: false)
+        _ = Foundation.Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(hideView), userInfo: nil, repeats: false)
 
     }
     func hideView (){
-        self.parent.TimeView.hidden = true
-        parent.modeButtonGroup.selectButton(parent.ModeTimed)
-        parent.updateModeLabel()
+        self.parentVC.TimeView.isHidden = true
+        parentVC.modeButtonGroup.selectButton(parentVC.ModeTimed)
+        parentVC.updateModeLabel()
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        var indexPath: NSIndexPath?
+        var indexPath: IndexPath?
         
-        if parent.defaultMode!.getType() == type.timed{
-            indexPath = NSIndexPath(forRow: parent.defaultMode.rawValue, inSection: 0)
+        if parentVC.defaultMode!.getType() == type.timed{
+            indexPath = IndexPath(row: parentVC.defaultMode.rawValue, section: 0)
             if indexPath != nil{
-                timeOptions.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+                timeOptions.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.middle)
             }
         }
     }
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
     }

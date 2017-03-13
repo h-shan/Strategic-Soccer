@@ -10,17 +10,17 @@ import SpriteKit
 
 class GoalPost: SKSpriteNode {
     
-    init(sender: SKScene, actualSize: CGSize){
+    init(actualSize: CGSize){
         let texture = SKTexture(imageNamed: "GoalPost")
-        super.init(texture: texture, color: UIColor.redColor(), size: actualSize)
+        super.init(texture: texture, color: UIColor.red, size: actualSize)
         
         self.name = "goalPost"
         self.zPosition=2
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: actualSize)
+        self.physicsBody = SKPhysicsBody(rectangleOf: actualSize)
         
         let body = self.physicsBody!
         body.linearDamping = 0
-        body.dynamic = false
+        body.isDynamic = false
         body.usesPreciseCollisionDetection = true
         body.restitution = 1
     }

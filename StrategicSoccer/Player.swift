@@ -16,14 +16,14 @@ class Player: SKSpriteNode {
     init(){
         mTexture = SKTexture(imageNamed: "BRAZIL")
         mTeamA = false
-        super.init(texture: mTexture, color: UIColor.clearColor(), size: mTexture.size())
+        super.init(texture: mTexture, color: UIColor.clear, size: mTexture.size())
     }
     init(teamA: Bool, country: String, sender: GameScene, name: String){
-        playerSize = CGSizeMake(120*scalerX, 120*scalerX)
+        playerSize = CGSize(width: 120*scalerX, height: 120*scalerX)
         mTeamA = teamA
         mTexture = SKTexture(imageNamed: country)
         //mTexture = SKTexture(image: UIImage(imageLiteral: country))
-        super.init(texture: mTexture, color: UIColor.clearColor(), size:playerSize)
+        super.init(texture: mTexture, color: UIColor.clear, size:playerSize)
         if teamA{
             zRotation = CGFloat(M_PI*1.5)
         }
@@ -43,10 +43,10 @@ class Player: SKSpriteNode {
         body.allowsRotation = false
     }
     init(country: String, sender: Game1Scene){
-        playerSize = CGSizeMake(120*scalerX, 120*scalerX)
+        playerSize = CGSize(width: 120*scalerX, height: 120*scalerX)
         mTexture = SKTexture(imageNamed: country)
         mTeamA = true
-        super.init(texture: mTexture, color: UIColor.clearColor(), size: playerSize)
+        super.init(texture: mTexture, color: UIColor.clear, size: playerSize)
         zRotation = CGFloat(M_PI*1.5)
         self.physicsBody = SKPhysicsBody(circleOfRadius: playerSize.width*5/12)
         self.name = "player"
@@ -60,7 +60,7 @@ class Player: SKSpriteNode {
         body.allowsRotation = false
     }
     
-    func setLighting(bright:Bool){
+    func setLighting(_ bright:Bool){
         if(bright){
             changeColorBright()
         }else{
@@ -70,12 +70,12 @@ class Player: SKSpriteNode {
     }
     
     func changeColorBright(){
-        self.runAction(SKAction.colorizeWithColor(UIColor.grayColor(), colorBlendFactor: 0.9, duration: 0))
+        self.run(SKAction.colorize(with: UIColor.gray, colorBlendFactor: 0.9, duration: 0))
         
     }
     
     func changeColorDark(){
-        self.runAction(SKAction.colorizeWithColor(UIColor.grayColor(), colorBlendFactor: -0.9, duration: 0))
+        self.run(SKAction.colorize(with: UIColor.gray, colorBlendFactor: -0.9, duration: 0))
         
     }
     

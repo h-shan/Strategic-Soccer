@@ -18,16 +18,16 @@ class Game1Scene : SKScene{
     var goalPostA2: GoalPost!
     var goalPostB1: GoalPost!
     var goalPostB2: GoalPost!
-    var ball: Ball!
+    var ball = Ball()
     var players = [Player]()
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "SoccerField")
         addChild(background)
-        let actualSize = CGSizeMake(80/568*self.frame.midX, 5/568*self.frame.midX)
-        goalPostA1 = GoalPost(sender: self, actualSize: actualSize)
-        goalPostA2 = GoalPost(sender: self, actualSize: actualSize)
-        goalPostB1 = GoalPost(sender: self, actualSize: actualSize)
-        goalPostB2 = GoalPost(sender: self, actualSize: actualSize)
+        let actualSize = CGSize(width: 80/568*self.frame.midX, height: 5/568*self.frame.midX)
+        goalPostA1 = GoalPost(actualSize: actualSize)
+        goalPostA2 = GoalPost(actualSize: actualSize)
+        goalPostB1 = GoalPost(actualSize: actualSize)
+        goalPostB2 = GoalPost(actualSize: actualSize)
         goalPostA1.position = CGPoint(x: 40/568*frame.midX, y: frame.midY*440/320)
         goalPostA2.position = CGPoint(x: 40/568*frame.midX, y: frame.midY*200/320)
         goalPostB1.position = CGPoint(x: 1096/568*frame.midX, y: frame.midY*440/320)
@@ -43,8 +43,7 @@ class Game1Scene : SKScene{
         for player in players{
             addChild(player)
         }
-        ball = Ball(scene: self)
-        ball.position = CGPointMake(frame.midX, frame.midY)
+        ball.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(ball)
     }
 }

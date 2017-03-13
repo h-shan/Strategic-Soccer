@@ -21,10 +21,10 @@ class buttonGroup{
     init(buttons:Set<UIButton>){
         self.buttons = buttons
     }
-    func addButton(button: UIButton){
+    func addButton(_ button: UIButton){
         buttons.insert(button)
     }
-    func selectButton(button: UIButton){
+    func selectButton(_ button: UIButton){
         if selectedButton != nil{
             selectedButton!.unselectButton()
         }
@@ -44,7 +44,7 @@ class SettingsViewController: UIViewController {
     var defaultAI: Int!
     var defaultSensitivity: Float!
 
-    var parent: TitleViewController!
+    var parentVC: TitleViewController!
     var timeVC: ChangeTimeViewController!
     var pointVC: ChangePointViewController!
     
@@ -75,7 +75,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var SensitivityLabel: UILabel!
     
    
-    @IBAction func AIDifficulty(sender: UIButton){
+    @IBAction func AIDifficulty(_ sender: UIButton){
         switch(sender){
         case One: selectDifficulty(1); break
         case Two: selectDifficulty(2); break
@@ -85,63 +85,63 @@ class SettingsViewController: UIViewController {
         default: break
         }
     }
-    func selectDifficulty(difficulty: Int){
+    func selectDifficulty(_ difficulty: Int){
         defaultAI = difficulty
         DiffValue.text = String(difficulty)  +  " \u{200c}"
         switch(difficulty){
         case 1:
-            Two.layer.backgroundColor = UIColor.grayColor().CGColor
-            Three.layer.backgroundColor = UIColor.grayColor().CGColor
-            Four.layer.backgroundColor = UIColor.grayColor().CGColor
-            Five.layer.backgroundColor = UIColor.grayColor().CGColor
+            Two.layer.backgroundColor = UIColor.gray.cgColor
+            Three.layer.backgroundColor = UIColor.gray.cgColor
+            Four.layer.backgroundColor = UIColor.gray.cgColor
+            Five.layer.backgroundColor = UIColor.gray.cgColor
         case 2:
-            Two.layer.backgroundColor = UIColor.greenColor().CGColor
-            Three.layer.backgroundColor = UIColor.grayColor().CGColor
-            Four.layer.backgroundColor = UIColor.grayColor().CGColor
-            Five.layer.backgroundColor = UIColor.grayColor().CGColor
+            Two.layer.backgroundColor = UIColor.green.cgColor
+            Three.layer.backgroundColor = UIColor.gray.cgColor
+            Four.layer.backgroundColor = UIColor.gray.cgColor
+            Five.layer.backgroundColor = UIColor.gray.cgColor
         case 3:
-            Two.layer.backgroundColor = UIColor.greenColor().CGColor
-            Three.layer.backgroundColor = UIColor.greenColor().CGColor
-            Four.layer.backgroundColor = UIColor.grayColor().CGColor
-            Five.layer.backgroundColor = UIColor.grayColor().CGColor
+            Two.layer.backgroundColor = UIColor.green.cgColor
+            Three.layer.backgroundColor = UIColor.green.cgColor
+            Four.layer.backgroundColor = UIColor.gray.cgColor
+            Five.layer.backgroundColor = UIColor.gray.cgColor
         case 4:
-            Two.layer.backgroundColor = UIColor.greenColor().CGColor
-            Three.layer.backgroundColor = UIColor.greenColor().CGColor
-            Four.layer.backgroundColor = UIColor.greenColor().CGColor
-            Five.layer.backgroundColor = UIColor.grayColor().CGColor
+            Two.layer.backgroundColor = UIColor.green.cgColor
+            Three.layer.backgroundColor = UIColor.green.cgColor
+            Four.layer.backgroundColor = UIColor.green.cgColor
+            Five.layer.backgroundColor = UIColor.gray.cgColor
         case 5:
-            Two.layer.backgroundColor = UIColor.greenColor().CGColor
-            Three.layer.backgroundColor = UIColor.greenColor().CGColor
-            Four.layer.backgroundColor = UIColor.greenColor().CGColor
-            Five.layer.backgroundColor = UIColor.greenColor().CGColor
+            Two.layer.backgroundColor = UIColor.green.cgColor
+            Three.layer.backgroundColor = UIColor.green.cgColor
+            Four.layer.backgroundColor = UIColor.green.cgColor
+            Five.layer.backgroundColor = UIColor.green.cgColor
         default:
             break
         }
     }
-    @IBAction func PlayerFour(sender: UIButton) {
+    @IBAction func PlayerFour(_ sender: UIButton) {
         playerButtonGroup.selectButton(sender)
         defaultPlayers = PlayerOption.four
         CurrentPlayers.text = "FOUR " +  " \u{200c}"
     }
-    @IBAction func PlayerThree(sender: UIButton) {
+    @IBAction func PlayerThree(_ sender: UIButton) {
         playerButtonGroup.selectButton(sender)
         defaultPlayers = PlayerOption.three
         CurrentPlayers.text = "THREE" + " \u{200c}"
     }
-    @IBAction func BackButton(sender: AnyObject) {
-        navigationController?.popViewControllerAnimated(true)
+    @IBAction func BackButton(_ sender: AnyObject) {
+        navigationController?.popViewController(animated: true)
     }
-    @IBAction func ModePoints(sender: UIButton) {
+    @IBAction func ModePoints(_ sender: UIButton) {
         defaultMode = Mode.tenPoint
-        PointView.hidden = false
-        TimeView.hidden = true
+        PointView.isHidden = false
+        TimeView.isHidden = true
     }
-    @IBAction func ModeTimed(sender: UIButton) {
+    @IBAction func ModeTimed(_ sender: UIButton) {
         defaultMode = Mode.threeMinute
-        TimeView.hidden = false
-        PointView.hidden = true
+        TimeView.isHidden = false
+        PointView.isHidden = true
     }
-    func setSensitivity(sender: UISlider){
+    func setSensitivity(_ sender: UISlider){
         defaultSensitivity = sender.value.roundToPlaces(1)
         SensitivityLabel.text = String(defaultSensitivity) + " \u{200c}"
     }
@@ -150,12 +150,12 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         TimeView.layer.zPosition = 2
         PointView.layer.zPosition = 2
-        TimeView.hidden = true
-        PointView.hidden = true
+        TimeView.isHidden = true
+        PointView.isHidden = true
         BackButtonWidth.constant = 80/568*screenWidth
         BackButtonHeight.constant = 60/568*screenWidth
         for button in DifficultyView.subviews{
-            button.layer.borderColor = UIColor.blackColor().CGColor
+            button.layer.borderColor = UIColor.black.cgColor
             button.layer.borderWidth = 5
         }
         selectDifficulty(defaultAI)
@@ -185,44 +185,44 @@ class SettingsViewController: UIViewController {
             modeButtonGroup.selectButton(ModePoints)
         }
         updateModeLabel()
-        SensitivitySlider.addTarget(self, action: #selector(setSensitivity), forControlEvents: UIControlEvents.ValueChanged)
+        SensitivitySlider.addTarget(self, action: #selector(setSensitivity), for: UIControlEvents.valueChanged)
         SensitivitySlider.minimumValue = 1
         SensitivitySlider.maximumValue = 5
         SensitivitySlider.setValue(defaultSensitivity, animated: false)
         
         // Do any additional setup after loading the view.
     }
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        TimeView.hidden = true
-        PointView.hidden = true
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        TimeView.isHidden = true
+        PointView.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        parent.defaultMode = defaultMode
-        parent.defaultPlayers = defaultPlayers!
-        parent.defaultAI = defaultAI
-        parent.defaultSensitivity = defaultSensitivity
-        defaults.setInteger(defaultMode.rawValue, forKey: modeKey)
-        defaults.setInteger(defaultPlayers!.rawValue, forKey: playerOptionKey)
-        defaults.setInteger(defaultAI, forKey: AIKey)
-        defaults.setFloat(defaultSensitivity, forKey: playerSensitivityKey)
+        parentVC.defaultMode = defaultMode
+        parentVC.defaultPlayers = defaultPlayers!
+        parentVC.defaultAI = defaultAI
+        parentVC.defaultSensitivity = defaultSensitivity
+        defaults.set(defaultMode.rawValue, forKey: modeKey)
+        defaults.set(defaultPlayers!.rawValue, forKey: playerOptionKey)
+        defaults.set(defaultAI, forKey: AIKey)
+        defaults.set(defaultSensitivity, forKey: playerSensitivityKey)
     }
     
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ChangeTime"{
-            timeVC = segue.destinationViewController as! ChangeTimeViewController
-            timeVC.parent = self
+            timeVC = segue.destination as! ChangeTimeViewController
+            timeVC.parentVC = self
         }
         if segue.identifier == "ChangePoint"{
-            pointVC = segue.destinationViewController as! ChangePointViewController
-            pointVC.parent = self
+            pointVC = segue.destination as! ChangePointViewController
+            pointVC.parentVC = self
         }
     
     }
@@ -240,13 +240,13 @@ class SettingsViewController: UIViewController {
         }
         CurrentMode.text =  CurrentMode.text! + " \u{200c}"
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         ButtonWidth.constant = 46.8/568*screenWidth
-        SensitivitySlider.setMinimumTrackImage(UIImage(named: "SliderBar"), forState: UIControlState.Normal)
-        SensitivitySlider.setMaximumTrackImage(UIImage(named: "SliderBarEnd"), forState: UIControlState.Normal)
+        SensitivitySlider.setMinimumTrackImage(UIImage(named: "SliderBar"), for: UIControlState())
+        SensitivitySlider.setMaximumTrackImage(UIImage(named: "SliderBarEnd"), for: UIControlState())
         let sliderThumb = UIImage(named: "SliderThumb")
-        SensitivitySlider.setThumbImage(sliderThumb, forState: .Normal)
+        SensitivitySlider.setThumbImage(sliderThumb, for: UIControlState())
         SensitivityLabel.text = String(defaultSensitivity) + " \u{200c}"
         GreenButtonWidth.constant = 110/568*screenWidth
         
@@ -259,22 +259,23 @@ class SettingsViewController: UIViewController {
 }
 extension Float {
     /// Rounds the double to decimal places value
-    func roundToPlaces(places:Int) -> Float {
-        let divisor = pow(10.0, Float(places))
-        return round(self * divisor) / divisor
+    mutating func roundToPlaces(_ places:Int) -> Float {
+        let divisor = Float(pow(10.0, Float(places)))
+        return Float((self * divisor).rounded() / divisor)
+        
     }
 }
 class CustomUISlider : UISlider
 {
-    override func trackRectForBounds(bounds: CGRect) -> CGRect {
-        var newBounds = super.trackRectForBounds(bounds)
+    override func trackRect(forBounds bounds: CGRect) -> CGRect {
+        var newBounds = super.trackRect(forBounds: bounds)
         newBounds.size.height = 12
         return newBounds
     }
     
     //while we are here, why not change the image here as well? (bonus material)
     override func awakeFromNib() {
-        self.setThumbImage(UIImage(named: "customThumb"), forState: .Normal)
+        self.setThumbImage(UIImage(named: "customThumb"), for: UIControlState())
         super.awakeFromNib()
     }
 }

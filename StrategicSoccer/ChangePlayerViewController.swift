@@ -9,21 +9,21 @@
 import UIKit
 
 extension UITableViewCell {
-    func enable(on: Bool) {
+    func enable(_ on: Bool) {
         for view in contentView.subviews {
             if view.tag != 99{
-                view.userInteractionEnabled = on
+                view.isUserInteractionEnabled = on
                 view.alpha = on ? 1 : 0.5
             }
         }
     }
 }
 class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    var lockedFlags: [String] = ["AFGHANISTAN","ALBANIA","ALGERIA","AMERICAN SAMOA","ANDORRA","ANGOLA","ANGUILLA","ANTIGUA AND BARBUDA","ARGENTINA","ARMENIA","ARUBA","AUSTRALIA","AUSTRIA" ,"AZERBAIJAN","BAHAMAS","BAHRAIN","BANGLADESH","BARBADOS","BELARUS","BELGIUM","BELIZE","BENIN","BHUTAN","BOLIVIA","BOSNIA AND HERZEGOVINA","BOTSWANA","BRAZIL","BRITISH VIRGIN ISLANDS","BRUNEI","BULGARIA","BURKINA FASO","BURUNDI","CABO VERDE","CAMBODIA","CAMEROON","CANADA","CAYMAN ISLANDS","CENTRAL AFRICAN REPUBLIC","CHAD","CHILE","CHINA","COLOMBIA","COMOROS","CONGO, DEM. REP. OF THE","CONGO, REP. OF THE","COOK ISLANDS","COSTA RICA","COTE D'IVOIRE","CROATIA","CUBA","CURACAO","CYPRUS","CZECH REPUBLIC","DENMARK","DJIBOUTI","DOMINICA","DOMINICAN REPUBLIC","ECUADOR","EGYPT","EL SALVADOR","ENGLAND","EQUATORIAL GUINEA","ERITREA","ESTONIA","ETHIOPIA","FIJI","FINLAND","FRANCE","GABON","GAMBIA","GEORGIA","GERMANY","GHANA","GREECE","GRENADA","GUAM","GUATEMALA","GUINEA","GUINEA-BISSAU","GUYANA","HAITI","HONDURAS","HONG KONG","HUNGARY","ICELAND","INDIA","INDONESIA","IRAN","IRAQ","IRELAND","ISRAEL","ITALY","JAMAICA","JAPAN","JORDAN","KAZAKHSTAN","KENYA","KIRIBATI","KOSOVO","KUWAIT","KYRGYZSTAN","LAOS","LATVIA","LEBANON","LESOTHO","LIBERIA","LIBYA","LIECHTENSTEIN","LITHUANIA","LUXEMBOURG","MACAU","MACEDONIA","MADAGASCAR","MALAWI","MALAYSIA","MALDIVES","MALI","MALTA","MAURITANIA","MAURITIUS","MEXICO","MOLDOVA","MONACO","MONGOLIA","MONTENEGRO","MONTSERRAT","MOROCCO","MOZAMBIQUE","MYANMAR","NAMIBIA","NAURU","NEPAL","NETHERLANDS","NEW CALEDONIA","NEW ZEALAND","NICARAGUA","NIGER","NIGERIA","NORTH KOREA","NORTHERN IRELAND","NORWAY","OMAN","PAKISTAN","PALESTINE","PANAMA","PAPUA NEW GUINEA","PARAGUAY","PERU","PHILIPPINES","POLAND","PORTUGAL","PUERTO RICO","QATAR","ROMANIA","RUSSIA","RWANDA","ST KITTS AND NEVIS","ST LUCIA","ST VINCENT AND THE GRENADINES","SAMOA","SAN MARINO","SAO TOME AND PRINCIPE","SAUDI ARABIA","SCOTLAND","SENEGAL","SERBIA","SEYCHELLES","SIERRA LEONE","SINGAPORE","SLOVAKIA","SLOVENIA","SOLOMON ISLANDS","SOMALIA","SOUTH AFRICA","SOUTH KOREA","SOUTH SUDAN","SPAIN","SRI LANKA","SUDAN","SURINAME","SWAZILAND","SWEDEN","SWITZERLAND","SYRIA","TAIWAN","TAJIKISTAN","TANZANIA","THAILAND","TIMOR-LESTE","TOGO","TONGA","TRUNIDAD AND TOBAGO","TUNISIA","TURKEY","TURKMENISTAN","TURKS AND CAICOS ISLANDS","U.S. VIRGIN ISLANDS","UGANDA","UKRAINE","UNITED ARAB EMIRATES","UNITED STATES","URUGUAY","UZBEKISTAN","VANUATU","VENEZUELA","VIETNAM","WALES","YEMEN","ZAMBIA","ZIMBABWE"]
+    var lockedFlags: [String] = ["AFGHANISTAN","ALBANIA","ALGERIA","AMERICAN SAMOA","ANDORRA","ANGOLA","ANGUILLA","ANTIGUA AND BARBUDA","ARGENTINA","ARMENIA","ARUBA","AUSTRALIA","AUSTRIA" ,"AZERBAIJAN","BAHAMAS","BAHRAIN","BANGLADESH","BARBADOS","BELARUS","BELGIUM","BELIZE","BENIN","BHUTAN","BOLIVIA","BOSNIA AND HERZEGOVINA","BOTSWANA","BRAZIL","BRITISH VIRGIN ISLANDS","BRUNEI","BULGARIA","BURKINA FASO","BURUNDI","CABO VERDE","CAMBODIA","CAMEROON","CANADA","CAYMAN ISLANDS","CENTRAL AFRICAN REPUBLIC","CHAD","CHILE","CHINA","COLOMBIA","COMOROS","CONGO, DEM. REP. OF THE","CONGO, REP. OF THE","COOK ISLANDS","COSTA RICA","COTE D'IVOIRE","CROATIA","CUBA","CURACAO","CYPRUS","CZECH REPUBLIC","DENMARK","DJIBOUTI","DOMINICA","DOMINICAN REPUBLIC","ECUADOR","EGYPT","EL SALVADOR","ENGLAND","EQUATORIAL GUINEA","ERITREA","ESTONIA","ETHIOPIA","FAROE ISLANDS","FIJI","FINLAND","FRANCE","GABON","GAMBIA","GEORGIA","GERMANY","GHANA","GIBRALTAR","GREECE","GRENADA","GUAM","GUATEMALA","GUINEA","GUINEA-BISSAU","GUYANA","HAITI","HONDURAS","HONG KONG","HUNGARY","ICELAND","INDIA","INDONESIA","IRAN","IRAQ","IRELAND","ISRAEL","ITALY","JAMAICA","JAPAN","JORDAN","KAZAKHSTAN","KENYA","KIRIBATI","KOSOVO","KUWAIT","KYRGYZSTAN","LAOS","LATVIA","LEBANON","LESOTHO","LIBERIA","LIBYA","LIECHTENSTEIN","LITHUANIA","LUXEMBOURG","MACAU","MACEDONIA","MADAGASCAR","MALAWI","MALAYSIA","MALDIVES","MALI","MALTA","MAURITANIA","MAURITIUS","MEXICO","MOLDOVA","MONACO","MONGOLIA","MONTENEGRO","MONTSERRAT","MOROCCO","MOZAMBIQUE","MYANMAR","NAMIBIA","NAURU","NEPAL","NETHERLANDS","NEW CALEDONIA","NEW ZEALAND","NICARAGUA","NIGER","NIGERIA","NORTH KOREA","NORTHERN IRELAND","NORWAY","OMAN","PAKISTAN","PALESTINE","PANAMA","PAPUA NEW GUINEA","PARAGUAY","PERU","PHILIPPINES","POLAND","PORTUGAL","PUERTO RICO","QATAR","ROMANIA","RUSSIA","RWANDA","ST KITTS AND NEVIS","ST LUCIA","ST VINCENT AND THE GRENADINES","SAMOA","SAN MARINO","SAO TOME AND PRINCIPE","SAUDI ARABIA","SCOTLAND","SENEGAL","SERBIA","SEYCHELLES","SIERRA LEONE","SINGAPORE","SLOVAKIA","SLOVENIA","SOLOMON ISLANDS","SOMALIA","SOUTH AFRICA","SOUTH KOREA","SOUTH SUDAN","SPAIN","SRI LANKA","SUDAN","SURINAME","SWAZILAND","SWEDEN","SWITZERLAND","SYRIA","TAIWAN","TAJIKISTAN","TANZANIA","THAILAND","TIMOR-LESTE","TOGO","TONGA","TRUNIDAD AND TOBAGO","TUNISIA","TURKEY","TURKMENISTAN","TURKS AND CAICOS ISLANDS","U.S. VIRGIN ISLANDS","UGANDA","UKRAINE","UNITED ARAB EMIRATES","UNITED STATES","URUGUAY","UZBEKISTAN","VANUATU","VENEZUELA","VIETNAM","WALES","YEMEN","ZAMBIA","ZIMBABWE"]
     var unlockedFlags:[String]!
     var currentUnlocked = [String]()
     
-    var parent: TitleViewController!
+    var parentVC: TitleViewController!
     var defaultA: String!
     var defaultB: String!
     var boughtCell: UITableViewCell!
@@ -41,10 +41,10 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var BackButtonWidth: NSLayoutConstraint!
     @IBOutlet weak var BackButtonHeight: NSLayoutConstraint!
 
-    @IBAction func BackArrow(sender: AnyObject) {
-        navigationController?.popViewControllerAnimated(true)
+    @IBAction func BackArrow(_ sender: AnyObject) {
+        navigationController?.popViewController(animated: true)
     }
-    @IBAction func YesButton(sender: AnyObject){
+    @IBAction func YesButton(_ sender: AnyObject){
         if coins >= 20{
             coins -= 20
             boughtCell.enable(true)
@@ -53,58 +53,58 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
                     subview.removeFromSuperview()
                 }
             }
-            boughtCell.selectionStyle = .Default
+            boughtCell.selectionStyle = .default
             currentUnlocked.append(boughtCell.textLabel!.text!)
-            BuyFlagView.hidden = true
+            BuyFlagView.isHidden = true
         }
         else{
-            NotEnoughCoins.hidden = false
+            NotEnoughCoins.isHidden = false
         }
     }
-    @IBAction func OKButton(sender: AnyObject){
-        NotEnoughCoins.hidden = true
-        BuyFlagView.hidden = true
+    @IBAction func OKButton(_ sender: AnyObject){
+        NotEnoughCoins.isHidden = true
+        BuyFlagView.isHidden = true
     }
-    @IBAction func NoButton(sender: AnyObject){
-        BuyFlagView.hidden = true
+    @IBAction func NoButton(_ sender: AnyObject){
+        BuyFlagView.isHidden = true
     }
     
-    override func viewWillAppear(animated:Bool) {
+    override func viewWillAppear(_ animated:Bool) {
         super.viewWillAppear(animated)
         BackButtonWidth.constant = 80/568*screenWidth
         BackButtonHeight.constant = 60/568*screenWidth
-        self.PlayerA.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        self.PlayerB.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.PlayerA.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.PlayerB.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         PlayerA.layer.borderWidth = 3
-        PlayerA.layer.borderColor = UIColor.blackColor().CGColor
+        PlayerA.layer.borderColor = UIColor.black.cgColor
         PlayerB.layer.borderWidth = 3
-        PlayerB.layer.borderColor = UIColor.blackColor().CGColor
+        PlayerB.layer.borderColor = UIColor.black.cgColor
         setBackground()
         for country in unlockedFlags{
-            lockedFlags.removeAtIndex(lockedFlags.indexOf(country)!)
+            lockedFlags.remove(at: lockedFlags.index(of: country)!)
         }
         PlayerA.showsVerticalScrollIndicator = false
         PlayerB.showsVerticalScrollIndicator = false
 
-        unlockedFlags = unlockedFlags.sort()
+        unlockedFlags = unlockedFlags.sorted()
         BuyFlagView.layer.borderWidth = 5
-        BuyFlagView.layer.borderColor = UIColor.blackColor().CGColor
+        BuyFlagView.layer.borderColor = UIColor.black.cgColor
         
         NotEnoughCoins.layer.borderWidth = 5
-        NotEnoughCoins.layer.borderColor = UIColor.blackColor().CGColor
+        NotEnoughCoins.layer.borderColor = UIColor.black.cgColor
         
         let buttons: [UIButton] = [YesButton, NoButton, OKButton]
         formatMenuButtons(buttons)
-        BuyFlagView.hidden = true
-        NotEnoughCoins.hidden = true
+        BuyFlagView.isHidden = true
+        NotEnoughCoins.isHidden = true
         ConfirmationText.numberOfLines = 0
         addCoinImage("DO YOU WANT TO SPEND\n", afterText: "20 TO BUY THIS FLAG?", label: ConfirmationText, numberLines: 2)
-        let indexPathA = NSIndexPath(forItem: findIndex(defaultA), inSection: 0)
-        let indexPathB = NSIndexPath(forItem: findIndex(defaultB), inSection: 0)
+        let indexPathA = IndexPath(item: findIndex(defaultA), section: 0)
+        let indexPathB = IndexPath(item: findIndex(defaultB), section: 0)
         
-        PlayerA.selectRowAtIndexPath(indexPathA, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+        PlayerA.selectRow(at: indexPathA, animated: false, scrollPosition: UITableViewScrollPosition.middle)
         
-        PlayerB.selectRowAtIndexPath(indexPathB, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+        PlayerB.selectRow(at: indexPathB, animated: false, scrollPosition: UITableViewScrollPosition.middle)
         // Do any additional setup after loading the view.
     }
 
@@ -112,27 +112,27 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return lockedFlags.count + unlockedFlags.count
     }
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         let flag = findFlag(indexPath.row)
         if !unlockedFlags.contains(flag) && !currentUnlocked.contains(flag){
             return nil
         }
         return indexPath
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         cell.textLabel?.text = findFlag(indexPath.row)
         cell.textLabel?.font = UIFont(name: "Optima", size: 18)
         
         let lockWidth = cell.frame.size.height/2
         let lockHeight = cell.frame.size.height*3/4
-        let lock = UIButton(frame: CGRectMake(cell.frame.size.width/2-lockWidth/2,cell.frame.size.height/8,lockWidth,lockHeight))
+        let lock = UIButton(frame: CGRect(x: cell.frame.size.width/2-lockWidth/2,y: cell.frame.size.height/8,width: lockWidth,height: lockHeight))
         lock.tag = 99
-        lock.addTarget(self, action: #selector(unlockFlag),forControlEvents: .TouchUpInside)
-        lock.setImage(UIImage(imageLiteral: "Locked"), forState: .Normal)
+        lock.addTarget(self, action: #selector(unlockFlag),for: .touchUpInside)
+        lock.setImage(UIImage(imageLiteralResourceName: "Locked"), for: UIControlState())
         if indexPath.row>=unlockedFlags.count && !currentUnlocked.contains(findFlag(indexPath.row)){
             var hasLock = false
             for view in cell.contentView.subviews{
@@ -145,7 +145,7 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
                 cell.contentView.addSubview(lock)
             }
             cell.enable(false)
-            cell.selectionStyle = .None
+            cell.selectionStyle = .none
         }else{
             cell.enable(true)
             for subview in cell.contentView.subviews{
@@ -154,14 +154,14 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
                     break
                 }
             }
-            cell.selectionStyle = .Default
+            cell.selectionStyle = .default
         }
-        cell.imageView!.image = UIImage(imageLiteral: findFlag(indexPath.row))
+        cell.imageView!.image = UIImage(imageLiteralResourceName: findFlag(indexPath.row))
         if tableView == PlayerB{
-            cell.contentView.transform = CGAffineTransformMakeScale(-1,1);
-            cell.imageView!.transform = CGAffineTransformMakeScale(-1,1);
-            cell.textLabel!.transform = CGAffineTransformMakeScale(-1,1);
-            cell.textLabel?.textAlignment = .Right
+            cell.contentView.transform = CGAffineTransform(scaleX: -1,y: 1);
+            cell.imageView!.transform = CGAffineTransform(scaleX: -1,y: 1);
+            cell.textLabel!.transform = CGAffineTransform(scaleX: -1,y: 1);
+            cell.textLabel?.textAlignment = .right
 
         }
 
@@ -169,7 +169,7 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == PlayerA{
             defaultA = findFlag(indexPath.row)
         }
@@ -177,36 +177,36 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
             defaultB = findFlag(indexPath.row)
         }
     }
-    func unlockFlag(sender:UIButton!){
-        BuyFlagView.hidden = false
+    func unlockFlag(_ sender:UIButton!){
+        BuyFlagView.isHidden = false
         boughtCell = sender.superview!.superview as! UITableViewCell
         warningFlag.image = boughtCell.imageView?.image
         flagName.text = boughtCell.textLabel?.text
         
     }
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        parent.playerA = defaultA
-        parent.playerB = defaultB
-        defaults.setObject(defaultA,forKey: playerAKey)
-        defaults.setObject(defaultB, forKey: playerBKey)
+        parentVC.playerA = defaultA
+        parentVC.playerB = defaultB
+        defaults.set(defaultA,forKey: playerAKey)
+        defaults.set(defaultB, forKey: playerBKey)
         let unlocked = Unlockable()
 
         for flag in currentUnlocked{
             unlockedFlags.append(flag)
         }
         unlocked.unlockedFlags = unlockedFlags
-        parent.unlockedFlags = unlockedFlags
-        NSKeyedArchiver.archiveRootObject(unlockedFlags, toFile: Unlockable.FlagURL.path!)
+        parentVC.unlockedFlags = unlockedFlags
+        NSKeyedArchiver.archiveRootObject(unlockedFlags, toFile: Unlockable.FlagURL.path)
         saveCoins()
     }
-    func findIndex(flag:String)->Int{
+    func findIndex(_ flag:String)->Int{
         if unlockedFlags.contains(flag){
-            return unlockedFlags.indexOf(flag)!
+            return unlockedFlags.index(of: flag)!
         }
-        return unlockedFlags.count + lockedFlags.indexOf(flag)!
+        return unlockedFlags.count + lockedFlags.index(of: flag)!
     }
-    func findFlag(index: Int) -> String{
+    func findFlag(_ index: Int) -> String{
         if index < unlockedFlags.count{
             return unlockedFlags[index]
         }

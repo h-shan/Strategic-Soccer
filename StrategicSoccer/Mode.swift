@@ -12,21 +12,21 @@ public enum Mode:Int {
     case oneMinute = 0, threeMinute, fiveMinute, tenMinute, threePoint, fivePoint, tenPoint, twentyPoint
     func getType()-> type{
         switch self{
-        case oneMinute:
+        case .oneMinute:
             return .timed
-        case threeMinute:
+        case .threeMinute:
             return .timed
-        case fiveMinute:
+        case .fiveMinute:
             return .timed
-        case tenMinute:
+        case .tenMinute:
             return .timed
-        case threePoint:
+        case .threePoint:
             return .points
-        case fivePoint:
+        case .fivePoint:
             return .points
-        case tenPoint:
+        case .tenPoint:
             return .points
-        case twentyPoint:
+        case .twentyPoint:
             return .points
         }
     }

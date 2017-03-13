@@ -12,13 +12,13 @@ class MiniGoal: SKSpriteNode {
     let miniGoalSize: CGSize
     init(sender: SKScene){
         mTexture = SKTexture(imageNamed: "MiniGoal")
-        miniGoalSize = CGSizeMake(150/568*sender.frame.midX, 30/568*sender.frame.midX)
-        super.init(texture: mTexture, color: UIColor.clearColor(), size:miniGoalSize)
-        let miniGoalPostSize = CGSizeMake(5/568*sender.frame.midX,30/568*sender.frame.midX)
-        let goalPostA = GoalPost(sender: sender, actualSize: miniGoalPostSize)
-        let goalPostB = GoalPost(sender: sender, actualSize: miniGoalPostSize)
-        goalPostA.position = CGPointMake(2.5/568*sender.frame.midX, 15/568*sender.frame.midX)
-        goalPostB.position = CGPointMake(27.5/568*sender.frame.midX, 15/568*sender.frame.midX)
+        miniGoalSize = CGSize(width: 150/568*sender.frame.midX, height: 30/568*sender.frame.midX)
+        super.init(texture: mTexture, color: UIColor.clear, size:miniGoalSize)
+        let miniGoalPostSize = CGSize(width: 5/568*sender.frame.midX,height: 30/568*sender.frame.midX)
+        let goalPostA = GoalPost(actualSize: miniGoalPostSize)
+        let goalPostB = GoalPost(actualSize: miniGoalPostSize)
+        goalPostA.position = CGPoint(x: 2.5/568*sender.frame.midX, y: 15/568*sender.frame.midX)
+        goalPostB.position = CGPoint(x: 27.5/568*sender.frame.midX, y: 15/568*sender.frame.midX)
         let randRotation = arc4random_uniform(6)
         switch(randRotation){
         case 0: self.zRotation = CGFloat(M_PI)/6

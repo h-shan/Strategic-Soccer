@@ -9,16 +9,16 @@ var modeString = [Mode: String]()
 var stringMode = [String:Mode]()
 import UIKit
 import SpriteKit
-let defaults = NSUserDefaults.standardUserDefaults()
+let defaults = UserDefaults.standard
 let modeKey = "Mode"
 let playerAKey = "PlayerA"
 let playerBKey = "PlayerB"
 let playerOptionKey = "PlayerOption"
 let AIKey = "AIDifficulty"
 let playerSensitivityKey = "PlayerSensitivity"
-let gold = UIColor(red: 161/255.0, green: 155/255.0, blue: 75/255.0, alpha: 1.0).CGColor
+let gold = UIColor(red: 161/255.0, green: 155/255.0, blue: 75/255.0, alpha: 1.0).cgColor
 let optima = UIFont(name: "Optima", size: 18)
-let screenSize: CGRect = UIScreen.mainScreen().bounds
+let screenSize: CGRect = UIScreen.main.bounds
 var screenWidth:CGFloat = 0
 var screenHeight:CGFloat = 0
 var scalerX:CGFloat = 0
@@ -34,12 +34,12 @@ extension UIViewController{
         
         var imageView : UIImageView!
         imageView = UIImageView(frame: view.bounds)
-        imageView.contentMode =  UIViewContentMode.ScaleAspectFill
+        imageView.contentMode =  UIViewContentMode.scaleAspectFill
         imageView.clipsToBounds = true
         imageView.image = background
         imageView.center = view.center
         view.addSubview(imageView)
-        self.view.sendSubviewToBack(imageView)
+        self.view.sendSubview(toBack: imageView)
     }
 }
 class TitleViewController: UIViewController {
@@ -55,10 +55,10 @@ class TitleViewController: UIViewController {
     @IBOutlet weak var CoinInfo: UILabel!
     
     @IBOutlet weak var ButtonWidth: NSLayoutConstraint!
-    @IBAction func clickCoin(sender: AnyObject){
-        UIView.animateWithDuration(0.5, animations: {
+    @IBAction func clickCoin(_ sender: AnyObject){
+        UIView.animate(withDuration: 0.5, animations: {
             self.CoinInfo.alpha = 0.8
-            _ = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(self.hideCoinInfo), userInfo: nil, repeats: false)
+            _ = Foundation.Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(self.hideCoinInfo), userInfo: nil, repeats: false)
         })
     }
     var skView: SKView!
@@ -74,32 +74,32 @@ class TitleViewController: UIViewController {
     override func viewDidLoad() {
         UIView.setAnimationsEnabled(true)
         super.viewDidLoad()
-        if let playA = defaults.objectForKey(playerAKey){
+        if let playA = defaults.object(forKey: playerAKey){
             playerA = playA as! String
-            playerA = playerA.uppercaseString
-            playerB = defaults.objectForKey(playerBKey) as! String
-            playerB = playerB.uppercaseString
+            playerA = playerA.uppercased()
+            playerB = defaults.object(forKey: playerBKey) as! String
+            playerB = playerB.uppercased()
         }
-        if let storedMode = defaults.objectForKey(modeKey){
+        if let storedMode = defaults.object(forKey: modeKey){
             defaultMode = Mode(rawValue: storedMode as! Int)!
         }
-        if let storedPlayers = defaults.objectForKey(playerOptionKey){
+        if let storedPlayers = defaults.object(forKey: playerOptionKey){
             defaultPlayers = PlayerOption(rawValue: storedPlayers as! Int)!
         }
-        if let AIDifficulty = defaults.objectForKey(AIKey){
+        if let AIDifficulty = defaults.object(forKey: AIKey){
             defaultAI = AIDifficulty as! Int
         }
-        if let numCoins = NSKeyedUnarchiver.unarchiveObjectWithFile(Unlockable.CoinURL.path!) as? Int{
+        if let numCoins = NSKeyedUnarchiver.unarchiveObject(withFile: Unlockable.CoinURL.path) as? Int{
            coins = numCoins
         }
-        if let storedStats = NSKeyedUnarchiver.unarchiveObjectWithFile(Unlockable.StatsURl.path!) as? [String:Int]{
+        if let storedStats = NSKeyedUnarchiver.unarchiveObject(withFile: Unlockable.StatsURl.path) as? [String:Int]{
             statistics = storedStats
         }
-        if let storedSensitivity = defaults.objectForKey(playerSensitivityKey){
+        if let storedSensitivity = defaults.object(forKey: playerSensitivityKey){
             defaultSensitivity = storedSensitivity as! Float
         }
         // bring out unlocked
-        if let storedUnlock = NSKeyedUnarchiver.unarchiveObjectWithFile(Unlockable.FlagURL.path!) as? [String]{
+        if let storedUnlock = NSKeyedUnarchiver.unarchiveObject(withFile: Unlockable.FlagURL.path) as? [String]{
             unlockedFlags = storedUnlock
         }
         else{
@@ -125,8 +125,8 @@ class TitleViewController: UIViewController {
         // Disbse of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool){
-        navigationController?.navigationBarHidden = true
+    override func viewWillAppear(_ animated: Bool){
+        navigationController?.isNavigationBarHidden = true
         super.viewWillAppear(animated)
         setBackground()
         addCoinImage("", afterText: String(coins), label: NumberCoins, numberLines: 1)
@@ -152,7 +152,7 @@ class TitleViewController: UIViewController {
     
     
     func hideCoinInfo(){
-        UIView.animateWithDuration(0.5, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.CoinInfo.alpha = 0
         })
     }
@@ -160,30 +160,30 @@ class TitleViewController: UIViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "PlaySegue"{
-            let destinationVC = segue.destinationViewController as! PlayViewController
+            let destinationVC = segue.destination as! PlayViewController
             scene.mode = defaultMode
             scene.playerOption = defaultPlayers
             scene.AIDifficulty = defaultAI
             scene.sensitivity = defaultSensitivity
             destinationVC.scene = scene
-            destinationVC.parent = self
+            destinationVC.parentVC = self
             scene.cAggro = 0
             scene.cDef = 0
         }
         if segue.identifier == "SettingsSegue"{
-            let destinationVC = segue.destinationViewController as! SettingsViewController
+            let destinationVC = segue.destination as! SettingsViewController
             destinationVC.defaultMode = self.defaultMode
             destinationVC.defaultPlayers = defaultPlayers
             destinationVC.defaultAI = defaultAI
             destinationVC.defaultSensitivity = defaultSensitivity
-            destinationVC.parent = self
+            destinationVC.parentVC = self
         }
         if segue.identifier == "ChangePlayersSegue"{
-            let destinationVC = segue.destinationViewController as! ChangePlayerViewController
-            destinationVC.parent = self
+            let destinationVC = segue.destination as! ChangePlayerViewController
+            destinationVC.parentVC = self
             destinationVC.defaultA = playerA
             destinationVC.defaultB = playerB
             destinationVC.unlockedFlags = unlockedFlags
@@ -192,22 +192,22 @@ class TitleViewController: UIViewController {
     }
 }
 
-func addCoinImage(beforeText: String, afterText: String, label: UILabel, numberLines: Int){
+func addCoinImage(_ beforeText: String, afterText: String, label: UILabel, numberLines: Int){
     let coinImage = UIImage(named:"Coins")!
-    let scaleSize = CGSizeMake(0.8*label.frame.height*coinImage.size.width/coinImage.size.height/CGFloat(numberLines),0.8*label.frame.height/CGFloat(numberLines))
+    let scaleSize = CGSize(width: 0.8*label.frame.height*coinImage.size.width/coinImage.size.height/CGFloat(numberLines),height: 0.8*label.frame.height/CGFloat(numberLines))
     UIGraphicsBeginImageContextWithOptions(scaleSize, false, 0)
-    coinImage.drawInRect(CGRectMake(0, 0, scaleSize.width, scaleSize.height))
+    coinImage.draw(in: CGRect(x: 0, y: 0, width: scaleSize.width, height: scaleSize.height))
     let resizedCoins = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
     let stackOfCoins = NSTextAttachment()
     stackOfCoins.image = resizedCoins
     let attachmentString = NSAttributedString(attachment: stackOfCoins)
     let coinString = NSMutableAttributedString(string: beforeText)
-    coinString.appendAttributedString(attachmentString)
-    coinString.appendAttributedString(NSAttributedString(string: " " + afterText))
+    coinString.append(attachmentString)
+    coinString.append(NSAttributedString(string: " " + afterText))
     label.attributedText = coinString
 }
-func formatMenuButtons(buttons: [UIButton]){
+func formatMenuButtons(_ buttons: [UIButton]){
     for button in buttons{
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 2
