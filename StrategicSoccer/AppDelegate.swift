@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillResignActive(_ application: UIApplication) {
         if let gameVC = getCurrentViewController() as? GameViewController{
-            gameVC.PauseClicked(GameViewController)
+            gameVC.PauseClicked(GameViewController.self)
             gameVC.scene.physicsWorld.speed = 0
         }
     }
@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
         if let gameVC = getCurrentViewController() as? GameViewController{
-            gameVC.PauseClicked(GameViewController)
+            gameVC.PauseClicked(GameViewController.self)
             gameVC.scene.isPaused = true
         }
     }

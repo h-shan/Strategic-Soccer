@@ -139,8 +139,8 @@ class GameViewController: UIViewController {
         scene.isSynced = false
         scene.loaded = false
         print("GameViewController backToTitle")
-    
     }
+    
     func displayEarnings(_ numberWon: Int){
         addCoinImage("YOU WON ", afterText: String(numberWon), label: NumberCoins, numberLines: 1)
         UIView.animate(withDuration: 1,delay:0.3,options: .curveEaseIn, animations: {

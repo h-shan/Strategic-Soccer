@@ -42,24 +42,27 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         HostGame.isUserInteractionEnabled = false
         HostGame.alpha = 0.5
     }
+    
     @IBAction func joinGame(_ sender: AnyObject){
         gameService.sendStart(nil, flag: scene.countryA)
         sentData = true
         JoinGame.alpha = 0.5
         JoinGame.isUserInteractionEnabled = false
     }
+    
     @IBAction func hideConnections(_ sender: AnyObject){
         ConnectionView.isHidden = true
         gameService.getServiceAdvertiser().stopAdvertisingPeer()
         gameService.getServiceBrowser().stopBrowsingForPeers()
         HostGame.isUserInteractionEnabled = true
         HostGame.alpha = 1
-        
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ConnectToAnotherDevice.isHidden = true
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         gameService.delegate = self
@@ -77,6 +80,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         scene.countryB = parentVC.playerB
         scene.addPlayers()
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! GameViewController
         destinationVC.scene = scene
@@ -91,31 +95,37 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         default: break
         }
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         connectedDevice = self.hostedGames[indexPath.row]
         self.JoinGame.alpha = 1
         self.JoinGame.isUserInteractionEnabled = true
         gameService.connectToDevice(connectedDevice!)
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         cell.textLabel?.text = hostedGames[indexPath.row]
         return cell
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return hostedGames.count
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
 }
 extension PlayViewController : ConnectionManagerDelegate {
+    
     func connectedDevicesChanged(_ manager: ConnectionManager, connectedDevices: [String]) {
         OperationQueue.main.addOperation {
             self.hostedGames = connectedDevices
             self.gameTableView.reloadData()
         }
     }
+    
     func receivePause(_ manager: ConnectionManager, pauseType: String){
         switch pauseType{
         case "pause":self.scene.viewController.PauseClicked(self); break
@@ -125,6 +135,7 @@ extension PlayViewController : ConnectionManagerDelegate {
         default: break
         }
     }
+    
     func receiveMisc(_ manager:ConnectionManager, message: [String]){
         switch(message[0]){
         case "goal":
@@ -146,6 +157,7 @@ extension PlayViewController : ConnectionManagerDelegate {
         default: break
         }
     }
+    
     func receivePositionMove(_ manager: ConnectionManager, positionMove: [String]){
         print("receivePositionMove")
         OperationQueue.main.addOperation({
@@ -179,6 +191,7 @@ extension PlayViewController : ConnectionManagerDelegate {
             }
         })
     }
+    
     func receiveVelocities(_ manager: ConnectionManager, velocities:[String]){
         OperationQueue.main.addOperation{
             let ballVelocity = CGVector(dx: -velocities[0].toFloat()*self.scaleFactorX*dampingFactor, dy: velocities[1].toFloat()*self.scaleFactorY*dampingFactor)
@@ -211,6 +224,7 @@ extension PlayViewController : ConnectionManagerDelegate {
             self.moveToScene()
         })
     }
+    
     func receiveSync(_ manager: ConnectionManager, turn: String, gameTime: String){
         if turn.toBool()!{
             if scene.turnA{
@@ -229,6 +243,7 @@ extension PlayViewController : ConnectionManagerDelegate {
             scene.gameTime = TimeInterval(gameTime.toFloat())
         }
     }
+    
     func receiveMove(_ manager: ConnectionManager, move: [String]) {
         print("receiveMove")
         DispatchQueue.main.async(execute: {
@@ -252,6 +267,7 @@ extension PlayViewController : ConnectionManagerDelegate {
             }
         })
     }
+    
     func receivePositions(_ manager: ConnectionManager, positions: [String]){
         //print(dampingFactor)
         OperationQueue.main.addOperation{
@@ -283,6 +299,7 @@ extension PlayViewController : ConnectionManagerDelegate {
             }
         }
     }
+    
     func receiveLoad(_ manager:ConnectionManager, load: [String]){
         print("loading")
         let position = CGPoint(x: load[0].toFloat()*scaleFactorX, y: load[1].toFloat()*scaleFactorY)

@@ -56,6 +56,7 @@ class Timer{
         self.start()
     }
     
+    // convert time to string format
     func secondsToString (_ seconds : TimeInterval) -> (String) {
         let minutes = Int(seconds/60)
         let seconds = Int(seconds.truncatingRemainder(dividingBy: 60))
