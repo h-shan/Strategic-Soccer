@@ -490,9 +490,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = TTP33C342C;
 				INFOPLIST_FILE = StrategicSoccer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.msjhs.StrategicSoccer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hshan.strategicsoccer;
 				PRODUCT_NAME = "Strategic Soccer";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
@@ -506,9 +507,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = TTP33C342C;
 				INFOPLIST_FILE = StrategicSoccer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.msjhs.StrategicSoccer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hshan.strategicsoccer;
 				PRODUCT_NAME = "Strategic Soccer";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
@@ -522,7 +524,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = StrategicSoccerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.msjhs.StrategicSoccerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hshan.StrategicSoccerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Strategic Soccer.app/Strategic Soccer";
@@ -534,7 +536,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = StrategicSoccerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.msjhs.StrategicSoccerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hshan.StrategicSoccerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Strategic Soccer.app/Strategic Soccer";
@@ -547,7 +549,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = StrategicSoccerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.msjhs.StrategicSoccerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hshan.StrategicSoccerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = StrategicSoccer;
@@ -559,7 +561,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = StrategicSoccerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.msjhs.StrategicSoccerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hshan.StrategicSoccerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = StrategicSoccer;

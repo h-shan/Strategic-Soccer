@@ -71,7 +71,9 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         BackButtonHeight.constant = 60/568*screenWidth
         let buttons:[UIButton] = [SinglePlayer, TwoPlayers, ConnectToAnotherDevice, JoinGame, HostGame]
         formatMenuButtons(buttons)
-        ConnectionView.isHidden = true
+        
+        // set ConnectionView.isHidden to false to disable connectivity
+        ConnectionView.isHidden = false
         ConnectionView.layer.borderWidth = 5
         ConnectionView.layer.borderColor = UIColor.black.cgColor
         JoinGame.alpha = 0.5

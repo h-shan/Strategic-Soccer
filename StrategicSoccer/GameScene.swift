@@ -235,9 +235,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         selPlayTimer = Timer()
         
-        
-        
-        
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -364,7 +361,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         if player.mTeamA == turnA {
                             let dis = distance(player.position, point2: location)
                             if dis < selPlay.0 {
-                                print("Player Selected")
                                 selPlayTimer!.restart()
                                 selPlay.0 = dis
                                 selPlay.1 = player
@@ -379,10 +375,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-        
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?){
-        print("TouchesEnded", moveTimer?.getElapsedTime())
         if (playerSelected == true) {
             // get time so that we measure velocity of swipe rather than simply distance
             let ms = CGFloat((selPlayTimer!.getElapsedTime()))
@@ -588,6 +582,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score.text = "PLAYER B WINS"
         }
         else{
+            updateStats(false)
             score.text = "IT'S A TIE!"
         }
         _ = Foundation.Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(goBackToTitle), userInfo: nil, repeats: false)
@@ -695,7 +690,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     func computerMove(){
-        if moveTimer?.getElapsedTime()<0.1{
+        if moveTimer?.getElapsedTime()<0.5{
             return
         }
         if firstTurn{
