@@ -73,7 +73,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         formatMenuButtons(buttons)
         
         // set ConnectionView.isHidden to false to disable connectivity
-        ConnectionView.isHidden = false
+        ConnectionView.isHidden = true
         ConnectionView.layer.borderWidth = 5
         ConnectionView.layer.borderColor = UIColor.black.cgColor
         JoinGame.alpha = 0.5

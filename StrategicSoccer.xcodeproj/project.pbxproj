@@ -16,6 +16,7 @@
 		8932AD6B1D13BD0100F6AC84 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8932AD6A1D13BD0100F6AC84 /* Mode.swift */; };
 		893B41C21D2E221B00E191BE /* ScoreBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B41C11D2E221B00E191BE /* ScoreBoard.swift */; };
 		8944D3CC1D3C986F00D90023 /* Unlockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8944D3CB1D3C986F00D90023 /* Unlockable.swift */; };
+		898B59661E7A70ED0017E049 /* AI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B59651E7A70ED0017E049 /* AI.swift */; };
 		898DE5A81D3F3DCB00602111 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898DE5A71D3F3DCA00602111 /* StatisticsViewController.swift */; };
 		89B97F811D20F5DB00588A21 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B97F801D20F5DB00588A21 /* TitleViewController.swift */; };
 		89B97F821D220CAC00588A21 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */; };
@@ -65,6 +66,7 @@
 		8932AD6A1D13BD0100F6AC84 /* Mode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		893B41C11D2E221B00E191BE /* ScoreBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreBoard.swift; sourceTree = "<group>"; };
 		8944D3CB1D3C986F00D90023 /* Unlockable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unlockable.swift; sourceTree = "<group>"; };
+		898B59651E7A70ED0017E049 /* AI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AI.swift; sourceTree = "<group>"; };
 		898DE5A71D3F3DCA00602111 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		89B97F801D20F5DB00588A21 /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		89B97F851D2221AE00588A21 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				8904A2601D400CDD004D4EC6 /* PlayViewController.swift */,
 				8904A2641D414336004D4EC6 /* Main.storyboard */,
 				DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */,
+				898B59651E7A70ED0017E049 /* AI.swift */,
 				89EEC9811D234CCF0075A85C /* SettingsViewController.swift */,
 				8904A2621D403472004D4EC6 /* ConnectionManager.swift */,
 				DC83DD011D1089EA00E1C3F8 /* GameViewController.swift */,
@@ -259,15 +262,20 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = TTP33C342C;
 						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
 					};
 					DC83DD0F1D1089EA00E1C3F8 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = TTP33C342C;
 						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
 						TestTargetID = DC83DCF71D1089EA00E1C3F8;
 					};
 					DC83DD1A1D1089EA00E1C3F8 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = TTP33C342C;
 						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
 						TestTargetID = DC83DCF71D1089EA00E1C3F8;
 					};
 				};
@@ -329,6 +337,7 @@
 				89F6A2C01D30DFDE0090618E /* ChangePointViewController.swift in Sources */,
 				8932AD6B1D13BD0100F6AC84 /* Mode.swift in Sources */,
 				8944D3CC1D3C986F00D90023 /* Unlockable.swift in Sources */,
+				898B59661E7A70ED0017E049 /* AI.swift in Sources */,
 				DC83DCFC1D1089EA00E1C3F8 /* AppDelegate.swift in Sources */,
 				89B97F811D20F5DB00588A21 /* TitleViewController.swift in Sources */,
 				89B97F821D220CAC00588A21 /* GameScene.swift in Sources */,
@@ -414,6 +423,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -462,6 +472,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -521,7 +532,9 @@
 		DC83DD281D1089EA00E1C3F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = TTP33C342C;
 				INFOPLIST_FILE = StrategicSoccerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hshan.StrategicSoccerTests;
@@ -534,6 +547,8 @@
 		DC83DD291D1089EA00E1C3F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = TTP33C342C;
 				INFOPLIST_FILE = StrategicSoccerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hshan.StrategicSoccerTests;
@@ -546,7 +561,9 @@
 		DC83DD2B1D1089EA00E1C3F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = TTP33C342C;
 				INFOPLIST_FILE = StrategicSoccerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hshan.StrategicSoccerUITests;
@@ -559,6 +576,8 @@
 		DC83DD2C1D1089EA00E1C3F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = TTP33C342C;
 				INFOPLIST_FILE = StrategicSoccerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hshan.StrategicSoccerUITests;

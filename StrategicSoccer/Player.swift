@@ -50,11 +50,11 @@ class Player: SKSpriteNode {
         zRotation = CGFloat(M_PI*1.5)
         self.physicsBody = SKPhysicsBody(circleOfRadius: playerSize.width*5/12)
         self.name = "player"
-        self.zPosition = 2
+        self.zPosition = 21
         let body:SKPhysicsBody = self.physicsBody!
         body.usesPreciseCollisionDetection = true
         // change back linear damping and friction
-        body.linearDamping = 0.3
+        body.linearDamping = 1
         body.restitution = 1
         body.friction = 0.1
         body.allowsRotation = false
