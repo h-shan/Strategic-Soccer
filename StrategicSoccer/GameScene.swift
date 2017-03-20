@@ -143,6 +143,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var moveTimer:Timer?
     
     var comp:AI!
+    let predictionTimer = Timer()
+    
     override init(size:CGSize){
         super.init(size: size)
         scoreBoard = ScoreBoard(sender: self)
@@ -239,9 +241,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func captureGamePosition(){
-        
-    }
+    
     func didBegin(_ contact: SKPhysicsContact){
         let ballVelocity = ball.physicsBody!.velocity
         if (contact.bodyA == borderBody && contact.bodyB == ball.physicsBody!) || (contact.bodyB == borderBody && contact.bodyA == ball.physicsBody!){
@@ -257,6 +257,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if -20 < ballVelocity.dy && ballVelocity.dy < 0{
                 ball.physicsBody!.velocity = CGVector(dx: ball.physicsBody!.velocity.dx,dy: -20)
             }
+        } else {
+//            if (contact.bodyA != ball.physicsBody!) {
+//                contact.bodyA.velocity.scale(factor: 0.8)
+//            } else {
+//                contact.bodyA.velocity.scale(factor: 0.8)
+//            }
+//            if (contact.bodyB != ball.physicsBody!) {
+//                contact.bodyB.velocity.scale(factor: 0.8)
+//            } else {
+//                contact.bodyB.velocity.scale(factor: 0.8)
+//            }
         }
 //        if gType == .twoPhone && isHost{
 //            viewController.parentVC.gameService.sendPositionMove(contact.bodyA.node!.name!, positionA: contact.bodyA.node!.position, velocityA: contact.bodyA.velocity,  nodeB: contact.bodyB.node!.name!, positionB: contact.bodyB.node!.position, velocityB: contact.bodyB.velocity)
@@ -286,7 +297,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             default:
                 break
             }
-
         }
         
         // set timer for timed
@@ -331,6 +341,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         restart()
         updateLighting()
         Foundation.Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateLighting), userInfo: nil, repeats: false)
+        
     }
     
     func sendPosition(){
@@ -384,12 +395,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let yMovement = CGFloat(sensitivity)*(touches.first!.location(in: self).y - startPosition!.y)
             let velX = xMovement*dampingFactor/pow(ms, 1.0/1.5)
             let velY = yMovement*dampingFactor/pow(ms, 1.0/1.5)
-            selectedPlayer!.physicsBody!.velocity = CGVector(dx: velX, dy: velY)
+            var vel = CGVector(dx: velX, dy: velY)
+            vel.damp(max: 1200)
             
+            selectedPlayer!.physicsBody!.velocity = vel
             if gType == .twoPhone {
                 viewController.parentVC.gameService.sendMove(selectedPlayer!, velocity: selectedPlayer!.physicsBody!.velocity, position: selectedPlayer!.position)
                 if !isHost{
-                    selectedPlayer!.physicsBody!.velocity = CGVector(dx: velX, dy: velY)
+                    selectedPlayer!.physicsBody!.velocity = vel
                 }
             }
             playerSelected = false
@@ -413,6 +426,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if !loaded{
                 viewController.parentVC.gameService.sendLoad(loadNode)
             }
+        }
+        if predictionTimer.getElapsedTime() > comp.waitTime {
+            predictionTimer.reset()
+            comp.addMarker(UIColor.red, point: comp.predictedBallPosition!)
         }
         
         if (!goalAccounted && 200*scalerY < ball.position.y && ball.position.y < 440*scalerY){
@@ -595,6 +612,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setPosition(){
+        removeMarkers()
         switch (playerOption){
         case PlayerOption.three:
             playerA1.position = CGPoint(x:frame.midX*0.3,y:frame.midY*1.5)
@@ -718,6 +736,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         default:break
         }
         saveStats()
+    }
+    
+    func removeMarkers() {
+        for node in self.children {
+            if node.name == "marker" {
+                node.removeFromParent()
+            }
+        }
     }
 }
 

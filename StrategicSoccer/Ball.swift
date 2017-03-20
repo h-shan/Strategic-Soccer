@@ -23,10 +23,10 @@ class Ball: SKSpriteNode {
         self.zPosition = 2
         let body = self.physicsBody!
         body.usesPreciseCollisionDetection = true
-        body.linearDamping = 0.3
+        body.linearDamping = 0.3 // 0.3
         body.angularDamping = 0
         body.restitution = 1
-        body.friction = 1
+        body.friction = 1 // 1
         body.allowsRotation = false
     }
     

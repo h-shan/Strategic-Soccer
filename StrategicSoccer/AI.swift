@@ -10,6 +10,43 @@ import Foundation
 import SpriteKit
 import UIKit
 
+let maxVel:CGFloat = 1000
+extension CGVector {
+    func getLength() -> CGFloat {
+        return sqrt(dx*dx + dy*dy)
+    }
+    mutating func scale(factor: CGFloat) {
+        dx *= factor
+        dy *= factor
+    }
+    mutating func compress() {
+        let expectedLength:CGFloat = 400
+        let ratio = expectedLength/getLength()
+        let multiplier = pow(ratio, 0.5)
+        scale(factor:multiplier)
+    }
+    mutating func damp() {
+        damp(max: maxVel)
+    }
+    mutating func damp(max: CGFloat) {
+        let ratio = max/getLength()
+        if (ratio < 1) {
+            scale(factor:ratio)
+        }
+    }
+    mutating func normalize() -> CGVector {
+        compress()
+        damp()
+        return self
+    }
+}
+
+extension Int {
+    func inRange(min:Int, max:Int) -> Bool {
+        return self >= min && self <= max
+    }
+}
+
 class AI {
     var selectedPlayer : Player?
     var startPosition : CGPoint?
@@ -18,7 +55,10 @@ class AI {
     var moveTimer:Timer!
     var scene:GameScene!
 
+    var markers:[SKSpriteNode] = []
     let timeLimit:Double = 2.5
+    var predictedBallPosition:CGPoint?
+    var waitTime:Double = 0
     
     init(scene:GameScene) {
         // copy over all necessary variables
@@ -61,6 +101,12 @@ class AI {
                 }
             }
         }
+        if scene.AIDifficulty == 5 {
+            if makeWayForGoal() {
+                scene.switchTurns()
+                return
+            }
+        }
         if moveTimer.getElapsedTime()>timeLimit{
             switch(scene.AIDifficulty){
             case 1: hitBallBasic(true); break
@@ -79,36 +125,41 @@ class AI {
     
     func firstMove(){
         //if playerOption == PlayerOption.three{
-        let random = arc4random_uniform(3)
-        switch (random){
-        case 0:
-            scene.playerB1.physicsBody!.velocity = CGVector(dx: scene.playerA1.position.x-scene.playerB1.position.x,dy: scene.playerA3.position.y - scene.playerB1.position.y)
+        let random = Int(arc4random_uniform(9))
+        // adding 10 so that there isn't a free goal
+        if random.inRange(min: 0, max: 0) {
+            scene.playerB1.physicsBody!.velocity = CGVector(dx: scene.playerA1.position.x-scene.playerB1.position.x + 10,dy: scene.playerA3.position.y - scene.playerB1.position.y)
             addMarker(UIColor.orange, point: scene.playerB1.position)
-            break
-        case 1:
-            scene.playerB2.physicsBody!.velocity = CGVector(dx: scene.playerA1.position.x-scene.playerB2.position.x,dy: scene.playerA3.position.y - scene.playerB2.position.y)
+        } else if random.inRange(min: 1, max: 1) {
+            scene.playerB2.physicsBody!.velocity = CGVector(dx: scene.playerA1.position.x-scene.playerB2.position.x + 10,dy: scene.playerA3.position.y - scene.playerB2.position.y)
             addMarker(UIColor.orange, point: scene.playerB2.position)
-            break
-        case 2:
-            scene.playerB3.physicsBody!.velocity = CGVector(dx: scene.playerA1.position.x-scene.playerB3.position.x,dy: scene.playerA3.position.y - scene.playerB3.position.y)
+        } else if random.inRange(min: 2, max: 2) {
+            // middle player
+            scene.playerB3.physicsBody!.velocity = CGVector(dx: scene.playerA1.position.x-scene.playerB3.position.x + 10,dy: scene.playerA3.position.y - scene.playerB3.position.y)
             addMarker(UIColor.orange, point: scene.playerB3.position)
-            break
-        default:
-            break
+        } else if random.inRange(min:3, max:5) {
+            // left from bottom
+            scene.playerB1.physicsBody!.velocity = CGVector(dx: goalLineB - scene.playerB1.position.x, dy: scene.frame.maxY*1/3 - scene.playerB1.position.y)
+            addMarker(UIColor.magenta, point: scene.playerB1.position)
+        } else if random.inRange(min:6, max:8) {
+            // right from bottom
+            scene.playerB2.physicsBody!.velocity = CGVector(dx: goalLineB - scene.playerB2.position.x, dy: scene.frame.maxY*2/3 - scene.playerB2.position.y)
+            addMarker(UIColor.magenta, point: scene.playerB2.position)
         }
     }
     
     func straightShot() -> Bool{
         var bestShot:(Player, CGVector, Int)?
+        let threshold = Int(arc4random_uniform(3))
         PLAYERLOOP: for player in scene.teamB{
-            var multiplier:CGFloat = 0.3
-            var minBar = Int(arc4random_uniform(4))
+            var multiplier:CGFloat = 0.1
+            var minBar = 20
             while (multiplier <= 0.6){
-                let predictedBallPosition = CGPoint(x: ball.position.x + ball.physicsBody!.velocity.dx*multiplier*0.9, y: ball.position.y + ball.physicsBody!.velocity.dy*multiplier*0.9)
+                let predictedBallPosition = CGPoint(x: ball.position.x + ball.physicsBody!.velocity.dx*multiplier, y: ball.position.y + ball.physicsBody!.velocity.dy*multiplier)
                 if !scene.frame.contains(predictedBallPosition){
                     return false
                 }
-                if detectBarriers(ball.position, velocity: ball.physicsBody!.velocity, xLimit: predictedBallPosition.x, fromRight: predictedBallPosition.x < ball.position.x)>0{
+                if detectBarriers(ball.position, velocity: ball.physicsBody!.velocity, xLimit: predictedBallPosition.x, fromRight: predictedBallPosition.x < ball.position.x).count > 0 {
                     return false
                 }
                 let toPointVelocity = CGVector(dx: (predictedBallPosition.x-player.position.x),dy: (predictedBallPosition.y - player.position.y))
@@ -124,29 +175,39 @@ class AI {
                 if xDistance < 0 {
                     continue PLAYERLOOP
                 }
-                if ball.position.x < 50*scalerX{
+                if predictedBallPosition.x < 50*scalerX{
                     multiplier+=0.1
                     continue
                 }
                 
-                if detectGoal(player.position, velocity: straightShotVelocity, xLimit: goalLineA, fromRight: true){
+                if detectGoal(predictedBallPosition, velocity: straightShotVelocity, xLimit: goalLineA, fromRight: true){
                     // detectObstacles
-                    let numBar = detectBarriers(player.position, velocity: straightShotVelocity, xLimit: goalLineB, fromRight: true)
-                    if numBar == 0{
-                        player.physicsBody!.velocity = dampVelocity(straightShotVelocity)
-                        addMarker(UIColor.blue, point: player.position)
-                        return true
-                    }
+                    let numBar = detectBarriers(player.position, velocity: straightShotVelocity, xLimit: goalLineB, fromRight: true).count
                     if numBar < minBar{
+                        self.predictedBallPosition = predictedBallPosition
+                        self.waitTime = Double(multiplier)*0.8
+                        scene.predictionTimer.restart()
                         bestShot = (player, straightShotVelocity, numBar)
                         minBar = numBar
+                    } else if numBar == minBar {
+                        if straightShotVelocity.getLength() < bestShot!.1.getLength() {
+                            self.predictedBallPosition = predictedBallPosition
+                            self.waitTime = Double(multiplier)*0.8
+                            scene.predictionTimer.restart()
+
+                            bestShot = (player, straightShotVelocity, numBar)
+                        }
                     }
                 }
                 multiplier += 0.1
             }
         }
         if var shot = bestShot{
-            shot.1 = dampVelocity(shot.1)
+            if shot.2 >= threshold {
+                return false
+            }
+            shot.1.compress()
+            shot.1.damp()
             shot.0.physicsBody!.velocity = shot.1
             addMarker(UIColor.blue, point: shot.0.position)
             return true
@@ -154,7 +215,8 @@ class AI {
         return false
     }
     
-    func detectBarriers(_ startingPoint: CGPoint, velocity: CGVector, xLimit: CGFloat, fromRight: Bool) -> Int{
+    
+    func detectBarriers(_ startingPoint: CGPoint, velocity: CGVector, xLimit: CGFloat, fromRight: Bool) -> [SKPhysicsBody]{
         var xPosition = (startingPoint.x)
         var yPosition = (startingPoint.y)
         var detectedBarriers = [SKPhysicsBody]()
@@ -168,12 +230,15 @@ class AI {
                 if objectAtPoint != nil && !detectedBarriers.contains(objectAtPoint!){
                     detectedBarriers.append(objectAtPoint!)
                     if objectAtPoint!.node is GoalPost{
-                        return 100
+                        // fill up detectedBarriers with 10 nodes to increase size
+                        for _ in 0..<10 {
+                            detectedBarriers.append(SKPhysicsBody())
+                        }
+                        return detectedBarriers
                     }
                 }
             }
-        }
-        else{
+        } else{
             while (xPosition < xLimit && xPosition < scene.frame.maxX && yPosition > 0 && yPosition < scene.frame.maxY){
                 xPosition += 2
                 yPosition += 2*velocity.dy/velocity.dx
@@ -181,12 +246,17 @@ class AI {
                 if objectAtPoint != nil && !detectedBarriers.contains(objectAtPoint!){
                     detectedBarriers.append(objectAtPoint!)
                     if objectAtPoint!.node is GoalPost{
-                        return 100
+                        // fill up detectedBarriers with 10 nodes to increase size
+                        for _ in 0..<10 {
+                            detectedBarriers.append(SKPhysicsBody())
+                        }
+                        return detectedBarriers
                     }
                 }
             }
         }
-        return detectedBarriers.count-1
+        detectedBarriers.remove(at: 0)
+        return detectedBarriers
     }
     
     func detectGoal(_ start: CGPoint, velocity: CGVector, xLimit: CGFloat, fromRight: Bool) -> Bool{
@@ -195,19 +265,19 @@ class AI {
         }
         var xPosition = start.x
         var yPosition = start.y
-        if fromRight{
+        if fromRight {
             while (xPosition>xLimit && xPosition < scene.frame.maxX && yPosition > 0 && yPosition < scene.frame.maxY){
                 xPosition -= 2
                 yPosition -= 2*velocity.dy/velocity.dx
             }
-        }
-        else{
+        } else {
             while (xPosition<xLimit && xPosition > 0 && yPosition > 0 && yPosition < scene.frame.maxY){
                 xPosition += 2
                 yPosition += 2*velocity.dy/velocity.dx
             }
         }
-        if scene.goalPostA1.position.y>yPosition && yPosition > scene.goalPostA2.position.y{
+        
+        if scene.goalPostA1.position.y > yPosition && yPosition > scene.goalPostA2.position.y{
             return true
         }
         return false
@@ -215,12 +285,16 @@ class AI {
     }
     
     func saveGoal() -> Bool {
+        var predictedBallPosition:CGPoint = CGPoint()
+        if ball.position.x < 0.6*scene.frame.maxX {
+            return false
+        }
         if detectGoal(ball.position, velocity: ball.physicsBody!.velocity, xLimit: goalLineB, fromRight: false){
             var shots = [(Player, CGVector, Int)]()
             
             var multiplier:CGFloat = 0.3
             for player in scene.teamB{
-                var predictedBallPosition = CGPoint(x: ball.position.x + ball.physicsBody!.velocity.dx*multiplier, y: ball.position.y + ball.physicsBody!.velocity.dy*multiplier)
+                predictedBallPosition = CGPoint(x: ball.position.x + ball.physicsBody!.velocity.dx*multiplier, y: ball.position.y + ball.physicsBody!.velocity.dy*multiplier)
                 while !scene.frame.contains(predictedBallPosition) && multiplier > 0{
                     multiplier -= 0.1
                     predictedBallPosition = CGPoint(x: ball.position.x + ball.physicsBody!.velocity.dx*multiplier, y: ball.position.y + ball.physicsBody!.velocity.dy*multiplier)
@@ -231,7 +305,7 @@ class AI {
                 let buffer:CGFloat = 0
                 let predictedPlayerPosition = CGPoint(x: predictedBallPosition.x + cos(angle)*buffer,y: predictedBallPosition.y + sin(angle)*buffer)
                 let blockVelocity = CGVector(dx: (predictedPlayerPosition.x-player.position.x)/multiplier, dy: (predictedPlayerPosition.y-player.position.y)/multiplier)
-                let numBar = detectBarriers(player.position, velocity: blockVelocity, xLimit: goalLineB, fromRight: player.position.x > ball.position.x)
+                let numBar = detectBarriers(player.position, velocity: blockVelocity, xLimit: goalLineB, fromRight: player.position.x > ball.position.x).count
                 shots.append((player,blockVelocity, numBar))
                 
             }
@@ -241,7 +315,7 @@ class AI {
                     minBar = shot.2
                 }
             }
-            if minBar > 10 {
+            if minBar >= 10 {
                 return false
             }
             var bestShot: (Player, CGVector, Int)?
@@ -260,40 +334,18 @@ class AI {
                     }
                 }
             }
-            let finalVelocity = dampVelocity(bestShot!.1)
-            bestShot!.0.physicsBody!.velocity = finalVelocity
+            self.predictedBallPosition = predictedBallPosition
+            self.waitTime = Double(multiplier)*0.8
+            scene.predictionTimer.restart()
+            bestShot!.0.physicsBody!.velocity = bestShot!.1.normalize()
+            
             addMarker(UIColor.yellow, point: bestShot!.0.position)
             return true
         }
         return false
     }
     
-    func dampVelocity(_ velocity: CGVector) -> CGVector {
-        return dampVelocity(velocity, maxX: 1000, maxY: 500)
-    }
     
-    func dampVelocity(_ velocity: CGVector, maxX: CGFloat, maxY: CGFloat) -> CGVector{
-        var dampedVelocity = velocity
-        while abs(dampedVelocity.dx)>maxX ||  abs(dampedVelocity.dy) > maxY{
-            if dampedVelocity.dx > maxX{
-                dampedVelocity.dy = velocity.dy * maxX/velocity.dx
-                dampedVelocity.dx = maxX
-            }
-            if dampedVelocity.dy > maxY{
-                dampedVelocity.dx = velocity.dx * maxY/velocity.dy
-                dampedVelocity.dy = maxY
-            }
-            if dampedVelocity.dx < -maxX{
-                dampedVelocity.dy = velocity.dy * -maxX/velocity.dx
-                dampedVelocity.dx = -maxX
-            }
-            if dampedVelocity.dy < -maxY{
-                dampedVelocity.dx = velocity.dx * -maxY/velocity.dy
-                dampedVelocity.dy = -maxY
-            }
-        }
-        return dampedVelocity
-    }
     func improvePosition(){
         if outOfCorner(){
             return
@@ -303,26 +355,29 @@ class AI {
                 return
             }
         }
+        if clearCorner() {
+            return
+        }
         if getBehindBall(){
             return
         }
         deflectPlayer()
     }
+    
     func outOfCorner() -> Bool{
         for player in scene.teamB{
             //check corners
-            if player.position.x > scene.goalPostB1.position.x-scene.goalPostB1.size.width || player.position.x < scene.goalPostA1.position.x + scene.goalPostA1.size.width{
+            if player.position.x > goalLineB || player.position.x < goalLineA{
                 // player in opponent goal
                 if player.position.x < scene.frame.midX{
-                    if player.position.y < scene.goalPostA1.position.y && player.position.y > scene.goalPostA2.position.y{
-                        if Bool.random(){
-                            player.physicsBody!.velocity = CGVector(dx: (scene.frame.midX - player.position.x)/3, dy: (scene.goalPostA1.position.y-player.position.y)/3)
-                        }else{
-                            player.physicsBody!.velocity = CGVector(dx: (scene.frame.midX - player.position.x)/3, dy: (scene.goalPostA2.position.y - player.position.y)/3)
-                        }
-                        addMarker(UIColor.black, point: player.position)
-                        return true
+                    if Bool.random(){
+                        player.physicsBody!.velocity = CGVector(dx: (scene.frame.midX - player.position.x)/3, dy: (scene.goalPostA1.position.y-player.position.y)/3)
+                    } else{
+                        player.physicsBody!.velocity = CGVector(dx: (scene.frame.midX - player.position.x)/3, dy: (scene.goalPostA2.position.y - player.position.y)/3)
                     }
+                    addMarker(UIColor.black, point: player.position)
+                    return true
+                    
                 }
                 // player in top corners
                 if player.position.y > scene.goalPostA1.position.y{
@@ -346,6 +401,7 @@ class AI {
         return false
         
     }
+    
     func hitBallBasic(_ random: Bool){
         
         let randomPlayer: UInt32
@@ -369,20 +425,21 @@ class AI {
                 ballFuturePosition.y -= CGFloat(arc4random_uniform(32))
             }
         }
-        let shotVelocity = CGVector(dx: (ballFuturePosition.x-selectedPlayer.position.x)/time, dy: (ballFuturePosition.y-selectedPlayer.position.y)/time)
-        selectedPlayer.physicsBody!.velocity = random ? dampVelocity(shotVelocity, maxX: CGFloat(300), maxY: CGFloat(180)):dampVelocity(shotVelocity)
-        
+        var shotVelocity = CGVector(dx: (ballFuturePosition.x-selectedPlayer.position.x)/time, dy: (ballFuturePosition.y-selectedPlayer.position.y)/time)
+        shotVelocity.normalize()
+        selectedPlayer.physicsBody!.velocity = shotVelocity
         
         addMarker(UIColor.magenta, point: selectedPlayer.position)
     }
     
     func hitBallAdvanced() -> Bool{
+        
         let ballMultiplier:CGFloat = 0.5
         var ballFuturePosition = CGPoint(x: ball.position.x + ball.physicsBody!.velocity.dx*ballMultiplier, y: ball.position.y + ball.physicsBody!.velocity.dy*ballMultiplier)
         while !scene.frame.contains(ballFuturePosition){
             let firstVelocity = CGVector(dx: ballFuturePosition.x - ball.position.x, dy: ballFuturePosition.y - ball.position.y)
             if ballFuturePosition.x < 0 || ballFuturePosition.x > scene.frame.maxX{
-                if detectBarriers(ball.position,velocity: firstVelocity, xLimit: ballFuturePosition.x, fromRight: firstVelocity.dx < 0) == 100{
+                if detectBarriers(ball.position,velocity: firstVelocity, xLimit: ballFuturePosition.x, fromRight: firstVelocity.dx < 0).count >= 10{
                     return false
                 }
                 let secondVelocity = CGVector(dx: -firstVelocity.dx, dy: firstVelocity.dy)
@@ -392,17 +449,17 @@ class AI {
                 else if ballFuturePosition.x > scene.frame.maxX{
                     ballFuturePosition.x = 2*scene.frame.maxX-ballFuturePosition.x
                 }
-                if detectBarriers(ball.position,velocity: secondVelocity, xLimit: ballFuturePosition.x, fromRight: secondVelocity.dx < 0) == 100{
+                if detectBarriers(ball.position,velocity: secondVelocity, xLimit: ballFuturePosition.x, fromRight: secondVelocity.dx < 0).count >= 10{
                     return false
                 }
                 
             }
             if ballFuturePosition.y < 0 || ballFuturePosition.y>scene.frame.maxY{
-                if detectBarriers(ball.position, velocity: firstVelocity, xLimit: ballFuturePosition.x, fromRight: firstVelocity.dx < 0) == 100{
+                if detectBarriers(ball.position, velocity: firstVelocity, xLimit: ballFuturePosition.x, fromRight: firstVelocity.dx < 0).count >= 10{
                     return false
                 }
                 let secondVelocity = CGVector(dx: firstVelocity.dx, dy: -firstVelocity.dy)
-                if detectBarriers(ball.position, velocity: firstVelocity, xLimit: ballFuturePosition.x, fromRight: secondVelocity.dx < 0) == 100{
+                if detectBarriers(ball.position, velocity: firstVelocity, xLimit: ballFuturePosition.x, fromRight: secondVelocity.dx < 0).count >= 10{
                     return false
                 }
                 if ballFuturePosition.y < 0{
@@ -415,10 +472,12 @@ class AI {
         }
         var shots = [(Player, CGVector, Int)]()
         for player in scene.teamB{
-            let playerVelocity = CGVector(dx: 2*ballMultiplier*(ballFuturePosition.x-player.position.x), dy: 2*ballMultiplier*(ballFuturePosition.y - player.position.y))
-            let numBar = detectBarriers(player.position,velocity: playerVelocity, xLimit: ball.position.x, fromRight: playerVelocity.dx < 0)
-            if playerVelocity.dx < 0{
-                shots.append((player,playerVelocity,numBar))
+            if (!isGoalie(player: player)) {
+                let playerVelocity = CGVector(dx: 2*ballMultiplier*(ballFuturePosition.x-player.position.x), dy: 2*ballMultiplier*(ballFuturePosition.y - player.position.y))
+                let numBar = detectBarriers(player.position,velocity: playerVelocity, xLimit: ball.position.x, fromRight: playerVelocity.dx < 0).count
+                if playerVelocity.dx < 0{
+                    shots.append((player,playerVelocity,numBar))
+                }
             }
         }
         var minBar = 10
@@ -429,29 +488,35 @@ class AI {
                 bestShot = shot
             }
         }
-        if let finalShot = bestShot{
-            let finalVelocity = dampVelocity(finalShot.1)
-            finalShot.0.physicsBody!.velocity = finalVelocity
+        if var finalShot = bestShot{
+            self.predictedBallPosition = ballFuturePosition
+            self.waitTime = Double(ballMultiplier)*0.8
+            scene.predictionTimer.restart()
+            finalShot.0.physicsBody!.velocity = finalShot.1.normalize()
             addMarker(UIColor.red, point: finalShot.0.position)
             return true
         }
         return false
         
     }
+    
     func getBehindBall() -> Bool{
         if ball.position.x < scene.frame.midX{
             return false
         }
-        let deflater:CGFloat = 2/3
+        var deflater:CGFloat = 0.6
         for player in scene.teamB{
             if player.position.x < scene.frame.maxX/3{
-                player.physicsBody!.velocity = dampVelocity(CGVector(dx: (goalLineB - player.position.x) * deflater, dy: (scene.frame.midY-player.position.y) * deflater))
+                var vel = CGVector(dx: (goalLineB - player.position.x) * deflater, dy: (scene.frame.midY-player.position.y) * deflater)
+                vel.normalize()
+                player.physicsBody!.velocity = vel
                 addMarker(UIColor.purple, point: player.position)
                 return true
             }
         }
         return false
     }
+    
     func deflectPlayer(){
         var closestDistance:CGFloat = 1000
         var closestOpponent = scene.playerA1
@@ -465,9 +530,11 @@ class AI {
         
         let velFactor:CGFloat = 2
         for player in scene.teamB{
-            let shotVelocity = CGVector(dx: (closestOpponent.position.x-player.position.x) * velFactor, dy: (closestOpponent.position.y-player.position.y) * velFactor)
-            let numBar = detectBarriers(player.position,velocity: shotVelocity, xLimit: closestOpponent.position.x, fromRight: shotVelocity.dx < 0)
-            shots.append(player,shotVelocity, numBar)
+            if (!isGoalie(player: player)) {
+                let shotVelocity = CGVector(dx: (closestOpponent.position.x-player.position.x) * velFactor, dy: (closestOpponent.position.y-player.position.y) * velFactor)
+                let numBar = detectBarriers(player.position,velocity: shotVelocity, xLimit: closestOpponent.position.x, fromRight: shotVelocity.dx < 0).count
+                shots.append(player,shotVelocity, numBar)
+            }
         }
         var minBar = 10
         var bestShot: (Player, CGVector, Int)?
@@ -477,19 +544,106 @@ class AI {
                 bestShot = shot
             }
         }
-        bestShot!.1 = dampVelocity(bestShot!.1)
-        bestShot!.0.physicsBody!.velocity = bestShot!.1
+        bestShot!.0.physicsBody!.velocity = bestShot!.1.normalize()
         addMarker(UIColor.brown,point: bestShot!.0.position)
     }
     
+    func makeWayForGoal() -> Bool {
+        
+        if detectGoal(ball.position, velocity: ball.physicsBody!.velocity, xLimit: goalLineA, fromRight: true){
+            let bar = detectBarriers(ball.position, velocity: ball.physicsBody!.velocity, xLimit: goalLineA, fromRight: true)
+            if (bar.count == 1) {
+                var shots = [(Player,CGVector, Int)]()
+                let velFactor:CGFloat = 2
+                for body in bar {
+                    for playerA in scene.teamA {
+                        if (body == playerA.physicsBody!) {
+                            for player in scene.teamB{
+                                let shotVelocity = CGVector(dx: (playerA.position.x-player.position.x) * velFactor, dy: (playerA.position.y-player.position.y) * velFactor)
+                                let numBar = detectBarriers(player.position,velocity: shotVelocity, xLimit: playerA.position.x, fromRight: shotVelocity.dx < 0).count
+                                shots.append(player,shotVelocity, numBar)
+                            }
+                            var minBar = 10
+                            var bestShot: (Player, CGVector, Int)?
+                            for shot in shots{
+                                if shot.2 < minBar{
+                                    minBar = shot.2
+                                    bestShot = shot
+                                }
+                            }
+                            bestShot!.0.physicsBody!.velocity = bestShot!.1.normalize()
+                            addMarker(UIColor.cyan, point: bestShot!.0.position)
+                            return true
+                        }
+                    }
+                    for playerB in scene.teamB {
+                        if (!isGoalie(player: playerB)) {
+                            if (body == playerB.physicsBody!) {
+                                if scene.distance(ball.position, point2: ball.position) < 0.3 * scene.frame.maxX {
+                                    // try to dodge towards middle of screen
+                                    var dodgeVel:CGVector
+                                    let velX = ball.physicsBody!.velocity.dx/2
+                                    let velY = ball.physicsBody!.velocity.dy/2
+                                    dodgeVel = CGVector(dx: velY, dy: -velX)
+                                    playerB.physicsBody!.velocity = dodgeVel
+                                    addMarker(UIColor.cyan, point: playerB.position)
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false
+    }
+    
+    func clearCorner() -> Bool{
+        // if ball not in corner or still moving, then don't do anything
+        if ball.position.x < goalLineA || ball.position.x > goalLineB {
+            return false
+        }
+        if ball.physicsBody!.velocity.getLength() > 200 {
+            return false
+        }
+        // go through all players and find one that doesn't hit a goal post
+        for playerB in scene.teamB {
+            if (!isGoalie(player: playerB)) {
+                let vel = CGVector(dx: ball.position.x - playerB.position.x, dy: ball.position.y - playerB.position.y)
+                let bar = detectBarriers(ball.position, velocity: ball.physicsBody!.velocity, xLimit: goalLineA, fromRight: playerB.position.x > ball.position.x)
+                if (bar.count < 10) {
+                    playerB.physicsBody?.velocity = vel
+                    addMarker(UIColor.gray, point: playerB.position)
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    func isGoalie(player:Player) -> Bool{
+        if (player.position.x > goalLineB) {
+            if (player.position.y > scene.goalPostA1.position.y || player.position.y < scene.goalPostA2.position.y) {
+                return true
+            }
+        }
+        return false
+    }
+    
     func addMarker(_ color: UIColor, point: CGPoint){
-            let blue = SKSpriteNode(imageNamed: "PlayerA")
-            blue.run(SKAction.colorize(with: color, colorBlendFactor: 1.0, duration: 0.0001))
-            blue.size = CGSize(width: 10, height: 10)
-            blue.position = point
-            blue.zPosition = 2
-            blue.name = "blue"
-            scene.addChild(blue)
+        let marker = SKSpriteNode(imageNamed: "PlayerA")
+        marker.run(SKAction.colorize(with: color, colorBlendFactor: 1.0, duration: 0.0001))
+        marker.size = CGSize(width: 10, height: 10)
+        marker.position = point
+        marker.zPosition = 10 // 2
+        marker.name = "marker"
+        scene.addChild(marker)
+        markers.append(marker)
+        // only keep track of last 10
+        if markers.count > 10 {
+            markers[0].removeFromParent()
+            markers.remove(at: 0)
+        }
     }
 
     

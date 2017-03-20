@@ -65,7 +65,7 @@ class GameViewController: UIViewController {
         loadingView.layer.borderWidth = 5
         loadingView.layer.borderColor = UIColor.black.cgColor
         scene.viewController = self
-        NumberCoins.layer.borderWidth = 5
+        NumberCoins.layer.borderWidth = 0
         NumberCoins.layer.borderColor = UIColor.black.cgColor
         skView.ignoresSiblingOrder = true
         
