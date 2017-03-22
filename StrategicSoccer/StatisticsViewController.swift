@@ -40,7 +40,7 @@ class StatisticsViewController: UIViewController{
     @IBOutlet weak var BackButtonHeight: NSLayoutConstraint!
     
     @IBAction func BackButton(_ sender:AnyObject){
-        navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
     @IBAction func resetStatistics(){
         ResetWarning.isHidden = false

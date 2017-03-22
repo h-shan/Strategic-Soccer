@@ -42,7 +42,7 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var BackButtonHeight: NSLayoutConstraint!
 
     @IBAction func BackArrow(_ sender: AnyObject) {
-        navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
     @IBAction func YesButton(_ sender: AnyObject){
         if coins >= 20{

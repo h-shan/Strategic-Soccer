@@ -121,7 +121,7 @@ class GameViewController: UIViewController {
         }
     }
     func backToTitle(){
-        navigationController?.popViewController(animated: false)
+        _ = navigationController?.popViewController(animated: false)
 
         self.removeFromParentViewController()
         UIGraphicsBeginImageContext(view.frame.size)

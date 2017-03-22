@@ -129,7 +129,7 @@ class SettingsViewController: UIViewController {
         CurrentPlayers.text = "THREE" + " \u{200c}"
     }
     @IBAction func BackButton(_ sender: AnyObject) {
-        navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
     @IBAction func ModePoints(_ sender: UIButton) {
         defaultMode = Mode.tenPoint

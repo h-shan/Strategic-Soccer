@@ -30,7 +30,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var BackButtonWidth: NSLayoutConstraint!
     @IBOutlet weak var BackButtonHeight: NSLayoutConstraint!
     @IBAction func backButton(_ sender: AnyObject){
-        navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
     @IBAction func showConnections(_ sender: AnyObject){
         ConnectionView.isHidden = false
