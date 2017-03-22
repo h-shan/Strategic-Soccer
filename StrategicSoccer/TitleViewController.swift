@@ -23,8 +23,8 @@ var screenWidth:CGFloat = 0
 var screenHeight:CGFloat = 0
 var scalerX:CGFloat = 0
 var scalerY:CGFloat = 0
-let goalLineB = 1086*scalerX
-let goalLineA = 50*scalerX
+let goalLineB = 1076*scalerX
+let goalLineA = 60*scalerX
 var coins = 50
 var statistics = [Stats.totalGames:0,Stats.totalWon:0,Stats.totalOne:0,Stats.oneWon:0,Stats.totalTwo:0,Stats.twoWon: 0, Stats.totalThree:0,Stats.threeWon:0,Stats.totalFour:0,Stats.fourWon:0,Stats.totalFive:0,Stats.fiveWon:0]
 

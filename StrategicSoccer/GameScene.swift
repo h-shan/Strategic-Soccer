@@ -10,42 +10,6 @@ import SpriteKit
 import Foundation
 import UIKit
 
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l <= r
-  default:
-    return !(rhs < lhs)
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
-
 let difficulty1Multiplier = 1
 let difficulty2Multiplier = 1.5
 let difficulty3Multiplier = 2
@@ -54,7 +18,6 @@ let difficulty5Multiplier = 4
 extension SKNode{
     func fadeIn(){
         self.run(SKAction.fadeAlpha(to: 0.8, duration: 0.3))
-        
     }
     func fadeOut(){
         self.run(SKAction.fadeAlpha(to: 0, duration: 0.3))
@@ -64,7 +27,14 @@ extension Bool{
     static func random() -> Bool {
         return arc4random_uniform(2) == 0
     }
-    
+}
+
+extension CGPoint {
+    func distance(_ point : CGPoint) -> CGFloat{
+        let dx = point.x - self.x
+        let dy = point.y - self.y
+        return dx*dx + dy*dy
+    }
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -119,7 +89,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var winPoints: Int?
     var baseTime: TimeInterval?
-    var gameTime: TimeInterval?
+    var gameTime: TimeInterval!
     
     var mode = Mode.threeMinute
     var playerOption = PlayerOption.three
@@ -349,41 +319,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        var selPlay: (CGFloat, Player?, CGPoint?) = (0.2 * screenSize.width, nil, nil)
         for touch in touches {
             let location = touch.location(in: self)
             let node = atPoint(location)
-
+            
             if gType == .twoPlayer || (gType == .onePlayer && turnA) || gType == .twoPhone && turnA{
                 if (node is Player){
                     let touchedPlayer = (node as! Player)
                     if touchedPlayer.mTeamA == turnA {
-                        selectedPlayer = touchedPlayer
-                        playerSelected = true
-                        startPosition = location
-                        selectedPlayer!.run(SKAction.colorize(with: UIColor.red, colorBlendFactor: 0.4, duration: 0))
-                        selPlayTimer!.restart()
+                        selPlay.1 = touchedPlayer
+                        selPlay.2 = location
                     }
-                }
-                else{
-                    var selPlay: (CGFloat, Player?) = (0.2 * screenSize.width, nil)
-                    
+                } else{
                     for player in players{
-                        // select closest player within
+                        // select closest player within set radius
                         if player.mTeamA == turnA {
-                            let dis = distance(player.position, point2: location)
+                            let dis = player.position.distance(location)
                             if dis < selPlay.0 {
                                 selPlayTimer!.restart()
                                 selPlay.0 = dis
                                 selPlay.1 = player
-                                selectedPlayer = player
-                                playerSelected = true
-                                startPosition = player.position
-                                selectedPlayer!.run(SKAction.colorize(with: UIColor.red, colorBlendFactor: 0.4, duration: 0))
+                                selPlay.2 = location
                             }
                         }
                     }
                 }
             }
+        }
+        if let touchedPlayer = selPlay.1 {
+            selectedPlayer = touchedPlayer
+            playerSelected = true
+            startPosition = selPlay.2!
+            selectedPlayer!.run(SKAction.colorize(with: UIColor.red, colorBlendFactor: 0.4, duration: 0))
+            selPlayTimer!.restart()
         }
     }
     
@@ -396,7 +365,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let velX = xMovement*dampingFactor/pow(ms, 1.0/1.5)
             let velY = yMovement*dampingFactor/pow(ms, 1.0/1.5)
             var vel = CGVector(dx: velX, dy: velY)
-            vel.damp(max: 1200)
+            vel.damp(max: 1000)
             
             selectedPlayer!.physicsBody!.velocity = vel
             if gType == .twoPhone {
@@ -433,17 +402,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if (!goalAccounted && 200*scalerY < ball.position.y && ball.position.y < 440*scalerY){
-            if ball.position.x<60*scalerX{
-                self.reset(false)
-                if gType == .twoPhone && isHost && viewController.parentVC.gameService.connectedDevice != nil{
-                    viewController.parentVC.gameService.stringSend(String(format: "%@ %@ %@","misc", "goal", false.toString()))
-                }
-            } else if 1076*scalerX < ball.position.x {
-                if gType == .twoPhone && isHost && viewController.parentVC.gameService.connectedDevice != nil{
-                    viewController.parentVC.gameService.stringSend(String(format:"%@ %@ %@","misc", "goal", true.toString()))
-                }
-                self.reset(true)
-            }
+            checkGoal()
         }
         
         if gType == .onePlayer && !turnA{
@@ -604,8 +563,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         _ = Foundation.Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(goBackToTitle), userInfo: nil, repeats: false)
         gameTimer.elapsedTime = 0
-
     }
+    
     func goBackToTitle(){
         clockBackground?.isHidden = true
         viewController.backToTitle()
@@ -635,11 +594,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         ball.position = CGPoint(x: frame.midX,y: frame.midY)
     }
-    func distance(_ point1: CGPoint, point2: CGPoint) -> CGFloat{
-        let distX = point1.x-point2.x
-        let distY = point1.y-point2.y
-        return sqrt(distX*distX + distY*distY)
-    }
+    
     func restart(){
         scoreA = 0
         scoreB = 0
@@ -650,7 +605,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setPosition()
         setDynamicStates(false)
         setDynamicStates(true)
-        moveTimer?.restart()
         goalDelay.reset()
         scoreBackground.fadeOut()
         goalAccounted = false
@@ -664,6 +618,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         isUserInteractionEnabled = true
         scoreBoard.label.text = "0    0"
         updateLighting()
+        moveTimer?.restart()
+
     }
     
     func addPlayers(){
@@ -743,6 +699,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if node.name == "marker" {
                 node.removeFromParent()
             }
+        }
+    }
+    
+    func checkGoal() {
+        if ball.position.x < goalLineA {
+            self.reset(false)
+            if gType == .twoPhone && isHost && viewController.parentVC.gameService.connectedDevice != nil{
+                viewController.parentVC.gameService.stringSend(String(format: "%@ %@ %@","misc", "goal", false.toString()))
+            }
+        } else if ball.position.x > goalLineB {
+            if gType == .twoPhone && isHost && viewController.parentVC.gameService.connectedDevice != nil{
+                viewController.parentVC.gameService.stringSend(String(format:"%@ %@ %@","misc", "goal", true.toString()))
+            }
+            self.reset(true)
         }
     }
 }

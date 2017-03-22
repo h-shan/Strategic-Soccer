@@ -28,12 +28,15 @@ extension CGVector {
     mutating func damp() {
         damp(max: maxVel)
     }
+    
     mutating func damp(max: CGFloat) {
         let ratio = max/getLength()
         if (ratio < 1) {
             scale(factor:ratio)
         }
     }
+    
+    @discardableResult
     mutating func normalize() -> CGVector {
         compress()
         damp()
@@ -504,7 +507,7 @@ class AI {
         if ball.position.x < scene.frame.midX{
             return false
         }
-        var deflater:CGFloat = 0.6
+        let deflater:CGFloat = 0.6
         for player in scene.teamB{
             if player.position.x < scene.frame.maxX/3{
                 var vel = CGVector(dx: (goalLineB - player.position.x) * deflater, dy: (scene.frame.midY-player.position.y) * deflater)
@@ -521,8 +524,8 @@ class AI {
         var closestDistance:CGFloat = 1000
         var closestOpponent = scene.playerA1
         for player in scene.teamA{
-            if scene.distance(player.position, point2:ball.position) < closestDistance{
-                closestDistance = scene.distance(player.position, point2: ball.position)
+            if player.position.distance(ball.position) < closestDistance{
+                closestDistance = player.position.distance(ball.position)
                 closestOpponent = player
             }
         }
@@ -579,7 +582,7 @@ class AI {
                     for playerB in scene.teamB {
                         if (!isGoalie(player: playerB)) {
                             if (body == playerB.physicsBody!) {
-                                if scene.distance(ball.position, point2: ball.position) < 0.3 * scene.frame.maxX {
+                                if ball.position.distance(playerB.position) < 0.3 * scene.frame.maxX {
                                     // try to dodge towards middle of screen
                                     var dodgeVel:CGVector
                                     let velX = ball.physicsBody!.velocity.dx/2
