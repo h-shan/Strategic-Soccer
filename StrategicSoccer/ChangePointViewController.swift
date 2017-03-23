@@ -22,6 +22,8 @@ class ChangePointViewController: UIViewController, UITableViewDelegate, UITableV
    
     
     override func viewDidLoad() {
+        becomeFirstResponder()
+
         super.viewDidLoad()
         self.pointOptions.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         items = [threePointKey, fivePointKey, tenPointKey, twentyPointKey]

@@ -6,7 +6,9 @@
 //  Copyright © 2016 HS. All rights reserved.
 //
 
+import Foundation
 import UIKit
+
 extension UIButton{
     func selectButton(){
         self.layer.borderWidth = 3.5
@@ -15,6 +17,7 @@ extension UIButton{
         self.layer.borderWidth = 0
     }
 }
+
 class buttonGroup{
     var buttons = Set<UIButton>()
     var selectedButton: UIButton?
@@ -32,7 +35,8 @@ class buttonGroup{
         button.selectButton()
     }
 }
-class SettingsViewController: UIViewController {
+
+class SettingsViewController: UIViewController, UIScrollViewDelegate {
     let timed: [String] = ["OneMinute","ThreeMinute","FiveMinute","TenMinute"]
     let points: [String] = ["ThreePoint","FivePoint","TenPoint","TwentyPoint"]
     var modeButtonGroup: buttonGroup!
@@ -64,13 +68,10 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var Four : UIButton!
     @IBOutlet weak var Five : UIButton!
     
-    @IBOutlet weak var ButtonWidth: NSLayoutConstraint!
-    @IBOutlet weak var GreenButtonWidth: NSLayoutConstraint!
-    @IBOutlet weak var leadingMargin: NSLayoutConstraint!
-    @IBOutlet weak var endingMargin: NSLayoutConstraint!
-    @IBOutlet weak var BackButtonWidth: NSLayoutConstraint!
-    @IBOutlet weak var BackButtonHeight: NSLayoutConstraint!
+    @IBOutlet weak var ModeView: UIView!
+    @IBOutlet weak var contentView : UIView!
     
+    @IBOutlet weak var Scroll : UIScrollView!
     @IBOutlet weak var SensitivitySlider: UISlider!
     @IBOutlet weak var SensitivityLabel: UILabel!
     
@@ -85,6 +86,7 @@ class SettingsViewController: UIViewController {
         default: break
         }
     }
+    
     func selectDifficulty(_ difficulty: Int){
         defaultAI = difficulty
         DiffValue.text = String(difficulty)  +  " \u{200c}"
@@ -121,45 +123,42 @@ class SettingsViewController: UIViewController {
     @IBAction func PlayerFour(_ sender: UIButton) {
         playerButtonGroup.selectButton(sender)
         defaultPlayers = PlayerOption.four
-        CurrentPlayers.text = "FOUR " +  " \u{200c}"
+        CurrentPlayers.text = "FOUR"
     }
     @IBAction func PlayerThree(_ sender: UIButton) {
         playerButtonGroup.selectButton(sender)
         defaultPlayers = PlayerOption.three
-        CurrentPlayers.text = "THREE" + " \u{200c}"
+        CurrentPlayers.text = "THREE"
     }
     @IBAction func BackButton(_ sender: AnyObject) {
         _ = navigationController?.popViewController(animated: true)
     }
     @IBAction func ModePoints(_ sender: UIButton) {
         defaultMode = Mode.tenPoint
-        PointView.isHidden = false
-        TimeView.isHidden = true
+        hideView(TimeView)
+        showView(PointView)
     }
     @IBAction func ModeTimed(_ sender: UIButton) {
         defaultMode = Mode.threeMinute
-        TimeView.isHidden = false
-        PointView.isHidden = true
+        hideView(PointView)
+        showView(TimeView)
     }
     func setSensitivity(_ sender: UISlider){
         defaultSensitivity = sender.value.roundToPlaces(1)
-        SensitivityLabel.text = String(defaultSensitivity) + " \u{200c}"
+        SensitivityLabel.text = String(defaultSensitivity)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        TimeView.layer.zPosition = 2
-        PointView.layer.zPosition = 2
-        TimeView.isHidden = true
-        PointView.isHidden = true
-        BackButtonWidth.constant = 80/568*screenWidth
-        BackButtonHeight.constant = 60/568*screenWidth
+        TimeView.layer.zPosition = 1
+        PointView.layer.zPosition = 1
+        hideView(TimeView)
+        hideView(PointView)
         for button in DifficultyView.subviews{
             button.layer.borderColor = UIColor.black.cgColor
             button.layer.borderWidth = 5
         }
         selectDifficulty(defaultAI)
-        DiffValue.text = String(defaultAI) + " \u{200c}"
 
         setBackground()
         let modeButtons: Set<UIButton> = [ModeTimed,ModePoints]
@@ -171,11 +170,11 @@ class SettingsViewController: UIViewController {
         switch (defaultPlayers!){
             case PlayerOption.three:
                 playerButtonGroup.selectButton(PlayerThree)
-                CurrentPlayers.text = "THREE \u{200c}"
+                CurrentPlayers.text = "THREE"
                 break
             case PlayerOption.four:
                 playerButtonGroup.selectButton(PlayerFour)
-                CurrentPlayers.text = "FOUR \u{200c}"
+                CurrentPlayers.text = "FOUR"
                 break
         }
         if (defaultMode.getType() == .timed){
@@ -186,15 +185,26 @@ class SettingsViewController: UIViewController {
         }
         updateModeLabel()
         SensitivitySlider.addTarget(self, action: #selector(setSensitivity), for: UIControlEvents.valueChanged)
-        SensitivitySlider.minimumValue = 1
+        SensitivitySlider.minimumValue = 0.2
         SensitivitySlider.maximumValue = 5
         SensitivitySlider.setValue(defaultSensitivity, animated: false)
         
+        SensitivitySlider.setMinimumTrackImage(UIImage(named: "SliderBar"), for: UIControlState())
+        SensitivitySlider.setMaximumTrackImage(UIImage(named: "SliderBarEnd"), for: UIControlState())
+        let sliderThumb = UIImage(named: "SliderThumb")
+        SensitivitySlider.setThumbImage(sliderThumb, for: UIControlState())
+        
         // Do any additional setup after loading the view.
+        
+        // add closing of time and point views (in mode view) for random touch in content view
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.hideModeViews(_:)))
+        tapGesture.cancelsTouchesInView = false
+        self.contentView.addGestureRecognizer(tapGesture)
+        
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        TimeView.isHidden = true
-        PointView.isHidden = true
+        hideView(TimeView)
+        hideView(PointView)
     }
 
     override func didReceiveMemoryWarning() {
@@ -238,25 +248,40 @@ class SettingsViewController: UIViewController {
         case 7:CurrentMode.text = "20 PTS"; break
         default: break
         }
-        CurrentMode.text =  CurrentMode.text! + " \u{200c}"
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ButtonWidth.constant = 46.8/568*screenWidth
-        SensitivitySlider.setMinimumTrackImage(UIImage(named: "SliderBar"), for: UIControlState())
-        SensitivitySlider.setMaximumTrackImage(UIImage(named: "SliderBarEnd"), for: UIControlState())
-        let sliderThumb = UIImage(named: "SliderThumb")
-        SensitivitySlider.setThumbImage(sliderThumb, for: UIControlState())
-        SensitivityLabel.text = String(defaultSensitivity) + " \u{200c}"
-        GreenButtonWidth.constant = 110/568*screenWidth
-        
-        leadingMargin.constant = 30/568*screenWidth
-        endingMargin.constant = -30/568*screenWidth
-        print(ButtonWidth.constant)
-        print(DifficultyView.layer.frame.width)
-       
+        setSensitivity(SensitivitySlider)
+        SensitivitySlider.setValue(defaultSensitivity, animated: false)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollView.contentOffset.x = 0
+    }
+    
+    func hideView(_ currentView : UIView) {
+        currentView.isHidden = true
+        contentView.sendSubview(toBack: ModeView)
+    }
+    
+    func showView(_ currentView : UIView) {
+        currentView.isHidden = false
+        contentView.bringSubview(toFront: ModeView)
+    }
+    
+    func hideModeViews(_ sender : UITapGestureRecognizer) {
+        if let tempView = contentView.hitTest(sender.location(in: contentView), with: nil) {
+            print(type(of: tempView))
+            let typeStr = String(describing: type(of: tempView))
+            if typeStr == "UIView" || typeStr == "UIButton"{
+                hideView(PointView)
+                hideView(TimeView)
+            }
+        }
     }
 }
+
 extension Float {
     /// Rounds the double to decimal places value
     mutating func roundToPlaces(_ places:Int) -> Float {
@@ -265,8 +290,8 @@ extension Float {
         
     }
 }
-class CustomUISlider : UISlider
-{
+
+class CustomUISlider : UISlider {
     override func trackRect(forBounds bounds: CGRect) -> CGRect {
         var newBounds = super.trackRect(forBounds: bounds)
         newBounds.size.height = 12
@@ -278,4 +303,18 @@ class CustomUISlider : UISlider
         self.setThumbImage(UIImage(named: "customThumb"), for: UIControlState())
         super.awakeFromNib()
     }
+}
+
+@IBDesignable class PaddingLabel: UILabel {
+    
+    @IBInspectable var topInset: CGFloat = 0
+    @IBInspectable var bottomInset: CGFloat = 0
+    @IBInspectable var leftInset: CGFloat = 0
+    @IBInspectable var rightInset: CGFloat = 5.0
+    
+    override func drawText(in rect: CGRect) {
+        let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+        super.drawText(in: UIEdgeInsetsInsetRect(rect, insets))
+    }
+    
 }

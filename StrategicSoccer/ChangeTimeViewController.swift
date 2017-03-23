@@ -22,6 +22,7 @@ class ChangeTimeViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        becomeFirstResponder()
         self.timeOptions.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         items = [oneMinKey, threeMinKey, fiveMinKey,tenMinKey]
         // Do any additional setup after loading the view.
