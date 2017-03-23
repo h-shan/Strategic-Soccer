@@ -26,8 +26,7 @@ class Player: SKSpriteNode {
         super.init(texture: mTexture, color: UIColor.clear, size:playerSize)
         if teamA{
             zRotation = CGFloat(M_PI*1.5)
-        }
-        else {
+        } else {
             zRotation = CGFloat(M_PI*0.5)
         }
         self.physicsBody = SKPhysicsBody(circleOfRadius: playerSize.width*5/12)
@@ -42,6 +41,7 @@ class Player: SKSpriteNode {
         body.friction = 0.1
         body.allowsRotation = false
     }
+    
     init(country: String, sender: Game1Scene){
         playerSize = CGSize(width: 120*scalerX, height: 120*scalerX)
         mTexture = SKTexture(imageNamed: country)

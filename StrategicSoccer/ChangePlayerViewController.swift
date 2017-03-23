@@ -186,8 +186,11 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        parentVC.playerA = defaultA
-        parentVC.playerB = defaultB
+        if parentVC.playerA != defaultA || parentVC.playerB != defaultB {
+            parentVC.playerA = defaultA
+            parentVC.playerB = defaultB
+            parentVC.scene.playersAdded = false
+        }
         defaults.set(defaultA,forKey: playerAKey)
         defaults.set(defaultB, forKey: playerBKey)
         let unlocked = Unlockable()

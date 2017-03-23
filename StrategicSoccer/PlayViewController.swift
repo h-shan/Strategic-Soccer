@@ -152,7 +152,6 @@ extension PlayViewController : ConnectionManagerDelegate {
             self.scene.viewController.loadingView.fadeOut(0.5)
             scene.loaded = true
             scene.restart()
-            scene.loadNode.removeFromParent()
             scene.isUserInteractionEnabled = true
             print(scene.isUserInteractionEnabled)
 
@@ -300,54 +299,7 @@ extension PlayViewController : ConnectionManagerDelegate {
                 i+=2
             }
         }
-    }
     
-    func receiveLoad(_ manager:ConnectionManager, load: [String]){
-        print("loading")
-        let position = CGPoint(x: load[0].toFloat()*scaleFactorX, y: load[1].toFloat()*scaleFactorY)
-        let velocity = CGVector(dx: load[2].toFloat()*scaleFactorX, dy: load[3].toFloat()*scaleFactorY)
-        if velocity.dx > 0{
-            if position.x > self.scene.loadNode.position.x + 0.1{
-                dampingFactor += 0.01
-                print(dampingFactor)
-            }else if position.x < self.scene.loadNode.position.x - 0.1{
-                dampingFactor -= 0.01
-                print(dampingFactor)
-            }else{
-                gameService.stringSend("tag loaded")
-                scene.restart()
-                scene.loaded = true
-                scene.loadNode.removeFromParent()
-                scene.isUserInteractionEnabled = true
-                scene.viewController.Dimmer?.fadeOut(0.5)
-                scene.viewController.loadingView.fadeOut(0.5)
-                print(dampingFactor)
-                print("RECEIVE LOADED")
-            }
-        }else if velocity.dx < 0{
-            if position.x < self.scene.loadNode.position.x - 0.1{
-                dampingFactor += 0.01
-                print(dampingFactor)
-            }
-            else if position.x > self.scene.loadNode.position.x + 0.1{
-                dampingFactor -= 0.01
-                print(dampingFactor)
-            }
-            else{
-                gameService.stringSend("tag loaded")
-                scene.restart()
-                scene.loaded = true
-                scene.viewController.Dimmer?.fadeOut(0.5)
-                self.scene.viewController.loadingView.fadeOut(0.5)
-                scene.loadNode.removeFromParent()
-                scene.isUserInteractionEnabled = true
-                print(dampingFactor)
-                print("RECEIVE LOADED")
-            }
-        }
-        scene.loadNode.position = position
-        scene.loadNode.physicsBody!.velocity = CGVector(dx: velocity.dx*dampingFactor, dy: velocity.dy*dampingFactor)
-        
     }
 
     func convertToIndex(_ index: Int) -> Int{

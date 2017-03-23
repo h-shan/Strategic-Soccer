@@ -33,7 +33,7 @@ extension CGPoint {
     func distance(_ point : CGPoint) -> CGFloat{
         let dx = point.x - self.x
         let dy = point.y - self.y
-        return dx*dx + dy*dy
+        return sqrt(dx*dx + dy*dy)
     }
 }
 
@@ -75,7 +75,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     var gType = gameType.twoPlayer
     var isHost = false
-    let loadNode = SKNode()
     var sensitivity: Float!
     var AIDifficulty: Int!
     var cAggro:Int?
@@ -114,6 +113,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var comp:AI!
     let predictionTimer = Timer()
+    
+    var playersAdded = false
     
     override init(size:CGSize){
         super.init(size: size)
@@ -198,11 +199,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         clockBackground!.zPosition = 4
         self.addChild(clockBackground!)
         clockBackground?.isHidden = true
-        loadNode.physicsBody = SKPhysicsBody(circleOfRadius: 5*scalerX)
-        loadNode.physicsBody!.categoryBitMask = 5
-        loadNode.physicsBody!.collisionBitMask = 5
-        loadNode.physicsBody!.contactTestBitMask = 5
-        loadNode.name = "loadNode"
         
         selPlayTimer = Timer()
         comp = AI(scene: self)
@@ -251,6 +247,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         /* Setup your scene here */
         scoreBackground.alpha = 0.0
+        physicsWorld.speed = 1
 
         // put ball in middle
         
@@ -293,13 +290,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         addPlayers()
         for node in children{
-            if node != loadNode{
-                if let body = node.physicsBody{
-                    body.collisionBitMask = 1
-                    body.contactTestBitMask = 1
-                    body.categoryBitMask = 1
-                }
+            if let body = node.physicsBody{
+                body.collisionBitMask = 1
+                body.contactTestBitMask = 1
+                body.categoryBitMask = 1
             }
+            
         }
         if gType == .twoPhone{
             moveTimer?.pause()
@@ -319,32 +315,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-        var selPlay: (CGFloat, Player?, CGPoint?) = (0.2 * screenSize.width, nil, nil)
+        var selPlay: (CGFloat, Player?, CGPoint?) = (0.2 * screenWidth, nil, nil)
         for touch in touches {
             let location = touch.location(in: self)
             let node = atPoint(location)
-            
-            if gType == .twoPlayer || (gType == .onePlayer && turnA) || gType == .twoPhone && turnA{
-                if (node is Player){
-                    let touchedPlayer = (node as! Player)
+            if gType == .twoPlayer || (gType == .onePlayer && turnA) || (gType == .twoPhone && turnA) {
+                if let touchedPlayer = node as? Player {
                     if touchedPlayer.mTeamA == turnA {
                         selPlay.1 = touchedPlayer
                         selPlay.2 = location
+                        break
                     }
-                } else{
-                    for player in players{
-                        // select closest player within set radius
-                        if player.mTeamA == turnA {
-                            let dis = player.position.distance(location)
-                            if dis < selPlay.0 {
-                                selPlayTimer!.restart()
-                                selPlay.0 = dis
-                                selPlay.1 = player
-                                selPlay.2 = location
-                            }
+                }
+                for player in players{
+                    // select closest player within set radius
+                    if player.mTeamA == turnA {
+                        let dis = player.position.distance(location)
+                        if dis < selPlay.0 {
+                            selPlay.0 = dis
+                            selPlay.1 = player
+                            selPlay.2 = location
                         }
                     }
                 }
+                
             }
         }
         if let touchedPlayer = selPlay.1 {
@@ -391,9 +385,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if loaded{
                 viewController.parentVC.gameService.sendPosition(self)
                 viewController.parentVC.gameService.sendVelocities(self)
-            }
-            if !loaded{
-                viewController.parentVC.gameService.sendLoad(loadNode)
             }
         }
         if predictionTimer.getElapsedTime() > comp.waitTime {
@@ -623,41 +614,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addPlayers(){
-        for child in children{
-            if child is Player{
-                child.removeFromParent()
-            }else if child.name == "loadNode"{
-                child.removeFromParent()
-            }
+        if (!playersAdded) {
+            playerA1 = Player(teamA: true, country: countryA, sender: self, name: "playerA1")
+            playerA2 = Player(teamA: true, country: countryA, sender: self, name: "playerA2")
+            playerA3 = Player(teamA: true, country: countryA, sender: self, name: "playerA3")
+            playerA4 = Player(teamA: true, country: countryA, sender: self, name: "playerA4")
+            playerB1 = Player(teamA: false, country: countryB, sender: self, name: "playerB1")
+            playerB2 = Player(teamA: false, country: countryB, sender: self, name: "playerB2")
+            playerB3 = Player(teamA: false, country: countryB, sender: self, name: "playerB3")
+            playerB4 = Player(teamA: false, country: countryB, sender: self, name: "playerB4")
+            
+            playersAdded = true
         }
-        if gType == .twoPhone{
-            if isHost{
-                loadNode.position = CGPoint(x: 60*scalerX, y: 60*scalerX)
-                loadNode.physicsBody!.velocity = CGVector(dx: 500*scalerX,dy: 0)
-            }
-            self.addChild(loadNode)
-        }
-        playerA1 = Player(teamA: true, country: countryA, sender: self, name: "playerA1")
-        playerA2 = Player(teamA: true, country: countryA, sender: self, name: "playerA2")
-        playerA3 = Player(teamA: true, country: countryA, sender: self, name: "playerA3")
-        playerA4 = Player(teamA: true, country: countryA, sender: self, name: "playerA4")
-        playerB1 = Player(teamA: false, country: countryB, sender: self, name: "playerB1")
-        playerB2 = Player(teamA: false, country: countryB, sender: self, name: "playerB2")
-        playerB3 = Player(teamA: false, country: countryB, sender: self, name: "playerB3")
-        playerB4 = Player(teamA: false, country: countryB, sender: self, name: "playerB4")
+        
         
         switch (playerOption){
-        case PlayerOption.three:
-            players = [playerA1, playerA2, playerA3, playerB1, playerB2, playerB3]
-            teamA = [playerA1,playerA2,playerA3]
-            teamB = [playerB1, playerB2, playerB3]
-            break
-        case PlayerOption.four:
-            players = [playerA1, playerA2, playerA3, playerA4, playerB1, playerB2, playerB3, playerB4]
-            teamA = [playerA1, playerA2, playerA3, playerA4]
-            teamB = [playerB1, playerB2, playerB3, playerB4]
-            break;
+            case PlayerOption.three:
+                players = [playerA1, playerA2, playerA3, playerB1, playerB2, playerB3]
+                teamA = [playerA1,playerA2,playerA3]
+                teamB = [playerB1, playerB2, playerB3]
+                break
+            case PlayerOption.four:
+                players = [playerA1, playerA2, playerA3, playerA4, playerB1, playerB2, playerB3, playerB4]
+                teamA = [playerA1, playerA2, playerA3, playerA4]
+                teamB = [playerB1, playerB2, playerB3, playerB4]
+                break;
         }
+        for node in self.children {
+            if node is Player {
+                node.removeFromParent()
+            }
+        }
+        
         for node in players{
             node.zPosition = 2
             self.addChild(node)

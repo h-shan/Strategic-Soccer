@@ -137,8 +137,7 @@ class GameViewController: UIViewController {
         parentVC.sentData = false
         parentVC.sentPause = false
         scene.isSynced = false
-        scene.loaded = false
-        print("GameViewController backToTitle")
+        scene.loaded = true
     }
     
     func displayEarnings(_ numberWon: Int){

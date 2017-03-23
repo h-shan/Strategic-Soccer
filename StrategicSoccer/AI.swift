@@ -582,7 +582,7 @@ class AI {
                     for playerB in scene.teamB {
                         if (!isGoalie(player: playerB)) {
                             if (body == playerB.physicsBody!) {
-                                if ball.position.distance(playerB.position) < 0.3 * scene.frame.maxX {
+                                if ball.position.distance(playerB.position) < 0.3 * screenWidth {
                                     // try to dodge towards middle of screen
                                     var dodgeVel:CGVector
                                     let velX = ball.physicsBody!.velocity.dx/2

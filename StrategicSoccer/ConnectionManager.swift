@@ -18,7 +18,6 @@ protocol ConnectionManagerDelegate {
     func receiveVelocities(_ manager: ConnectionManager, velocities:[String])
     func receiveSync(_ manager: ConnectionManager, turn: String, gameTime: String)
     func receiveMisc(_ manager: ConnectionManager, message: [String])
-    func receiveLoad(_ manager: ConnectionManager, load: [String])
 }
 class ConnectionManager : NSObject{
     fileprivate let serviceBrowser : MCNearbyServiceBrowser
@@ -122,10 +121,6 @@ class ConnectionManager : NSObject{
             }
         })
     }
-    func sendLoad(_ node: SKNode){
-        let sendString = String(format:"%@ %f %f %f %f", "load", node.position.x, node.position.y, node.physicsBody!.velocity.dx, node.physicsBody!.velocity.dy)
-        stringSend(sendString)
-    }
 }
 
 
@@ -193,7 +188,6 @@ extension ConnectionManager : MCSessionDelegate {
             case "positionMove": self.delegate?.receivePositionMove(self, positionMove: strArr); break
             case "velocities": self.delegate?.receiveVelocities(self, velocities: strArr); break
             case "sendSync": self.delegate?.receiveSync(self, turn: strArr[0], gameTime: strArr[1]); break
-            case "load": self.delegate?.receiveLoad(self, load: strArr); break
             default: self.delegate?.receiveMisc(self, message: strArr); break
             }
         })
