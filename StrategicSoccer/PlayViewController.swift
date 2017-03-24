@@ -35,6 +35,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var BackButtonHeight: NSLayoutConstraint!
     @IBAction func backButton(_ sender: AnyObject){
         _ = navigationController?.popViewController(animated: true)
+        gameService.session.disconnect()
     }
     @IBAction func showConnections(_ sender: AnyObject){
         ConnectionView.isHidden = false
@@ -45,11 +46,13 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.gameTableView.reloadData()
         HostGame.isUserInteractionEnabled = false
         HostGame.alpha = 0.5
+        scene.isHost = true
     }
     
     @IBAction func joinGame(_ sender: AnyObject){
-        gameService.sendStart(nil, flag: scene.countryA)
+        gameService.sendStart(self.scene)
         sentData = true
+        scene.isHost = false
         JoinGame.alpha = 0.5
         JoinGame.isUserInteractionEnabled = false
     }
@@ -58,6 +61,8 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         ConnectionView.isHidden = true
         gameService.getServiceAdvertiser().stopAdvertisingPeer()
         gameService.getServiceBrowser().stopBrowsingForPeers()
+        gameService.session.disconnect()
+        self.gameTableView.reloadData()
         HostGame.isUserInteractionEnabled = true
         HostGame.alpha = 1
     }
@@ -178,24 +183,10 @@ extension PlayViewController : ConnectionManagerDelegate {
             let nodeA = self.scene.childNode(withName: self.convertTeams(nameA))!
             let nodeB = self.scene.childNode(withName: self.convertTeams(nameB))!
             if nodeA != self.scene.borderBodyNode{
-                //nodeA.position = positionA
-                if !self.scene.isHost{
-                    nodeA.physicsBody!.velocity = CGVector(dx: velocityA.dx , dy: velocityA.dy )
-                }
-                else{
-                    nodeA.physicsBody!.velocity = velocityA
-                }
                 nodeA.physicsBody!.velocity = CGVector(dx: velocityA.dx , dy: velocityA.dy )
             }
             if nodeB != self.scene.borderBodyNode{
-                //nodeB.position = positionB
-                if !self.scene.isHost{
-                    nodeB.physicsBody!.velocity = CGVector(dx: velocityB.dx , dy: velocityB.dy )
-                }
-                else{
-                    nodeB.physicsBody!.velocity = velocityB
-                }
-                nodeB.physicsBody!.velocity = CGVector(dx: velocityB.dx , dy: velocityB.dy )
+                nodeB.physicsBody!.velocity = velocityB
             }
         })
     }
@@ -217,10 +208,10 @@ extension PlayViewController : ConnectionManagerDelegate {
         DispatchQueue.main.async(execute: {
             self.connectedDevice = self.gameService.connectedDevice!.first?.displayName
             print("receiveStart")
-            self.scene.isHost = true
-            if settings.first! != "joined"{
-                self.scene.isHost = false
-                self.scene.mode = stringMode[settings.first!]!
+            if !self.scene.isHost{
+                self.scene.mode = stringMode[settings[0]]!
+                self.scene.gameTimer.restart()
+                defaultFriction = Float(settings[4].toFloat())
             }
             if self.scene.countryB != settings[1] {
                 self.scene.countryB = settings[1]
@@ -229,7 +220,7 @@ extension PlayViewController : ConnectionManagerDelegate {
             self.scaleFactorX = screenWidth/settings[2].toFloat()
             self.scaleFactorY = screenHeight/settings[3].toFloat()
             if !self.sentData{
-                self.gameService.sendStart(modeString[self.scene.mode]!,flag: self.scene.countryA)
+                self.gameService.sendStart(self.scene)
                 self.sentData = true
             }
             self.moveToScene()
@@ -237,23 +228,19 @@ extension PlayViewController : ConnectionManagerDelegate {
         })
     }
     
-    func receiveSync(_ manager: ConnectionManager, turn: String, gameTime: String){
-        if turn.toBool()!{
-            if scene.turnA{
+    func receiveSync(_ manager: ConnectionManager, turn: String){
+        if turn.toBool()! {
+            if scene.turnA {
                 scene.switchTurns()
-            }else{
+            } else {
                 scene.moveTimer?.restart()
             }
-        }else{
-            if !scene.turnA{
+        } else {
+            if !scene.turnA {
                 scene.switchTurns()
-            }else{
+            } else {
                 scene.moveTimer?.restart()
             }
-        }
-        if scene.mode.getType() == .timed{
-            scene.gameTime = TimeInterval(gameTime.toFloat())
-            scene.gameTimer.restart()
         }
     }
     
@@ -274,11 +261,12 @@ extension PlayViewController : ConnectionManagerDelegate {
                     if playerName == player.name{
                         player.physicsBody!.velocity = CGVector(dx: velocityX, dy: velocityY)
                         player.position = position
-                        self.scene.switchTurns()
+                        if self.scene.isHost {
+                            self.scene.switchTurns()
+                        }
                         break
                     }
                 }
-                // self.scene.isHost = true
             }
         })
     }
@@ -320,7 +308,6 @@ extension PlayViewController : ConnectionManagerDelegate {
             self.scene.ball.physicsBody!.velocity = ballVelocity
             
             let lagTime = CGFloat(Date.timeIntervalSinceReferenceDate) - positionVelocity[n].toFloat()
-            print("LAG: ", lagTime)
             var i = 2
             
             while i < positions.count{
@@ -372,7 +359,11 @@ extension PlayViewController : ConnectionManagerDelegate {
         scene.gType = .twoPhone
         gameService.getServiceBrowser().stopBrowsingForPeers()
         gameService.getServiceAdvertiser().stopAdvertisingPeer()
-        self.navigationController!.pushViewController(gameVC, animated: true)
+        do {
+            self.navigationController!.pushViewController(gameVC, animated: true)
+        } catch {
+            print("error")
+        }
         JoinGame.isUserInteractionEnabled = true
         JoinGame.alpha = 1
     }

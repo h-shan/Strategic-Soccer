@@ -83,7 +83,6 @@ class PauseViewController: UIViewController {
         parentVC.parentVC.sentPauseAction = true
         parentVC.parentVC.sentPause = false
         self.parentVC.Dimmer?.fadeOut(0.2)
-        
         scene = parentVC.scene
         scene.physicsWorld.speed = 1
         parentVC.PauseView.isHidden = true
@@ -91,7 +90,6 @@ class PauseViewController: UIViewController {
         scene.restart()
         scene.isUserInteractionEnabled = true
         scene.firstTurn = true
-        scene.isSynced = false
     }
     func pauseQuit(){
         if scene.gType == .twoPhone && !parentVC.parentVC.sentPauseAction{

@@ -16,7 +16,7 @@ protocol ConnectionManagerDelegate {
     func receivePause(_ manager: ConnectionManager, pauseType: String)
     func receivePositionMove(_ manager: ConnectionManager, positionMove:[String])
     func receiveVelocities(_ manager: ConnectionManager, velocities:[String])
-    func receiveSync(_ manager: ConnectionManager, turn: String, gameTime: String)
+    func receiveSync(_ manager: ConnectionManager, turn: String)
     func receiveMisc(_ manager: ConnectionManager, message: [String])
     func receivePositionVelocity(_ manager: ConnectionManager, positionVelocity: [String])
 }
@@ -103,16 +103,19 @@ class ConnectionManager : NSObject{
             stringSend(sendString)
         }
     }
-    func sendStart(_ mode:String?, flag: String){
+    func sendStart(_ scene: GameScene){
+        let flag = scene.countryA!
         print("sendStart")
-        var gameMode = ""
-        if mode == nil{
-            gameMode = "joined"
-        }else{
-            gameMode = mode!
+        
+        var stringToSend = "start "
+        if scene.isHost {
+            stringToSend += modeString[scene.mode]! + " "
+        } else {
+            stringToSend += "joined "
         }
+        stringToSend += String(format: "%@ %f %f %f", flag, screenWidth, screenHeight, defaultFriction)
         if connectedDevice != nil{
-            stringSend(String(format: "%@ %@ %@ %f %f","start", gameMode, flag, screenWidth, screenHeight))
+            stringSend(stringToSend)
         }
     }
     func sendPositionMove(_ nodeA: String, positionA: CGPoint, velocityA: CGVector, nodeB: String, positionB: CGPoint, velocityB: CGVector){
@@ -121,9 +124,9 @@ class ConnectionManager : NSObject{
             stringSend(sendString)
         }
     }
-    func sendSync(_ turnA: Bool, time:String){
+    func sendSync(_ turnA: Bool){
         let appendBool = turnA.toString()
-        let sendString = String(format:"%@ %@ %@", "sendSync", appendBool, time)
+        let sendString = String(format:"%@ %@", "sendSync", appendBool)
         if connectedDevice != nil{
             stringSend(sendString)
         }
@@ -205,7 +208,7 @@ extension ConnectionManager : MCSessionDelegate {
             case "pause":self.delegate?.receivePause(self, pauseType:strArr[0]); break
             case "positionMove": self.delegate?.receivePositionMove(self, positionMove: strArr); break
             case "velocities": self.delegate?.receiveVelocities(self, velocities: strArr); break
-            case "sendSync": self.delegate?.receiveSync(self, turn: strArr[0], gameTime: strArr[1]); break
+            case "sendSync": self.delegate?.receiveSync(self, turn: strArr[0]); break
             case "positionVelocity": self.delegate?.receivePositionVelocity(self, positionVelocity: strArr); break
             default: self.delegate?.receiveMisc(self, message: strArr); break
             }

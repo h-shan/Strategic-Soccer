@@ -50,6 +50,7 @@ class GameViewController: UIViewController {
         switch(pauseVC.action){
         case .quit:
             pauseVC.pauseQuit()
+            scene.isHost = true
             break
         case .restart:
             pauseVC.pauseRestart()
@@ -138,7 +139,6 @@ class GameViewController: UIViewController {
         view = nil
         parentVC.sentData = false
         parentVC.sentPause = false
-        scene.isSynced = false
         scene.loaded = true
     }
     
@@ -151,6 +151,7 @@ class GameViewController: UIViewController {
         saveCoins()
     }
 }
+
 extension UIView{
     func fadeOut(_ time:Double){
         UIView.animate(withDuration: time, animations: {

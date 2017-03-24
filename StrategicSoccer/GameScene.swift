@@ -64,7 +64,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var goalAccounted = false
     var loaded = true
     
-    var isSynced = false
     var firstTurn = true
     var ownGoal = false
     var countryA:String!
@@ -222,27 +221,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if -20 < ballVelocity.dy && ballVelocity.dy < 0{
                 ball.physicsBody!.velocity = CGVector(dx: ball.physicsBody!.velocity.dx,dy: -20)
             }
-        } else {
-//            if (contact.bodyA != ball.physicsBody!) {
-//                contact.bodyA.velocity.scale(factor: 0.8)
-//            } else {
-//                contact.bodyA.velocity.scale(factor: 0.8)
-//            }
-//            if (contact.bodyB != ball.physicsBody!) {
-//                contact.bodyB.velocity.scale(factor: 0.8)
-//            } else {
-//                contact.bodyB.velocity.scale(factor: 0.8)
-//            }
         }
-//        if gType == .twoPhone && isHost{
-//            viewController.parentVC.gameService.sendPositionMove(contact.bodyA.node!.name!, positionA: contact.bodyA.node!.position, velocityA: contact.bodyA.velocity,  nodeB: contact.bodyB.node!.name!, positionB: contact.bodyB.node!.position, velocityB: contact.bodyB.velocity)
-//        }
     }
-    func didEnd(_ contact: SKPhysicsContact) {
-//        if gType == .twoPhone && isHost{
-//            viewController.parentVC.gameService.sendPositionMove(contact.bodyA.node!.name!, positionA: contact.bodyA.node!.position, velocityA: contact.bodyA.velocity,  nodeB: contact.bodyB.node!.name!, positionB: contact.bodyB.node!.position, velocityB: contact.bodyB.velocity)
-//        }
-    }
+    
     override func didMove(to view: SKView) {
         /* Setup your scene here */
         scoreBackground.alpha = 0.0
@@ -363,14 +344,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             selectedPlayer!.physicsBody!.velocity = vel
             if gType == .twoPhone {
                 viewController.parentVC.gameService.sendMove(selectedPlayer!, velocity: selectedPlayer!.physicsBody!.velocity, position: selectedPlayer!.position)
-                // this is for exchanging host status, expeimental
-                // isHost = false
                 if !isHost{
                     selectedPlayer!.physicsBody!.velocity = vel
                 }
             }
             playerSelected = false
-            switchTurns()
+            if !(gType == .twoPhone && !isHost) {
+                switchTurns()
+            }
         }
         playerSelected = false
     }
@@ -384,8 +365,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         if gType == .twoPhone && isHost{
             if loaded{
-                // viewController.parentVC.gameService.sendPosition(self)
-                // viewController.parentVC.gameService.sendVelocities(self)
                 viewController.parentVC.gameService.sendPositionVelocity(self)
             }
         }
@@ -405,7 +384,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if(moveTimer!.getElapsedTime() > 5){
-            switchTurns()
+            if !(gType == .twoPhone && !isHost) {
+                switchTurns()
+            }
         }
         if mode.getType() == .timed && !gameEnded{
             showTime()
@@ -422,7 +403,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             goalDelay.reset()
             goalAccounted = false
             if ownGoal{
-                switchTurns()
+                if !(gType == .twoPhone && !isHost) {
+                    switchTurns()
+                }
                 ownGoal = false
             }
         }
@@ -487,21 +470,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func switchTurns(){
         turnA = !turnA
-        if gType == .twoPhone && isHost && !isSynced{
-            if mode.getType() == .timed{
-                viewController.parentVC.gameService.sendSync(turnA, time: String(gameTime!))
-                gameTimer.restart()
-            }else{
-                viewController.parentVC.gameService.sendSync(turnA, time: "PointMode")
-            }
-            isSynced = true
+        if gType == .twoPhone && isHost {
+            viewController.parentVC.gameService.sendSync(turnA)
         }
         if playerSelected == true {
             playerSelected = false
         }
         updateLighting()
         moveTimer?.restart()
-        
     }
     
     func showTime(){
@@ -607,7 +583,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if !turnA{
             switchTurns()
         }
-        if gType == .twoPhone && !isHost{
+        if gType == .twoPhone && !isHost {
             switchTurns()
         }
         gameEnded = false

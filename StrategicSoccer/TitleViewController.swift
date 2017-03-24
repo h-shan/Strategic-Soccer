@@ -136,7 +136,6 @@ class TitleViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         super.viewWillAppear(animated)
         setBackground()
-        print(defaultFriction)
         addCoinImage("", afterText: String(coins), label: NumberCoins, numberLines: 1)
         modeString[Mode.oneMinute] = "oneMinute"
         modeString[Mode.threeMinute] = "threeMinute"
