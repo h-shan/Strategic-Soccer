@@ -199,7 +199,6 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
             unlockedFlags.append(flag)
         }
         unlocked.unlockedFlags = unlockedFlags
-        parentVC.unlockedFlags = unlockedFlags
         NSKeyedArchiver.archiveRootObject(unlockedFlags, toFile: Unlockable.FlagURL.path)
         saveCoins()
     }

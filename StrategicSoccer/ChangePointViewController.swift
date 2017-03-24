@@ -49,7 +49,6 @@ class ChangePointViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         parentVC.timeVC.timeOptions.selectRow(at: nil, animated: false, scrollPosition: UITableViewScrollPosition.middle)
         pointMode = Mode(rawValue: indexPath.row + Mode.threePoint.rawValue)
-        parentVC.defaultMode = pointMode
         _ = Foundation.Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(hideView), userInfo: nil, repeats: false)
 
     }
@@ -61,8 +60,8 @@ class ChangePointViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         var indexPath: IndexPath?
-        if parentVC.defaultMode!.getType() == .points{
-            indexPath = IndexPath(row: parentVC.defaultMode.rawValue-Mode.threePoint.rawValue, section: 0)
+        if defaultMode.getType() == .points{
+            indexPath = IndexPath(row: defaultMode.rawValue-Mode.threePoint.rawValue, section: 0)
             if indexPath != nil{
                 pointOptions.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.middle)
             }

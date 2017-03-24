@@ -47,7 +47,7 @@ class ChangeTimeViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         parentVC.pointVC.pointOptions.selectRow(at: nil, animated: false, scrollPosition: UITableViewScrollPosition.middle)
         timedMode = Mode(rawValue: indexPath.row)
-        parentVC.defaultMode = timedMode
+        defaultMode = timedMode!
         
         _ = Foundation.Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(hideView), userInfo: nil, repeats: false)
 
@@ -61,8 +61,8 @@ class ChangeTimeViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewWillAppear(animated)
         var indexPath: IndexPath?
         
-        if parentVC.defaultMode!.getType() == type.timed{
-            indexPath = IndexPath(row: parentVC.defaultMode.rawValue, section: 0)
+        if defaultMode.getType() == type.timed{
+            indexPath = IndexPath(row: defaultMode.rawValue, section: 0)
             if indexPath != nil{
                 timeOptions.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.middle)
             }

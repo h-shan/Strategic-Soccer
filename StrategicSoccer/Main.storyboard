@@ -623,24 +623,28 @@ PLAY MORE GAMES TO EARN COINS.</string>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ErG-xW-gkl">
                                 <rect key="frame" x="20" y="71" width="627" height="234"/>
                                 <subviews>
+                                    <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UaE-Ma-69Q" userLabel="Screen">
+                                        <rect key="frame" x="3" y="3" width="621" height="286"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="09B-9g-Skm" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="627" height="250"/>
+                                        <rect key="frame" x="10" y="10" width="607" height="250"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S0F-az-ipJ" userLabel="AI Difficulty View">
-                                                <rect key="frame" x="0.0" y="85" width="282" height="80"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="273" height="80"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  AI DIFFICULTY:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGo-f3-n2c">
-                                                        <rect key="frame" x="0.0" y="0.0" width="175.5" height="32"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="191" height="32"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EHr-2Z-8sL" userLabel="DifficultyView">
-                                                        <rect key="frame" x="0.0" y="40" width="282" height="34"/>
+                                                        <rect key="frame" x="0.0" y="40" width="273" height="32"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lMl-2V-vbM">
-                                                                <rect key="frame" x="0.0" y="0.0" width="56.5" height="34"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="54.5" height="32"/>
                                                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <accessibility key="accessibilityConfiguration" label="One"/>
                                                                 <connections>
@@ -648,7 +652,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jj2-Zj-ELT">
-                                                                <rect key="frame" x="56.5" y="0.0" width="57" height="34"/>
+                                                                <rect key="frame" x="54.5" y="0.0" width="54.5" height="32"/>
                                                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <accessibility key="accessibilityConfiguration" label="Two"/>
                                                                 <connections>
@@ -656,7 +660,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0id-CV-Ed3">
-                                                                <rect key="frame" x="113.5" y="0.0" width="56.5" height="34"/>
+                                                                <rect key="frame" x="109" y="0.0" width="54.5" height="32"/>
                                                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <accessibility key="accessibilityConfiguration" label="Three"/>
                                                                 <connections>
@@ -664,7 +668,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xS6-jV-qAJ">
-                                                                <rect key="frame" x="170" y="0.0" width="57" height="34"/>
+                                                                <rect key="frame" x="163.5" y="0.0" width="54.5" height="32"/>
                                                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <accessibility key="accessibilityConfiguration" label="Four"/>
                                                                 <connections>
@@ -672,7 +676,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mpx-NK-1WM">
-                                                                <rect key="frame" x="227" y="0.0" width="57" height="34"/>
+                                                                <rect key="frame" x="218" y="0.0" width="55" height="32"/>
                                                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <accessibility key="accessibilityConfiguration" label="Five"/>
                                                                 <connections>
@@ -704,7 +708,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3g-Jt-8ef" customClass="PaddingLabel" customModule="Strategic_Soccer" customModuleProvider="target">
-                                                        <rect key="frame" x="175.5" y="0.0" width="106.5" height="32"/>
+                                                        <rect key="frame" x="191" y="0.0" width="82" height="32"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -717,8 +721,10 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                                     </label>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstItem="LGo-f3-n2c" firstAttribute="height" secondItem="S0F-az-ipJ" secondAttribute="height" multiplier="0.4" id="1Vj-Sb-SvF"/>
                                                     <constraint firstItem="EHr-2Z-8sL" firstAttribute="trailing" secondItem="S0F-az-ipJ" secondAttribute="trailing" id="BEA-B7-ZHr"/>
-                                                    <constraint firstItem="LGo-f3-n2c" firstAttribute="width" secondItem="S0F-az-ipJ" secondAttribute="width" multiplier="0.7" constant="-21.699999999999989" id="OcT-qP-JpE"/>
+                                                    <constraint firstAttribute="height" constant="80" id="HTe-MB-yVO"/>
+                                                    <constraint firstItem="LGo-f3-n2c" firstAttribute="width" secondItem="S0F-az-ipJ" secondAttribute="width" multiplier="0.7" id="OcT-qP-JpE"/>
                                                     <constraint firstItem="n3g-Jt-8ef" firstAttribute="leading" secondItem="LGo-f3-n2c" secondAttribute="trailing" id="RAR-19-uRc"/>
                                                     <constraint firstItem="n3g-Jt-8ef" firstAttribute="top" secondItem="LGo-f3-n2c" secondAttribute="top" id="Ugi-8g-VpS"/>
                                                     <constraint firstItem="EHr-2Z-8sL" firstAttribute="top" secondItem="LGo-f3-n2c" secondAttribute="bottom" constant="8" id="Wyy-X8-L6S"/>
@@ -726,15 +732,15 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                                     <constraint firstItem="n3g-Jt-8ef" firstAttribute="trailing" secondItem="S0F-az-ipJ" secondAttribute="trailing" id="btJ-iq-UxZ"/>
                                                     <constraint firstItem="LGo-f3-n2c" firstAttribute="top" secondItem="S0F-az-ipJ" secondAttribute="top" id="cLu-vn-JCT"/>
                                                     <constraint firstItem="EHr-2Z-8sL" firstAttribute="leading" secondItem="S0F-az-ipJ" secondAttribute="leading" id="kzX-vL-asP"/>
-                                                    <constraint firstItem="n3g-Jt-8ef" firstAttribute="width" secondItem="S0F-az-ipJ" secondAttribute="width" multiplier="0.3" constant="21.700000000000003" id="n1O-zl-ffl"/>
+                                                    <constraint firstItem="EHr-2Z-8sL" firstAttribute="height" secondItem="LGo-f3-n2c" secondAttribute="height" id="vww-zg-E3Z"/>
                                                     <constraint firstItem="LGo-f3-n2c" firstAttribute="leading" secondItem="S0F-az-ipJ" secondAttribute="leading" id="xbC-Tz-0ed"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hOD-ET-JuN" userLabel="Player View">
-                                                <rect key="frame" x="0.0" y="0.0" width="282" height="80"/>
+                                                <rect key="frame" x="0.0" y="170" width="273" height="80"/>
                                                 <subviews>
                                                     <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gdt-er-Qx4">
-                                                        <rect key="frame" x="0.0" y="37" width="113.5" height="32"/>
+                                                        <rect key="frame" x="0.0" y="37" width="110" height="32"/>
                                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal">
                                                             <attributedString key="attributedTitle">
@@ -751,14 +757,14 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  PLAYERS:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rep-hV-DSt">
-                                                        <rect key="frame" x="0.0" y="0.0" width="141" height="32"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="136.5" height="32"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cbl-8U-uwl">
-                                                        <rect key="frame" x="168" y="37" width="114" height="32"/>
+                                                        <rect key="frame" x="162.5" y="37" width="110.5" height="32"/>
                                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal">
                                                             <attributedString key="attributedTitle">
@@ -775,7 +781,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCQ-Fd-NTk" customClass="PaddingLabel" customModule="Strategic_Soccer" customModuleProvider="target">
-                                                        <rect key="frame" x="141" y="0.0" width="141" height="32"/>
+                                                        <rect key="frame" x="136.5" y="0.0" width="136.5" height="32"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -808,16 +814,16 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XwK-aB-0XC" userLabel="Mode View">
-                                                <rect key="frame" x="345" y="0.0" width="282" height="175"/>
+                                                <rect key="frame" x="334" y="0.0" width="273" height="182"/>
                                                 <subviews>
                                                     <containerView opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BWt-8S-NPU">
-                                                        <rect key="frame" x="0.0" y="69" width="113" height="104"/>
+                                                        <rect key="frame" x="0.0" y="72" width="109.5" height="108"/>
                                                         <connections>
                                                             <segue destination="loy-k9-g4a" kind="embed" identifier="ChangePoint" id="v76-At-Qxj"/>
                                                         </connections>
                                                     </containerView>
                                                     <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x1V-wF-2Rs">
-                                                        <rect key="frame" x="169.5" y="37" width="112.5" height="32"/>
+                                                        <rect key="frame" x="164" y="38.5" width="109" height="33.5"/>
                                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal">
                                                             <attributedString key="attributedTitle">
@@ -834,7 +840,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xfv-5N-ocI">
-                                                        <rect key="frame" x="0.0" y="37" width="113" height="32"/>
+                                                        <rect key="frame" x="0.0" y="38.5" width="109.5" height="33.5"/>
                                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal">
                                                             <attributedString key="attributedTitle">
@@ -851,14 +857,14 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  MODE:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXJ-xE-DP7">
-                                                        <rect key="frame" x="0.0" y="0.0" width="140.5" height="32"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="136" height="33.5"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKg-cr-rHi" customClass="PaddingLabel" customModule="Strategic_Soccer" customModuleProvider="target">
-                                                        <rect key="frame" x="139.5" y="0.0" width="142.5" height="32"/>
+                                                        <rect key="frame" x="135" y="0.0" width="138" height="33.5"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="Mode">
@@ -877,7 +883,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <containerView opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aoE-XK-syY">
-                                                        <rect key="frame" x="169.5" y="69" width="112.5" height="104"/>
+                                                        <rect key="frame" x="164" y="72" width="109" height="108"/>
                                                         <connections>
                                                             <segue destination="Aq4-5H-fVw" kind="embed" identifier="ChangeTime" id="3GG-Ix-mkY"/>
                                                         </connections>
@@ -913,17 +919,17 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Rd-2b-NqQ" userLabel="Player Sensitivity View">
-                                                <rect key="frame" x="345" y="85" width="282" height="80"/>
+                                                <rect key="frame" x="334" y="85" width="273" height="80"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  PLAYER SENSITIVITY:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="9m4-7s-RGa">
-                                                        <rect key="frame" x="0.0" y="0.0" width="226.5" height="32"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="218.5" height="32"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.99 " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgm-b6-Gde" customClass="PaddingLabel" customModule="Strategic_Soccer" customModuleProvider="target">
-                                                        <rect key="frame" x="226.5" y="0.0" width="56.5" height="32"/>
+                                                        <rect key="frame" x="218.5" y="0.0" width="54.5" height="32"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -934,8 +940,8 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
-                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lJZ-We-Te0" userLabel="Sensitivity Slider" customClass="CustomUISlider" customModule="Strategic_Soccer" customModuleProvider="target">
-                                                        <rect key="frame" x="-2" y="48" width="286" height="33"/>
+                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lJZ-We-Te0" userLabel="Sensitivity Slider" customClass="SettingSlider" customModule="Strategic_Soccer" customModuleProvider="target">
+                                                        <rect key="frame" x="-2" y="40" width="277" height="33"/>
                                                     </slider>
                                                 </subviews>
                                                 <constraints>
@@ -943,44 +949,90 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                                     <constraint firstItem="pgm-b6-Gde" firstAttribute="height" secondItem="9m4-7s-RGa" secondAttribute="height" id="DP8-af-PMY"/>
                                                     <constraint firstItem="lJZ-We-Te0" firstAttribute="leading" secondItem="2Rd-2b-NqQ" secondAttribute="leading" id="F0y-MD-Yk4"/>
                                                     <constraint firstItem="lJZ-We-Te0" firstAttribute="width" secondItem="2Rd-2b-NqQ" secondAttribute="width" id="FPD-Ez-hE3"/>
-                                                    <constraint firstAttribute="bottom" secondItem="lJZ-We-Te0" secondAttribute="bottom" id="FSy-fe-Usz"/>
+                                                    <constraint firstItem="lJZ-We-Te0" firstAttribute="bottom" secondItem="2Rd-2b-NqQ" secondAttribute="bottom" constant="-8" id="FSy-fe-Usz"/>
                                                     <constraint firstItem="9m4-7s-RGa" firstAttribute="leading" secondItem="2Rd-2b-NqQ" secondAttribute="leading" id="SLO-GM-onh"/>
                                                     <constraint firstItem="9m4-7s-RGa" firstAttribute="width" secondItem="2Rd-2b-NqQ" secondAttribute="width" multiplier="0.8" id="TgX-0y-VzM"/>
                                                     <constraint firstItem="pgm-b6-Gde" firstAttribute="leading" secondItem="9m4-7s-RGa" secondAttribute="trailing" id="YNs-E1-9IK"/>
                                                     <constraint firstItem="pgm-b6-Gde" firstAttribute="top" secondItem="9m4-7s-RGa" secondAttribute="top" id="YQe-X0-t1z"/>
                                                     <constraint firstItem="pgm-b6-Gde" firstAttribute="width" secondItem="2Rd-2b-NqQ" secondAttribute="width" multiplier="0.2" id="cfS-rG-Mfp"/>
                                                     <constraint firstItem="9m4-7s-RGa" firstAttribute="top" secondItem="2Rd-2b-NqQ" secondAttribute="top" id="osI-sW-DBx"/>
+                                                    <constraint firstItem="9m4-7s-RGa" firstAttribute="height" secondItem="2Rd-2b-NqQ" secondAttribute="height" multiplier="0.4" id="sYf-65-txn"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6z-Qw-Z1x" userLabel="Friction View">
+                                                <rect key="frame" x="0.0" y="85" width="273" height="80"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" FRICTION:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R44-oD-lTx">
+                                                        <rect key="frame" x="0.0" y="0.0" width="163.5" height="32"/>
+                                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5Q-XO-RZb" customClass="PaddingLabel" customModule="Strategic_Soccer" customModuleProvider="target">
+                                                        <rect key="frame" x="163.5" y="0.0" width="109.5" height="32"/>
+                                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                                <real key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="g6u-Pm-bdR" userLabel="Friction Slider" customClass="SettingSlider" customModule="Strategic_Soccer" customModuleProvider="target">
+                                                        <rect key="frame" x="-2" y="40" width="277" height="33"/>
+                                                    </slider>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="g6u-Pm-bdR" firstAttribute="leading" secondItem="O6z-Qw-Z1x" secondAttribute="leading" id="0gQ-Mk-wPY"/>
+                                                    <constraint firstItem="R44-oD-lTx" firstAttribute="top" secondItem="O6z-Qw-Z1x" secondAttribute="top" id="4Ch-PZ-37K"/>
+                                                    <constraint firstItem="g6u-Pm-bdR" firstAttribute="height" secondItem="R44-oD-lTx" secondAttribute="height" id="54w-dY-Yil"/>
+                                                    <constraint firstItem="i5Q-XO-RZb" firstAttribute="leading" secondItem="R44-oD-lTx" secondAttribute="trailing" id="CdL-fC-EJi"/>
+                                                    <constraint firstItem="i5Q-XO-RZb" firstAttribute="top" secondItem="O6z-Qw-Z1x" secondAttribute="top" id="VL0-0X-FfF"/>
+                                                    <constraint firstItem="R44-oD-lTx" firstAttribute="width" secondItem="O6z-Qw-Z1x" secondAttribute="width" multiplier="0.6" id="YY2-TC-wBP"/>
+                                                    <constraint firstItem="R44-oD-lTx" firstAttribute="leading" secondItem="O6z-Qw-Z1x" secondAttribute="leading" id="Z6t-sq-uWM"/>
+                                                    <constraint firstItem="g6u-Pm-bdR" firstAttribute="width" secondItem="O6z-Qw-Z1x" secondAttribute="width" id="a1G-4V-gIV"/>
+                                                    <constraint firstAttribute="bottom" secondItem="g6u-Pm-bdR" secondAttribute="bottom" constant="8" id="gm5-0d-dDY"/>
+                                                    <constraint firstItem="i5Q-XO-RZb" firstAttribute="height" secondItem="R44-oD-lTx" secondAttribute="height" id="gpo-5F-8zJ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="i5Q-XO-RZb" secondAttribute="trailing" id="h8K-ku-Qzf"/>
+                                                    <constraint firstItem="R44-oD-lTx" firstAttribute="height" secondItem="O6z-Qw-Z1x" secondAttribute="height" multiplier="0.4" id="qAF-dD-mvG"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="jXJ-xE-DP7" firstAttribute="height" secondItem="rep-hV-DSt" secondAttribute="height" id="0WR-D3-nRa"/>
-                                            <constraint firstItem="2Rd-2b-NqQ" firstAttribute="trailing" secondItem="XwK-aB-0XC" secondAttribute="trailing" id="8mF-uq-yF2"/>
-                                            <constraint firstItem="2Rd-2b-NqQ" firstAttribute="leading" secondItem="XwK-aB-0XC" secondAttribute="leading" id="IK5-Wa-chv"/>
-                                            <constraint firstItem="XwK-aB-0XC" firstAttribute="width" secondItem="hOD-ET-JuN" secondAttribute="width" id="PrF-W5-kt2"/>
-                                            <constraint firstItem="S0F-az-ipJ" firstAttribute="leading" secondItem="hOD-ET-JuN" secondAttribute="leading" id="QNU-4q-wir"/>
-                                            <constraint firstItem="S0F-az-ipJ" firstAttribute="height" secondItem="hOD-ET-JuN" secondAttribute="height" id="Qrd-8C-zyi"/>
-                                            <constraint firstItem="2Rd-2b-NqQ" firstAttribute="top" secondItem="S0F-az-ipJ" secondAttribute="top" id="Qsg-oQ-4gK"/>
-                                            <constraint firstItem="hOD-ET-JuN" firstAttribute="leading" secondItem="09B-9g-Skm" secondAttribute="leading" id="Sve-Gr-sgD"/>
-                                            <constraint firstItem="9m4-7s-RGa" firstAttribute="height" secondItem="rep-hV-DSt" secondAttribute="height" id="ZQn-bh-FKj"/>
-                                            <constraint firstItem="2Rd-2b-NqQ" firstAttribute="bottom" secondItem="S0F-az-ipJ" secondAttribute="bottom" id="aM2-b3-GqV"/>
-                                            <constraint firstItem="S0F-az-ipJ" firstAttribute="trailing" secondItem="hOD-ET-JuN" secondAttribute="trailing" id="bXJ-7V-5jp"/>
+                                            <constraint firstItem="XwK-aB-0XC" firstAttribute="top" secondItem="09B-9g-Skm" secondAttribute="top" id="0QI-UB-34j"/>
+                                            <constraint firstItem="2Rd-2b-NqQ" firstAttribute="height" secondItem="O6z-Qw-Z1x" secondAttribute="height" id="1Z4-48-8Au"/>
+                                            <constraint firstItem="S0F-az-ipJ" firstAttribute="leading" secondItem="09B-9g-Skm" secondAttribute="leading" id="Dyr-hE-0TO"/>
+                                            <constraint firstItem="O6z-Qw-Z1x" firstAttribute="height" secondItem="S0F-az-ipJ" secondAttribute="height" id="JTj-Mn-FI8"/>
+                                            <constraint firstItem="O6z-Qw-Z1x" firstAttribute="top" secondItem="S0F-az-ipJ" secondAttribute="bottom" constant="5" id="KSt-FB-fnM"/>
+                                            <constraint firstItem="hOD-ET-JuN" firstAttribute="leading" secondItem="09B-9g-Skm" secondAttribute="leading" id="Rnq-IC-oWg"/>
+                                            <constraint firstItem="hOD-ET-JuN" firstAttribute="width" secondItem="09B-9g-Skm" secondAttribute="width" multiplier="0.45" id="avz-TP-fAj"/>
+                                            <constraint firstItem="O6z-Qw-Z1x" firstAttribute="width" secondItem="09B-9g-Skm" secondAttribute="width" multiplier="0.45" id="bBf-4B-0dc"/>
                                             <constraint firstAttribute="height" constant="250" id="eDL-ng-HOn"/>
-                                            <constraint firstItem="hOD-ET-JuN" firstAttribute="top" secondItem="09B-9g-Skm" secondAttribute="top" id="iFZ-MT-8ri"/>
-                                            <constraint firstItem="XwK-aB-0XC" firstAttribute="trailing" secondItem="09B-9g-Skm" secondAttribute="trailing" id="kF0-Mi-uZE"/>
-                                            <constraint firstItem="S0F-az-ipJ" firstAttribute="top" secondItem="hOD-ET-JuN" secondAttribute="bottom" constant="5" id="qPo-ud-EwX"/>
-                                            <constraint firstItem="XwK-aB-0XC" firstAttribute="top" secondItem="hOD-ET-JuN" secondAttribute="top" id="qS7-mM-VxD"/>
-                                            <constraint firstItem="hOD-ET-JuN" firstAttribute="width" secondItem="09B-9g-Skm" secondAttribute="width" multiplier="0.45" id="qTn-Jj-8eI"/>
-                                            <constraint firstItem="LGo-f3-n2c" firstAttribute="height" secondItem="rep-hV-DSt" secondAttribute="height" id="rpF-k6-fS4"/>
+                                            <constraint firstItem="S0F-az-ipJ" firstAttribute="width" secondItem="09B-9g-Skm" secondAttribute="width" multiplier="0.45" id="gPf-Af-R0g"/>
+                                            <constraint firstAttribute="trailing" secondItem="2Rd-2b-NqQ" secondAttribute="trailing" id="kEl-UX-PoH"/>
+                                            <constraint firstItem="2Rd-2b-NqQ" firstAttribute="top" secondItem="O6z-Qw-Z1x" secondAttribute="top" id="kij-kc-DpB"/>
+                                            <constraint firstItem="O6z-Qw-Z1x" firstAttribute="leading" secondItem="09B-9g-Skm" secondAttribute="leading" id="nXG-AG-S6W"/>
+                                            <constraint firstItem="XwK-aB-0XC" firstAttribute="width" secondItem="09B-9g-Skm" secondAttribute="width" multiplier="0.45" id="oWX-lD-mS6"/>
+                                            <constraint firstItem="hOD-ET-JuN" firstAttribute="top" secondItem="O6z-Qw-Z1x" secondAttribute="bottom" constant="5" id="qSr-iS-fbl"/>
+                                            <constraint firstItem="2Rd-2b-NqQ" firstAttribute="width" secondItem="09B-9g-Skm" secondAttribute="width" multiplier="0.45" id="vGA-TT-IxW"/>
+                                            <constraint firstItem="XwK-aB-0XC" firstAttribute="trailing" secondItem="09B-9g-Skm" secondAttribute="trailing" id="xee-lN-cGr"/>
+                                            <constraint firstItem="S0F-az-ipJ" firstAttribute="top" secondItem="09B-9g-Skm" secondAttribute="top" id="zKr-62-jhd"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="09B-9g-Skm" firstAttribute="bottom" secondItem="ErG-xW-gkl" secondAttribute="bottom" id="3Gc-rT-Ek1"/>
-                                    <constraint firstItem="09B-9g-Skm" firstAttribute="trailing" secondItem="ErG-xW-gkl" secondAttribute="trailing" id="4hb-79-MvA"/>
-                                    <constraint firstItem="09B-9g-Skm" firstAttribute="width" secondItem="ErG-xW-gkl" secondAttribute="width" id="UEu-XG-Omv"/>
-                                    <constraint firstItem="09B-9g-Skm" firstAttribute="leading" secondItem="ErG-xW-gkl" secondAttribute="leading" id="bfO-Bw-XQv"/>
-                                    <constraint firstItem="09B-9g-Skm" firstAttribute="top" secondItem="ErG-xW-gkl" secondAttribute="top" id="kwj-rs-QRE"/>
+                                    <constraint firstItem="09B-9g-Skm" firstAttribute="bottom" secondItem="ErG-xW-gkl" secondAttribute="bottom" constant="-10" id="3Gc-rT-Ek1"/>
+                                    <constraint firstItem="09B-9g-Skm" firstAttribute="trailing" secondItem="ErG-xW-gkl" secondAttribute="trailing" constant="-10" id="4hb-79-MvA"/>
+                                    <constraint firstItem="09B-9g-Skm" firstAttribute="width" secondItem="ErG-xW-gkl" secondAttribute="width" constant="-20" id="UEu-XG-Omv"/>
+                                    <constraint firstItem="09B-9g-Skm" firstAttribute="leading" secondItem="ErG-xW-gkl" secondAttribute="leading" constant="10" id="bfO-Bw-XQv"/>
+                                    <constraint firstItem="UaE-Ma-69Q" firstAttribute="leading" secondItem="ErG-xW-gkl" secondAttribute="leading" constant="3" id="cOl-Rw-oB0"/>
+                                    <constraint firstItem="UaE-Ma-69Q" firstAttribute="top" secondItem="ErG-xW-gkl" secondAttribute="top" constant="3" id="dVZ-yX-pAN"/>
+                                    <constraint firstAttribute="trailing" secondItem="UaE-Ma-69Q" secondAttribute="trailing" constant="3" id="dhs-H9-jl7"/>
+                                    <constraint firstAttribute="bottom" secondItem="UaE-Ma-69Q" secondAttribute="bottom" constant="-19" id="fpY-Fj-T34"/>
+                                    <constraint firstItem="09B-9g-Skm" firstAttribute="top" secondItem="ErG-xW-gkl" secondAttribute="top" constant="10" id="kwj-rs-QRE"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="1lU-lZ-m6k" id="joc-Vs-oPv"/>
@@ -1024,6 +1076,8 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <outlet property="DifficultyView" destination="EHr-2Z-8sL" id="FY5-xO-9DF"/>
                         <outlet property="Five" destination="Mpx-NK-1WM" id="zzN-2L-avD"/>
                         <outlet property="Four" destination="xS6-jV-qAJ" id="z4Z-Kt-8qY"/>
+                        <outlet property="FrictionLabel" destination="i5Q-XO-RZb" id="TSx-yQ-8Rp"/>
+                        <outlet property="FrictionSlider" destination="g6u-Pm-bdR" id="r4q-bq-jAP"/>
                         <outlet property="ModePoints" destination="xfv-5N-ocI" id="Xec-kd-M3S"/>
                         <outlet property="ModeTimed" destination="x1V-wF-2Rs" id="Wan-sX-RsC"/>
                         <outlet property="ModeView" destination="XwK-aB-0XC" id="LEW-DW-9Pe"/>
@@ -1042,7 +1096,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jmZ-J4-8VC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-746.39999999999998" y="182.15892053973016"/>
+            <point key="canvasLocation" x="-747.1875" y="181.16197183098592"/>
         </scene>
         <!--Play View Controller-->
         <scene sceneID="8LS-Ab-Zcn">
@@ -1796,11 +1850,11 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <viewControllerLayoutGuide type="bottom" id="KBc-1r-GE5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Pfd-F3-8ju">
-                        <rect key="frame" x="0.0" y="0.0" width="113" height="104"/>
+                        <rect key="frame" x="0.0" y="0.0" width="109.5" height="108"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zUJ-AB-ArL">
-                                <rect key="frame" x="0.0" y="0.0" width="113" height="104"/>
+                                <rect key="frame" x="0.0" y="0.0" width="109.5" height="108"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="loy-k9-g4a" id="8Y1-ao-dbW"/>
@@ -1833,11 +1887,11 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <viewControllerLayoutGuide type="bottom" id="QGR-ZE-pk1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="X5W-NA-K6t">
-                        <rect key="frame" x="0.0" y="0.0" width="112.5" height="104"/>
+                        <rect key="frame" x="0.0" y="0.0" width="109" height="108"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hUk-WK-T5S">
-                                <rect key="frame" x="0.0" y="0.0" width="112.5" height="104"/>
+                                <rect key="frame" x="0.0" y="0.0" width="109" height="108"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Aq4-5H-fVw" id="vbJ-sL-Zzz"/>

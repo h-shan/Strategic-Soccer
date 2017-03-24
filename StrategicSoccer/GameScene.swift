@@ -180,9 +180,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(goalPostA2)
         self.addChild(goalPostB1)
         self.addChild(goalPostB2)
-        ball.zPosition = 2
-        setPosition()
-        self.addChild(ball)
+        
+        
         moveTimer = Timer()
         // set up clock
         clockBackground = SKShapeNode(rect: CGRect(x: -50*scalerX,y: -25*scalerY,width: 100*scalerX,height: 50*scalerY), cornerRadius: 10)
@@ -202,7 +201,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         selPlayTimer = Timer()
         comp = AI(scene: self)
-        ball = Ball(friction: viewController.parentVC.parentVC.defaultFriction)
         
     }
     required init?(coder aDecoder: NSCoder) {
@@ -622,14 +620,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func addPlayers(){
         if (!playersAdded) {
-            playerA1 = Player(teamA: true, country: countryA, sender: self, name: "playerA1", friction: viewController.parentVC.parentVC.defaultFriction)
-            playerA2 = Player(teamA: true, country: countryA, sender: self, name: "playerA2", friction: viewController.parentVC.parentVC.defaultFriction)
-            playerA3 = Player(teamA: true, country: countryA, sender: self, name: "playerA3", friction: viewController.parentVC.parentVC.defaultFriction)
-            playerA4 = Player(teamA: true, country: countryA, sender: self, name: "playerA4", friction: viewController.parentVC.parentVC.defaultFriction)
-            playerB1 = Player(teamA: false, country: countryB, sender: self, name: "playerB1", friction: viewController.parentVC.parentVC.defaultFriction)
-            playerB2 = Player(teamA: false, country: countryB, sender: self, name: "playerB2", friction: viewController.parentVC.parentVC.defaultFriction)
-            playerB3 = Player(teamA: false, country: countryB, sender: self, name: "playerB3", friction: viewController.parentVC.parentVC.defaultFriction)
-            playerB4 = Player(teamA: false, country: countryB, sender: self, name: "playerB4", friction: viewController.parentVC.parentVC.defaultFriction)
+            ball = Ball()
+            ball.zPosition = 2
+            playerA1 = Player(teamA: true, country: countryA, sender: self, name: "playerA1")
+            playerA2 = Player(teamA: true, country: countryA, sender: self, name: "playerA2")
+            playerA3 = Player(teamA: true, country: countryA, sender: self, name: "playerA3")
+            playerA4 = Player(teamA: true, country: countryA, sender: self, name: "playerA4")
+            playerB1 = Player(teamA: false, country: countryB, sender: self, name: "playerB1")
+            playerB2 = Player(teamA: false, country: countryB, sender: self, name: "playerB2")
+            playerB3 = Player(teamA: false, country: countryB, sender: self, name: "playerB3")
+            playerB4 = Player(teamA: false, country: countryB, sender: self, name: "playerB4")
             
             playersAdded = true
         }
@@ -648,7 +648,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 break;
         }
         for node in self.children {
-            if node is Player {
+            if node is Player || node is Ball{
                 node.removeFromParent()
             }
         }
@@ -657,6 +657,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             node.zPosition = 2
             self.addChild(node)
         }
+        self.addChild(ball)
+        setPosition()
+
     }
     func updateStats(_ won: Bool){
         statistics[Stats.totalGames]! += 1

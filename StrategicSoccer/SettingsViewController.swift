@@ -43,11 +43,6 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
     var playerButtonGroup: buttonGroup!
     var allButtons: [UIButton]!
     
-    var defaultMode: Mode!
-    var defaultPlayers: PlayerOption!
-    var defaultAI: Int!
-    var defaultFriction: Float!
-    var defaultSensitivity: Float!
 
     var parentVC: TitleViewController!
     var timeVC: ChangeTimeViewController!
@@ -73,8 +68,10 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var contentView : UIView!
     
     @IBOutlet weak var Scroll : UIScrollView!
-    @IBOutlet weak var SensitivitySlider: UISlider!
+    @IBOutlet weak var SensitivitySlider: SettingSlider!
     @IBOutlet weak var SensitivityLabel: UILabel!
+    @IBOutlet weak var FrictionSlider: SettingSlider!
+    @IBOutlet weak var FrictionLabel: UILabel!
     
    
     @IBAction func AIDifficulty(_ sender: UIButton){
@@ -148,7 +145,11 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
         defaultSensitivity = sender.value.roundToPlaces(1)
         SensitivityLabel.text = String(defaultSensitivity)
     }
-
+    func setFriction(_ sender: UISlider) {
+        defaultFriction = sender.value.roundToPlaces(1)
+        FrictionLabel.text = String(defaultFriction)
+        parentVC.scene.playersAdded = false
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         TimeView.layer.zPosition = 1
@@ -168,7 +169,7 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
         playerButtonGroup = buttonGroup(buttons: playerButtons)
         allButtons = [PlayerFour,PlayerThree,ModePoints,ModeTimed]
         
-        switch (defaultPlayers!){
+        switch (defaultPlayers){
             case PlayerOption.three:
                 playerButtonGroup.selectButton(PlayerThree)
                 CurrentPlayers.text = "THREE"
@@ -185,15 +186,16 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
             modeButtonGroup.selectButton(ModePoints)
         }
         updateModeLabel()
+        
+        // sensitivity slider initialization
         SensitivitySlider.addTarget(self, action: #selector(setSensitivity), for: UIControlEvents.valueChanged)
         SensitivitySlider.minimumValue = 0.2
         SensitivitySlider.maximumValue = 5
-        SensitivitySlider.setValue(defaultSensitivity, animated: false)
         
-        SensitivitySlider.setMinimumTrackImage(UIImage(named: "SliderBar"), for: UIControlState())
-        SensitivitySlider.setMaximumTrackImage(UIImage(named: "SliderBarEnd"), for: UIControlState())
-        let sliderThumb = UIImage(named: "SliderThumb")
-        SensitivitySlider.setThumbImage(sliderThumb, for: UIControlState())
+        // Friction slider initialization
+        FrictionSlider.addTarget(self, action: #selector(setFriction), for: UIControlEvents.valueChanged)
+        FrictionSlider.minimumValue = 0
+        FrictionSlider.maximumValue = 1
         
         // Do any additional setup after loading the view.
         
@@ -214,15 +216,11 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        parentVC.defaultMode = defaultMode
-        parentVC.defaultPlayers = defaultPlayers!
-        parentVC.defaultAI = defaultAI
-        parentVC.defaultSensitivity = defaultSensitivity
         defaults.set(defaultMode.rawValue, forKey: modeKey)
-        defaults.set(defaultPlayers!.rawValue, forKey: playerOptionKey)
+        defaults.set(defaultPlayers.rawValue, forKey: playerOptionKey)
         defaults.set(defaultAI, forKey: AIKey)
         defaults.set(defaultSensitivity, forKey: playerSensitivityKey)
+        defaults.set(defaultFriction, forKey: frictionKey)
     }
     
 
@@ -253,8 +251,12 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setSensitivity(SensitivitySlider)
+        
         SensitivitySlider.setValue(defaultSensitivity, animated: false)
+        FrictionSlider.setValue(defaultFriction, animated: false)
+        
+        setSensitivity(SensitivitySlider)
+        setFriction(FrictionSlider)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -288,11 +290,11 @@ extension Float {
     mutating func roundToPlaces(_ places:Int) -> Float {
         let divisor = Float(pow(10.0, Float(places)))
         return Float((self * divisor).rounded() / divisor)
-        
     }
 }
 
-class CustomUISlider : UISlider {
+class SettingSlider : UISlider {
+    
     override func trackRect(forBounds bounds: CGRect) -> CGRect {
         var newBounds = super.trackRect(forBounds: bounds)
         newBounds.size.height = 12
@@ -301,7 +303,10 @@ class CustomUISlider : UISlider {
     
     //while we are here, why not change the image here as well? (bonus material)
     override func awakeFromNib() {
-        self.setThumbImage(UIImage(named: "customThumb"), for: UIControlState())
+        setMinimumTrackImage(UIImage(named: "SliderBar"), for: UIControlState())
+        setMaximumTrackImage(UIImage(named: "SliderBarEnd"), for: UIControlState())
+        let sliderThumb = UIImage(named: "SliderThumb")
+        setThumbImage(sliderThumb, for: UIControlState())
         super.awakeFromNib()
     }
 }

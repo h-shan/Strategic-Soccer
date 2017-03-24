@@ -13,8 +13,7 @@ class Ball: SKSpriteNode {
     var storedVelocity:CGVector?
     var radius:CGFloat = 0
     
-    
-    init(friction: Float) {
+    init() {
         radius = 45*scalerX
         let ballSize = CGSize(width: radius,height: radius)
         super.init(texture: mTexture, color: UIColor.clear, size: ballSize)
@@ -23,7 +22,7 @@ class Ball: SKSpriteNode {
         self.zPosition = 2
         let body = self.physicsBody!
         body.usesPreciseCollisionDetection = true
-        body.linearDamping = CGFloat(friction)
+        body.linearDamping = CGFloat(defaultFriction)
         body.angularDamping = 0
         body.restitution = 1
         body.friction = 1 // 1

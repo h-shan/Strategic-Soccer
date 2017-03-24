@@ -26,6 +26,14 @@ var scalerX:CGFloat = 0
 var scalerY:CGFloat = 0
 let goalLineB = 1076*scalerX
 let goalLineA = 60*scalerX
+
+var defaultFriction:Float = 0.5
+var defaultMode = Mode.threeMinute
+var defaultPlayers = PlayerOption.three
+var defaultAI = 1
+var defaultSensitivity: Float = 2
+var unlockedFlags:[String]!
+
 var coins = 50
 var statistics = [Stats.totalGames:0,Stats.totalWon:0,Stats.totalOne:0,Stats.oneWon:0,Stats.totalTwo:0,Stats.twoWon: 0, Stats.totalThree:0,Stats.threeWon:0,Stats.totalFour:0,Stats.fourWon:0,Stats.totalFive:0,Stats.fiveWon:0]
 
@@ -63,12 +71,7 @@ class TitleViewController: UIViewController {
         })
     }
     var skView: SKView!
-    var defaultMode = Mode.threeMinute
-    var defaultPlayers = PlayerOption.three
-    var defaultAI = 1
-    var defaultFriction:Float = 1
-    var defaultSensitivity: Float = 2
-    var unlockedFlags:[String]!
+    
     
     var playerA = "AUSTRALIA"
     var playerB = "CANADA"
@@ -100,8 +103,8 @@ class TitleViewController: UIViewController {
         if let storedSensitivity = defaults.object(forKey: playerSensitivityKey){
             defaultSensitivity = storedSensitivity as! Float
         }
-        if let fric = defaults.object(forKey: frictionKey) {
-            defaultFriction = fric as! Float
+        if let friction = defaults.object(forKey: frictionKey) {
+            defaultFriction = friction as! Float
         }
         // bring out unlocked
         if let storedUnlock = NSKeyedUnarchiver.unarchiveObject(withFile: Unlockable.FlagURL.path) as? [String]{
@@ -133,6 +136,7 @@ class TitleViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         super.viewWillAppear(animated)
         setBackground()
+        print(defaultFriction)
         addCoinImage("", afterText: String(coins), label: NumberCoins, numberLines: 1)
         modeString[Mode.oneMinute] = "oneMinute"
         modeString[Mode.threeMinute] = "threeMinute"
@@ -179,11 +183,6 @@ class TitleViewController: UIViewController {
         }
         if segue.identifier == "SettingsSegue"{
             let destinationVC = segue.destination as! SettingsViewController
-            destinationVC.defaultMode = self.defaultMode
-            destinationVC.defaultPlayers = defaultPlayers
-            destinationVC.defaultAI = defaultAI
-            destinationVC.defaultSensitivity = defaultSensitivity
-            destinationVC.defaultFriction = defaultFriction
             destinationVC.parentVC = self
         }
         if segue.identifier == "ChangePlayersSegue"{
