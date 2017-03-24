@@ -18,6 +18,7 @@ protocol ConnectionManagerDelegate {
     func receiveVelocities(_ manager: ConnectionManager, velocities:[String])
     func receiveSync(_ manager: ConnectionManager, turn: String, gameTime: String)
     func receiveMisc(_ manager: ConnectionManager, message: [String])
+    func receivePositionVelocity(_ manager: ConnectionManager, positionVelocity: [String])
 }
 class ConnectionManager : NSObject{
     fileprivate let serviceBrowser : MCNearbyServiceBrowser
@@ -56,9 +57,10 @@ class ConnectionManager : NSObject{
         session.delegate = self
         return session
     }()
+    
     func sendMove(_ player:Player, velocity: CGVector, position: CGPoint) {
         NSLog("%@", "player: \(player.name), x:\(velocity.dx), y:\(velocity.dy)")
-        let sendString = String(format:"%@ %@ %f %f %f %f", "move",player.name!, velocity.dx, velocity.dy, position.x, position.y)
+        let sendString = String(format:"%@ %@ %f %f %f %f %f", "move",player.name!,velocity.dx, velocity.dy, position.x, position.y, Date.timeIntervalSinceReferenceDate)
         if connectedDevice != nil{
             stringSend(sendString)
         }
@@ -82,6 +84,21 @@ class ConnectionManager : NSObject{
         for player in scene.players{
             sendString += String(format: "%f %f ",player.position.x, player.position.y)
         }
+        if connectedDevice != nil{
+            stringSend(sendString)
+        }
+    }
+    func sendPositionVelocity(_ scene: GameScene) {
+        var sendString = String(format:"%@ %f %f ", "positionVelocity", scene.ball.position.x, scene.ball.position.y)
+
+        for player in scene.players{
+            sendString += String(format: "%f %f ",player.position.x, player.position.y)
+        }
+        sendString += String(format:"%f %f ", scene.ball.physicsBody!.velocity.dx, scene.ball.physicsBody!.velocity.dy)
+        for player in scene.players{
+            sendString += String(format: "%f %f ",player.physicsBody!.velocity.dx, player.physicsBody!.velocity.dy)
+        }
+        sendString += String(format:"%f", Date.timeIntervalSinceReferenceDate)
         if connectedDevice != nil{
             stringSend(sendString)
         }
@@ -121,6 +138,7 @@ class ConnectionManager : NSObject{
             }
         })
     }
+    
 }
 
 
@@ -188,6 +206,7 @@ extension ConnectionManager : MCSessionDelegate {
             case "positionMove": self.delegate?.receivePositionMove(self, positionMove: strArr); break
             case "velocities": self.delegate?.receiveVelocities(self, velocities: strArr); break
             case "sendSync": self.delegate?.receiveSync(self, turn: strArr[0], gameTime: strArr[1]); break
+            case "positionVelocity": self.delegate?.receivePositionVelocity(self, positionVelocity: strArr); break
             default: self.delegate?.receiveMisc(self, message: strArr); break
             }
         })

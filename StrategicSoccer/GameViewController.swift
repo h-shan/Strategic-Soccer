@@ -77,10 +77,10 @@ class GameViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if scene.gType != .twoPhone{
+        //if scene.gType != .twoPhone{
             self.Dimmer?.fadeOut(1.0)
             scene.isUserInteractionEnabled = true
-        }
+        //}
     }
     override func viewWillAppear(_ animated:Bool){
         super.viewWillAppear(animated)
@@ -93,6 +93,7 @@ class GameViewController: UIViewController {
         }else{
             loadingView.alpha = 0.9
         }
+        loadingView.isHidden = true
     }
     
     override var shouldAutorotate : Bool {

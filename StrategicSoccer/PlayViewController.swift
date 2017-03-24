@@ -7,7 +7,8 @@
 //
 
 import UIKit
-var dampingFactor:CGFloat = 0.5
+import Foundation
+
 class PlayViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     var scene: GameScene!
     let gameService = ConnectionManager()
@@ -20,6 +21,9 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     var sentData = false
     var sentPause = false
     var sentPauseAction = false
+    
+    let timer = Timer()
+    
     @IBOutlet weak var SinglePlayer: UIButton!
     @IBOutlet weak var TwoPlayers: UIButton!
     @IBOutlet weak var ConnectToAnotherDevice: UIButton!
@@ -60,7 +64,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ConnectToAnotherDevice.isHidden = true
+        ConnectToAnotherDevice.isHidden = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,6 +133,7 @@ extension PlayViewController : ConnectionManagerDelegate {
     }
     
     func receivePause(_ manager: ConnectionManager, pauseType: String){
+        print("recievePause")
         switch pauseType{
         case "pause":self.scene.viewController.PauseClicked(self); break
         case "resume": self.scene.viewController.pauseVC.Resume(self); break
@@ -164,42 +169,44 @@ extension PlayViewController : ConnectionManagerDelegate {
         OperationQueue.main.addOperation({
             let nameA = positionMove[0]
             //let positionA = CGPointMake(screenWidth-positionMove[1].toFloat()*self.scaleFactorX, positionMove[2].toFloat()*self.scaleFactorY)
-            let velocityA = CGVector(dx: -positionMove[3].toFloat()*self.scaleFactorX*dampingFactor,dy: positionMove[4].toFloat()*self.scaleFactorY*dampingFactor)
+            let velocityA = CGVector(dx: -positionMove[3].toFloat()*self.scaleFactorX,dy: positionMove[4].toFloat()*self.scaleFactorY)
             let nameB = positionMove[5]
             //let positionB = CGPointMake(screenWidth-positionMove[6].toFloat()*self.scaleFactorX, positionMove[7].toFloat()*self.scaleFactorY)
             
-            let velocityB = CGVector(dx: -positionMove[8].toFloat()*self.scaleFactorX*dampingFactor, dy: positionMove[9].toFloat()*self.scaleFactorY*dampingFactor)
+            let velocityB = CGVector(dx: -positionMove[8].toFloat()*self.scaleFactorX, dy: positionMove[9].toFloat()*self.scaleFactorY)
             
             let nodeA = self.scene.childNode(withName: self.convertTeams(nameA))!
             let nodeB = self.scene.childNode(withName: self.convertTeams(nameB))!
             if nodeA != self.scene.borderBodyNode{
                 //nodeA.position = positionA
                 if !self.scene.isHost{
-                    nodeA.physicsBody!.velocity = CGVector(dx: velocityA.dx * dampingFactor, dy: velocityA.dy * dampingFactor)
+                    nodeA.physicsBody!.velocity = CGVector(dx: velocityA.dx , dy: velocityA.dy )
                 }
                 else{
                     nodeA.physicsBody!.velocity = velocityA
                 }
+                nodeA.physicsBody!.velocity = CGVector(dx: velocityA.dx , dy: velocityA.dy )
             }
             if nodeB != self.scene.borderBodyNode{
                 //nodeB.position = positionB
                 if !self.scene.isHost{
-                    nodeB.physicsBody!.velocity = CGVector(dx: velocityB.dx * dampingFactor, dy: velocityB.dy * dampingFactor)
+                    nodeB.physicsBody!.velocity = CGVector(dx: velocityB.dx , dy: velocityB.dy )
                 }
                 else{
                     nodeB.physicsBody!.velocity = velocityB
                 }
+                nodeB.physicsBody!.velocity = CGVector(dx: velocityB.dx , dy: velocityB.dy )
             }
         })
     }
     
     func receiveVelocities(_ manager: ConnectionManager, velocities:[String]){
         OperationQueue.main.addOperation{
-            let ballVelocity = CGVector(dx: -velocities[0].toFloat()*self.scaleFactorX*dampingFactor, dy: velocities[1].toFloat()*self.scaleFactorY*dampingFactor)
+            let ballVelocity = CGVector(dx: -velocities[0].toFloat()*self.scaleFactorX, dy: velocities[1].toFloat()*self.scaleFactorY)
             self.scene.ball.physicsBody!.velocity = ballVelocity
             var i = 2
             while i < velocities.count{
-                let velocity = CGVector(dx: -velocities[i].toFloat()*self.scaleFactorX*dampingFactor, dy: velocities[i+1].toFloat()*self.scaleFactorY*dampingFactor)
+                let velocity = CGVector(dx: -velocities[i].toFloat()*self.scaleFactorX, dy: velocities[i+1].toFloat()*self.scaleFactorY)
                 self.scene.players[self.convertToIndex(i)].physicsBody!.velocity = velocity
                 i+=2
             }
@@ -215,7 +222,10 @@ extension PlayViewController : ConnectionManagerDelegate {
                 self.scene.isHost = false
                 self.scene.mode = stringMode[settings.first!]!
             }
-            self.scene.countryB = settings[1]
+            if self.scene.countryB != settings[1] {
+                self.scene.countryB = settings[1]
+                self.scene.playersAdded = false
+            }
             self.scaleFactorX = screenWidth/settings[2].toFloat()
             self.scaleFactorY = screenHeight/settings[3].toFloat()
             if !self.sentData{
@@ -223,6 +233,7 @@ extension PlayViewController : ConnectionManagerDelegate {
                 self.sentData = true
             }
             self.moveToScene()
+            self.timer.restart()
         })
     }
     
@@ -242,55 +253,40 @@ extension PlayViewController : ConnectionManagerDelegate {
         }
         if scene.mode.getType() == .timed{
             scene.gameTime = TimeInterval(gameTime.toFloat())
+            scene.gameTimer.restart()
         }
     }
     
     func receiveMove(_ manager: ConnectionManager, move: [String]) {
-        print("receiveMove")
+        //print("receiveMove \(timer.getElapsedTime())")
         DispatchQueue.main.async(execute: {
             OperationQueue.main.addOperation {
                 let playerName = self.convertTeams(move[0])
-                let velocityX = move[1].toFloat()
-                let velocityY = move[2].toFloat()
-                let position = CGPoint(x: screenWidth-move[3].toFloat()*self.scaleFactorX, y: move[4].toFloat()*self.scaleFactorY)
+                let velocityX = -move[1].toFloat()*self.scaleFactorX
+                let velocityY = move[2].toFloat()*self.scaleFactorY
+                var position = CGPoint(x: screenWidth-move[3].toFloat()*self.scaleFactorX, y: move[4].toFloat()*self.scaleFactorY)
+                
+                // add adjustment for lag
+                let lagTime = CGFloat(Date.timeIntervalSinceReferenceDate) - move[5].toFloat()
+                position.x += lagTime * velocityX
+                position.y += lagTime * velocityY
                 for player in self.scene.teamB{
                     if playerName == player.name{
-                        if self.scene.isHost{
-                            player.physicsBody!.velocity = CGVector(dx: -velocityX*self.scaleFactorX, dy: velocityY*self.scaleFactorY)
-                        }else{
-                            player.physicsBody!.velocity = CGVector(dx: -velocityX*self.scaleFactorX*dampingFactor, dy: velocityY*self.scaleFactorY*dampingFactor)
-                        }
+                        player.physicsBody!.velocity = CGVector(dx: velocityX, dy: velocityY)
                         player.position = position
                         self.scene.switchTurns()
                         break
                     }
                 }
+                // self.scene.isHost = true
             }
         })
     }
     
     func receivePositions(_ manager: ConnectionManager, positions: [String]){
-        //print(dampingFactor)
+        print("receivePositions \(timer.getElapsedTime())")
         OperationQueue.main.addOperation{
             let ballPosition = CGPoint(x: screenWidth - positions[0].toFloat()*self.scaleFactorX, y: positions[1].toFloat()*self.scaleFactorY)
-            if self.scene.ball.physicsBody!.velocity.dx < 0{
-                if self.scene.ball.position.x < ballPosition.x-1{
-                    dampingFactor -= 0.01
-                    print(dampingFactor)
-                }else if self.scene.ball.position.x > ballPosition.x+1{
-                    dampingFactor += 0.01
-                    print(dampingFactor)
-                }
-            }
-            else{
-                if self.scene.ball.position.x > ballPosition.x+1{
-                    dampingFactor -= 0.01
-                    print(dampingFactor)
-                }else if self.scene.ball.position.x < ballPosition.x-1{
-                    dampingFactor += 0.01
-                    print(dampingFactor)
-                }
-            }
             self.scene.ball.position = ballPosition
             var i = 2
             while i < positions.count{
@@ -302,6 +298,45 @@ extension PlayViewController : ConnectionManagerDelegate {
     
     }
 
+    func receivePositionVelocity(_ manager: ConnectionManager, positionVelocity: [String]){
+        OperationQueue.main.addOperation{
+            let n = positionVelocity.count - 1
+            var positions = [CGFloat]()
+            var velocities = [CGFloat]()
+            var j = 0
+            while j < n/2 {
+                positions.append(screenWidth - positionVelocity[j].toFloat() * self.scaleFactorX)
+                positions.append(positionVelocity[j+1].toFloat() * self.scaleFactorY)
+                j += 2
+            }
+            while j < n {
+                velocities.append(-positionVelocity[j].toFloat() * self.scaleFactorX)
+                velocities.append(positionVelocity[j+1].toFloat() * self.scaleFactorY)
+                j += 2
+            }
+            let ballPosition = CGPoint(x: positions[0], y: positions[1])
+            self.scene.ball.position = ballPosition
+            let ballVelocity = CGVector(dx: velocities[0], dy: velocities[1])
+            self.scene.ball.physicsBody!.velocity = ballVelocity
+            
+            let lagTime = CGFloat(Date.timeIntervalSinceReferenceDate) - positionVelocity[n].toFloat()
+            print("LAG: ", lagTime)
+            var i = 2
+            
+            while i < positions.count{
+                var position = CGPoint(x: positions[i], y: positions[i+1])
+                
+                position.x += lagTime * velocities[i]
+                position.y += lagTime * velocities[i+1]
+                
+                let velocity = CGVector(dx: velocities[i], dy: velocities[i+1])
+                self.scene.players[self.convertToIndex(i)].position = position
+                self.scene.players[self.convertToIndex(i)].physicsBody!.velocity = velocity
+                i+=2
+            }
+        }
+    }
+    
     func convertToIndex(_ index: Int) -> Int{
         let rawIndex = index/2-1
         switch(scene.playerOption){
@@ -333,7 +368,7 @@ extension PlayViewController : ConnectionManagerDelegate {
         gameVC.scene = scene
         gameVC.parentVC = self
         scene.viewController = gameVC
-        scene.loaded = false
+        scene.loaded = true // changed from false
         scene.gType = .twoPhone
         gameService.getServiceBrowser().stopBrowsingForPeers()
         gameService.getServiceAdvertiser().stopAdvertisingPeer()
@@ -341,6 +376,7 @@ extension PlayViewController : ConnectionManagerDelegate {
         JoinGame.isUserInteractionEnabled = true
         JoinGame.alpha = 1
     }
+    
 }
 extension String {
     
@@ -370,5 +406,7 @@ extension Bool{
         return "false"
     }
 }
+
+
 
 
