@@ -18,7 +18,7 @@ class Player: SKSpriteNode {
         mTeamA = false
         super.init(texture: mTexture, color: UIColor.clear, size: mTexture.size())
     }
-    init(teamA: Bool, country: String, sender: GameScene, name: String){
+    init(teamA: Bool, country: String, sender: GameScene, name: String, friction: Float){
         playerSize = CGSize(width: 120*scalerX, height: 120*scalerX)
         mTeamA = teamA
         mTexture = SKTexture(imageNamed: country)
@@ -36,25 +36,7 @@ class Player: SKSpriteNode {
         let body:SKPhysicsBody = self.physicsBody!
         body.usesPreciseCollisionDetection = true
         // change back linear damping and friction
-        body.linearDamping = 0.6 // 0.4
-        body.restitution = 1
-        body.friction = 0.1
-        body.allowsRotation = false
-    }
-    
-    init(country: String, sender: Game1Scene){
-        playerSize = CGSize(width: 120*scalerX, height: 120*scalerX)
-        mTexture = SKTexture(imageNamed: country)
-        mTeamA = true
-        super.init(texture: mTexture, color: UIColor.clear, size: playerSize)
-        zRotation = CGFloat(M_PI*1.5)
-        self.physicsBody = SKPhysicsBody(circleOfRadius: playerSize.width*5/12)
-        self.name = "player"
-        self.zPosition = 21
-        let body:SKPhysicsBody = self.physicsBody!
-        body.usesPreciseCollisionDetection = true
-        // change back linear damping and friction
-        body.linearDamping = 0.6 // 0.4
+        body.linearDamping = CGFloat(friction)
         body.restitution = 1
         body.friction = 0.1
         body.allowsRotation = false

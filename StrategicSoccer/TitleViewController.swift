@@ -14,6 +14,7 @@ let modeKey = "Mode"
 let playerAKey = "PlayerA"
 let playerBKey = "PlayerB"
 let playerOptionKey = "PlayerOption"
+let frictionKey = "Friction"
 let AIKey = "AIDifficulty"
 let playerSensitivityKey = "PlayerSensitivity"
 let gold = UIColor(red: 161/255.0, green: 155/255.0, blue: 75/255.0, alpha: 1.0).cgColor
@@ -65,6 +66,7 @@ class TitleViewController: UIViewController {
     var defaultMode = Mode.threeMinute
     var defaultPlayers = PlayerOption.three
     var defaultAI = 1
+    var defaultFriction:Float = 1
     var defaultSensitivity: Float = 2
     var unlockedFlags:[String]!
     
@@ -98,11 +100,13 @@ class TitleViewController: UIViewController {
         if let storedSensitivity = defaults.object(forKey: playerSensitivityKey){
             defaultSensitivity = storedSensitivity as! Float
         }
+        if let fric = defaults.object(forKey: frictionKey) {
+            defaultFriction = fric as! Float
+        }
         // bring out unlocked
         if let storedUnlock = NSKeyedUnarchiver.unarchiveObject(withFile: Unlockable.FlagURL.path) as? [String]{
             unlockedFlags = storedUnlock
-        }
-        else{
+        } else{
             unlockedFlags = Unlockable().unlockedFlags
         }
         
@@ -179,6 +183,7 @@ class TitleViewController: UIViewController {
             destinationVC.defaultPlayers = defaultPlayers
             destinationVC.defaultAI = defaultAI
             destinationVC.defaultSensitivity = defaultSensitivity
+            destinationVC.defaultFriction = defaultFriction
             destinationVC.parentVC = self
         }
         if segue.identifier == "ChangePlayersSegue"{
@@ -188,7 +193,6 @@ class TitleViewController: UIViewController {
             destinationVC.defaultB = playerB
             destinationVC.unlockedFlags = unlockedFlags
         }
-        
     }
 }
 

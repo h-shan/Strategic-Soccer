@@ -42,7 +42,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var startPosition : CGPoint?
     var playerSelected = false
     var goalA : Bool?
-    var ball = Ball()
+    var ball: Ball!
     var timeLimit:Double = 2.5
 
     var gamePositions = [([(SKSpriteNode,CGPoint,CGVector)],Double)]()
@@ -202,6 +202,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         selPlayTimer = Timer()
         comp = AI(scene: self)
+        ball = Ball(friction: viewController.parentVC.parentVC.defaultFriction)
         
     }
     required init?(coder aDecoder: NSCoder) {
@@ -621,14 +622,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func addPlayers(){
         if (!playersAdded) {
-            playerA1 = Player(teamA: true, country: countryA, sender: self, name: "playerA1")
-            playerA2 = Player(teamA: true, country: countryA, sender: self, name: "playerA2")
-            playerA3 = Player(teamA: true, country: countryA, sender: self, name: "playerA3")
-            playerA4 = Player(teamA: true, country: countryA, sender: self, name: "playerA4")
-            playerB1 = Player(teamA: false, country: countryB, sender: self, name: "playerB1")
-            playerB2 = Player(teamA: false, country: countryB, sender: self, name: "playerB2")
-            playerB3 = Player(teamA: false, country: countryB, sender: self, name: "playerB3")
-            playerB4 = Player(teamA: false, country: countryB, sender: self, name: "playerB4")
+            playerA1 = Player(teamA: true, country: countryA, sender: self, name: "playerA1", friction: viewController.parentVC.parentVC.defaultFriction)
+            playerA2 = Player(teamA: true, country: countryA, sender: self, name: "playerA2", friction: viewController.parentVC.parentVC.defaultFriction)
+            playerA3 = Player(teamA: true, country: countryA, sender: self, name: "playerA3", friction: viewController.parentVC.parentVC.defaultFriction)
+            playerA4 = Player(teamA: true, country: countryA, sender: self, name: "playerA4", friction: viewController.parentVC.parentVC.defaultFriction)
+            playerB1 = Player(teamA: false, country: countryB, sender: self, name: "playerB1", friction: viewController.parentVC.parentVC.defaultFriction)
+            playerB2 = Player(teamA: false, country: countryB, sender: self, name: "playerB2", friction: viewController.parentVC.parentVC.defaultFriction)
+            playerB3 = Player(teamA: false, country: countryB, sender: self, name: "playerB3", friction: viewController.parentVC.parentVC.defaultFriction)
+            playerB4 = Player(teamA: false, country: countryB, sender: self, name: "playerB4", friction: viewController.parentVC.parentVC.defaultFriction)
             
             playersAdded = true
         }

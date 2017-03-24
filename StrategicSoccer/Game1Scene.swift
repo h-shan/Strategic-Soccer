@@ -18,8 +18,15 @@ class Game1Scene : SKScene{
     var goalPostA2: GoalPost!
     var goalPostB1: GoalPost!
     var goalPostB2: GoalPost!
-    var ball = Ball()
+    var ball: Ball!
     var players = [Player]()
+    override init() {
+        super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "SoccerField")
         addChild(background)

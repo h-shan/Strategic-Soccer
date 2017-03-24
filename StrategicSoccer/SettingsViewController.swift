@@ -46,6 +46,7 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
     var defaultMode: Mode!
     var defaultPlayers: PlayerOption!
     var defaultAI: Int!
+    var defaultFriction: Float!
     var defaultSensitivity: Float!
 
     var parentVC: TitleViewController!

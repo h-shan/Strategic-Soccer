@@ -398,6 +398,7 @@ extension String {
         return nil
     }
 }
+
 extension Bool{
     func toString() -> String{
         if self{

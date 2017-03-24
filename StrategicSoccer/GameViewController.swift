@@ -114,6 +114,7 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden : Bool {
         return true
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Pause"{
             pauseVC = segue.destination as! PauseViewController
