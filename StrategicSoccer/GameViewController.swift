@@ -50,7 +50,6 @@ class GameViewController: UIViewController {
         switch(pauseVC.action){
         case .quit:
             pauseVC.pauseQuit()
-            scene.isHost = true
             break
         case .restart:
             pauseVC.pauseRestart()
@@ -97,6 +96,11 @@ class GameViewController: UIViewController {
         loadingView.isHidden = true
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        scene.isHost = true
+    }
+    
     override var shouldAutorotate : Bool {
         return true
     }
@@ -140,6 +144,8 @@ class GameViewController: UIViewController {
         parentVC.sentData = false
         parentVC.sentPause = false
         scene.loaded = true
+        parentVC.JoinGame.isUserInteractionEnabled = true
+        parentVC.JoinGame.alpha = 1
     }
     
     func displayEarnings(_ numberWon: Int){

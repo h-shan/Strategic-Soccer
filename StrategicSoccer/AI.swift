@@ -640,7 +640,7 @@ class AI {
         marker.position = point
         marker.zPosition = 10 // 2
         marker.name = "marker"
-        scene.addChild(marker)
+        //scene.addChild(marker)
         markers.append(marker)
         // only keep track of last 10
         if markers.count > 10 {

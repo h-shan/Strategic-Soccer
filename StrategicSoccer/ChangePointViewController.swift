@@ -49,6 +49,7 @@ class ChangePointViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         parentVC.timeVC.timeOptions.selectRow(at: nil, animated: false, scrollPosition: UITableViewScrollPosition.middle)
         pointMode = Mode(rawValue: indexPath.row + Mode.threePoint.rawValue)
+        defaultMode = pointMode!
         _ = Foundation.Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(hideView), userInfo: nil, repeats: false)
 
     }

@@ -109,11 +109,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var selPlayTimer:Timer?
     var moveTimer:Timer?
+    let sendTimer = Timer()
     
     var comp:AI!
     let predictionTimer = Timer()
     
     var playersAdded = false
+    
+    var justMadeMove = false
     
     override init(size:CGSize){
         super.init(size: size)
@@ -200,6 +203,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         selPlayTimer = Timer()
         comp = AI(scene: self)
+        sendTimer.start()
         
     }
     required init?(coder aDecoder: NSCoder) {
@@ -224,6 +228,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func didEnd(_ contact: SKPhysicsContact) {
+        
+    }
     override func didMove(to view: SKView) {
         /* Setup your scene here */
         scoreBackground.alpha = 0.0
@@ -269,6 +276,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             clockBackground?.isHidden = false
         }
         addPlayers()
+        
         for node in children{
             if let body = node.physicsBody{
                 body.collisionBitMask = 1
@@ -340,12 +348,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let velY = yMovement/pow(ms, 1.0/1.5)
             var vel = CGVector(dx: velX, dy: velY)
             vel.damp(max: 1000)
-            
-            selectedPlayer!.physicsBody!.velocity = vel
+            //if !(gType == .twoPhone && !isHost) {
+                selectedPlayer!.physicsBody!.velocity = vel
+            // }
             if gType == .twoPhone {
-                viewController.parentVC.gameService.sendMove(selectedPlayer!, velocity: selectedPlayer!.physicsBody!.velocity, position: selectedPlayer!.position)
+                justMadeMove = true
+                viewController.parentVC.gameService.sendMove(selectedPlayer!, velocity: vel, position: selectedPlayer!.position)
                 if !isHost{
-                    selectedPlayer!.physicsBody!.velocity = vel
+                    //selectedPlayer!.physicsBody!.velocity = vel
                 }
             }
             playerSelected = false
@@ -364,8 +374,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
    
     override func update(_ currentTime: TimeInterval) {
         if gType == .twoPhone && isHost{
-            if loaded{
+            if loaded && sendTimer.getElapsedTime() > 0.02{
                 viewController.parentVC.gameService.sendPositionVelocity(self)
+                sendTimer.restart()
             }
         }
         if predictionTimer.getElapsedTime() > comp.waitTime {
@@ -563,8 +574,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             playerB3.position = CGPoint(x:frame.midX*1.5,y:frame.midY*0.8)
             playerB4.position = CGPoint(x:frame.midX*1.5,y:frame.midY*1.2)
         }
+        for player in players {
+            player.physicsBody!.velocity = CGVector(dx: 0, dy: 0)
+        }
         
         ball.position = CGPoint(x: frame.midX,y: frame.midY)
+        ball.physicsBody!.velocity = CGVector(dx: 0, dy: 0)
     }
     
     func restart(){
@@ -594,9 +609,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
     
-    func addPlayers(){
+    func addPlayers() {
         if (!playersAdded) {
             ball = Ball()
+            comp.ball = ball
             ball.zPosition = 2
             playerA1 = Player(teamA: true, country: countryA, sender: self, name: "playerA1")
             playerA2 = Player(teamA: true, country: countryA, sender: self, name: "playerA2")
@@ -609,7 +625,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             playersAdded = true
         }
-        
         
         switch (playerOption){
             case PlayerOption.three:
@@ -629,7 +644,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        for node in players{
+        for node in players {
             node.zPosition = 2
             self.addChild(node)
         }
@@ -637,7 +652,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setPosition()
 
     }
-    func updateStats(_ won: Bool){
+    func updateStats(_ won: Bool) {
         statistics[Stats.totalGames]! += 1
         if won{
             statistics[Stats.totalWon]! += 1
@@ -681,10 +696,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.reset(false)
             if gType == .twoPhone && isHost && viewController.parentVC.gameService.connectedDevice != nil{
                 viewController.parentVC.gameService.stringSend(String(format: "%@ %@ %@","misc", "goal", false.toString()))
+//                isHost = false
             }
         } else if ball.position.x > goalLineB {
             if gType == .twoPhone && isHost && viewController.parentVC.gameService.connectedDevice != nil{
                 viewController.parentVC.gameService.stringSend(String(format:"%@ %@ %@","misc", "goal", true.toString()))
+//                isHost = false
             }
             self.reset(true)
         }
