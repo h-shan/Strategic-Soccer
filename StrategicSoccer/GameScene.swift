@@ -333,7 +333,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             selectedPlayer = touchedPlayer
             playerSelected = true
             startPosition = selPlay.2!
-            selectedPlayer!.run(SKAction.colorize(with: UIColor.red, colorBlendFactor: 0.4, duration: 0))
+            selectedPlayer!.highlight()
+            viewController.parentVC.gameService.sendHighlight(selectedPlayer!.name!)
             selPlayTimer!.restart()
         }
     }
@@ -430,7 +431,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // unselect any plaers
         if playerSelected{
             playerSelected = false
-            selectedPlayer!.run(SKAction.colorize(with: UIColor.gray, colorBlendFactor: -0.7, duration: 0.00001))
+            selectedPlayer!.unHighlight()
         }
         if turnA == scoreGoal{
             ownGoal = true

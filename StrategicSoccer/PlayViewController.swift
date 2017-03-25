@@ -132,6 +132,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewWillDisappear(animated)
     }
 }
+
 extension PlayViewController : ConnectionManagerDelegate {
     
     func connectedDevicesChanged(_ manager: ConnectionManager, connectedDevices: [String]) {
@@ -233,7 +234,7 @@ extension PlayViewController : ConnectionManagerDelegate {
         })
     }
     
-    func receiveSync(_ manager: ConnectionManager, turn: String){
+    func receiveSync(_ manager: ConnectionManager, turn: String) {
         if turn.toBool()! {
             if scene.turnA {
                 scene.switchTurns()
@@ -257,10 +258,10 @@ extension PlayViewController : ConnectionManagerDelegate {
                 let velocityY = move[2].toFloat()*self.scaleFactorY
                 var position = CGPoint(x: screenWidth-move[3].toFloat()*self.scaleFactorX, y: move[4].toFloat()*self.scaleFactorY)
                 
-                
-                
                 for player in self.scene.teamB{
                     if playerName == player.name{
+                        player.unHighlight()
+                        self.scene.updateLighting()
                         player.physicsBody!.velocity = CGVector(dx: velocityX, dy: velocityY)
                         let lagTime = CGFloat(Date.timeIntervalSinceReferenceDate) - move[5].toFloat()
                         let currentPosition = player.position
@@ -362,6 +363,18 @@ extension PlayViewController : ConnectionManagerDelegate {
         }
     }
     
+    func receiveHighlight(_ manager: ConnectionManager, playerName: String) {
+        OperationQueue.main.addOperation{
+            let playerBName = self.convertTeams(playerName)
+            for player in self.scene.teamB {
+                if player.name == playerBName {
+                    player.highlight()
+                    return
+                }
+            }
+        }
+    }
+    
     func convertToIndex(_ index: Int) -> Int{
         let rawIndex = index/2-1
         switch(scene.playerOption){
@@ -397,11 +410,8 @@ extension PlayViewController : ConnectionManagerDelegate {
         scene.gType = .twoPhone
         gameService.getServiceBrowser().stopBrowsingForPeers()
         gameService.getServiceAdvertiser().stopAdvertisingPeer()
-        do {
-            self.navigationController!.pushViewController(gameVC, animated: true)
-        } catch {
-            print("error")
-        }
+        self.navigationController!.pushViewController(gameVC, animated: true)
+     
     }
     
 }

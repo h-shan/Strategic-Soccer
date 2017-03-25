@@ -19,6 +19,7 @@ protocol ConnectionManagerDelegate {
     func receiveSync(_ manager: ConnectionManager, turn: String)
     func receiveMisc(_ manager: ConnectionManager, message: [String])
     func receivePositionVelocity(_ manager: ConnectionManager, positionVelocity: [String])
+    func receiveHighlight(_ manager: ConnectionManager, playerName: String)
 }
 class ConnectionManager : NSObject{
     fileprivate let serviceBrowser : MCNearbyServiceBrowser
@@ -131,6 +132,11 @@ class ConnectionManager : NSObject{
             stringSend(sendString)
         }
     }
+    
+    func sendHighlight(_ playerName: String) {
+        stringSend("highlight " + playerName)
+    }
+    
     func stringSend(_ message: String){
         DispatchQueue.main.async(execute: {
             do {
@@ -198,7 +204,7 @@ extension ConnectionManager : MCSessionDelegate {
             let str = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as! String
             var strArr = str.characters.split{$0 == " "}.map(String.init)
             let tag = strArr.removeFirst()
-            switch(tag){
+            switch(tag) {
             case "start":
                 self.connectedDevice = [peerID]
                 self.delegate?.receiveStart(self, settings: strArr);
@@ -210,6 +216,7 @@ extension ConnectionManager : MCSessionDelegate {
             case "velocities": self.delegate?.receiveVelocities(self, velocities: strArr); break
             case "sendSync": self.delegate?.receiveSync(self, turn: strArr[0]); break
             case "positionVelocity": self.delegate?.receivePositionVelocity(self, positionVelocity: strArr); break
+            case "highlight": self.delegate?.receiveHighlight(self, playerName: strArr[0]); break
             default: self.delegate?.receiveMisc(self, message: strArr); break
             }
         })

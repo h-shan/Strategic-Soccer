@@ -12,6 +12,7 @@ class Player: SKSpriteNode {
     let mTeamA:Bool
     var mTexture:SKTexture!
     var playerSize: CGSize!
+    var highlighted = false
     
     init(){
         mTexture = SKTexture(imageNamed: "BRAZIL")
@@ -59,6 +60,20 @@ class Player: SKSpriteNode {
     func changeColorDark(){
         self.run(SKAction.colorize(with: UIColor.gray, colorBlendFactor: -0.9, duration: 0))
         
+    }
+    
+    func highlight() {
+        if !highlighted {
+            highlighted = true
+            self.run(SKAction.colorize(with: UIColor.red, colorBlendFactor: 0.7, duration: 0))
+        }
+    }
+    
+    func unHighlight() {
+        if highlighted {
+            highlighted = false
+            self.run(SKAction.colorize(with: UIColor.gray, colorBlendFactor: -0.7, duration: 0))
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
