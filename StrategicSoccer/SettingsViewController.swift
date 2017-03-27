@@ -205,6 +205,7 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
         self.contentView.addGestureRecognizer(tapGesture)
         
     }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         hideView(TimeView)
         hideView(PointView)

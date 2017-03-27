@@ -334,7 +334,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             playerSelected = true
             startPosition = selPlay.2!
             selectedPlayer!.highlight()
-            viewController.parentVC.gameService.sendHighlight(selectedPlayer!.name!)
+            if gType == .twoPhone {
+                viewController.parentVC.gameService.sendHighlight(selectedPlayer!.name!)
+            }
             selPlayTimer!.restart()
         }
     }

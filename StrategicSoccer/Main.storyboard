@@ -1179,7 +1179,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                                 <rect key="frame" x="0.0" y="28" width="250" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zl6-qQ-tVy" id="I5c-gs-cdk">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
