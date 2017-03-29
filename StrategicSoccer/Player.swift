@@ -12,6 +12,7 @@ class Player: SKSpriteNode {
     let mTeamA:Bool
     var mTexture:SKTexture!
     var playerSize: CGSize!
+    var isBright = true
     var highlighted = false
     
     init(){
@@ -48,18 +49,21 @@ class Player: SKSpriteNode {
             changeColorBright()
         }else{
             changeColorDark()
-            
+        }
+    }
+    
+    func changeColorDark(){
+        if isBright {
+            self.run(SKAction.colorize(with: UIColor.gray, colorBlendFactor: 0.9, duration: 0))
+            isBright = false
         }
     }
     
     func changeColorBright(){
-        self.run(SKAction.colorize(with: UIColor.gray, colorBlendFactor: 0.9, duration: 0))
-        
-    }
-    
-    func changeColorDark(){
-        self.run(SKAction.colorize(with: UIColor.gray, colorBlendFactor: -0.9, duration: 0))
-        
+        if !isBright {
+            self.run(SKAction.colorize(with: UIColor.gray, colorBlendFactor: -0.9, duration: 0))
+            isBright = true
+        }
     }
     
     func highlight() {

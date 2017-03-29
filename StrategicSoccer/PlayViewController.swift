@@ -152,11 +152,15 @@ extension PlayViewController : ConnectionManagerDelegate {
         default: break
         }
     }
+    
     func receiveMisc(_ manager:ConnectionManager, message: [String]){
         switch(message[0]){
         case "goal":
             if !scene.goalAccounted{
-//                scene.isHost = true
+                for player in scene.players {
+                    player.unHighlight()
+                }
+                scene.updateLighting()
                 scene.reset(!message[1].toBool()!)
                 break
             }
@@ -168,7 +172,6 @@ extension PlayViewController : ConnectionManagerDelegate {
             scene.loaded = true
             scene.restart()
             scene.isUserInteractionEnabled = true
-            print(scene.isUserInteractionEnabled)
 
         default: break
         }
@@ -212,6 +215,8 @@ extension PlayViewController : ConnectionManagerDelegate {
     func receiveStart(_ manager: ConnectionManager, settings:[String]){
         DispatchQueue.main.async(execute: {
             self.connectedDevice = self.gameService.connectedDevice!.first?.displayName
+            self.gameService.getServiceBrowser().stopBrowsingForPeers()
+            self.gameService.getServiceAdvertiser().stopAdvertisingPeer()
             print("receiveStart")
             if !self.scene.isHost{
                 self.scene.mode = stringMode[settings[0]]!
@@ -296,21 +301,21 @@ extension PlayViewController : ConnectionManagerDelegate {
                 i+=2
             }
         }
-    
     }
 
     func receivePositionVelocity(_ manager: ConnectionManager, positionVelocity: [String]) {
         OperationQueue.main.addOperation{
             let n = positionVelocity.count - 1
+            var transition = true
+            if n%2 == 1 {
+                //transition = false
+            }
             var positions = [CGFloat]()
             var velocities = [CGFloat]()
             var j = 0
             if self.scene.justMadeMove {
                 self.timer.restart()
-             //  while self.timer.getElapsedTime() < 0.1 {                }
                 self.scene.justMadeMove = false
-            //    self.gameService.sendPositionVelocity(self.scene)
-            //    return
             }
             while j < n/2 {
                 positions.append(screenWidth - positionVelocity[j].toFloat() * self.scaleFactorX)
@@ -326,16 +331,13 @@ extension PlayViewController : ConnectionManagerDelegate {
             lagTime *= 0.5
             let ballVelocity = CGVector(dx: velocities[0], dy: velocities[1])
 
-            let ballPosition = CGPoint(x: positions[0], y: positions[1])
+            
             var newBallPosition = CGPoint(x: positions[0] + lagTime * ballVelocity.dx, y: positions[1] + lagTime * ballVelocity.dy)
-            let currentPosition = self.scene.ball.position
-            if abs(newBallPosition.x - currentPosition.x) > 1 || abs(newBallPosition.y - currentPosition.y) > 1 {
-                //print("Before lag: ", ballPosition)
-                //print("current: ", currentPosition)
-                //print("new: ", newBallPosition)
+            if transition {
+                let currentPosition = self.scene.ball.position
+                newBallPosition.x = (newBallPosition.x + currentPosition.x*2)/3
+                newBallPosition.y = (newBallPosition.y + currentPosition.y*2)/3
             }
-            //newBallPosition.x = (newBallPosition.x + currentPosition.x)/2
-            //newBallPosition.y = (newBallPosition.y + currentPosition.y)/2
             self.scene.ball.position = newBallPosition
             if !self.scene.isHost {
                 self.scene.ball.physicsBody!.velocity = ballVelocity
@@ -350,8 +352,10 @@ extension PlayViewController : ConnectionManagerDelegate {
                 let velocity = CGVector(dx: velocities[i], dy: velocities[i+1])
                 let currentPlayer = self.scene.players[self.convertToIndex(i)]
                 let currentPosition = currentPlayer.position
-                position.x = (currentPosition.x + position.x)/2
-                position.y = (currentPosition.y + position.y)/2
+                if transition {
+                    position.x = (currentPosition.x * 2 + position.x)/3
+                    position.y = (currentPosition.y * 2 + position.y)/3
+                }
                 
                 currentPlayer.position = position
                 if !self.scene.isHost {

@@ -299,7 +299,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func sendPosition(){
-        viewController.parentVC.gameService.sendPosition(self)
+        getService().sendPosition(self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
@@ -335,7 +335,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             startPosition = selPlay.2!
             selectedPlayer!.highlight()
             if gType == .twoPhone {
-                viewController.parentVC.gameService.sendHighlight(selectedPlayer!.name!)
+                getService().sendHighlight(selectedPlayer!.name!)
             }
             selPlayTimer!.restart()
         }
@@ -351,15 +351,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let velY = yMovement/pow(ms, 1.0/1.5)
             var vel = CGVector(dx: velX, dy: velY)
             vel.damp(max: 1000)
-            //if !(gType == .twoPhone && !isHost) {
+            if !(gType == .twoPhone && !isHost) {
                 selectedPlayer!.physicsBody!.velocity = vel
-            // }
+            }
             if gType == .twoPhone {
                 justMadeMove = true
-                viewController.parentVC.gameService.sendMove(selectedPlayer!, velocity: vel, position: selectedPlayer!.position)
-                if !isHost{
-                    //selectedPlayer!.physicsBody!.velocity = vel
-                }
+                getService().sendMove(selectedPlayer!, velocity: vel, position: selectedPlayer!.position)
             }
             playerSelected = false
             if !(gType == .twoPhone && !isHost) {
@@ -371,15 +368,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func updateLighting(){
         for player in players{
-            player.setLighting(player.mTeamA != turnA)
+            player.setLighting(player.mTeamA == turnA)
         }
     }
    
     override func update(_ currentTime: TimeInterval) {
         if gType == .twoPhone && isHost{
             if loaded && sendTimer.getElapsedTime() > 0.02{
-                viewController.parentVC.gameService.sendPositionVelocity(self)
-                sendTimer.restart()
+                if goalDelay.getElapsedTime() == 0 {
+                    getService().sendPositionVelocity(self, reset: false)
+                    sendTimer.restart()
+                }
             }
         }
         if predictionTimer.getElapsedTime() > comp.waitTime {
@@ -406,6 +405,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             showTime()
         }
         if (goalDelay.getElapsedTime()>2 && !gameEnded){
+            if gType == .twoPhone && isHost {
+                getService().sendPositionVelocity(self, reset: true)
+            }
             scoreBackground.fadeOut()
             isUserInteractionEnabled = true
             setDynamicStates(true)
@@ -485,7 +487,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func switchTurns(){
         turnA = !turnA
         if gType == .twoPhone && isHost {
-            viewController.parentVC.gameService.sendSync(turnA)
+            getService().sendSync(turnA)
         }
         if playerSelected == true {
             playerSelected = false
@@ -547,8 +549,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             updateStats(false)
             score.text = "IT'S A TIE!"
         }
+        
+        // tear down connection
+        if gType == .twoPhone {
+            getService().session.cancelConnectPeer(getService().connectedDevice!.first!)
+            getService().session.disconnect()
+        }
         _ = Foundation.Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(goBackToTitle), userInfo: nil, repeats: false)
         gameTimer.elapsedTime = 0
+    }
+    
+    func getService() -> ConnectionManager{
+        return viewController.parentVC.gameService
     }
     
     func goBackToTitle(){
@@ -697,15 +709,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func checkGoal() {
         if ball.position.x < goalLineA {
             self.reset(false)
-            if gType == .twoPhone && isHost && viewController.parentVC.gameService.connectedDevice != nil{
-                viewController.parentVC.gameService.stringSend(String(format: "%@ %@ %@","misc", "goal", false.toString()))
-//                isHost = false
+            if gType == .twoPhone && isHost && getService().connectedDevice != nil{
+                for player in players {
+                    player.unHighlight()
+                }
+                getService().stringSend(String(format: "%@ %@ %@","misc", "goal", false.toString()))
             }
+            updateLighting()
+
         } else if ball.position.x > goalLineB {
-            if gType == .twoPhone && isHost && viewController.parentVC.gameService.connectedDevice != nil{
-                viewController.parentVC.gameService.stringSend(String(format:"%@ %@ %@","misc", "goal", true.toString()))
-//                isHost = false
+            if gType == .twoPhone && isHost && getService().connectedDevice != nil{
+                for player in players {
+                    player.unHighlight()
+                }
+                getService().stringSend(String(format:"%@ %@ %@","misc", "goal", true.toString()))
             }
+            updateLighting()
             self.reset(true)
         }
     }

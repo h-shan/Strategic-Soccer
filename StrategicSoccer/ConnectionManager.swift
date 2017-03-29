@@ -89,7 +89,7 @@ class ConnectionManager : NSObject{
             stringSend(sendString)
         }
     }
-    func sendPositionVelocity(_ scene: GameScene) {
+    func sendPositionVelocity(_ scene: GameScene, reset: Bool) {
         var sendString = String(format:"%@ %f %f ", "positionVelocity", scene.ball.position.x, scene.ball.position.y)
 
         for player in scene.players{
@@ -100,6 +100,9 @@ class ConnectionManager : NSObject{
             sendString += String(format: "%f %f ",player.physicsBody!.velocity.dx, player.physicsBody!.velocity.dy)
         }
         sendString += String(format:"%f", Date.timeIntervalSinceReferenceDate)
+        if reset {
+            sendString += " reset"
+        }
         if connectedDevice != nil{
             stringSend(sendString)
         }
