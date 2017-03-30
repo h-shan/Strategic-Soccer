@@ -47,23 +47,23 @@ class Player: SKSpriteNode {
     func setLighting(_ bright:Bool){
         if(bright){
             changeColorBright()
-        }else{
+        } else{
             changeColorDark()
         }
     }
     
     func changeColorDark(){
-        if isBright {
+        //if isBright {
             self.run(SKAction.colorize(with: UIColor.gray, colorBlendFactor: 0.9, duration: 0))
             isBright = false
-        }
+        //}
     }
     
     func changeColorBright(){
-        if !isBright {
+        //if !isBright {
             self.run(SKAction.colorize(with: UIColor.gray, colorBlendFactor: -0.9, duration: 0))
             isBright = true
-        }
+        //}
     }
     
     func highlight() {
