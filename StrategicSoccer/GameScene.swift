@@ -204,8 +204,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         selPlayTimer = Timer()
         comp = AI(scene: self)
         sendTimer.start()
-        
     }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -228,9 +228,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func didEnd(_ contact: SKPhysicsContact) {
-        
-    }
     override func didMove(to view: SKView) {
         /* Setup your scene here */
         scoreBackground.alpha = 0.0
@@ -597,7 +594,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ball.physicsBody!.velocity = CGVector(dx: 0, dy: 0)
     }
     
-    func restart(){
+    func restart() {
         scoreA = 0
         scoreB = 0
         if mode.getType() == .timed{
@@ -625,7 +622,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addPlayers() {
-        if (!playersAdded) {
+        if !playersAdded {
             ball = Ball()
             comp.ball = ball
             ball.zPosition = 2
@@ -641,7 +638,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             playersAdded = true
         }
         
-        switch (playerOption){
+        switch playerOption {
             case PlayerOption.three:
                 players = [playerA1, playerA2, playerA3, playerB1, playerB2, playerB3]
                 teamA = [playerA1,playerA2,playerA3]
@@ -665,8 +662,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         self.addChild(ball)
         setPosition()
-
     }
+    
     func updateStats(_ won: Bool) {
         statistics[Stats.totalGames]! += 1
         if won{

@@ -266,6 +266,8 @@ extension PlayViewController : ConnectionManagerDelegate {
                 for player in self.scene.teamB{
                     if playerName == player.name{
                         player.unHighlight()
+                        player.changeColorDark()
+                        player.changeColorBright()
                         self.scene.updateLighting()
                         player.physicsBody!.velocity = CGVector(dx: velocityX, dy: velocityY)
                         let lagTime = CGFloat(Date.timeIntervalSinceReferenceDate) - move[5].toFloat()
