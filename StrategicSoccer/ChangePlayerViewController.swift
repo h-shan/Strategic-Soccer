@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+let flagPrice = 15
 extension UITableViewCell {
     func enable(_ on: Bool) {
         for view in contentView.subviews {
@@ -45,8 +45,8 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         _ = navigationController?.popViewController(animated: true)
     }
     @IBAction func YesButton(_ sender: AnyObject){
-        if coins >= 20{
-            coins -= 20
+        if coins >= flagPrice {
+            coins -= flagPrice
             boughtCell.enable(true)
             for subview in boughtCell.contentView.subviews{
                 if subview.tag == 99{
@@ -98,7 +98,7 @@ class ChangePlayerViewController: UIViewController, UITableViewDelegate, UITable
         BuyFlagView.isHidden = true
         NotEnoughCoins.isHidden = true
         ConfirmationText.numberOfLines = 0
-        addCoinImage("DO YOU WANT TO SPEND\n", afterText: "20 TO BUY THIS FLAG?", label: ConfirmationText, numberLines: 2)
+        addCoinImage("DO YOU WANT TO SPEND\n", afterText: "\(flagPrice) TO BUY THIS FLAG?", label: ConfirmationText, numberLines: 2)
         let indexPathA = IndexPath(item: findIndex(defaultA), section: 0)
         let indexPathB = IndexPath(item: findIndex(defaultB), section: 0)
         
