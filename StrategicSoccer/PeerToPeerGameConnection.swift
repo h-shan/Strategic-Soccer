@@ -290,15 +290,13 @@ extension PlayViewController : ConnectionManagerDelegate {
         gameVC.scene = scene
         gameVC.parentVC = self
         scene.viewController = gameVC
-        scene.loaded = true // changed from false
         scene.gType = .twoPhone
-        gameService.getServiceBrowser().stopBrowsingForPeers()
-        gameService.getServiceAdvertiser().stopAdvertisingPeer()
-        self.navigationController!.pushViewController(gameVC, animated: true)
-        
+        // gameService.getServiceBrowser().stopBrowsingForPeers()
+        // gameService.getServiceAdvertiser().stopAdvertisingPeer()
+        self.navigationController?.pushViewController(gameVC, animated: true)
     }
-    
 }
+
 extension String {
     
     subscript (i: Int) -> Character {

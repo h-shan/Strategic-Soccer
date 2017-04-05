@@ -98,7 +98,7 @@ class GameViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        scene.isHost = true
+        scene.isHost = false
     }
     
     override var shouldAutorotate : Bool {

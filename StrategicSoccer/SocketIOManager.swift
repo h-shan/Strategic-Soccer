@@ -38,16 +38,16 @@ class SocketIOManager: NSObject {
         completionHandler()
     }
     
-    func connectGame(_ username: String, otherUsername: String, completionHandler: @escaping (_ opponentName: String) -> Void) {
+    func connectGame(_ username: String, otherUsername: String, completionHandler: @escaping (_ opponentName: String, _ host: Bool) -> Void) {
         socket.emit("connectGame", username, otherUsername)
         socket.on("connectGameUpdate") { (opp, ack) -> Void in
-            completionHandler(opp.first as! String)
+            completionHandler(opp[0] as! String, opp[1] as! Bool)
         }
         
     }
     
-    func sendGameInfo(_ username: String, flag: String, screenWidth: CGFloat, screenHeight: CGFloat, friction: Float) {
-        socket.emit("gameInfo", username, flag, screenWidth, screenHeight, friction)
+    func sendGameInfo(_ username: String, mode: String, flag: String, screenWidth: CGFloat, screenHeight: CGFloat, friction: Float) {
+        socket.emit("gameInfo", username, mode, flag, screenWidth, screenHeight, friction)
     }
 }
 

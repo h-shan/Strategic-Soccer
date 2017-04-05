@@ -22,6 +22,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     var sentPause = false
     var sentPauseAction = false
     let id = UUID().uuidString
+    var username = UIDevice.current.name
     
     let timer = Timer()
     
@@ -60,6 +61,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         scene.countryA = parentVC.playerA
         scene.countryB = parentVC.playerB
         scene.addPlayers()
+        respondToSocket()
 
     }
     
@@ -73,6 +75,9 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
             break
         case "SinglePlayerSegue":
             scene.gType = .onePlayer
+            break
+        case "TwoPhoneSegue" :
+            scene.gType = .twoPhone
             break
         default: break
         }
@@ -90,24 +95,28 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         HostGame.alpha = 1
         HostGame.isUserInteractionEnabled = true
     }
+    
     @IBAction func hostGame(_ sender: AnyObject){
         //gameService.getServiceAdvertiser().startAdvertisingPeer()
         //gameService.getServiceBrowser().startBrowsingForPeers()
         self.gameTableView.reloadData()
         HostGame.isUserInteractionEnabled = false
         HostGame.alpha = 0.5
-        scene.isHost = true
+        scene.isHost = false
         connectToServer()
     }
     
     @IBAction func joinGame(_ sender: AnyObject){
-        //gameService.sendStart(self.scene)
+        // rename to invite game, user who clicks join game will be host!
         sentData = true
-        scene.isHost = false
         JoinGame.alpha = 0.5
         JoinGame.isUserInteractionEnabled = false
-        SocketIOManager.sharedInstance.connectGame(UIDevice.current.name, otherUsername: connectedDevice!) { (opponentName) in
-            print(opponentName)
+        SocketIOManager.sharedInstance.connectGame(self.username, otherUsername: connectedDevice!) { (opponentName, host) in
+            self.scene.isHost = host
+            print("connect game update")
+            if host {
+                SocketIOManager.sharedInstance.sendGameInfo(self.username, mode: modeString[self.scene.mode]!, flag: self.scene.countryA, screenWidth: screenWidth, screenHeight: screenHeight, friction: defaultFriction)
+            }
         }
     }
     
@@ -127,13 +136,13 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         connectedDevice = self.hostedGames[indexPath.row]["username"] as? String
         self.JoinGame.alpha = 1
         self.JoinGame.isUserInteractionEnabled = true
-        gameService.connectToDevice(connectedDevice!)
+        //gameService.connectToDevice(connectedDevice!)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         cell.textLabel?.text = hostedGames[indexPath.row]["username"] as? String
-        if (cell.textLabel?.text! == UIDevice.current.name) {
+        if (cell.textLabel?.text! == self.username) {
             cell.isUserInteractionEnabled = false
             cell.alpha = 0.5
         }
@@ -146,7 +155,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: Custom Methods
     func connectToServer() {
-        SocketIOManager.sharedInstance.connectToServerWithUsername(UIDevice.current.name, completionHandler: { (userList) -> Void in
+        SocketIOManager.sharedInstance.connectToServerWithUsername(self.username, completionHandler: { (userList) -> Void in
             DispatchQueue.main.async(execute: { () -> Void in
                 print("Updated user list")
                 if userList != nil {
@@ -159,16 +168,21 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
 }
 
 // MARK: SocketManager functions
+
 extension PlayViewController {
     func respondToSocket() {
+        
+        // game info update
         SocketIOManager.sharedInstance.socket.on("gameInfoUpdate") { (settings, ack) -> Void in
-            print("receiveStart")
-            self.scene.isHost = settings[5] as! Bool
+            print("game info update")
             if !self.scene.isHost{
+                // if not host, then update scene paramaters
                 self.scene.mode = stringMode[settings[0] as! String]!
                 self.scene.gameTimer.restart()
                 defaultFriction = settings[4] as! Float
+                SocketIOManager.sharedInstance.sendGameInfo(self.username, mode: modeString[self.scene.mode]!, flag: self.scene.countryA, screenWidth: screenWidth, screenHeight: screenHeight, friction: defaultFriction)
             }
+            // general configurations
             let opponentFlag = settings[1] as! String
             if self.scene.countryB != opponentFlag {
                 self.scene.countryB = opponentFlag
@@ -176,15 +190,11 @@ extension PlayViewController {
             }
             self.scaleFactorX = screenWidth/(settings[2] as! CGFloat)
             self.scaleFactorY = screenHeight/(settings[3] as! CGFloat)
-            if !self.scene.isHost {
-                
-            }
             self.moveToScene()
             self.timer.restart()
         }
     }
 }
-
 
 
 

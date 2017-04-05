@@ -136,6 +136,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		899A00261E94AE920005D8B8 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				89B97F801D20F5DB00588A21 /* TitleViewController.swift */,
+				8904A2601D400CDD004D4EC6 /* PlayViewController.swift */,
+				89EEC9811D234CCF0075A85C /* SettingsViewController.swift */,
+				DC83DD011D1089EA00E1C3F8 /* GameViewController.swift */,
+				89B97F851D2221AE00588A21 /* PauseViewController.swift */,
+				898DE5A71D3F3DCA00602111 /* StatisticsViewController.swift */,
+				89EEC9831D246D8A0075A85C /* ChangePlayerViewController.swift */,
+				89F6A2BD1D30CD610090618E /* ChangeTimeViewController.swift */,
+				89F6A2BF1D30DFDE0090618E /* ChangePointViewController.swift */,
+				892182901D34C67000A2F274 /* MiniGameViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		899A00271E94AEAF0005D8B8 /* Device Connection */ = {
+			isa = PBXGroup;
+			children = (
+				8904A2621D403472004D4EC6 /* ConnectionManager.swift */,
+				892A93AC1E91A31B0045C2E3 /* SocketIOManager.swift */,
+				899A00241E92D9800005D8B8 /* PeerToPeerGameConnection.swift */,
+			);
+			name = "Device Connection";
+			sourceTree = "<group>";
+		};
 		AFB72475DC986742FBA0640A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,22 +197,14 @@
 		DC83DCFA1D1089EA00E1C3F8 /* StrategicSoccer */ = {
 			isa = PBXGroup;
 			children = (
+				899A00271E94AEAF0005D8B8 /* Device Connection */,
+				899A00261E94AE920005D8B8 /* View Controllers */,
 				DC83DCFB1D1089EA00E1C3F8 /* AppDelegate.swift */,
 				DC83DD061D1089EA00E1C3F8 /* Assets.xcassets */,
-				89B97F801D20F5DB00588A21 /* TitleViewController.swift */,
-				8904A2601D400CDD004D4EC6 /* PlayViewController.swift */,
 				8904A2641D414336004D4EC6 /* Main.storyboard */,
 				DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */,
 				898B59651E7A70ED0017E049 /* AI.swift */,
-				89EEC9811D234CCF0075A85C /* SettingsViewController.swift */,
-				8904A2621D403472004D4EC6 /* ConnectionManager.swift */,
-				DC83DD011D1089EA00E1C3F8 /* GameViewController.swift */,
 				89F9D6E41D6D15C200528ABA /* GameView.swift */,
-				89B97F851D2221AE00588A21 /* PauseViewController.swift */,
-				898DE5A71D3F3DCA00602111 /* StatisticsViewController.swift */,
-				89EEC9831D246D8A0075A85C /* ChangePlayerViewController.swift */,
-				89F6A2BD1D30CD610090618E /* ChangeTimeViewController.swift */,
-				89F6A2BF1D30DFDE0090618E /* ChangePointViewController.swift */,
 				8944D3CB1D3C986F00D90023 /* Unlockable.swift */,
 				DC83DD0B1D1089EA00E1C3F8 /* Info.plist */,
 				DCFEEDD31D14645600D4A259 /* Timer.swift */,
@@ -195,11 +214,8 @@
 				89EFF7BC1D1208C3004DEA93 /* GoalPost.swift */,
 				8932AD6A1D13BD0100F6AC84 /* Mode.swift */,
 				892182921D359BCF00A2F274 /* Game1Scene.swift */,
-				892182901D34C67000A2F274 /* MiniGameViewController.swift */,
 				892182941D35B60100A2F274 /* MiniGoal.swift */,
 				DC83DD081D1089EA00E1C3F8 /* LaunchScreen.storyboard */,
-				892A93AC1E91A31B0045C2E3 /* SocketIOManager.swift */,
-				899A00241E92D9800005D8B8 /* PeerToPeerGameConnection.swift */,
 			);
 			path = StrategicSoccer;
 			sourceTree = "<group>";
