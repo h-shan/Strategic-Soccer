@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             gameVC.PauseClicked(GameViewController.self)
             gameVC.scene.physicsWorld.speed = 0
         }
+        SocketIOManager.sharedInstance.closeConnection()
     }
     func getCurrentViewController()->UIViewController?{
         if let vc = self.window!.rootViewController as? UINavigationController{
@@ -44,7 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        
+        SocketIOManager.sharedInstance.establishConnection()
+
         if let gameVC = getCurrentViewController() as? GameViewController{
             gameVC.PauseClicked(GameViewController.self)
             gameVC.scene.isPaused = true

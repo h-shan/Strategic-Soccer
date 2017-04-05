@@ -13,11 +13,13 @@
 		892182911D34C67000A2F274 /* MiniGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892182901D34C67000A2F274 /* MiniGameViewController.swift */; };
 		892182931D359BCF00A2F274 /* Game1Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892182921D359BCF00A2F274 /* Game1Scene.swift */; };
 		892182951D35B60100A2F274 /* MiniGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892182941D35B60100A2F274 /* MiniGoal.swift */; };
+		892A93AD1E91A31B0045C2E3 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892A93AC1E91A31B0045C2E3 /* SocketIOManager.swift */; };
 		8932AD6B1D13BD0100F6AC84 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8932AD6A1D13BD0100F6AC84 /* Mode.swift */; };
 		893B41C21D2E221B00E191BE /* ScoreBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B41C11D2E221B00E191BE /* ScoreBoard.swift */; };
 		8944D3CC1D3C986F00D90023 /* Unlockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8944D3CB1D3C986F00D90023 /* Unlockable.swift */; };
 		898B59661E7A70ED0017E049 /* AI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B59651E7A70ED0017E049 /* AI.swift */; };
 		898DE5A81D3F3DCB00602111 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898DE5A71D3F3DCA00602111 /* StatisticsViewController.swift */; };
+		899A00251E92D9800005D8B8 /* PeerToPeerGameConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A00241E92D9800005D8B8 /* PeerToPeerGameConnection.swift */; };
 		89B97F811D20F5DB00588A21 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B97F801D20F5DB00588A21 /* TitleViewController.swift */; };
 		89B97F821D220CAC00588A21 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */; };
 		89B97F861D2221AE00588A21 /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B97F851D2221AE00588A21 /* PauseViewController.swift */; };
@@ -29,6 +31,7 @@
 		89F6A2BE1D30CD610090618E /* ChangeTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F6A2BD1D30CD610090618E /* ChangeTimeViewController.swift */; };
 		89F6A2C01D30DFDE0090618E /* ChangePointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F6A2BF1D30DFDE0090618E /* ChangePointViewController.swift */; };
 		89F9D6E51D6D15C200528ABA /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9D6E41D6D15C200528ABA /* GameView.swift */; };
+		D0B98F53E1826B5E398DDDEC /* Pods_StrategicSoccer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1AFC34E5BBA9C6E1D4C169B /* Pods_StrategicSoccer.framework */; };
 		DC83CF2F1D10CB780044D0E1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83CF2E1D10CB780044D0E1 /* Player.swift */; };
 		DC83DCFC1D1089EA00E1C3F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DCFB1D1089EA00E1C3F8 /* AppDelegate.swift */; };
 		DC83DD021D1089EA00E1C3F8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DD011D1089EA00E1C3F8 /* GameViewController.swift */; };
@@ -57,17 +60,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		407E0DE3AE383BF63526E745 /* Pods-StrategicSoccer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StrategicSoccer.release.xcconfig"; path = "Pods/Target Support Files/Pods-StrategicSoccer/Pods-StrategicSoccer.release.xcconfig"; sourceTree = "<group>"; };
 		8904A2601D400CDD004D4EC6 /* PlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		8904A2621D403472004D4EC6 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		8904A2641D414336004D4EC6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		892182901D34C67000A2F274 /* MiniGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniGameViewController.swift; sourceTree = "<group>"; };
 		892182921D359BCF00A2F274 /* Game1Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game1Scene.swift; sourceTree = "<group>"; };
 		892182941D35B60100A2F274 /* MiniGoal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniGoal.swift; sourceTree = "<group>"; };
+		892A93AC1E91A31B0045C2E3 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		8932AD6A1D13BD0100F6AC84 /* Mode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		893B41C11D2E221B00E191BE /* ScoreBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreBoard.swift; sourceTree = "<group>"; };
 		8944D3CB1D3C986F00D90023 /* Unlockable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unlockable.swift; sourceTree = "<group>"; };
 		898B59651E7A70ED0017E049 /* AI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AI.swift; sourceTree = "<group>"; };
 		898DE5A71D3F3DCA00602111 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		899A00241E92D9800005D8B8 /* PeerToPeerGameConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerToPeerGameConnection.swift; sourceTree = "<group>"; };
 		89B97F801D20F5DB00588A21 /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		89B97F851D2221AE00588A21 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
 		89EEC9811D234CCF0075A85C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +83,8 @@
 		89F6A2BD1D30CD610090618E /* ChangeTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeTimeViewController.swift; sourceTree = "<group>"; };
 		89F6A2BF1D30DFDE0090618E /* ChangePointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePointViewController.swift; sourceTree = "<group>"; };
 		89F9D6E41D6D15C200528ABA /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		96F1FAEBAB1EE760A2DA192B /* Pods-StrategicSoccer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StrategicSoccer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StrategicSoccer/Pods-StrategicSoccer.debug.xcconfig"; sourceTree = "<group>"; };
+		B1AFC34E5BBA9C6E1D4C169B /* Pods_StrategicSoccer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StrategicSoccer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC83CF2E1D10CB780044D0E1 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		DC83DCF81D1089EA00E1C3F8 /* Strategic Soccer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Strategic Soccer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC83DCFB1D1089EA00E1C3F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B98F53E1826B5E398DDDEC /* Pods_StrategicSoccer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +128,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7DFDEF4CF89738E5E8554DF4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B1AFC34E5BBA9C6E1D4C169B /* Pods_StrategicSoccer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AFB72475DC986742FBA0640A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				96F1FAEBAB1EE760A2DA192B /* Pods-StrategicSoccer.debug.xcconfig */,
+				407E0DE3AE383BF63526E745 /* Pods-StrategicSoccer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		DC83DCEF1D1089E900E1C3F8 = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +152,8 @@
 				DC83DD131D1089EA00E1C3F8 /* StrategicSoccerTests */,
 				DC83DD1E1D1089EA00E1C3F8 /* StrategicSoccerUITests */,
 				DC83DCF91D1089EA00E1C3F8 /* Products */,
+				AFB72475DC986742FBA0640A /* Pods */,
+				7DFDEF4CF89738E5E8554DF4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -170,6 +198,8 @@
 				892182901D34C67000A2F274 /* MiniGameViewController.swift */,
 				892182941D35B60100A2F274 /* MiniGoal.swift */,
 				DC83DD081D1089EA00E1C3F8 /* LaunchScreen.storyboard */,
+				892A93AC1E91A31B0045C2E3 /* SocketIOManager.swift */,
+				899A00241E92D9800005D8B8 /* PeerToPeerGameConnection.swift */,
 			);
 			path = StrategicSoccer;
 			sourceTree = "<group>";
@@ -199,9 +229,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DC83DD241D1089EA00E1C3F8 /* Build configuration list for PBXNativeTarget "StrategicSoccer" */;
 			buildPhases = (
+				64AB3582B202B3FFCCF8CD25 /* [CP] Check Pods Manifest.lock */,
 				DC83DCF41D1089EA00E1C3F8 /* Sources */,
 				DC83DCF51D1089EA00E1C3F8 /* Frameworks */,
 				DC83DCF61D1089EA00E1C3F8 /* Resources */,
+				C6E7E2533E40A329284DE7D3 /* [CP] Embed Pods Frameworks */,
+				E3C4A472DFE1A8D6059805C8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -327,6 +360,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		64AB3582B202B3FFCCF8CD25 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C6E7E2533E40A329284DE7D3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StrategicSoccer/Pods-StrategicSoccer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E3C4A472DFE1A8D6059805C8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StrategicSoccer/Pods-StrategicSoccer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DC83DCF41D1089EA00E1C3F8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -352,7 +433,9 @@
 				89EEC9841D246D8A0075A85C /* ChangePlayerViewController.swift in Sources */,
 				89F6A2BE1D30CD610090618E /* ChangeTimeViewController.swift in Sources */,
 				892182911D34C67000A2F274 /* MiniGameViewController.swift in Sources */,
+				899A00251E92D9800005D8B8 /* PeerToPeerGameConnection.swift in Sources */,
 				DCFEEDD41D14645600D4A259 /* Timer.swift in Sources */,
+				892A93AD1E91A31B0045C2E3 /* SocketIOManager.swift in Sources */,
 				8904A2611D400CDD004D4EC6 /* PlayViewController.swift in Sources */,
 				89F9D6E51D6D15C200528ABA /* GameView.swift in Sources */,
 				893B41C21D2E221B00E191BE /* ScoreBoard.swift in Sources */,
@@ -497,6 +580,7 @@
 		};
 		DC83DD251D1089EA00E1C3F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96F1FAEBAB1EE760A2DA192B /* Pods-StrategicSoccer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -515,6 +599,7 @@
 		};
 		DC83DD261D1089EA00E1C3F8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 407E0DE3AE383BF63526E745 /* Pods-StrategicSoccer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

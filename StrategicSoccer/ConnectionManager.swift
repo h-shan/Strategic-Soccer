@@ -60,7 +60,6 @@ class ConnectionManager : NSObject{
     }()
     
     func sendMove(_ player:Player, velocity: CGVector, position: CGPoint) {
-        NSLog("%@", "player: \(player.name), x:\(velocity.dx), y:\(velocity.dy)")
         let sendString = String(format:"%@ %@ %f %f %f %f %f", "move",player.name!,velocity.dx, velocity.dy, position.x, position.y, Date.timeIntervalSinceReferenceDate)
         if connectedDevice != nil{
             stringSend(sendString)
@@ -204,7 +203,7 @@ extension ConnectionManager : MCSessionDelegate {
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         DispatchQueue.main.async(execute: {
-            let str = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as! String
+            let str = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
             var strArr = str.characters.split{$0 == " "}.map(String.init)
             let tag = strArr.removeFirst()
             switch(tag) {
