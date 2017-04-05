@@ -549,8 +549,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // tear down connection
         if gType == .twoPhone {
-            getService().session.cancelConnectPeer(getService().connectedDevice!.first!)
-            getService().session.disconnect()
+            //getService().session.cancelConnectPeer(getService().connectedDevice!.first!)
+            //getService().session.disconnect()
         }
         _ = Foundation.Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(goBackToTitle), userInfo: nil, repeats: false)
         gameTimer.elapsedTime = 0

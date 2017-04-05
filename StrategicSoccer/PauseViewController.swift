@@ -23,7 +23,7 @@ class PauseViewController: UIViewController {
             parentVC.QuitWarningView.isHidden = false
             action = .quit
         }else{
-            pauseQuit()
+            pauseQuit(sender)
         }
         
     }
@@ -33,14 +33,14 @@ class PauseViewController: UIViewController {
             parentVC.QuitWarningText.text = "ARE YOU SURE YOU WANT TO RESTART? THIS WILL COUNT AS A LOSS IN YOUR STATISTICS."
             parentVC.QuitWarningView.isHidden = false
             action = .restart
-        }
-        else{
-            pauseRestart()
+        } else{
+            pauseRestart(sender)
         }
     }
     @IBAction func Resume(_ sender: AnyObject) {
-        if scene.gType == .twoPhone && !parentVC.parentVC.sentPauseAction{
-            parentVC.parentVC.gameService.sendPause("resume")
+        if scene.gType == .twoPhone && sender is UIButton {
+            print("Sending pause to \(parentVC.opponent)")
+            SocketIOManager.sharedInstance.sendPause(parentVC.opponent, pauseOption: Pause.resume)
         }
         parentVC.parentVC.sentPauseAction = true
         self.parentVC.Dimmer?.fadeOut(0.2)
@@ -76,9 +76,9 @@ class PauseViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func pauseRestart(){
-        if scene.gType == gameType.twoPhone && !parentVC.parentVC.sentPauseAction{
-            parentVC.parentVC.gameService.sendPause("restart")
+    func pauseRestart(_ sender: AnyObject){
+        if scene.gType == gameType.twoPhone && sender is UIButton{
+            SocketIOManager.sharedInstance.sendPause(parentVC.opponent, pauseOption: Pause.restart)
         }
         parentVC.parentVC.sentPauseAction = true
         parentVC.parentVC.sentPause = false
@@ -91,9 +91,9 @@ class PauseViewController: UIViewController {
         scene.isUserInteractionEnabled = true
         scene.firstTurn = true
     }
-    func pauseQuit(){
-        if scene.gType == .twoPhone && !parentVC.parentVC.sentPauseAction{
-            parentVC.parentVC.gameService.sendPause("quit")
+    func pauseQuit(_ sender: AnyObject) {
+        if scene.gType == .twoPhone && sender is UIButton{
+            SocketIOManager.sharedInstance.sendPause(parentVC.opponent, pauseOption: Pause.quit)
         }
         parentVC.parentVC.sentPauseAction = true
         parentVC.parentVC.sentPause = false

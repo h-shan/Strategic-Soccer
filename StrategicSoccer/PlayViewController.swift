@@ -23,6 +23,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     var sentPauseAction = false
     let id = UUID().uuidString
     var username = UIDevice.current.name
+    var opponent = ""
     
     let timer = Timer()
     
@@ -40,6 +41,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        respondToSocket()
         ConnectToAnotherDevice.isHidden = false
     }
     
@@ -61,7 +63,6 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         scene.countryA = parentVC.playerA
         scene.countryB = parentVC.playerB
         scene.addPlayers()
-        respondToSocket()
 
     }
     
@@ -111,13 +112,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         sentData = true
         JoinGame.alpha = 0.5
         JoinGame.isUserInteractionEnabled = false
-        SocketIOManager.sharedInstance.connectGame(self.username, otherUsername: connectedDevice!) { (opponentName, host) in
-            self.scene.isHost = host
-            print("connect game update")
-            if host {
-                SocketIOManager.sharedInstance.sendGameInfo(self.username, mode: modeString[self.scene.mode]!, flag: self.scene.countryA, screenWidth: screenWidth, screenHeight: screenHeight, friction: defaultFriction)
-            }
-        }
+        SocketIOManager.sharedInstance.connectGame(self.username, otherUsername: connectedDevice!)
     }
     
     @IBAction func hideConnections(_ sender: AnyObject){
@@ -180,7 +175,7 @@ extension PlayViewController {
                 self.scene.mode = stringMode[settings[0] as! String]!
                 self.scene.gameTimer.restart()
                 defaultFriction = settings[4] as! Float
-                SocketIOManager.sharedInstance.sendGameInfo(self.username, mode: modeString[self.scene.mode]!, flag: self.scene.countryA, screenWidth: screenWidth, screenHeight: screenHeight, friction: defaultFriction)
+                SocketIOManager.sharedInstance.sendGameInfo(self.opponent, mode: modeString[self.scene.mode]!, flag: self.scene.countryA, screenWidth: screenWidth, screenHeight: screenHeight, friction: defaultFriction)
             }
             // general configurations
             let opponentFlag = settings[1] as! String
@@ -192,6 +187,38 @@ extension PlayViewController {
             self.scaleFactorY = screenHeight/(settings[3] as! CGFloat)
             self.moveToScene()
             self.timer.restart()
+        }
+        
+        SocketIOManager.sharedInstance.socket.on("pauseUpdate") { (pauseOption, ack) in
+            print ("pause update")
+            let pOption = pauseOption[0] as! String
+            switch pOption {
+            case Pause.pause:
+                self.scene.viewController.PauseClicked(self)
+                break
+            case Pause.resume:
+                self.scene.viewController.pauseVC.Resume(self)
+                break
+            case Pause.restart:
+                self.scene.viewController.pauseVC.Restart(self)
+                break
+            case Pause.quit:
+                self.scene.viewController.pauseVC.Quit(self)
+                break
+            default:
+                break
+            }
+        }
+        
+        SocketIOManager.sharedInstance.socket.on("connectGameUpdate") { (opp, ack) in
+            print ("connect game update")
+            let opponentName = opp[0] as! String
+            let isHost = opp[1] as! Bool
+            self.scene.isHost = isHost
+            self.opponent = opponentName
+            if isHost {
+                SocketIOManager.sharedInstance.sendGameInfo(opponentName, mode: modeString[self.scene.mode]!, flag: self.scene.countryA, screenWidth: screenWidth, screenHeight: screenHeight, friction: defaultFriction)
+            }
         }
     }
 }

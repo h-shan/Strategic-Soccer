@@ -14,6 +14,7 @@ class GameViewController: UIViewController {
     var scene: GameScene!
     var parentVC: PlayViewController!
     var pauseVC: PauseViewController!
+    var opponent = ""
     @IBOutlet var loadingView: UIView!
     @IBOutlet weak var PauseView: UIView!
     @IBOutlet weak var skView: SKView!
@@ -27,7 +28,7 @@ class GameViewController: UIViewController {
     
     @IBAction func PauseClicked(_ sender: AnyObject) {
         if scene.gType == .twoPhone && !parentVC.sentPause{
-            parentVC.gameService.sendPause("pause")
+            SocketIOManager.sharedInstance.sendPause(parentVC.opponent, pauseOption: Pause.pause)
         }
         parentVC.sentPauseAction = false
         parentVC.sentPause = true
@@ -49,10 +50,10 @@ class GameViewController: UIViewController {
         scene.updateStats(false)
         switch(pauseVC.action){
         case .quit:
-            pauseVC.pauseQuit()
+            pauseVC.pauseQuit(sender)
             break
         case .restart:
-            pauseVC.pauseRestart()
+            pauseVC.pauseRestart(sender)
         }
     }
     @IBAction func NoQuit(_ sender: AnyObject){
@@ -81,6 +82,10 @@ class GameViewController: UIViewController {
             self.Dimmer?.fadeOut(1.0)
             scene.isUserInteractionEnabled = true
         //}
+        
+        if scene.gType == .twoPhone {
+            self.opponent = parentVC.opponent
+        }
     }
     override func viewWillAppear(_ animated:Bool){
         super.viewWillAppear(animated)
