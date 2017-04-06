@@ -345,18 +345,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let velY = yMovement/pow(ms, 1.0/1.5)
             var vel = CGVector(dx: velX, dy: velY)
             vel.damp(max: 1000)
-            //if !(gType == .twoPhone && !isHost) {
+            if !(gType == .twoPhone && !isHost) {
                 selectedPlayer!.physicsBody!.velocity = vel
-            //}
-            if gType == .twoPhone {
-                justMadeMove = true
-                //getService().sendMove(selectedPlayer!, velocity: vel, position: selectedPlayer!.position)
             }
             playerSelected = false
-            //if !(gType == .twoPhone && !isHost) {
-                switchTurns()
-            //}
-            SocketIOManager.sharedInstance.sendMove(viewController.opponent, playerName: selectedPlayer!.name!, velocity: vel)
+            switchTurns()
+            SocketIOManager.sharedInstance.sendMove(viewController.opponent, playerName: selectedPlayer!.name!, position: selectedPlayer!.position, velocity: selectedPlayer!.physicsBody!.velocity)
         }
         playerSelected = false
     }

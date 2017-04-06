@@ -50,8 +50,9 @@ class SocketIOManager: NSObject {
         socket.emit("pause", opponentName, pauseOption)
     }
     
-    func sendMove(_ opponentName: String, playerName: String, velocity: CGVector) {
-        socket.emit("move", opponentName, playerName, velocity.dx, velocity.dy)
+    func sendMove(_ opponentName: String, playerName: String, position: CGPoint, velocity: CGVector) {
+        let moveInfo = [position.x, position.y, velocity.dx, velocity.dy]
+        socket.emit("move", opponentName, playerName, moveInfo, Date.timeIntervalSinceReferenceDate)
     }
     
     func sendPositionVelocity(_ opponentName: String, gameScene: GameScene) {

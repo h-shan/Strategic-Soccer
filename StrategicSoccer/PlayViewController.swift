@@ -243,13 +243,28 @@ extension PlayViewController {
         SocketIOManager.sharedInstance.socket.on("moveUpdate") { (moveInfo, ack) in
             //print("move update")
             let playerName = self.playerDict[moveInfo[0] as! String]!
-            let velX = -(moveInfo[1] as! CGFloat) * self.scaleFactorX
-            let velY = -(moveInfo[2] as! CGFloat) * self.scaleFactorY
+            let info = moveInfo[1] as! [CGFloat]
+            let sendTime = moveInfo[2] as! TimeInterval
+            var lagTime = CGFloat(Date.timeIntervalSinceReferenceDate - sendTime)
+            var pPosition = CGPoint(x: screenWidth - info[0] * self.scaleFactorX, y: screenHeight-info[1] * self.scaleFactorY)
+            lagTime *= 0.5
+            let velX = -(info[2]) * self.scaleFactorX
+            let velY = -(info[3]) * self.scaleFactorY
+            pPosition.x += velX * lagTime
+            pPosition.y += velY * lagTime
+            
             let player = self.scene.nameToPlayer[playerName]!
+
+            let currentPosition = player.position
+            // to smooth transition, take one third point to end
+            pPosition.x = (pPosition.x + currentPosition.x * 2) / 3
+            pPosition.y = (pPosition.y + currentPosition.y * 2) / 3
+
             player.unHighlight()
             player.changeColorBright()
             self.scene.updateLighting()
             player.physicsBody!.velocity = CGVector(dx: velX, dy: velY)
+            player.position = pPosition
             if !self.scene.turnA {
                 self.scene.switchTurns()
             } else {
@@ -263,8 +278,8 @@ extension PlayViewController {
             let sendTime = posVelInfo[1] as! TimeInterval
             var lagTime = CGFloat(Date.timeIntervalSinceReferenceDate - sendTime)
             // if too much lag then don't bother updating position
+            print(lagTime)
             if lagTime > 0.5 {
-                //print(lagTime)
                 return
             }
             lagTime *= 0.5
@@ -307,6 +322,12 @@ extension PlayViewController {
             let player = self.scene.nameToPlayer[playerName]!
             print("highlight Update")
             player.highlight()
+        }
+        
+        SocketIOManager.sharedInstance.socket.on("gameOver") { (nothing, ack) in
+            self.opponent = ""
+            self.scene.viewController.opponent = ""
+            self.scene.goBackToTitle()
         }
     }
 }
