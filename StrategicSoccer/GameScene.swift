@@ -56,6 +56,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playerB2 = Player()
     var playerB3 = Player()
     var playerB4 = Player()
+    var nameToPlayer = [String: Player]()
     var players: [Player]!
     var teamA: [Player]!
     var teamB: [Player]!
@@ -162,7 +163,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let rightSoccerNet = SKSpriteNode(texture: netTexture,color: UIColor.clear, size: netSize)
         rightSoccerNet.position = CGPoint(x: 1096*scalerX, y: frame.midY)
         leftSoccerNet.position = CGPoint(x:40*scalerX, y: frame.midY)
-        rightSoccerNet.zRotation = CGFloat(M_PI)
+        rightSoccerNet.zRotation = CGFloat(Double.pi)
         rightSoccerNet.zPosition = 3
         leftSoccerNet.zPosition = 3
         addChild(leftSoccerNet)
@@ -295,10 +296,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func sendPosition(){
-        getService().sendPosition(self)
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         var selPlay: (CGFloat, Player?, CGPoint?) = (0.2 * screenWidth, nil, nil)
         for touch in touches {
@@ -332,7 +329,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             startPosition = selPlay.2!
             selectedPlayer!.highlight()
             if gType == .twoPhone {
-                getService().sendHighlight(selectedPlayer!.name!)
+                //getService().sendHighlight(selectedPlayer!.name!)
             }
             selPlayTimer!.restart()
         }
@@ -348,17 +345,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let velY = yMovement/pow(ms, 1.0/1.5)
             var vel = CGVector(dx: velX, dy: velY)
             vel.damp(max: 1000)
-            if !(gType == .twoPhone && !isHost) {
+            //if !(gType == .twoPhone && !isHost) {
                 selectedPlayer!.physicsBody!.velocity = vel
-            }
+            //}
             if gType == .twoPhone {
                 justMadeMove = true
-                getService().sendMove(selectedPlayer!, velocity: vel, position: selectedPlayer!.position)
+                //getService().sendMove(selectedPlayer!, velocity: vel, position: selectedPlayer!.position)
             }
             playerSelected = false
-            if !(gType == .twoPhone && !isHost) {
+            //if !(gType == .twoPhone && !isHost) {
                 switchTurns()
-            }
+            //}
+            SocketIOManager.sharedInstance.sendMove(viewController.opponent, playerName: selectedPlayer!.name!, velocity: vel)
         }
         playerSelected = false
     }
@@ -371,11 +369,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
    
     override func update(_ currentTime: TimeInterval) {
         if gType == .twoPhone && isHost{
-            if loaded && sendTimer.getElapsedTime() > 0.02{
-                if goalDelay.getElapsedTime() == 0 {
-                    getService().sendPositionVelocity(self, reset: false)
-                    sendTimer.restart()
-                }
+            if viewController.opponent != "" {
+                SocketIOManager.sharedInstance.sendPositionVelocity(viewController.opponent, gameScene: self)
+            } else {
+                print("Opponent not set!")
             }
         }
         if predictionTimer.getElapsedTime() > comp.waitTime {
@@ -384,9 +381,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if (!goalAccounted && 200*scalerY < ball.position.y && ball.position.y < 440*scalerY){
-            if !(gType == .twoPhone && !isHost) {
+            //if !(gType == .twoPhone && !isHost) {
                 checkGoal()
-            }
+            //}
         }
         
         if gType == .onePlayer && !turnA{
@@ -394,16 +391,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if(moveTimer!.getElapsedTime() > 5){
-            if !(gType == .twoPhone && !isHost) {
+            //if !(gType == .twoPhone && !isHost) {
                 switchTurns()
-            }
+            //}
         }
         if mode.getType() == .timed && !gameEnded{
             showTime()
         }
         if (goalDelay.getElapsedTime()>2 && !gameEnded){
             if gType == .twoPhone && isHost {
-                getService().sendPositionVelocity(self, reset: true)
+                //getService().sendPositionVelocity(self, reset: true)
             }
             scoreBackground.fadeOut()
             isUserInteractionEnabled = true
@@ -416,9 +413,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             goalDelay.reset()
             goalAccounted = false
             if ownGoal{
-                if !(gType == .twoPhone && !isHost) {
+                //if !(gType == .twoPhone && !isHost) {
                     switchTurns()
-                }
+                //}
                 ownGoal = false
             }
         }
@@ -484,7 +481,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func switchTurns(){
         turnA = !turnA
         if gType == .twoPhone && isHost {
-            getService().sendSync(turnA)
+            //getService().sendSync(turnA)
         }
         if playerSelected == true {
             playerSelected = false
@@ -635,6 +632,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             playerB3 = Player(teamA: false, country: countryB, sender: self, name: "playerB3")
             playerB4 = Player(teamA: false, country: countryB, sender: self, name: "playerB4")
             
+//            let labelA1 = SKLabelNode()
+//            let labelA2 = SKLabelNode()
+//            let labelA3 = SKLabelNode()
+//            let labelA4 = SKLabelNode()
+//            let labelB1 = SKLabelNode()
+//            let labelB2 = SKLabelNode()
+//            let labelB3 = SKLabelNode()
+//            let labelB4 = SKLabelNode()
+//            
+//            labelA1.text = "1"
+//            labelA2.text = "2"
+//            labelA3.text = "3"
+//            labelA4.text = "4"
+//            labelB1.text = "1"
+//            labelB2.text = "2"
+//            labelB3.text = "3"
+//            labelB4.text = "4"
+//            labelA1.zPosition = 3
+//            labelA2.zPosition = 3
+//            labelA3.zPosition = 3
+//            labelA4.zPosition = 3
+//            labelB1.zPosition = 3
+//            labelB2.zPosition = 3
+//            labelB3.zPosition = 3
+//            labelB4.zPosition = 3
+//            playerA1.addChild(labelA1)
+//            playerA2.addChild(labelA2)
+//            playerA3.addChild(labelA3)
+//            playerA4.addChild(labelA4)
+//            playerB1.addChild(labelB1)
+//            playerB2.addChild(labelB2)
+//            playerB3.addChild(labelB3)
+//            playerB4.addChild(labelB4)
             playersAdded = true
         }
         
@@ -662,6 +692,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         self.addChild(ball)
         setPosition()
+        
+        nameToPlayer["playerA1"] = playerA1
+        nameToPlayer["playerA2"] = playerA2
+        nameToPlayer["playerA3"] = playerA3
+        nameToPlayer["playerA4"] = playerA4
+        nameToPlayer["playerB1"] = playerB1
+        nameToPlayer["playerB2"] = playerB2
+        nameToPlayer["playerB3"] = playerB3
+        nameToPlayer["playerB4"] = playerB4
+        
     }
     
     func updateStats(_ won: Bool) {
@@ -706,21 +746,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func checkGoal() {
         if ball.position.x < goalLineA {
             self.reset(false)
-            if gType == .twoPhone && isHost && getService().connectedDevice != nil{
-                for player in players {
-                    player.unHighlight()
-                }
-                getService().stringSend(String(format: "%@ %@ %@","misc", "goal", false.toString()))
-            }
             updateLighting()
 
         } else if ball.position.x > goalLineB {
-            if gType == .twoPhone && isHost && getService().connectedDevice != nil{
-                for player in players {
-                    player.unHighlight()
-                }
-                getService().stringSend(String(format:"%@ %@ %@","misc", "goal", true.toString()))
-            }
             updateLighting()
             self.reset(true)
         }

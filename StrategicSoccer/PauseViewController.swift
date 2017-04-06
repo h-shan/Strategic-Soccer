@@ -97,7 +97,6 @@ class PauseViewController: UIViewController {
         }
         parentVC.parentVC.sentPauseAction = true
         parentVC.parentVC.sentPause = false
-        scene = parentVC.scene
         parentVC.PauseView.isHidden = true
         scene.goBackToTitle()
     }

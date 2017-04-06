@@ -278,7 +278,7 @@ extension PlayViewController : ConnectionManagerDelegate {
         if player.characters.count == 8{
             if player[6]=="A"{
                 newPlayer=player.replace("A",withString: "B")
-            }else{
+            } else{
                 newPlayer = player.replace("B", withString: "A")
             }
             return newPlayer

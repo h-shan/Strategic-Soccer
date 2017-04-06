@@ -42,12 +42,25 @@ class SocketIOManager: NSObject {
         socket.emit("connectGame", username, otherUsername)
     }
     
-    func sendGameInfo(_ opponentName: String, mode: String, flag: String, screenWidth: CGFloat, screenHeight: CGFloat, friction: Float) {
-        socket.emit("gameInfo", opponentName, mode, flag, screenWidth, screenHeight, friction)
+    func sendGameInfo(_ opponentName: String, mode: String, playerOption: PlayerOption, flag: String, screenWidth: CGFloat, screenHeight: CGFloat, friction: Float) {
+        socket.emit("gameInfo", opponentName, mode, playerOption.rawValue, flag, screenWidth, screenHeight, friction)
     }
     
     func sendPause(_ opponentName: String, pauseOption: String) {
         socket.emit("pause", opponentName, pauseOption)
+    }
+    
+    func sendMove(_ opponentName: String, playerName: String, velocity: CGVector) {
+        socket.emit("move", opponentName, playerName, velocity.dx, velocity.dy)
+    }
+    
+    func sendPositionVelocity(_ opponentName: String, gameScene: GameScene) {
+        var posVelDict = [String:[CGFloat]]()
+        for p in gameScene.players {
+            posVelDict[p.name!] = [p.position.x, p.position.y, p.physicsBody!.velocity.dx, p.physicsBody!.velocity.dy]
+        }
+        posVelDict["ball"] = [gameScene.ball.position.x, gameScene.ball.position.y, gameScene.ball.physicsBody!.velocity.dx, gameScene.ball.physicsBody!.velocity.dy]
+        socket.emit("positionVelocity", opponentName, posVelDict, Date.timeIntervalSinceReferenceDate)
     }
 }
 

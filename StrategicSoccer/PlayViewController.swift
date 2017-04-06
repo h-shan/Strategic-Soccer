@@ -24,6 +24,8 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     let id = UUID().uuidString
     var username = UIDevice.current.name
     var opponent = ""
+    var playerDict: [String: String]!
+    var movedToScene = false
     
     let timer = Timer()
     
@@ -63,6 +65,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         scene.countryA = parentVC.playerA
         scene.countryB = parentVC.playerB
         scene.addPlayers()
+        SocketIOManager.sharedInstance.establishConnection()
 
     }
     
@@ -95,6 +98,8 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         ConnectionView.isHidden = false
         HostGame.alpha = 1
         HostGame.isUserInteractionEnabled = true
+        JoinGame.alpha = 0.5
+        JoinGame.isUserInteractionEnabled = false
     }
     
     @IBAction func hostGame(_ sender: AnyObject){
@@ -112,7 +117,8 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         sentData = true
         JoinGame.alpha = 0.5
         JoinGame.isUserInteractionEnabled = false
-        SocketIOManager.sharedInstance.connectGame(self.username, otherUsername: connectedDevice!)
+        gameTableView.deselectRow(at: gameTableView.indexPathForSelectedRow!, animated: false)
+        SocketIOManager.sharedInstance.connectGame(self.username, otherUsername: opponent)
     }
     
     @IBAction func hideConnections(_ sender: AnyObject){
@@ -128,7 +134,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: Table View Delegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        connectedDevice = self.hostedGames[indexPath.row]["username"] as? String
+        opponent = self.hostedGames[indexPath.row]["username"] as! String
         self.JoinGame.alpha = 1
         self.JoinGame.isUserInteractionEnabled = true
         //gameService.connectToDevice(connectedDevice!)
@@ -168,30 +174,39 @@ extension PlayViewController {
     func respondToSocket() {
         
         // game info update
-        SocketIOManager.sharedInstance.socket.on("gameInfoUpdate") { (settings, ack) -> Void in
+        SocketIOManager.sharedInstance.socket.on("gameInfoUpdate") { (settings, ack) in
             print("game info update")
             if !self.scene.isHost{
                 // if not host, then update scene paramaters
                 self.scene.mode = stringMode[settings[0] as! String]!
+                self.scene.playerOption = intToPOption[settings[1] as! Int]!
                 self.scene.gameTimer.restart()
-                defaultFriction = settings[4] as! Float
-                SocketIOManager.sharedInstance.sendGameInfo(self.opponent, mode: modeString[self.scene.mode]!, flag: self.scene.countryA, screenWidth: screenWidth, screenHeight: screenHeight, friction: defaultFriction)
+                defaultFriction = settings[5] as! Float
+                
+                if self.scene.playerOption == PlayerOption.three {
+                    self.playerDict = player3Dict
+                } else {
+                    self.playerDict = player4Dict
+                }
+                SocketIOManager.sharedInstance.sendGameInfo(self.opponent, mode: modeString[self.scene.mode]!, playerOption: self.scene.playerOption, flag: self.scene.countryA, screenWidth: screenWidth, screenHeight: screenHeight, friction: defaultFriction)
             }
+            
             // general configurations
-            let opponentFlag = settings[1] as! String
+            let opponentFlag = settings[2] as! String
             if self.scene.countryB != opponentFlag {
                 self.scene.countryB = opponentFlag
                 self.scene.playersAdded = false
             }
-            self.scaleFactorX = screenWidth/(settings[2] as! CGFloat)
-            self.scaleFactorY = screenHeight/(settings[3] as! CGFloat)
+            self.scaleFactorX = screenWidth/(settings[3] as! CGFloat)
+            self.scaleFactorY = screenHeight/(settings[4] as! CGFloat)
+            self.movedToScene = true
             self.moveToScene()
             self.timer.restart()
         }
         
         SocketIOManager.sharedInstance.socket.on("pauseUpdate") { (pauseOption, ack) in
-            print ("pause update")
             let pOption = pauseOption[0] as! String
+            print ("pause \(pOption)")
             switch pOption {
             case Pause.pause:
                 self.scene.viewController.PauseClicked(self)
@@ -216,9 +231,76 @@ extension PlayViewController {
             let isHost = opp[1] as! Bool
             self.scene.isHost = isHost
             self.opponent = opponentName
-            if isHost {
-                SocketIOManager.sharedInstance.sendGameInfo(opponentName, mode: modeString[self.scene.mode]!, flag: self.scene.countryA, screenWidth: screenWidth, screenHeight: screenHeight, friction: defaultFriction)
+            if self.scene.playerOption == PlayerOption.three {
+               self.playerDict = player3Dict
+            } else if self.scene.playerOption == PlayerOption.four {
+                self.playerDict = player4Dict
             }
+            if isHost {
+                SocketIOManager.sharedInstance.sendGameInfo(opponentName, mode: modeString[self.scene.mode]!, playerOption: self.scene.playerOption, flag: self.scene.countryA, screenWidth: screenWidth, screenHeight: screenHeight, friction: defaultFriction)
+            }
+        }
+        
+        SocketIOManager.sharedInstance.socket.on("moveUpdate") { (moveInfo, ack) in
+            //print("move update")
+            let playerName = self.playerDict[moveInfo[0] as! String]!
+            let velX = -(moveInfo[1] as! CGFloat) * self.scaleFactorX
+            let velY = -(moveInfo[2] as! CGFloat) * self.scaleFactorY
+            let player = self.scene.nameToPlayer[playerName]!
+            player.unHighlight()
+            player.changeColorBright()
+            self.scene.updateLighting()
+            player.physicsBody!.velocity = CGVector(dx: velX, dy: velY)
+            if !self.scene.turnA {
+                self.scene.switchTurns()
+            } else {
+                self.scene.moveTimer!.restart()
+            }
+        
+        }
+        
+        SocketIOManager.sharedInstance.socket.on("positionVelocityUpdate") { (posVelInfo, ack) in
+            //print("positionVelocityUpdate")
+            let posVelDict = posVelInfo[0] as! [String:[CGFloat]]
+            let sendTime = posVelInfo[1] as! TimeInterval
+            var lagTime = CGFloat(Date.timeIntervalSinceReferenceDate - sendTime)
+            if lagTime > 0.5 {
+                print(lagTime)
+                return
+            }
+            lagTime *= 0.5
+            for posVel in posVelDict {
+                if posVel.key == "ball" {
+                    continue
+                }
+                let pName = self.playerDict[posVel.key]!
+                let info = posVel.value
+                var pPosition = CGPoint(x: screenWidth - info[0] * self.scaleFactorX, y: screenHeight-info[1] * self.scaleFactorY)
+                let pVelocity = CGVector(dx: -info[2] * self.scaleFactorX, dy: -info[3] * self.scaleFactorY)
+                let player = self.scene.nameToPlayer[pName]!
+                
+                // account for lag
+                pPosition.x += pVelocity.dx * lagTime
+                pPosition.y += pVelocity.dy * lagTime
+                let currentPosition = player.position
+                // to smooth transition, take one third point to end
+                pPosition.x = (pPosition.x + currentPosition.x * 2) / 3
+                pPosition.y = (pPosition.y + currentPosition.y * 2) / 3
+                player.position = pPosition
+                player.physicsBody!.velocity = pVelocity
+            }
+            let ballInfo = posVelDict["ball"]!
+            
+            var bPosition = CGPoint(x: screenWidth - ballInfo[0] * self.scaleFactorX, y: screenHeight - ballInfo[1] * self.scaleFactorY)
+            
+            let bVelocity = CGVector(dx: -ballInfo[2] * self.scaleFactorX, dy: -ballInfo[3] * self.scaleFactorY)
+            bPosition.x += bVelocity.dx * lagTime
+            bPosition.y += bVelocity.dy * lagTime
+            let currentBallPosition = self.scene.ball.position
+            bPosition.x = (bPosition.x + currentBallPosition.x * 2) / 3
+            bPosition.y = (bPosition.y + currentBallPosition.y * 2) / 3
+            self.scene.ball.position = bPosition
+            self.scene.ball.physicsBody!.velocity = bVelocity
         }
     }
 }

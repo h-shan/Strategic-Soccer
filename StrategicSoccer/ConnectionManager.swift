@@ -106,6 +106,7 @@ class ConnectionManager : NSObject{
             stringSend(sendString)
         }
     }
+    
     func sendStart(_ scene: GameScene){
         let flag = scene.countryA!
         print("sendStart")

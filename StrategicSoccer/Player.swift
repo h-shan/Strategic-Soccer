@@ -27,9 +27,9 @@ class Player: SKSpriteNode {
         //mTexture = SKTexture(image: UIImage(imageLiteral: country))
         super.init(texture: mTexture, color: UIColor.clear, size:playerSize)
         if teamA{
-            zRotation = CGFloat(M_PI*1.5)
+            zRotation = CGFloat(Double.pi*1.5)
         } else {
-            zRotation = CGFloat(M_PI*0.5)
+            zRotation = CGFloat(Double.pi*0.5)
         }
         self.physicsBody = SKPhysicsBody(circleOfRadius: playerSize.width*5/12)
         self.name = name
@@ -67,17 +67,17 @@ class Player: SKSpriteNode {
     }
     
     func highlight() {
-        if !highlighted {
+        //if !highlighted {
             highlighted = true
             self.run(SKAction.colorize(with: UIColor.red, colorBlendFactor: 0.7, duration: 0))
-        }
+        //}
     }
     
     func unHighlight() {
-        if highlighted {
+        //if highlighted {
             highlighted = false
             self.run(SKAction.colorize(with: UIColor.gray, colorBlendFactor: -0.7, duration: 0))
-        }
+        //}
     }
     
     required init?(coder aDecoder: NSCoder) {

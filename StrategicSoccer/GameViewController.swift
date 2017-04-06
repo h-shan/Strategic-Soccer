@@ -83,9 +83,7 @@ class GameViewController: UIViewController {
             scene.isUserInteractionEnabled = true
         //}
         
-        if scene.gType == .twoPhone {
-            self.opponent = parentVC.opponent
-        }
+       
     }
     override func viewWillAppear(_ animated:Bool){
         super.viewWillAppear(animated)
@@ -97,6 +95,9 @@ class GameViewController: UIViewController {
             loadingView.alpha = 0
         }else{
             loadingView.alpha = 0.9
+        }
+        if scene.gType == .twoPhone {
+            self.opponent = parentVC.opponent
         }
         loadingView.isHidden = true
     }
@@ -133,8 +134,8 @@ class GameViewController: UIViewController {
         }
     }
     func backToTitle(){
-        _ = navigationController?.popViewController(animated: false)
-
+        _ = navigationController?.popViewController(animated: true)
+        parentVC.movedToScene = false
         self.removeFromParentViewController()
         UIGraphicsBeginImageContext(view.frame.size)
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
@@ -149,8 +150,6 @@ class GameViewController: UIViewController {
         parentVC.sentData = false
         parentVC.sentPause = false
         scene.loaded = true
-        parentVC.JoinGame.isUserInteractionEnabled = true
-        parentVC.JoinGame.alpha = 1
     }
     
     func displayEarnings(_ numberWon: Int){
