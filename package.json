@@ -1,0 +1,9 @@
+{
+  "name": "Howard - Strategic Soccer",
+  "version": "1.33",
+  "description": "Socket.IO Client for Strategic Soccer",
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^1.7.3"
+  }
+}
