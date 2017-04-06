@@ -443,7 +443,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                     <constraint firstItem="paz-pH-qnx" firstAttribute="leading" secondItem="Lmz-fY-9xw" secondAttribute="leading" constant="5" id="zuE-X6-oBu"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79a-dm-a6g">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79a-dm-a6g">
                                 <rect key="frame" x="246" y="143" width="175" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOADING..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Qd-Cr-TSW">

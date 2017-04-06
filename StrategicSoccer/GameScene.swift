@@ -329,7 +329,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             startPosition = selPlay.2!
             selectedPlayer!.highlight()
             if gType == .twoPhone {
-                //getService().sendHighlight(selectedPlayer!.name!)
+                SocketIOManager.sharedInstance.sendHighlight(viewController.opponent, playerToHighlight: selectedPlayer!.name!)
             }
             selPlayTimer!.restart()
         }

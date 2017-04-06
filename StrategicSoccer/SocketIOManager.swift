@@ -62,6 +62,10 @@ class SocketIOManager: NSObject {
         posVelDict["ball"] = [gameScene.ball.position.x, gameScene.ball.position.y, gameScene.ball.physicsBody!.velocity.dx, gameScene.ball.physicsBody!.velocity.dy]
         socket.emit("positionVelocity", opponentName, posVelDict, Date.timeIntervalSinceReferenceDate)
     }
+    
+    func sendHighlight(_ opponentName: String, playerToHighlight: String) {
+        socket.emit("highlight", opponentName, playerToHighlight)
+    }
 }
 
 extension CGFloat: SocketData {}

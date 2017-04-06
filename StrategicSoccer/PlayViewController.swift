@@ -199,7 +199,6 @@ extension PlayViewController {
             }
             self.scaleFactorX = screenWidth/(settings[3] as! CGFloat)
             self.scaleFactorY = screenHeight/(settings[4] as! CGFloat)
-            self.movedToScene = true
             self.moveToScene()
             self.timer.restart()
         }
@@ -256,7 +255,6 @@ extension PlayViewController {
             } else {
                 self.scene.moveTimer!.restart()
             }
-        
         }
         
         SocketIOManager.sharedInstance.socket.on("positionVelocityUpdate") { (posVelInfo, ack) in
@@ -264,8 +262,9 @@ extension PlayViewController {
             let posVelDict = posVelInfo[0] as! [String:[CGFloat]]
             let sendTime = posVelInfo[1] as! TimeInterval
             var lagTime = CGFloat(Date.timeIntervalSinceReferenceDate - sendTime)
+            // if too much lag then don't bother updating position
             if lagTime > 0.5 {
-                print(lagTime)
+                //print(lagTime)
                 return
             }
             lagTime *= 0.5
@@ -301,6 +300,13 @@ extension PlayViewController {
             bPosition.y = (bPosition.y + currentBallPosition.y * 2) / 3
             self.scene.ball.position = bPosition
             self.scene.ball.physicsBody!.velocity = bVelocity
+        }
+        
+        SocketIOManager.sharedInstance.socket.on("highlightUpdate") { (hlPlayer, ack) in
+            let playerName = self.playerDict[hlPlayer[0] as! String]!
+            let player = self.scene.nameToPlayer[playerName]!
+            print("highlight Update")
+            player.highlight()
         }
     }
 }

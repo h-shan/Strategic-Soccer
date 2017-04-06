@@ -286,11 +286,15 @@ extension PlayViewController : ConnectionManagerDelegate {
         return player
     }
     func moveToScene(){
+        if movedToScene {
+            return
+        }
         let gameVC = self.storyboard!.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
         gameVC.scene = scene
         gameVC.parentVC = self
         scene.viewController = gameVC
         scene.gType = .twoPhone
+        self.movedToScene = true
         // gameService.getServiceBrowser().stopBrowsingForPeers()
         // gameService.getServiceAdvertiser().stopAdvertisingPeer()
         self.navigationController?.pushViewController(gameVC, animated: true)
