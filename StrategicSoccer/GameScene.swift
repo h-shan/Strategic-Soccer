@@ -350,13 +350,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             playerSelected = false
             switchTurns()
-            SocketIOManager.sharedInstance.sendMove(viewController.opponent, playerName: selectedPlayer!.name!, position: selectedPlayer!.position, velocity: selectedPlayer!.physicsBody!.velocity)
+            SocketIOManager.sharedInstance.sendMove(viewController.opponent, playerName: selectedPlayer!.name!, position: selectedPlayer!.position, velocity: vel)
         }
         playerSelected = false
     }
     
     func updateLighting(){
         for player in players{
+            player.unHighlight()
             player.setLighting(player.mTeamA == turnA)
         }
     }

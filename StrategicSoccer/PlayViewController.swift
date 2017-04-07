@@ -143,9 +143,11 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         cell.textLabel?.text = hostedGames[indexPath.row]["username"] as? String
-        if (cell.textLabel?.text! == self.username) {
-            cell.isUserInteractionEnabled = false
-            cell.alpha = 0.5
+        if let txt = cell.textLabel?.text {
+            if txt == self.username {
+                cell.isUserInteractionEnabled = false
+                cell.alpha = 0.5
+            }
         }
         return cell
     }
@@ -328,6 +330,10 @@ extension PlayViewController {
             self.opponent = ""
             self.scene.viewController.opponent = ""
             self.scene.goBackToTitle()
+        }
+        
+        SocketIOManager.sharedInstance.socket.on("nameChange") { (newName, ack) in
+            self.username = newName[0] as! String
         }
     }
 }
