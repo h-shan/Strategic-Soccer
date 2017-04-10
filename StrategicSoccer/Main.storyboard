@@ -1111,12 +1111,8 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jS9-Co-kiM">
-                                <rect key="frame" x="144" y="148" width="180" height="40"/>
+                                <rect key="frame" x="120" y="151.5" width="200" height="33.5"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Q0i-VD-8xE"/>
-                                    <constraint firstAttribute="width" constant="180" id="VgR-FN-lEF"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                 <state key="normal" title="SINGLE PLAYER">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1126,7 +1122,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rOR-Lg-LEu">
-                                <rect key="frame" x="344" y="148" width="180" height="40"/>
+                                <rect key="frame" x="347" y="151.5" width="200" height="33.5"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                 <state key="normal" title="TWO PLAYERS">
@@ -1148,7 +1144,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eEW-WU-dEc">
-                                <rect key="frame" x="144" y="228" width="380" height="34"/>
+                                <rect key="frame" x="120" y="225" width="427" height="34"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                 <state key="normal" title="CONNECT TO ANOTHER DEVICE">
@@ -1159,27 +1155,23 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yUE-Y9-Sg1">
-                                <rect key="frame" x="134" y="88" width="400" height="200"/>
+                                <rect key="frame" x="100.5" y="70.5" width="467" height="234.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVAILABLE GAMES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ph-lw-414">
-                                        <rect key="frame" x="97" y="10" width="206" height="29"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AVAILABLE GAMES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ph-lw-414">
+                                        <rect key="frame" x="93.5" y="10" width="280" height="46.5"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="24"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ObI-8h-DPS">
-                                        <rect key="frame" x="75" y="60" width="250" height="80"/>
+                                        <rect key="frame" x="46.5" y="61.5" width="374" height="112.5"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="mav-qj-Rh3"/>
-                                            <constraint firstAttribute="width" constant="250" id="qCR-yU-L0B"/>
-                                        </constraints>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="zl6-qQ-tVy">
-                                                <rect key="frame" x="0.0" y="28" width="250" height="44"/>
+                                                <rect key="frame" x="0.0" y="28" width="374" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zl6-qQ-tVy" id="I5c-gs-cdk">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
@@ -1190,19 +1182,18 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                         </connections>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0X-YL-jgI">
-                                        <rect key="frame" x="210" y="156" width="150" height="34"/>
+                                        <rect key="frame" x="256.5" y="182" width="187" height="34"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                        <state key="normal" title="JOIN GAME"/>
+                                        <state key="normal" title="INVITE TO GAME"/>
                                         <connections>
-                                            <action selector="joinGame:" destination="f1z-UW-r5Y" eventType="touchUpInside" id="ph1-XJ-aF2"/>
+                                            <action selector="InviteToGame:" destination="f1z-UW-r5Y" eventType="touchUpInside" id="ph1-XJ-aF2"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Wv-K9-6HS" userLabel="XButton">
-                                        <rect key="frame" x="10" y="10" width="30" height="30"/>
+                                        <rect key="frame" x="10" y="10" width="46.5" height="46.5"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="vRz-x7-aRt"/>
-                                            <constraint firstAttribute="width" constant="30" id="yad-4b-mD5"/>
+                                            <constraint firstAttribute="width" secondItem="6Wv-K9-6HS" secondAttribute="height" multiplier="1:1" id="FzX-fg-gvN"/>
                                         </constraints>
                                         <state key="normal" image="ClosingX"/>
                                         <connections>
@@ -1210,54 +1201,58 @@ PLAY MORE GAMES TO EARN COINS.</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7fq-lP-MXf">
-                                        <rect key="frame" x="40" y="154" width="150" height="36"/>
+                                        <rect key="frame" x="23.5" y="182" width="187" height="34"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="dQg-dC-zn2"/>
-                                            <constraint firstAttribute="width" constant="150" id="ttD-3Q-fJo"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                        <state key="normal" title="SEARCH NEARBY">
+                                        <state key="normal" title="SEARCH ONLINE">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="hostGame:" destination="f1z-UW-r5Y" eventType="touchUpInside" id="4Gz-Sl-Qc3"/>
+                                            <action selector="SearchOnline:" destination="f1z-UW-r5Y" eventType="touchUpInside" id="4Gz-Sl-Qc3"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="7fq-lP-MXf" firstAttribute="bottom" secondItem="X0X-YL-jgI" secondAttribute="bottom" id="8BR-eR-XqU"/>
-                                    <constraint firstItem="7fq-lP-MXf" firstAttribute="trailing" secondItem="yUE-Y9-Sg1" secondAttribute="centerX" constant="-10" id="C9V-os-ThF"/>
-                                    <constraint firstAttribute="width" constant="400" id="DtX-Mq-ERh"/>
-                                    <constraint firstAttribute="height" constant="200" id="E2R-7t-27f"/>
-                                    <constraint firstItem="6Wv-K9-6HS" firstAttribute="top" secondItem="yUE-Y9-Sg1" secondAttribute="top" constant="10" id="HPw-Zg-laQ"/>
-                                    <constraint firstItem="ObI-8h-DPS" firstAttribute="centerY" secondItem="yUE-Y9-Sg1" secondAttribute="centerY" id="Kcl-kt-vmj"/>
-                                    <constraint firstItem="ObI-8h-DPS" firstAttribute="centerX" secondItem="yUE-Y9-Sg1" secondAttribute="centerX" id="aOW-ck-mMx"/>
-                                    <constraint firstItem="6Wv-K9-6HS" firstAttribute="leading" secondItem="yUE-Y9-Sg1" secondAttribute="leading" constant="10" id="aoo-s7-Flg"/>
-                                    <constraint firstItem="X0X-YL-jgI" firstAttribute="leading" secondItem="yUE-Y9-Sg1" secondAttribute="centerX" constant="10" id="iu5-za-RdV"/>
-                                    <constraint firstItem="3ph-lw-414" firstAttribute="centerX" secondItem="yUE-Y9-Sg1" secondAttribute="centerX" id="jak-Ez-pjV"/>
-                                    <constraint firstItem="X0X-YL-jgI" firstAttribute="bottom" secondItem="yUE-Y9-Sg1" secondAttribute="bottom" constant="-10" id="mEc-Qv-Teh"/>
-                                    <constraint firstItem="3ph-lw-414" firstAttribute="top" secondItem="yUE-Y9-Sg1" secondAttribute="top" constant="10" id="rMv-Ji-Yee"/>
-                                    <constraint firstItem="X0X-YL-jgI" firstAttribute="width" secondItem="7fq-lP-MXf" secondAttribute="width" id="za5-9a-Anu"/>
+                                    <constraint firstItem="X0X-YL-jgI" firstAttribute="centerY" secondItem="yUE-Y9-Sg1" secondAttribute="bottom" multiplier="0.85" id="0lX-kZ-dGy"/>
+                                    <constraint firstItem="X0X-YL-jgI" firstAttribute="centerX" secondItem="yUE-Y9-Sg1" secondAttribute="trailing" multiplier="0.75" id="10c-Bj-fbA"/>
+                                    <constraint firstItem="ObI-8h-DPS" firstAttribute="top" secondItem="3ph-lw-414" secondAttribute="bottom" constant="5" id="5oi-Mb-ofw"/>
+                                    <constraint firstItem="6Wv-K9-6HS" firstAttribute="bottom" secondItem="3ph-lw-414" secondAttribute="bottom" id="7gz-9w-4kF"/>
+                                    <constraint firstItem="3ph-lw-414" firstAttribute="centerX" secondItem="yUE-Y9-Sg1" secondAttribute="centerX" id="FXk-1n-8eX"/>
+                                    <constraint firstItem="3ph-lw-414" firstAttribute="top" secondItem="yUE-Y9-Sg1" secondAttribute="top" constant="10" id="HJo-EM-hEm"/>
+                                    <constraint firstItem="6Wv-K9-6HS" firstAttribute="leading" secondItem="yUE-Y9-Sg1" secondAttribute="leading" constant="10" id="J9g-dv-xyB"/>
+                                    <constraint firstItem="7fq-lP-MXf" firstAttribute="width" secondItem="yUE-Y9-Sg1" secondAttribute="width" multiplier="0.4" id="OJy-Mi-qJ9"/>
+                                    <constraint firstItem="6Wv-K9-6HS" firstAttribute="top" secondItem="yUE-Y9-Sg1" secondAttribute="top" constant="10" id="OgB-P2-je1"/>
+                                    <constraint firstItem="X0X-YL-jgI" firstAttribute="width" secondItem="7fq-lP-MXf" secondAttribute="width" id="QFm-l9-sik"/>
+                                    <constraint firstItem="ObI-8h-DPS" firstAttribute="bottom" secondItem="X0X-YL-jgI" secondAttribute="top" constant="-8" id="gRe-52-de3"/>
+                                    <constraint firstItem="ObI-8h-DPS" firstAttribute="centerX" secondItem="yUE-Y9-Sg1" secondAttribute="centerX" id="gXV-6R-bxD"/>
+                                    <constraint firstItem="ObI-8h-DPS" firstAttribute="width" secondItem="yUE-Y9-Sg1" secondAttribute="width" multiplier="0.8" id="kNr-lO-orI"/>
+                                    <constraint firstItem="7fq-lP-MXf" firstAttribute="centerY" secondItem="yUE-Y9-Sg1" secondAttribute="bottom" multiplier="0.85" id="kZx-Yg-O7w"/>
+                                    <constraint firstItem="3ph-lw-414" firstAttribute="height" secondItem="yUE-Y9-Sg1" secondAttribute="height" multiplier="0.2" id="qyD-z7-MEK"/>
+                                    <constraint firstItem="3ph-lw-414" firstAttribute="width" secondItem="yUE-Y9-Sg1" secondAttribute="width" multiplier="0.6" id="r7L-w8-4ts"/>
+                                    <constraint firstItem="7fq-lP-MXf" firstAttribute="centerX" secondItem="yUE-Y9-Sg1" secondAttribute="trailing" multiplier="0.25" id="ygZ-Jo-KmB"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="yUE-Y9-Sg1" firstAttribute="width" secondItem="fvG-zO-Dea" secondAttribute="width" multiplier="0.7" id="3Sc-Ab-R9t"/>
+                            <constraint firstItem="yUE-Y9-Sg1" firstAttribute="height" secondItem="fvG-zO-Dea" secondAttribute="height" multiplier="0.7" id="6Lr-BZ-cr1"/>
                             <constraint firstItem="rOR-Lg-LEu" firstAttribute="bottom" secondItem="jS9-Co-kiM" secondAttribute="bottom" id="9nw-Px-8ld"/>
                             <constraint firstItem="yUE-Y9-Sg1" firstAttribute="centerX" secondItem="fvG-zO-Dea" secondAttribute="centerX" id="EkO-6t-RWa"/>
                             <constraint firstItem="eEW-WU-dEc" firstAttribute="leading" secondItem="jS9-Co-kiM" secondAttribute="leading" id="JD9-nn-dI5"/>
                             <constraint firstItem="yUE-Y9-Sg1" firstAttribute="centerY" secondItem="fvG-zO-Dea" secondAttribute="centerY" constant="20" id="NF0-fd-Ond"/>
                             <constraint firstItem="rOR-Lg-LEu" firstAttribute="width" secondItem="jS9-Co-kiM" secondAttribute="width" id="OMQ-bK-Zhr"/>
-                            <constraint firstItem="rOR-Lg-LEu" firstAttribute="centerX" secondItem="fvG-zO-Dea" secondAttribute="centerX" constant="100" id="REc-aY-c19"/>
-                            <constraint firstItem="jS9-Co-kiM" firstAttribute="centerX" secondItem="fvG-zO-Dea" secondAttribute="centerX" constant="-100" id="VzH-2C-OV5"/>
+                            <constraint firstItem="rOR-Lg-LEu" firstAttribute="trailing" secondItem="fvG-zO-Dea" secondAttribute="trailing" multiplier="0.82" id="REc-aY-c19"/>
+                            <constraint firstItem="jS9-Co-kiM" firstAttribute="leading" secondItem="fvG-zO-Dea" secondAttribute="trailing" multiplier="0.18" id="VzH-2C-OV5"/>
                             <constraint firstItem="jS9-Co-kiM" firstAttribute="centerY" secondItem="fvG-zO-Dea" secondAttribute="centerY" id="bRV-4w-9D5"/>
                             <constraint firstItem="eEW-WU-dEc" firstAttribute="top" secondItem="jS9-Co-kiM" secondAttribute="bottom" constant="40" id="he0-Ot-U1t"/>
                             <constraint firstItem="wfU-na-WDg" firstAttribute="leading" secondItem="fvG-zO-Dea" secondAttribute="leading" constant="10" id="hiL-Cx-9ZY"/>
                             <constraint firstItem="wfU-na-WDg" firstAttribute="top" secondItem="fvG-zO-Dea" secondAttribute="top" constant="10" id="hxO-e9-DH3"/>
                             <constraint firstItem="rOR-Lg-LEu" firstAttribute="top" secondItem="jS9-Co-kiM" secondAttribute="top" id="i5q-n2-LvD"/>
+                            <constraint firstItem="jS9-Co-kiM" firstAttribute="height" secondItem="fvG-zO-Dea" secondAttribute="height" multiplier="0.1" id="jUd-FP-hq6"/>
                             <constraint firstItem="eEW-WU-dEc" firstAttribute="trailing" secondItem="rOR-Lg-LEu" secondAttribute="trailing" id="lma-NP-bAH"/>
+                            <constraint firstItem="jS9-Co-kiM" firstAttribute="width" secondItem="fvG-zO-Dea" secondAttribute="width" multiplier="0.3" id="tzi-HC-Hpr"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1265,8 +1260,8 @@ PLAY MORE GAMES TO EARN COINS.</string>
                         <outlet property="BackButtonWidth" destination="F7U-wa-cOM" id="JTt-TX-qGN"/>
                         <outlet property="ConnectToAnotherDevice" destination="eEW-WU-dEc" id="JD4-xe-pnx"/>
                         <outlet property="ConnectionView" destination="yUE-Y9-Sg1" id="Bw9-mG-bxQ"/>
-                        <outlet property="HostGame" destination="7fq-lP-MXf" id="ksh-Zv-obt"/>
-                        <outlet property="JoinGame" destination="X0X-YL-jgI" id="hAd-TG-ZJp"/>
+                        <outlet property="InviteToGame" destination="X0X-YL-jgI" id="hAd-TG-ZJp"/>
+                        <outlet property="SearchOnline" destination="7fq-lP-MXf" id="ksh-Zv-obt"/>
                         <outlet property="SinglePlayer" destination="jS9-Co-kiM" id="do9-A7-HyA"/>
                         <outlet property="TwoPlayers" destination="rOR-Lg-LEu" id="r3L-yy-s1s"/>
                         <outlet property="gameTableView" destination="ObI-8h-DPS" id="FA0-XU-le7"/>
@@ -1876,7 +1871,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1I9-e0-If3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-343" y="752"/>
+            <point key="canvasLocation" x="-566" y="625"/>
         </scene>
         <!--Change Time View Controller-->
         <scene sceneID="Yw2-lE-BuU">
@@ -1913,7 +1908,7 @@ PLAY MORE GAMES TO EARN COINS.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UIA-sE-ht8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-470" y="734"/>
+            <point key="canvasLocation" x="-871" y="626"/>
         </scene>
     </scenes>
     <resources>

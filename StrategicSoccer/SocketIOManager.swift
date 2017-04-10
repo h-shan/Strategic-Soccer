@@ -66,6 +66,10 @@ class SocketIOManager: NSObject {
     func sendHighlight(_ opponentName: String, playerToHighlight: String) {
         socket.emit("highlight", opponentName, playerToHighlight)
     }
+    
+    func sendGoal(_ opponentName: String, goalBySender: Bool) {
+        socket.emit("goalScored", opponentName, goalBySender)
+    }
 }
 
 extension CGFloat: SocketData {}

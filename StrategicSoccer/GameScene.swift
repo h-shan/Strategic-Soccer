@@ -376,9 +376,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if (!goalAccounted && 200*scalerY < ball.position.y && ball.position.y < 440*scalerY){
-            //if !(gType == .twoPhone && !isHost) {
+            if !(gType == .twoPhone && !isHost) {
                 checkGoal()
-            //}
+            }
         }
         
         if gType == .onePlayer && !turnA{
@@ -741,10 +741,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func checkGoal() {
         if ball.position.x < goalLineA {
             self.reset(false)
+            SocketIOManager.sharedInstance.sendGoal(viewController.opponent, goalBySender: false)
             updateLighting()
 
         } else if ball.position.x > goalLineB {
             updateLighting()
+            SocketIOManager.sharedInstance.sendGoal(viewController.opponent, goalBySender: true)
             self.reset(true)
         }
     }

@@ -34,8 +34,8 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var ConnectToAnotherDevice: UIButton!
     @IBOutlet weak var ConnectionView: UIView!
     @IBOutlet weak var gameTableView: UITableView!
-    @IBOutlet weak var JoinGame: UIButton!
-    @IBOutlet weak var HostGame: UIButton!
+    @IBOutlet weak var InviteToGame: UIButton!
+    @IBOutlet weak var SearchOnline: UIButton!
     @IBOutlet weak var BackButtonWidth: NSLayoutConstraint!
     @IBOutlet weak var BackButtonHeight: NSLayoutConstraint!
    
@@ -52,16 +52,16 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         setBackground()
         BackButtonWidth.constant = 80/568*screenWidth
         BackButtonHeight.constant = 60/568*screenWidth
-        let buttons:[UIButton] = [SinglePlayer, TwoPlayers, ConnectToAnotherDevice, JoinGame, HostGame]
+        let buttons:[UIButton] = [SinglePlayer, TwoPlayers, ConnectToAnotherDevice, InviteToGame, SearchOnline]
         formatMenuButtons(buttons)
         
         ConnectionView.isHidden = true
         ConnectionView.layer.borderWidth = 5
         ConnectionView.layer.borderColor = UIColor.black.cgColor
-        JoinGame.alpha = 0.5
-        JoinGame.isUserInteractionEnabled = false
-        HostGame.isUserInteractionEnabled = true
-        HostGame.alpha = 1
+        InviteToGame.alpha = 0.5
+        InviteToGame.isUserInteractionEnabled = false
+        SearchOnline.isUserInteractionEnabled = true
+        SearchOnline.alpha = 1
         scene.countryA = parentVC.playerA
         scene.countryB = parentVC.playerB
         scene.addPlayers()
@@ -96,27 +96,27 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func showConnections(_ sender: AnyObject){
         ConnectionView.isHidden = false
-        HostGame.alpha = 1
-        HostGame.isUserInteractionEnabled = true
-        JoinGame.alpha = 0.5
-        JoinGame.isUserInteractionEnabled = false
+        SearchOnline.alpha = 1
+        SearchOnline.isUserInteractionEnabled = true
+        InviteToGame.alpha = 0.5
+        InviteToGame.isUserInteractionEnabled = false
     }
     
-    @IBAction func hostGame(_ sender: AnyObject){
+    @IBAction func SearchOnline(_ sender: AnyObject){
         //gameService.getServiceAdvertiser().startAdvertisingPeer()
         //gameService.getServiceBrowser().startBrowsingForPeers()
         self.gameTableView.reloadData()
-        HostGame.isUserInteractionEnabled = false
-        HostGame.alpha = 0.5
+        SearchOnline.isUserInteractionEnabled = false
+        SearchOnline.alpha = 0.5
         scene.isHost = false
         connectToServer()
     }
     
-    @IBAction func joinGame(_ sender: AnyObject){
+    @IBAction func InviteToGame(_ sender: AnyObject){
         // rename to invite game, user who clicks join game will be host!
         sentData = true
-        JoinGame.alpha = 0.5
-        JoinGame.isUserInteractionEnabled = false
+        InviteToGame.alpha = 0.5
+        InviteToGame.isUserInteractionEnabled = false
         gameTableView.deselectRow(at: gameTableView.indexPathForSelectedRow!, animated: false)
         SocketIOManager.sharedInstance.connectGame(self.username, otherUsername: opponent)
     }
@@ -127,16 +127,16 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         gameService.getServiceBrowser().stopBrowsingForPeers()
         gameService.session.disconnect()
         self.gameTableView.reloadData()
-        HostGame.isUserInteractionEnabled = true
-        HostGame.alpha = 1
+        SearchOnline.isUserInteractionEnabled = true
+        SearchOnline.alpha = 1
     }
     
     // MARK: Table View Delegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         opponent = self.hostedGames[indexPath.row]["username"] as! String
-        self.JoinGame.alpha = 1
-        self.JoinGame.isUserInteractionEnabled = true
+        self.InviteToGame.alpha = 1
+        self.InviteToGame.isUserInteractionEnabled = true
         //gameService.connectToDevice(connectedDevice!)
     }
     
@@ -334,6 +334,11 @@ extension PlayViewController {
         
         SocketIOManager.sharedInstance.socket.on("nameChange") { (newName, ack) in
             self.username = newName[0] as! String
+        }
+        
+        SocketIOManager.sharedInstance.socket.on("goalUpdate") { (goalBySender, ack) in
+            let opponentScored = goalBySender[0] as! Bool
+            self.scene.reset(!opponentScored)
         }
     }
 }
