@@ -111,6 +111,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var selPlayTimer:Timer?
     var moveTimer:Timer?
     let sendTimer = Timer()
+    var ranOutOfTime = false
     
     var comp:AI!
     let predictionTimer = Timer()
@@ -301,6 +302,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for touch in touches {
             let location = touch.location(in: self)
             let node = atPoint(location)
+            var quitLoop = false
             if gType == .twoPlayer || (gType == .onePlayer && turnA) || (gType == .twoPhone && turnA) {
                 if let touchedPlayer = node as? Player {
                     if touchedPlayer.mTeamA == turnA {
@@ -309,6 +311,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         break
                     }
                 }
+                if moveTimer!.getElapsedTime() < 1.0 && gType == .twoPlayer && ranOutOfTime {
+                    // this is to prevent moving opponent's players
+                    for player in players {
+                        if player.mTeamA != turnA {
+                            let dis = player.position.distance(location)
+                            if dis < selPlay.0 {
+                                quitLoop = true
+                                selPlay.1 = nil
+                                break
+                            }
+                        }
+                    }
+                }
+                if quitLoop {
+                    break
+                }
+                
                 for player in players{
                     // select closest player within set radius
                     if player.mTeamA == turnA {
@@ -349,6 +368,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 selectedPlayer!.physicsBody!.velocity = vel
             }
             playerSelected = false
+            ranOutOfTime = false
             switchTurns()
             SocketIOManager.sharedInstance.sendMove(viewController.opponent, playerName: selectedPlayer!.name!, position: selectedPlayer!.position, velocity: vel)
         }
@@ -386,17 +406,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if(moveTimer!.getElapsedTime() > 5){
-            //if !(gType == .twoPhone && !isHost) {
-                switchTurns()
-            //}
+            ranOutOfTime = true
+            switchTurns()
         }
         if mode.getType() == .timed && !gameEnded{
             showTime()
         }
         if (goalDelay.getElapsedTime()>2 && !gameEnded){
-            if gType == .twoPhone && isHost {
-                //getService().sendPositionVelocity(self, reset: true)
-            }
             scoreBackground.fadeOut()
             isUserInteractionEnabled = true
             setDynamicStates(true)
@@ -475,12 +491,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func switchTurns(){
         turnA = !turnA
-        if gType == .twoPhone && isHost {
-            //getService().sendSync(turnA)
-        }
-        if playerSelected == true {
-            playerSelected = false
-        }
+        playerSelected = false
         updateLighting()
         moveTimer?.restart()
     }
@@ -508,6 +519,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func endGame(){
+        self.isUserInteractionEnabled = false
         goalDelay.reset()
         gameEnded = true
         setDynamicStates(false)
@@ -581,7 +593,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for player in players {
             player.physicsBody!.velocity = CGVector(dx: 0, dy: 0)
         }
-        
+        updateLighting()
         ball.position = CGPoint(x: frame.midX,y: frame.midY)
         ball.physicsBody!.velocity = CGVector(dx: 0, dy: 0)
     }
@@ -610,7 +622,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreBoard.label.text = "0    0"
         updateLighting()
         moveTimer?.restart()
-
     }
     
     func addPlayers() {
