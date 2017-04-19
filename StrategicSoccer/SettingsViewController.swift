@@ -144,11 +144,13 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
     func setSensitivity(_ sender: UISlider){
         defaultSensitivity = sender.value.roundToPlaces(1)
         SensitivityLabel.text = String(defaultSensitivity)
+        sender.setValue(defaultSensitivity, animated: false)
     }
     func setFriction(_ sender: UISlider) {
         defaultFriction = sender.value.roundToPlaces(1)
         FrictionLabel.text = String(defaultFriction)
         parentVC.scene.playersAdded = false
+        sender.setValue(defaultFriction, animated: false)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -276,7 +278,6 @@ class SettingsViewController: UIViewController, UIScrollViewDelegate {
     
     func hideModeViews(_ sender : UITapGestureRecognizer) {
         if let tempView = contentView.hitTest(sender.location(in: contentView), with: nil) {
-            print(type(of: tempView))
             let typeStr = String(describing: type(of: tempView))
             if typeStr == "UIView" || typeStr == "UIButton"{
                 hideView(PointView)
