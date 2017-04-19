@@ -47,6 +47,10 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         ConnectToAnotherDevice.isHidden = false
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setBackground()
@@ -91,7 +95,7 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func backButton(_ sender: AnyObject){
         _ = navigationController?.popViewController(animated: true)
-        gameService.session.disconnect()
+        SocketIOManager.sharedInstance.closeConnection()
     }
     
     @IBAction func showConnections(_ sender: AnyObject){
@@ -146,7 +150,13 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let txt = cell.textLabel?.text {
             if txt == self.username {
                 cell.isUserInteractionEnabled = false
-                cell.alpha = 0.5
+                cell.backgroundColor = UIColor(red: CGFloat(255.0/255), green: CGFloat(200.0/255), blue: CGFloat(200.0/255), alpha: 1.0)
+            }
+        }
+        if let opp = hostedGames[indexPath.row]["opponent"] as? String {
+            if opp != "" {
+                cell.isUserInteractionEnabled = false
+                cell.backgroundColor = UIColor(red: CGFloat(255.0/255), green: CGFloat(200.0/255), blue: CGFloat(200.0/255), alpha: 1.0)
             }
         }
         return cell
