@@ -551,17 +551,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             score.text = "IT'S A TIE!"
         }
         
-        // tear down connection
-        if gType == .twoPhone {
-            //getService().session.cancelConnectPeer(getService().connectedDevice!.first!)
-            //getService().session.disconnect()
-        }
         _ = Foundation.Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(goBackToTitle), userInfo: nil, repeats: false)
         gameTimer.elapsedTime = 0
-    }
-    
-    func getService() -> ConnectionManager{
-        return viewController.parentVC.gameService
     }
     
     func goBackToTitle(){

@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         SocketIOManager.sharedInstance.closeConnection()
     }
+    
     func getCurrentViewController()->UIViewController?{
         if let vc = self.window!.rootViewController as? UINavigationController{
             return vc.visibleViewController!

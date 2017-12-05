@@ -11,7 +11,6 @@ import Foundation
 
 class PlayViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     var scene: GameScene!
-    let gameService = ConnectionManager()
     var hostedGames = [[String: AnyObject]]()
     var otherScreenSize : CGRect!
     var scaleFactorX: CGFloat = 0
@@ -127,9 +126,9 @@ class PlayViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func hideConnections(_ sender: AnyObject){
         ConnectionView.isHidden = true
-        gameService.getServiceAdvertiser().stopAdvertisingPeer()
-        gameService.getServiceBrowser().stopBrowsingForPeers()
-        gameService.session.disconnect()
+//        gameService.getServiceAdvertiser().stopAdvertisingPeer()
+//        gameService.getServiceBrowser().stopBrowsingForPeers()
+//        gameService.session.disconnect()
         self.gameTableView.reloadData()
         SearchOnline.isUserInteractionEnabled = true
         SearchOnline.alpha = 1
@@ -212,6 +211,7 @@ extension PlayViewController {
             self.scaleFactorX = screenWidth/(settings[3] as! CGFloat)
             self.scaleFactorY = screenHeight/(settings[4] as! CGFloat)
             self.moveToScene()
+        
             self.timer.restart()
         }
         
@@ -254,6 +254,7 @@ extension PlayViewController {
         
         SocketIOManager.sharedInstance.socket.on("moveUpdate") { (moveInfo, ack) in
             //print("move update")
+            print(moveInfo)
             let playerName = self.playerDict[moveInfo[0] as! String]!
             let info = moveInfo[1] as! [CGFloat]
             let sendTime = moveInfo[2] as! TimeInterval
@@ -350,6 +351,21 @@ extension PlayViewController {
             let opponentScored = goalBySender[0] as! Bool
             self.scene.reset(!opponentScored)
         }
+    }
+    
+    func moveToScene(){
+        if movedToScene {
+            return
+        }
+        let gameVC = self.storyboard!.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
+        gameVC.scene = scene
+        gameVC.parentVC = self
+        scene.viewController = gameVC
+        scene.gType = .twoPhone
+        self.movedToScene = true
+        // gameService.getServiceBrowser().stopBrowsingForPeers()
+        // gameService.getServiceAdvertiser().stopAdvertisingPeer()
+        self.navigationController?.pushViewController(gameVC, animated: true)
     }
 }
 

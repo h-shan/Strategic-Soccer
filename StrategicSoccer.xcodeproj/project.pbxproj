@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8904A2611D400CDD004D4EC6 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8904A2601D400CDD004D4EC6 /* PlayViewController.swift */; };
-		8904A2631D403472004D4EC6 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8904A2621D403472004D4EC6 /* ConnectionManager.swift */; };
 		8904A2651D414336004D4EC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8904A2641D414336004D4EC6 /* Main.storyboard */; };
 		892182911D34C67000A2F274 /* MiniGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892182901D34C67000A2F274 /* MiniGameViewController.swift */; };
 		892182931D359BCF00A2F274 /* Game1Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892182921D359BCF00A2F274 /* Game1Scene.swift */; };
@@ -19,7 +18,6 @@
 		8944D3CC1D3C986F00D90023 /* Unlockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8944D3CB1D3C986F00D90023 /* Unlockable.swift */; };
 		898B59661E7A70ED0017E049 /* AI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B59651E7A70ED0017E049 /* AI.swift */; };
 		898DE5A81D3F3DCB00602111 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898DE5A71D3F3DCA00602111 /* StatisticsViewController.swift */; };
-		899A00251E92D9800005D8B8 /* PeerToPeerGameConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A00241E92D9800005D8B8 /* PeerToPeerGameConnection.swift */; };
 		899A00291E94BAF00005D8B8 /* Miscellaneous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A00281E94BAF00005D8B8 /* Miscellaneous.swift */; };
 		89B97F811D20F5DB00588A21 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B97F801D20F5DB00588A21 /* TitleViewController.swift */; };
 		89B97F821D220CAC00588A21 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83DCFF1D1089EA00E1C3F8 /* GameScene.swift */; };
@@ -63,7 +61,6 @@
 /* Begin PBXFileReference section */
 		407E0DE3AE383BF63526E745 /* Pods-StrategicSoccer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StrategicSoccer.release.xcconfig"; path = "Pods/Target Support Files/Pods-StrategicSoccer/Pods-StrategicSoccer.release.xcconfig"; sourceTree = "<group>"; };
 		8904A2601D400CDD004D4EC6 /* PlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
-		8904A2621D403472004D4EC6 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		8904A2641D414336004D4EC6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		892182901D34C67000A2F274 /* MiniGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniGameViewController.swift; sourceTree = "<group>"; };
 		892182921D359BCF00A2F274 /* Game1Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game1Scene.swift; sourceTree = "<group>"; };
@@ -74,7 +71,6 @@
 		8944D3CB1D3C986F00D90023 /* Unlockable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unlockable.swift; sourceTree = "<group>"; };
 		898B59651E7A70ED0017E049 /* AI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AI.swift; sourceTree = "<group>"; };
 		898DE5A71D3F3DCA00602111 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
-		899A00241E92D9800005D8B8 /* PeerToPeerGameConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerToPeerGameConnection.swift; sourceTree = "<group>"; };
 		899A00281E94BAF00005D8B8 /* Miscellaneous.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Miscellaneous.swift; sourceTree = "<group>"; };
 		89B97F801D20F5DB00588A21 /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		89B97F851D2221AE00588A21 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
@@ -158,9 +154,7 @@
 		899A00271E94AEAF0005D8B8 /* Device Connection */ = {
 			isa = PBXGroup;
 			children = (
-				8904A2621D403472004D4EC6 /* ConnectionManager.swift */,
 				892A93AC1E91A31B0045C2E3 /* SocketIOManager.swift */,
-				899A00241E92D9800005D8B8 /* PeerToPeerGameConnection.swift */,
 			);
 			name = "Device Connection";
 			sourceTree = "<group>";
@@ -312,7 +306,7 @@
 				TargetAttributes = {
 					DC83DCF71D1089EA00E1C3F8 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = TTP33C342C;
+						DevelopmentTeam = HHCEGF6B9C;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -442,7 +436,6 @@
 				89B97F811D20F5DB00588A21 /* TitleViewController.swift in Sources */,
 				89B97F821D220CAC00588A21 /* GameScene.swift in Sources */,
 				DC83CF2F1D10CB780044D0E1 /* Player.swift in Sources */,
-				8904A2631D403472004D4EC6 /* ConnectionManager.swift in Sources */,
 				89B97F861D2221AE00588A21 /* PauseViewController.swift in Sources */,
 				89EFF7C11D122FBA004DEA93 /* Ball.swift in Sources */,
 				898DE5A81D3F3DCB00602111 /* StatisticsViewController.swift in Sources */,
@@ -452,7 +445,6 @@
 				89EEC9841D246D8A0075A85C /* ChangePlayerViewController.swift in Sources */,
 				89F6A2BE1D30CD610090618E /* ChangeTimeViewController.swift in Sources */,
 				892182911D34C67000A2F274 /* MiniGameViewController.swift in Sources */,
-				899A00251E92D9800005D8B8 /* PeerToPeerGameConnection.swift in Sources */,
 				DCFEEDD41D14645600D4A259 /* Timer.swift in Sources */,
 				892A93AD1E91A31B0045C2E3 /* SocketIOManager.swift in Sources */,
 				8904A2611D400CDD004D4EC6 /* PlayViewController.swift in Sources */,
@@ -605,7 +597,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = TTP33C342C;
+				DEVELOPMENT_TEAM = HHCEGF6B9C;
 				GCC_WARN_UNUSED_VALUE = NO;
 				INFOPLIST_FILE = StrategicSoccer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -624,7 +616,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = TTP33C342C;
+				DEVELOPMENT_TEAM = HHCEGF6B9C;
 				GCC_WARN_UNUSED_VALUE = NO;
 				INFOPLIST_FILE = StrategicSoccer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
